@@ -1,0 +1,31 @@
+/* Greenish Theme - Shticell by Ariel Vaknin */
+
+.InnerComponents {
+    -fx-background-color: #05ea10;
+}
+
+
+.button {
+    -fx-background-color: #4CAF50;   /* A greenish color */
+    -fx-text-fill: white;            /* White text */
+    -fx-background-radius: 5px;      /* Rounded corners */
+    -fx-border-radius: 5px;
+}
+
+.label {
+    -fx-font-family: "Eras Demi ITC";
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.button:pressed {
+    -fx-background-color: #388E3C;
+}
+
+.button:disabled {
+    -fx-background-color: #A5D6A7;
+    -fx-text-fill: #E0E0E0;
+}

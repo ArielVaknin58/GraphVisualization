@@ -1,0 +1,30 @@
+/* Magenta Theme - Shticell by Ariel Vaknin */
+
+.InnerComponents {
+    -fx-background-color: #e028e8; /* Magenta background for the inner components */
+}
+
+.button {
+    -fx-background-color: #b820b8; /* Slightly darker magenta for buttons */
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.label {
+    -fx-font-family: "Eras Demi ITC";
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+    -fx-background-color: #a31ca1; /* Darker shade on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #891989; /* Even darker when pressed */
+}
+
+.button:disabled {
+    -fx-background-color: #d58ed5; /* Light magenta for disabled buttons */
+    -fx-text-fill: #E0E0E0; /* Lighter text for disabled buttons */
+}

@@ -1,0 +1,31 @@
+/* Red Theme - Shticell by Ariel Vaknin */
+
+.InnerComponents {
+    -fx-background-color: #ea3d5a;
+}
+
+
+.button {
+    -fx-background-color: #c61a37;   /* A greenish color */
+    -fx-text-fill: white;            /* White text */
+    -fx-background-radius: 5px;      /* Rounded corners */
+    -fx-border-radius: 5px;
+}
+
+.label {
+    -fx-font-family: "Eras Demi ITC";
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+    -fx-background-color: #aa1934;
+}
+
+.button:pressed {
+    -fx-background-color: #950e1f;
+}
+
+.button:disabled {
+    -fx-background-color: #cd6b80;
+    -fx-text-fill: #E0E0E0;
+}

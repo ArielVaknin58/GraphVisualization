@@ -1,0 +1,29 @@
+Oct 08, 2025 8:01:07 PM GraphVisualizer.GraphVisualizer loggerConfiguration
+SEVERE: Caught exception
+java.lang.RuntimeException: Test exception
+	at GraphVisualizer.GraphVisualizer.loggerConfiguration(GraphVisualizer.java:79)
+	at GraphVisualizer.GraphVisualizer.start(GraphVisualizer.java:25)
+	at javafx.graphics@22.0.2/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:839)
+	at javafx.graphics@22.0.2/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:483)
+	at javafx.graphics@22.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:456)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@22.0.2/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:455)
+	at javafx.graphics@22.0.2/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at javafx.graphics@22.0.2/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@22.0.2/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+Oct 08, 2025 10:08:22 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 08, 2025 10:08:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 08, 2025 10:08:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 08, 2025 10:08:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 08, 2025 10:08:26 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 08, 2025 10:08:30 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 08, 2025 10:12:17 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6

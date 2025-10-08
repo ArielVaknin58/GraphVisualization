@@ -1,0 +1,31 @@
+/* Blue Theme - Shticell by Ariel Vaknin */
+
+.InnerComponents {
+    -fx-background-color: #28e9f1;
+}
+
+
+.button {
+    -fx-background-color: #2999b8;   /* A greenish color */
+    -fx-text-fill: white;            /* White text */
+    -fx-background-radius: 5px;      /* Rounded corners */
+    -fx-border-radius: 5px;
+}
+
+.label {
+    -fx-font-family: "Eras Demi ITC";
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+    -fx-background-color: #2186a1;
+}
+
+.button:pressed {
+    -fx-background-color: #186880;
+}
+
+.button:disabled {
+    -fx-background-color: #79c1dc;
+    -fx-text-fill: #E0E0E0;
+}

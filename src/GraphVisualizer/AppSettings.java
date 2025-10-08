@@ -1,0 +1,16 @@
+package GraphVisualizer;
+
+import javafx.scene.paint.Color;
+
+public class AppSettings {
+    public static int nodeRadius = 25;
+    public static int nodeLabelPadding = 5;
+    public static int EdgeWidth = 5;
+    public static final Color defaultNodeColor = Color.LIGHTBLUE;
+    public static final Color defaultNodeLabelColor = Color.BLACK;
+    public static final double ARROW_SIZE = 10;
+
+    public static final String App_Title = "GraphVisualizer";
+    public static final String Graph_Input_Location = "/Controllers/GraphInput.fxml";
+
+}
