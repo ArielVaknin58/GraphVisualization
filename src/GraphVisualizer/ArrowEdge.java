@@ -22,6 +22,16 @@ public class ArrowEdge {
         createEdge();
     }
 
+    public Graph.GraphNode getFrom()
+    {
+        return from;
+    }
+
+    public Graph.GraphNode getTo()
+    {
+        return to;
+    }
+
     private void createEdge() {
         // Normal line + arrowhead
         double startX = from.getCircle().getCenterX();

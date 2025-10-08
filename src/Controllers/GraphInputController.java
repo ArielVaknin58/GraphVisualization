@@ -95,6 +95,7 @@ public class GraphInputController extends Controller{
 
 
     public void displayGraph(Graph graph) {
+        graphContainer.getChildren().clear();
         Group group = new Group();
         graph.addGraphToGroup(group);
         graphContainer.getChildren().add(group);

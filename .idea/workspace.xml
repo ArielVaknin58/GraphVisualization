@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="37a3260c-e9a7-416e-aca4-76b50415fc74" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/graph.log.0" beforeDir="false" afterPath="$PROJECT_DIR$/logs/graph.log.0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/GraphInputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphInputController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/ArrowEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/ArrowEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +42,7 @@
     "Application.GraphVisualizer.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "current",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Ariel/IdeaProjects/ShticellProject",
     "project.structure.last.edited": "Libraries",

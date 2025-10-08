@@ -1,5 +1,6 @@
 package GraphVisualizer;
 
+import Controllers.GraphInputController;
 import Exceptions.InvalidEdgeException;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -14,28 +15,47 @@ import java.util.Random;
 
 public class Graph {
 
-    private final ArrayList<GraphNode> V = new ArrayList<>();
-    private final Hashtable<String, GraphNode> VerticeIndexer = new Hashtable<>();
-    private final ArrayList<ArrowEdge> E = new ArrayList<>();
+    public final ArrayList<GraphNode> V = new ArrayList<>();
+    public final Hashtable<String, GraphNode> VerticeIndexer = new Hashtable<>();
+    public final ArrayList<ArrowEdge> E = new ArrayList<>();
 
-    public static final double nodeRadius = 25;
-    public static final double nodeLabelPadding = 5;
-    public static final double EdgeWidth = 2;
-
-
-    // ------------------- Node Class -------------------
+    public void RemoveVertice(GraphNode node)
+    {
+        List<ArrowEdge> toRemove = new ArrayList<>();
+        for(ArrowEdge edge : E)
+        {
+            if(node.nodeLabel.equals(edge.getFrom().nodeLabel))
+            {
+                toRemove.add(edge);
+                edge.getTo().inDegree--;
+            }
+            else if(node.nodeLabel.equals(edge.getTo().nodeLabel))
+            {
+                toRemove.add(edge);
+                edge.getFrom().outDegree--;
+            }
+        }
+        E.removeAll(toRemove);
+        V.remove(node);
+        VerticeIndexer.remove(node.nodeLabel);
+        GraphVisualizer.controller.displayGraph(this);
+    }
     public class GraphNode {
+        private Graph G;
         private Group nodeObject;
         private Circle circle;
         private Text label;
-        private List<ArrowEdge> connectedEdges = new ArrayList<>();
+        public List<ArrowEdge> connectedEdges = new ArrayList<>();
         private String nodeLabel;
+        public int inDegree;
+        public int outDegree;
 
-        public GraphNode(double x, double y, String textLabel) {
-            circle = new Circle(x, y, nodeRadius, Color.LIGHTBLUE);
+        public GraphNode(double x, double y, String textLabel,Graph G) {
+            circle = new Circle(x, y, AppSettings.nodeRadius, Color.LIGHTBLUE);
             circle.setStroke(Color.DARKBLUE);
 
-            label = new Text(x - nodeLabelPadding, y + nodeLabelPadding, textLabel);
+            this.G = G;
+            label = new Text(x - AppSettings.nodeLabelPadding, y + AppSettings.nodeLabelPadding, textLabel);
             label.setFill(Color.BLACK);
 
             nodeLabel = textLabel;
@@ -46,7 +66,9 @@ public class Graph {
 
         private void initDragHandlers() {
             circle.setOnMouseClicked(event -> {
+                this.G.RemoveVertice(this);
                 LoggerManager.Logger().fine("Clicked node " + nodeLabel);
+
             });
 
             circle.setOnMousePressed(event -> {
@@ -66,8 +88,8 @@ public class Graph {
                 circle.setCenterY(data[3] + deltaY);
 
                 // Move label along with circle
-                label.setX(circle.getCenterX() - nodeLabelPadding);
-                label.setY(circle.getCenterY() + nodeLabelPadding);
+                label.setX(circle.getCenterX() - AppSettings.nodeLabelPadding);
+                label.setY(circle.getCenterY() + AppSettings.nodeLabelPadding);
 
                 // Update connected edges
                 for (ArrowEdge edge : connectedEdges) {
@@ -78,6 +100,7 @@ public class Graph {
 
         public void addConnectedEdge(ArrowEdge edge) {
             connectedEdges.add(edge);
+            this.outDegree++;
         }
 
         public Circle getCircle() {
@@ -98,7 +121,7 @@ public class Graph {
         Random rand = new Random();
         int x = rand.nextInt(1,14);
         int y = rand.nextInt(1,12);
-        GraphNode node = new GraphNode(50 + 50*x, 50+50*y, label);
+        GraphNode node = new GraphNode(50 + 50*x, 50+50*y, label,this);
         V.add(node);
         VerticeIndexer.put(label, node);
         return node;
@@ -114,6 +137,7 @@ public class Graph {
 
         // Add edge to nodes
         fromNode.addConnectedEdge(edge);
+        toNode.inDegree++;
         if (fromNode != toNode)
             toNode.addConnectedEdge(edge);
 
