@@ -2,16 +2,25 @@ package Controllers;
 
 import Exceptions.InvalidEdgeException;
 import Exceptions.LoopException;
+import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+
+import java.io.IOException;
 
 public class GraphInputController extends Controller{
 
+    @FXML
+    private GridPane controlPanel;
+
+    @FXML
+    private Pane algoPlaceholder;
     @FXML
     private TextField verticesField;
 
@@ -38,9 +47,38 @@ public class GraphInputController extends Controller{
 
     @FXML
     private AnchorPane graphContainer;
+
+    @FXML
+    private ComboBox<Theme> ThemeBox;
     // Store graph data
     private int vertexCount = 0;
-    private Graph G = new Graph();
+    private Graph G = new Graph(true);
+
+    public void initialize()
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Algorithms_Pane_Location));
+            ScrollPane algorithmsPane = loader.load();
+            algoPlaceholder.getChildren().setAll(algorithmsPane);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ThemeBox.getItems().addAll(Theme.values());
+        ThemeBox.setValue(Theme.DEFAULT);
+        ThemeBox.valueProperty().addListener((obs, oldTheme, newTheme) -> {
+            if (newTheme != null) {
+                ThemeManager.getThemeManager().switchTheme(newTheme);
+            }
+        });
+        ControllerManager.setGraphInputController(this);
+
+    }
+
+    public Graph getGraph()
+    {
+        return G;
+    }
 
     @FXML
     private void onEnterVertices() {

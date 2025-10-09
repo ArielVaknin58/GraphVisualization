@@ -3,9 +3,10 @@ package Controllers;
 public enum Theme {
     BLUE("/styles/BlueTheme.css"),
     GREEN("/styles/GreenTheme.css"),
-    BROWNnGOLD("/styles/BrownAndGoldTheme.css"),
-    MAGENTA("/styles/Magenta.css"),
-    RED("/styles/RedTheme.css");
+    BROWN_AND_GOLD("/styles/BrownAndGoldTheme.css"),
+    MAGENTA("/styles/MagentaTheme.css"),
+    RED("/styles/RedTheme.css"),
+    DEFAULT("Default");
 
     private final String cssPath;
 

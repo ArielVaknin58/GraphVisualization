@@ -12,5 +12,7 @@ public class AppSettings {
 
     public static final String App_Title = "GraphVisualizer";
     public static final String Graph_Input_Location = "/Controllers/GraphInput.fxml";
+    public static final String Generic_PopupWindow_location = "/Controllers/GenericPopup.fxml";
+    public static final String Algorithms_Pane_Location = "/Controllers/AlgorithmsPane.fxml";
 
 }

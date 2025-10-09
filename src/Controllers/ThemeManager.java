@@ -31,6 +31,8 @@ public class ThemeManager {
     // Apply the current theme to a Scene
     private void applyTheme(Scene scene) {
         scene.getStylesheets().clear();
+        if(currentTheme.equals(Theme.DEFAULT))
+            return;
         String themePath = currentTheme.getCssPath();
         var url = getClass().getResource(themePath);
         if (url != null) {

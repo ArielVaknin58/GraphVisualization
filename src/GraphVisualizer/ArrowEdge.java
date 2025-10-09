@@ -22,6 +22,21 @@ public class ArrowEdge {
         createEdge();
     }
 
+    public boolean isShaftNull()
+    {
+        return this.shaft == null;
+    }
+    public ArrowEdge(ArrowEdge other) {
+        this.from = other.from;
+        this.to = other.to;
+
+        // Skip copying JavaFX visuals
+        this.shaft = null;
+        this.arrowHead = null;
+        this.edgeGroup = null;
+    }
+
+
     public Graph.GraphNode getFrom()
     {
         return from;

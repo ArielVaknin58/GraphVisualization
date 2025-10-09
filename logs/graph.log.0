@@ -69,3 +69,41 @@ Oct 09, 2025 12:02:11 AM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers
 FINE: Clicked node 3
 Oct 09, 2025 12:02:38 AM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
 FINE: Clicked node 1
+Oct 09, 2025 3:02:35 PM Controllers.ThemeManager applyTheme
+WARNING: ⚠ Could not find theme file: /styles/Magenta.css
+Oct 09, 2025 3:02:40 PM Controllers.ThemeManager applyTheme
+WARNING: ⚠ Could not find theme file: /styles/Magenta.css
+Oct 09, 2025 4:08:34 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 8
+Oct 09, 2025 4:08:37 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 7
+Oct 09, 2025 5:03:36 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 09, 2025 5:54:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 09, 2025 5:55:37 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 09, 2025 5:55:38 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 09, 2025 5:55:39 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 09, 2025 5:55:40 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 09, 2025 5:55:40 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 09, 2025 6:02:31 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 09, 2025 6:04:51 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 09, 2025 6:07:41 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 09, 2025 6:07:44 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 09, 2025 6:07:45 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 09, 2025 6:07:47 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 09, 2025 6:07:50 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 09, 2025 6:07:51 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
