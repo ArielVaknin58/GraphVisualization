@@ -7,12 +7,16 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
 
-public class Graph {
+public class Graph implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public final ArrayList<GraphNode> V = new ArrayList<>();
     public final Hashtable<String, GraphNode> VerticeIndexer = new Hashtable<>();
@@ -62,6 +66,12 @@ public class Graph {
         int x = rand.nextInt(1,14);
         int y = rand.nextInt(1,12);
         GraphNode node = new GraphNode(50 + 50*x, 50+50*y, label,this);
+        if(VerticeIndexer.containsKey(node.nodeLabel))
+        {
+            GraphNode oldNode = VerticeIndexer.get(node.nodeLabel);
+            VerticeIndexer.remove(node.nodeLabel);
+            V.remove(oldNode);
+        }
         V.add(node);
         VerticeIndexer.put(label, node);
         return node;
@@ -81,6 +91,13 @@ public class Graph {
         if (fromNode != toNode)
             toNode.addConnectedEdge(edge);
 
+        ArrowEdge toRemove = null;
+        for(ArrowEdge currentEdge : E)
+        {
+            if(currentEdge.getFrom().nodeLabel.equals(fromNode.nodeLabel) && currentEdge.getTo().nodeLabel.equals(toNode.nodeLabel))
+                toRemove = currentEdge;
+        }
+        if(toRemove != null) E.remove(toRemove);
         E.add(edge);
 
         // Optional click event on edge
@@ -134,11 +151,11 @@ public class Graph {
     }
 
 
-    public class GraphNode {
+    public class GraphNode implements Serializable{
         private Graph G;
-        private Group nodeObject;
-        private Circle circle;
-        private Text label;
+        private transient Group nodeObject;
+        private transient Circle circle;
+        private transient Text label;
         public List<ArrowEdge> connectedEdges = new ArrayList<>();
         private String nodeLabel;
         public int inDegree;
@@ -179,7 +196,6 @@ public class Graph {
 
         private void initDragHandlers() {
             circle.setOnMouseClicked(event -> {
-                this.G.RemoveVertice(this);
                 LoggerManager.Logger().fine("Clicked node " + nodeLabel);
 
             });

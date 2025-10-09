@@ -49,18 +49,20 @@
                <children>
                   <Label prefHeight="17.0" prefWidth="50.0" text="Theme :">
                      <HBox.margin>
-                        <Insets top="10.0" />
+                        <Insets right="10.0" top="10.0" />
                      </HBox.margin>
                      <padding>
                         <Insets left="5.0" />
                      </padding></Label>
-                  <ComboBox fx:id="ThemeBox" prefHeight="10.0" prefWidth="87.0">
+                  <ComboBox fx:id="ThemeBox" prefHeight="25.0" prefWidth="130.0">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin></ComboBox>
                </children>
             </HBox>
             <Pane fx:id="algoPlaceholder" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
+            <Button fx:id="loadGraph" mnemonicParsing="false" onAction="#onLoadGraph" prefHeight="25.0" prefWidth="80.0" text="load graph" GridPane.rowIndex="2" />
+            <Button fx:id="saveGraph" mnemonicParsing="false" onAction="#onSaveGraph" prefHeight="25.0" prefWidth="79.0" text="save graph" GridPane.rowIndex="1" />
             </children>
          <rowConstraints>
             <RowConstraints maxHeight="132.0" minHeight="19.0" prefHeight="22.0" />

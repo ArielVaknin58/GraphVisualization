@@ -2,9 +2,6 @@ package GraphVisualizer;
 
 
 import Controllers.Controller;
-import Controllers.ControllerManager;
-import Controllers.GraphInputController;
-import Controllers.ThemeManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

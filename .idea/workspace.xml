@@ -7,17 +7,24 @@
     <list default="true" id="37a3260c-e9a7-416e-aca4-76b50415fc74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/graph.log.0" beforeDir="false" afterPath="$PROJECT_DIR$/logs/graph.log.0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/Algorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/AlgorithmsPane.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/GraphInput.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphInput.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/GenericPopup.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/GraphInput.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/GraphInputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphInputController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/Theme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Theme.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/ThemeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ThemeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/GraphWiseAlgorithmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphWiseAlgorithmsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Theme.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/ThemeManager.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/ArrowEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/ArrowEdge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/BlueTheme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/BrownAndGoldTheme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/GreenTheme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/MagentaTheme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/RedTheme.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -84,5 +91,16 @@
       <updated>1759753692096</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/GraphVisualizer/GraphSerializer.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

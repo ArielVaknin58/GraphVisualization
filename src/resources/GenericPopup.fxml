@@ -9,7 +9,7 @@
       <Label fx:id="label" alignment="CENTER" layoutX="20.0" layoutY="112.0" prefHeight="17.0" prefWidth="325.0" text="Label" />
       <ImageView fx:id="myImage" fitHeight="73.0" fitWidth="77.0" layoutX="144.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@GreenV.png" />
+            <Image url="@../styles/GreenV.png" />
          </image></ImageView>
    </children>
 </AnchorPane>

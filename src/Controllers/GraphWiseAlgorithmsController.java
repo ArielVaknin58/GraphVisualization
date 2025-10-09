@@ -25,17 +25,17 @@ public class GraphWiseAlgorithmsController extends Controller{
         ControllerManager.setGraphWiseAlgorithmsController(this);
     }
 
-
-    public void OnTopologicalClick()
+    private void run(Algorithm algorithm)
     {
-        Graph G = ControllerManager.getGraphInputController().getGraph();
-
-        Algorithm algorithm = new TopologicalSort(new Graph(G));
         if (!algorithm.checkValidity())
         {
             AlertError(new InvalidAlgorithmInputException(algorithm),null);
         }
         algorithm.Run();
         algorithm.DisplayResults();
+    }
+    public void OnTopologicalClick()
+    {
+        run(new TopologicalSort(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 }

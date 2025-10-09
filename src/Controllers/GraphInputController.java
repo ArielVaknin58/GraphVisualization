@@ -2,8 +2,7 @@ package Controllers;
 
 import Exceptions.InvalidEdgeException;
 import Exceptions.LoopException;
-import GraphVisualizer.AppSettings;
-import GraphVisualizer.Graph;
+import GraphVisualizer.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -37,20 +36,17 @@ public class GraphInputController extends Controller{
     private Button addButton;
 
     @FXML
-    private Label GraphMeasurementsLabel;
-
-    @FXML
-    private Label enterVerticesLabel;
-
-    @FXML
-    private Label enterEdgesLabel;
-
-    @FXML
     private AnchorPane graphContainer;
 
     @FXML
     private ComboBox<Theme> ThemeBox;
-    // Store graph data
+
+    @FXML
+    private Button saveGraph;
+
+    @FXML
+    private Button loadGraph;
+
     private int vertexCount = 0;
     private Graph G = new Graph(true);
 
@@ -62,8 +58,9 @@ public class GraphInputController extends Controller{
             algoPlaceholder.getChildren().setAll(algorithmsPane);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            AlertError(e,null);
         }
+
         ThemeBox.getItems().addAll(Theme.values());
         ThemeBox.setValue(Theme.DEFAULT);
         ThemeBox.valueProperty().addListener((obs, oldTheme, newTheme) -> {
@@ -80,6 +77,19 @@ public class GraphInputController extends Controller{
         return G;
     }
 
+    @FXML
+    private void onLoadGraph()
+    {
+        this.G = GraphSerializer.loadGraph();
+        displayGraph(G);
+    }
+
+    @FXML
+    private void onSaveGraph()
+    {
+        GraphSerializer.saveGraph(G,"bloop");
+
+    }
     @FXML
     private void onEnterVertices() {
         try {

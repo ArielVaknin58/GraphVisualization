@@ -4,15 +4,19 @@ package GraphVisualizer;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.shape.Polygon;
 
-public class ArrowEdge {
+import java.awt.*;
+import java.io.Serializable;
+
+public class ArrowEdge implements Serializable {
 
     private Graph.GraphNode from;
     private Graph.GraphNode to;
 
-    private Line shaft;
-    private Polygon arrowHead;
-    private Group edgeGroup;  // Holds the shaft + arrowhead
+    private transient Line shaft;
+    private transient Polygon arrowHead;
+    private transient Group edgeGroup;  // Holds the shaft + arrowhead
 
 
     public ArrowEdge(Graph.GraphNode from, Graph.GraphNode to) {

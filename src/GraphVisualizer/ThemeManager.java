@@ -1,4 +1,4 @@
-package Controllers;
+package GraphVisualizer;
 
 import GraphVisualizer.LoggerManager;
 import javafx.scene.Scene;
@@ -14,7 +14,7 @@ public class ThemeManager {
     public ThemeManager() {
         scenes = new ArrayList<>();
         //default
-        currentTheme = Theme.GREEN;
+        currentTheme = Theme.DEFAULT;
     }
 
     public static ThemeManager getThemeManager()
@@ -38,7 +38,7 @@ public class ThemeManager {
         if (url != null) {
             scene.getStylesheets().add(url.toExternalForm());
         } else {
-            LoggerManager.Logger().warning("⚠ Could not find theme file: " + themePath);
+            LoggerManager.Logger().warning("Could not find theme file: " + themePath);
         }
     }
 
@@ -46,7 +46,7 @@ public class ThemeManager {
         currentTheme = theme;
         for(Scene scene : scenes)
         {
-            applyTheme(scene); // reapply to scene
+            applyTheme(scene);
         }
 
     }

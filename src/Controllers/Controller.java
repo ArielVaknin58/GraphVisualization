@@ -1,6 +1,7 @@
 package Controllers;
 
 import GraphVisualizer.AppSettings;
+import GraphVisualizer.ThemeManager;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;

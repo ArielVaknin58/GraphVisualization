@@ -5,6 +5,7 @@ import Controllers.ControllerManager;
 import GraphVisualizer.Graph;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TopologicalSort extends Algorithm {
@@ -56,12 +57,19 @@ public class TopologicalSort extends Algorithm {
     @Override
     public void DisplayResults() {
 
-        StringBuilder print = new StringBuilder("The Topological Sort is : ");
-        for(Graph.GraphNode node : result)
-            print.append(node.getNodeLabel()).append("  ");
+        StringBuilder print = new StringBuilder("The Topological Sort is: ");
+        Iterator<Graph.GraphNode> it = result.iterator();
+        while (it.hasNext()) {
+            Graph.GraphNode current = it.next();
+            print.append(current.getNodeLabel());
+            if (it.hasNext()) {
+                print.append(" --> ");
+            }
+        }
 
         ControllerManager.getGraphWiseAlgorithmsController().PopupMessage(print.toString());
     }
+
 
     private Graph.GraphNode checkForSources()
     {
