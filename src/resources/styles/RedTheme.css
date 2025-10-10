@@ -1,4 +1,4 @@
-/* Red Theme - Shticell by Ariel Vaknin */
+/* Red Theme - GraphVisualizer by Ariel Vaknin */
 
 .InnerComponents {
     -fx-background-color: #ea3d5a;
@@ -28,4 +28,22 @@
 .button:disabled {
     -fx-background-color: #cd6b80;
     -fx-text-fill: #E0E0E0;
+}
+
+.graph-node {
+    -fx-fill: #ea3d5a;          /* fill color */
+    -fx-stroke: #000000;        /* border color */
+    -fx-stroke-width: 2px;      /* border thickness */
+}
+
+.graph-node:pressed {
+    -fx-fill: derive(#ea3d5a, -30%); /* 30% darker */
+}
+
+.node-label {
+    fill: #000000;
+}
+
+.graph-node.selected {
+    -fx-effect: dropshadow(gaussian, #ea3d5a, 30, 0.6, 0, 0);
 }

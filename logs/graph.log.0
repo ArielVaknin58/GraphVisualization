@@ -135,3 +135,501 @@ Oct 10, 2025 12:48:02 AM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers
 FINE: Clicked node 1
 Oct 10, 2025 12:48:04 AM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
 FINE: Clicked node 3
+Oct 10, 2025 1:00:23 AM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 1:01:52 AM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 1:01:57 AM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 1:02:00 AM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 1:02:58 AM GraphVisualizer.GraphSerializer saveGraph
+FINE: Graph saved successfully to: C:\Users\Ariel\IdeaProjects\GraphVisualizer\Serializations\FullGraph6.ser
+Oct 10, 2025 1:03:24 AM GraphVisualizer.GraphSerializer loadGraph
+SEVERE: File selection canceled by user.
+Oct 10, 2025 3:35:45 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:35:46 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:35:47 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:35:49 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 3:35:50 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:35:52 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:39:59 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:40:00 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:40:01 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:40:02 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:40:09 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:40:10 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:40:15 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:40:16 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:40:17 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:44:14 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:44:17 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:44:20 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:44:21 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 3:44:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:44:30 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:44:31 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:44:31 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:44:32 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:44:35 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:44:36 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:44:38 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:44:39 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 3:44:40 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:47:20 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 3:47:20 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:47:22 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:47:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:47:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:47:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:47:27 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:47:31 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:47:32 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:47:33 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:47:34 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:47:41 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:47:42 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 3:47:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:47:45 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:47:48 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:47:49 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:50:31 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:50:32 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:50:34 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:50:35 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 3:50:38 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:50:42 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:50:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:50:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:50:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:50:45 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:50:46 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:50:47 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:50:48 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:50:49 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:50:50 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:50:50 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:50:51 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:50:52 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 3:51:06 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:51:19 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:51:20 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:51:20 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:51:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:51:44 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:51:46 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:51:46 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:51:52 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:53:15 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:53:16 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:53:17 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:53:18 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:59:32 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:59:33 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:59:35 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 3:59:38 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 3:59:39 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 3:59:42 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 3:59:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 3:59:45 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 3:59:54 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:00:01 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:00:01 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:00:03 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:02:39 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 5
+Oct 10, 2025 4:02:40 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 5
+Oct 10, 2025 4:02:41 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 5
+Oct 10, 2025 4:02:42 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 5
+Oct 10, 2025 4:02:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 5
+Oct 10, 2025 4:02:48 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 5
+Oct 10, 2025 4:02:50 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 5
+Oct 10, 2025 4:02:51 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 5
+Oct 10, 2025 4:02:53 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 6
+Oct 10, 2025 4:02:54 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 6
+Oct 10, 2025 4:02:55 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 2
+Oct 10, 2025 4:02:56 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 2
+Oct 10, 2025 4:02:57 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 2
+Oct 10, 2025 4:02:59 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 1
+Oct 10, 2025 4:03:00 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 3
+Oct 10, 2025 4:03:02 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 4
+Oct 10, 2025 4:03:04 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 1
+Oct 10, 2025 4:03:05 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 1
+Oct 10, 2025 4:03:07 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$1
+FINE: Clicked node 1
+Oct 10, 2025 4:05:05 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:05:07 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:05:08 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:05:09 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:05:10 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:05:13 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:05:17 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:05:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:05:26 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:05:28 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:05:30 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:05:32 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:05:33 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:11:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:11:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:11:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:11:26 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:11:27 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:11:28 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:11:33 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:11:33 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:11:34 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:11:35 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:22:05 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:22:06 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:22:06 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:23:00 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:23:00 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:23:02 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:23:03 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:23:08 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:23:09 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:23:10 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:23:11 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:23:12 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:23:14 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:23:16 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:23:17 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:23:20 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:23:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:23:51 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:31:38 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:31:39 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:31:45 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:35:04 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:35:06 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:35:07 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:35:08 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:35:09 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:35:10 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:35:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:35:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:35:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:37:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:37:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:37:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:37:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:37:26 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:37:30 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:37:33 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:37:35 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:37:36 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:38:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:38:27 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:38:29 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:38:30 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:38:35 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:38:37 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:39:13 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:40:55 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:41:03 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:41:06 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:41:07 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:41:09 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:41:11 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:41:28 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:41:29 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:41:30 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:41:31 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:41:34 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 4:41:36 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 4:41:37 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 4:41:41 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 4:41:41 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:41:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 4:41:45 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 4:41:47 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:22:21 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 5:22:22 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 5:22:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 5:22:27 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:22:29 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 5:22:59 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 5:22:59 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 5:23:00 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 5:23:30 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 5:23:31 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 5:23:33 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 5:23:38 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:23:39 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:23:41 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 5:23:43 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 5:23:48 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:23:49 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:23:50 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:23:54 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:23:58 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:24:02 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:24:03 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:24:07 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:24:10 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:24:20 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:24:39 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:29:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 5:29:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 5:29:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 5:29:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 5:29:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 5:29:26 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:29:26 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 5:29:27 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 5:29:28 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 5:30:03 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 5:30:04 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:30:05 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 5:30:06 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3
+Oct 10, 2025 5:30:07 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 5:30:11 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 5:30:30 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 5:37:22 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 5
+Oct 10, 2025 5:37:23 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 4
+Oct 10, 2025 5:37:24 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 6
+Oct 10, 2025 5:37:25 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 2
+Oct 10, 2025 5:37:27 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 1
+Oct 10, 2025 5:37:29 PM GraphVisualizer.Graph$GraphNode lambda$initDragHandlers$0
+FINE: Clicked node 3

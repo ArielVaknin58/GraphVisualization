@@ -50,6 +50,7 @@ public class GraphInputController extends Controller{
     private int vertexCount = 0;
     private Graph G = new Graph(true);
 
+
     public void initialize()
     {
         try {
@@ -87,7 +88,7 @@ public class GraphInputController extends Controller{
     @FXML
     private void onSaveGraph()
     {
-        GraphSerializer.saveGraph(G,"bloop");
+        GraphSerializer.saveGraph(G,"FullGraph6");
 
     }
     @FXML

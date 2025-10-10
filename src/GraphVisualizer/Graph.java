@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -163,17 +164,20 @@ public class Graph implements Serializable {
 
         public GraphNode(double x, double y, String textLabel,Graph G) {
             circle = new Circle(x, y, AppSettings.nodeRadius, Color.LIGHTBLUE);
-            circle.setStroke(Color.DARKBLUE);
+            circle.getStyleClass().add("graph-node");
 
             this.G = G;
             label = new Text(x - AppSettings.nodeLabelPadding, y + AppSettings.nodeLabelPadding, textLabel);
             label.setFill(Color.BLACK);
+            label.getStyleClass().add("node-label");
+
 
             nodeLabel = textLabel;
             nodeObject = new Group(circle, label);
 
             initDragHandlers();
         }
+
 
         public GraphNode(GraphNode other) {
             this.nodeLabel = other.nodeLabel;
@@ -185,7 +189,6 @@ public class Graph implements Serializable {
             this.nodeObject = null;
             this.G = null;
 
-            // Deep copy list structure (edges will be reconnected later)
             this.connectedEdges = new ArrayList<>();
         }
 
@@ -195,18 +198,25 @@ public class Graph implements Serializable {
         }
 
         private void initDragHandlers() {
+            circle.setFocusTraversable(true);
             circle.setOnMouseClicked(event -> {
+                circle.requestFocus();
+
                 LoggerManager.Logger().fine("Clicked node " + nodeLabel);
 
             });
 
             circle.setOnMousePressed(event -> {
-                circle.setFill(Color.GRAY);
-                circle.setUserData(new double[]{event.getSceneX(), event.getSceneY(),
-                        circle.getCenterX(), circle.getCenterY()});
+                circle.getStyleClass().add("selected");
+                circle.setUserData(new double[]{
+                        event.getSceneX(), event.getSceneY(),
+                        circle.getCenterX(), circle.getCenterY()
+                });
             });
 
-            circle.setOnMouseReleased(event -> {circle.setFill(Color.LIGHTBLUE);});
+            circle.setOnMouseReleased(event -> {
+                circle.getStyleClass().remove("selected");
+            });
 
             circle.setOnMouseDragged(event -> {
                 double[] data = (double[]) circle.getUserData();

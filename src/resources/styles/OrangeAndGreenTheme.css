@@ -29,3 +29,21 @@
     -fx-background-color: #A5D6A7;
     -fx-text-fill: #E0E0E0;
 }
+
+.graph-node {
+    -fx-fill: #fd7709;          /* fill color */
+    -fx-stroke: #000000;        /* border color */
+    -fx-stroke-width: 2px;      /* border thickness */
+}
+
+.graph-node:pressed {
+    -fx-fill: derive(#fd7709, -30%); /* 30% darker */
+}
+
+.node-label {
+    fill: #000000;
+}
+
+.graph-node.selected {
+    -fx-effect: dropshadow(gaussian, #05ea10, 30, 0.6, 0, 0);
+}

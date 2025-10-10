@@ -1,4 +1,4 @@
-/* Magenta Theme - Shticell by Ariel Vaknin */
+/* Magenta Theme - GraphVisualizer by Ariel Vaknin */
 
 .InnerComponents {
     -fx-background-color: #e028e8; /* Magenta background for the inner components */
@@ -27,4 +27,22 @@
 .button:disabled {
     -fx-background-color: #d58ed5; /* Light magenta for disabled buttons */
     -fx-text-fill: #E0E0E0; /* Lighter text for disabled buttons */
+}
+
+.graph-node {
+    -fx-fill: #e028e8;          /* fill color */
+    -fx-stroke: #000000;        /* border color */
+    -fx-stroke-width: 2px;      /* border thickness */
+}
+
+.graph-node:pressed {
+    -fx-fill: derive(#e028e8, -30%); /* 30% darker */
+}
+
+.node-label {
+    fill: #000000;
+}
+
+.graph-node.selected {
+    -fx-effect: dropshadow(gaussian, #ff77ff, 30, 0.6, 0, 0);
 }
