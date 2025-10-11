@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="saveGraphPane" prefHeight="128.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SaveGraphPopupController">
+<AnchorPane fx:id="saveGraphPane" prefHeight="128.0" prefWidth="391.0" styleClass="InnerComponents" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SaveGraphPopupController">
 
    <children>
       <Label layoutX="19.0" layoutY="24.0" prefHeight="17.0" prefWidth="360.0" text="Please enter filename to be saved (will be saved as name.ser) :" />

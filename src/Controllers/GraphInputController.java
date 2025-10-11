@@ -53,42 +53,33 @@ public class GraphInputController extends Controller{
 
     public void initialize() {
         try {
-            // Load the main (Algorithms) pane
             FXMLLoader algoLoader = new FXMLLoader(getClass().getResource(AppSettings.Algorithms_Pane_Location));
             ScrollPane algorithmsPane = algoLoader.load();
 
-            // Load the node details pane (for when a GraphNode is focused)
             FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource(AppSettings.Vertice_Algorithms_Pane_Location));
             ScrollPane nodeDetailsPane = nodeLoader.load();
 
             nodeDetailsPane.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                // Only consume clicks on the pane itself, not on its children
                 if (event.getTarget().equals(nodeDetailsPane)) {
                     event.consume();
                 }
             });
 
-            // Initially show the algorithms pane
             algoPlaceholder.getChildren().setAll(algorithmsPane);
 
             graphContainer.setOnMouseClicked(event -> {
-                // Only deselect if clicking on the background itself
                 if (event.getTarget() == graphContainer) {
                     CurrentlyPressedNodeHelper.setCurrentNode(null);
                 }
             });
 
-            // 👇 Register a reactive listener for node focus changes
             CurrentlyPressedNodeHelper.setOnFocusChange(() -> {
                 Platform.runLater(() -> {
                     if (CurrentlyPressedNodeHelper.hasFocus()) {
-                        // A node is in focus → show the node details pane
-
                         ControllerManager.getVerticeWiseAlgorithmsController().updateCurrentNodeLabels();
                         algoPlaceholder.getChildren().setAll(nodeDetailsPane);
 
                     } else {
-                        // No node in focus → show the algorithms pane again
                         algoPlaceholder.getChildren().setAll(algorithmsPane);
                     }
                 });
@@ -108,14 +99,14 @@ public class GraphInputController extends Controller{
         });
 
         DirectedCheckbox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+            enterButton.setDisable(false);
             if (isNowSelected) {
                 System.out.println("graph is directed");
-                //displayGraph(new Graph(true));
             } else {
                 System.out.println("graph isnt directed");
-                //displayGraph(new Graph(false));
             }
             graphContainer.getChildren().clear();
+            this.G = new Graph(isNowSelected);
         });
         // Register this controller for access elsewhere
         ControllerManager.setGraphInputController(this);
@@ -195,6 +186,9 @@ public class GraphInputController extends Controller{
             if(intFrom.equals(intTo))
                 throw new LoopException();
             G.createEdge(intFrom.toString(),intTo.toString());
+            if(!G.isDirected())
+                G.createEdge(intTo.toString(),intFrom.toString());
+
             displayGraph(G);
         }
         catch (NumberFormatException e)

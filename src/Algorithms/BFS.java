@@ -1,9 +1,22 @@
 package Algorithms;
 
 import Controllers.ControllerManager;
+import Controllers.ResultsPaneController;
+import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
+import GraphVisualizer.ThemeManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.*;
+
+import static Controllers.Controller.AlertError;
 
 public class BFS extends Algorithm{
 
@@ -50,7 +63,6 @@ public class BFS extends Algorithm{
 
             for (Graph.GraphNode node : current.neighborsList) {
 
-                // If neighbor has no distance yet (infinity)
                 Integer value = result.get(node.getNodeLabel());
                 if (currentDistance + 1 < value) {
                     result.put(node.getNodeLabel(), currentDistance + 1);
@@ -70,17 +82,35 @@ public class BFS extends Algorithm{
     @Override
     public void DisplayResults() {
 
-        StringBuilder print = new StringBuilder();
-        print.append("The lengths of the shortest paths from vertice "+this.inputNode.getNodeLabel()+" are :\n");
-        Iterator<String> it = result.keySet().iterator();
-        while(it.hasNext())
-        {
-            String currentNode = it.next();
-            Integer current = result.get(currentNode);
-            print.append(currentNode +" : "+ current +"  ");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Results_Popup_location));
+            AnchorPane resultsPane = loader.load();
+            ResultsPaneController controller = loader.getController();
+            controller.getResultsLabel().setText("Shortest distances from vertice "+this.inputNode.getNodeLabel()+" :");
+            controller.getNodeCol().setText("Node index");
+            controller.getValueCol().setText("distance");
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Algorithm Results");
 
+            ObservableList<NodeResult> data = FXCollections.observableArrayList();
+
+            for (Map.Entry<String, Integer> entry : result.entrySet()) {
+                data.add(new NodeResult(entry.getKey(), entry.getValue()));
+            }
+
+            ControllerManager.getResultsPaneController().getResultsTable().setItems(data);
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+
+            Scene scene = new Scene(resultsPane);
+            popupStage.setScene(scene);
+            ThemeManager.getThemeManager().AddScene(scene);
+
+            popupStage.show();
+
+        }catch (IOException e)
+        {
+            AlertError(e,null);
         }
 
-        ControllerManager.getVerticeWiseAlgorithmsController().PopupMessage(print.toString());
     }
 }

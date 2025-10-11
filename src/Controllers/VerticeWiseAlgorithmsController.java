@@ -5,15 +5,17 @@ import Algorithms.BFS;
 import Exceptions.InvalidAlgorithmInputException;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.CurrentlyPressedNodeHelper;
+import GraphVisualizer.ThemeManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-
 import GraphVisualizer.Graph;
-
 import javafx.scene.control.Button;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -22,30 +24,27 @@ public class VerticeWiseAlgorithmsController extends Controller{
 
     @FXML
     private AnchorPane VerticeAlgorithmsPane;
-
     @FXML
     private Button BFSButton;
-
     @FXML
     private Label verticeLabel;
-
     @FXML
     private Label verticeWeight;
-
     @FXML
     private Label inDegree;
-
     @FXML
     private Label outDegree;
+    @FXML
+    private Label outLabel;
+    @FXML
+    private Label inLabel;
 
     private Graph.GraphNode currentNode;
 
     @FXML
     public void initialize() {
         ControllerManager.setVerticeWiseAlgorithmsController(this);
-
         currentNode = CurrentlyPressedNodeHelper.getCurrentNode();
-
     }
 
     public void updateCurrentNodeLabels()
@@ -54,13 +53,24 @@ public class VerticeWiseAlgorithmsController extends Controller{
         if (currentNode != null) {
             verticeLabel.setText(currentNode.getNodeLabel());
             verticeWeight.setText("0");
-            inDegree.setText(Integer.toString(currentNode.inDegree));
-            outDegree.setText(Integer.toString(currentNode.outDegree));
+            if (ControllerManager.getGraphInputController().getGraph().isDirected())
+            {
+                inLabel.setText("in Degree :");
+                inDegree.setText(Integer.toString(currentNode.inDegree));
+                outLabel.setText("out Degree :");
+                outDegree.setText(Integer.toString(currentNode.outDegree));
+            }
+            else {
+                inLabel.setText("Degree :");
+                inDegree.setText(Integer.toString(currentNode.inDegree));
+                outDegree.setText("");
+                outLabel.setText("");
+            }
+
         }
     }
 
-    private void run(Algorithm algorithm)
-    {
+    private void run(Algorithm algorithm)  {
         if (!algorithm.checkValidity())
         {
             AlertError(new InvalidAlgorithmInputException(algorithm),null);

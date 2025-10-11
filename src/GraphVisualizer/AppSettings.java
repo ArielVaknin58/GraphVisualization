@@ -15,6 +15,7 @@ public class AppSettings {
     public static final String App_Icon_location = "/resources/GraphVisualizerIcon.png";
     public static final String Vertice_Algorithms_Pane_Location = "/resources/VerticeAlgorithmsPane.fxml";
     public static final String save_Graph_Popup_location = "/resources/saveGraphPopup.fxml";
+    public static final String Results_Popup_location = "/resources/results.fxml";
 
 
 

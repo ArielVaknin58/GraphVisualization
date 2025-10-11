@@ -10,6 +10,16 @@ public class ControllerManager {
 
     private static SaveGraphPopupController saveGraphPopupController;
 
+    private static ResultsPaneController resultsPaneController;
+
+    public static ResultsPaneController getResultsPaneController() {
+        return resultsPaneController;
+    }
+
+    public static void setResultsPaneController(ResultsPaneController resultsPaneController) {
+        ControllerManager.resultsPaneController = resultsPaneController;
+    }
+
     public static SaveGraphPopupController getSaveGraphPopupController() {
         return saveGraphPopupController;
     }

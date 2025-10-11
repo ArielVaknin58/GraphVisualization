@@ -3,12 +3,10 @@ package GraphVisualizer;
 
 import Exceptions.InvalidEdgeException;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
-import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -30,6 +28,14 @@ public class Graph implements Serializable {
     public Graph(boolean isDirected)
     {
         this.isDirected = isDirected;
+    }
+
+    public void setDirected(boolean directed) {
+        isDirected = directed;
+    }
+
+    public boolean isDirected() {
+        return isDirected;
     }
 
     public Graph(Graph other) {
@@ -84,7 +90,7 @@ public class Graph implements Serializable {
         if(fromNode == null || toNode == null)
             throw new InvalidEdgeException();
 
-        ArrowEdge edge = new ArrowEdge(fromNode, toNode);
+        ArrowEdge edge = new ArrowEdge(fromNode, toNode,this.isDirected);
 
         // Add edge to nodes
         fromNode.neighborsList.add(toNode);
@@ -174,7 +180,7 @@ public class Graph implements Serializable {
             nodeLabel = textLabel;
             nodeObject = new Group(circle, label);
 
-            initDragHandlers();
+            initNodeEvents();
         }
 
 
@@ -195,7 +201,7 @@ public class Graph implements Serializable {
             this.G = g;
         }
 
-        private void initDragHandlers() {
+        private void initNodeEvents() {
             circle.setFocusTraversable(true);
             circle.setOnMouseClicked(event -> {
                 CurrentlyPressedNodeHelper.setCurrentNode(this);
@@ -204,36 +210,36 @@ public class Graph implements Serializable {
 
             });
 
-                circle.setOnMousePressed(event -> {
-                    circle.getStyleClass().add("selected");
-                    circle.setUserData(new double[]{
-                            event.getSceneX(), event.getSceneY(),
-                            circle.getCenterX(), circle.getCenterY()
-                    });
+            circle.setOnMousePressed(event -> {
+                circle.getStyleClass().add("selected");
+                circle.setUserData(new double[]{
+                        event.getSceneX(), event.getSceneY(),
+                        circle.getCenterX(), circle.getCenterY()
                 });
+            });
 
-                circle.setOnMouseReleased(event -> {
-                    circle.getStyleClass().remove("selected");
-                });
+            circle.setOnMouseReleased(event -> {
+                circle.getStyleClass().remove("selected");
+            });
 
-                circle.setOnMouseDragged(event -> {
-                    double[] data = (double[]) circle.getUserData();
-                    double deltaX = event.getSceneX() - data[0];
-                    double deltaY = event.getSceneY() - data[1];
+            circle.setOnMouseDragged(event -> {
+                double[] data = (double[]) circle.getUserData();
+                double deltaX = event.getSceneX() - data[0];
+                double deltaY = event.getSceneY() - data[1];
 
-                    circle.setCenterX(data[2] + deltaX);
-                    circle.setCenterY(data[3] + deltaY);
+                circle.setCenterX(data[2] + deltaX);
+                circle.setCenterY(data[3] + deltaY);
 
-                    // Move label along with circle
-                    label.setX(circle.getCenterX() - AppSettings.nodeLabelPadding);
-                    label.setY(circle.getCenterY() + AppSettings.nodeLabelPadding);
+                // Move label along with circle
+                label.setX(circle.getCenterX() - AppSettings.nodeLabelPadding);
+                label.setY(circle.getCenterY() + AppSettings.nodeLabelPadding);
 
-                    // Update connected edges
-                    for (ArrowEdge edge : connectedEdges) {
-                        if (!edge.isShaftNull())
-                            edge.updatePosition();
-                    }
-                });
+                // Update connected edges
+                for (ArrowEdge edge : connectedEdges) {
+                    if (!edge.isShaftNull())
+                        edge.updatePosition(this.G.isDirected);
+                }
+            });
 
         }
 
