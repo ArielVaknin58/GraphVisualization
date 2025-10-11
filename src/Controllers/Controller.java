@@ -9,11 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.Objects;
 
 public class Controller {
 
@@ -55,6 +58,8 @@ public class Controller {
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle("result");
 
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
+            popupStage.getIcons().add(icon);
             Scene popupScene = new Scene(pane, 430, 150);
             ThemeManager.getThemeManager().AddScene(popupScene);
             popupStage.setScene(popupScene);

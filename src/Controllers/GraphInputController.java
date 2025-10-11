@@ -12,42 +12,40 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class GraphInputController extends Controller{
 
     @FXML
+    private AnchorPane saveGraphPane;
+    @FXML
     private GridPane controlPanel;
-
     @FXML
     private Pane algoPlaceholder;
     @FXML
     private TextField verticesField;
-
     @FXML
     private TextField edgeStartField;
-
     @FXML
     private TextField edgeEndField;
-
     @FXML
     private Button enterButton;
-
     @FXML
     private Button addButton;
-
     @FXML
     private AnchorPane graphContainer;
-
     @FXML
     private ComboBox<Theme> ThemeBox;
-
     @FXML
     private Button saveGraph;
-
     @FXML
     private Button loadGraph;
+    @FXML
+    private CheckBox DirectedCheckbox;
 
     private int vertexCount = 0;
     private Graph G = new Graph(true);
@@ -109,6 +107,16 @@ public class GraphInputController extends Controller{
             }
         });
 
+        DirectedCheckbox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+            if (isNowSelected) {
+                System.out.println("graph is directed");
+                //displayGraph(new Graph(true));
+            } else {
+                System.out.println("graph isnt directed");
+                //displayGraph(new Graph(false));
+            }
+            graphContainer.getChildren().clear();
+        });
         // Register this controller for access elsewhere
         ControllerManager.setGraphInputController(this);
     }
@@ -123,15 +131,36 @@ public class GraphInputController extends Controller{
     private void onLoadGraph()
     {
         this.G = GraphSerializer.loadGraph();
+        assert G != null;
         displayGraph(G);
     }
 
     @FXML
     private void onSaveGraph()
     {
-        GraphSerializer.saveGraph(G,"SimpleTriangle");
+        try {
+            FXMLLoader saveGraphLoader = new FXMLLoader(getClass().getResource(AppSettings.save_Graph_Popup_location));
+            AnchorPane saveGraphPane = saveGraphLoader.load();
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Save Graph");
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+
+            Scene popupScene = new Scene(saveGraphPane);
+            popupStage.setScene(popupScene);
+
+            ThemeManager.getThemeManager().AddScene(popupScene);
+
+            popupStage.showAndWait();
+        }
+        catch (IOException e) {
+            AlertError(e,null);
+        }
+
 
     }
+
     @FXML
     private void onEnterVertices() {
         try {

@@ -8,6 +8,16 @@ public class ControllerManager {
 
     private static VerticeWiseAlgorithmsController verticeWiseAlgorithmsController;
 
+    private static SaveGraphPopupController saveGraphPopupController;
+
+    public static SaveGraphPopupController getSaveGraphPopupController() {
+        return saveGraphPopupController;
+    }
+
+    public static void setSaveGraphPopupController(SaveGraphPopupController saveGraphPopupController) {
+        ControllerManager.saveGraphPopupController = saveGraphPopupController;
+    }
+
     public static void setGraphInputController(GraphInputController graphInputController) {
         ControllerManager.graphInputController = graphInputController;
     }

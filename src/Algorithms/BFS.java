@@ -71,10 +71,14 @@ public class BFS extends Algorithm{
     public void DisplayResults() {
 
         StringBuilder print = new StringBuilder();
-        print.append("The lengths of the shortest paths from vertice "+this.inputNode.getNodeLabel()+"is :\n");
-        for(String node : result.keySet())
+        print.append("The lengths of the shortest paths from vertice "+this.inputNode.getNodeLabel()+" are :\n");
+        Iterator<String> it = result.keySet().iterator();
+        while(it.hasNext())
         {
-            print.append(node +" : "+ result.get(node) +" ");
+            String currentNode = it.next();
+            Integer current = result.get(currentNode);
+            print.append(currentNode +" : "+ current +"  ");
+
         }
 
         ControllerManager.getVerticeWiseAlgorithmsController().PopupMessage(print.toString());

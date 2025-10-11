@@ -24,7 +24,7 @@ public class GraphSerializer {
                 out.flush();
             }
 
-            ControllerManager.getGraphWiseAlgorithmsController().PopupMessage("Graph saved successfully to: " + graphFile.toAbsolutePath());
+            ControllerManager.getGraphWiseAlgorithmsController().PopupMessage("Graph "+fileName+".ser saved successfully !");
 
         } catch (IOException e) {
             Controller.AlertError(e,null);

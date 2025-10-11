@@ -33,23 +33,25 @@ public class Graph implements Serializable {
     }
 
     public Graph(Graph other) {
-        this.isDirected = other.isDirected;
 
-        Hashtable<String, GraphNode> nodeMap = new Hashtable<>();
+        this.isDirected = other.isDirected;
 
 
             for (GraphNode oldNode : other.V) {
                 GraphNode newNode = new GraphNode(oldNode);
                 newNode.setGraph(this);
-                this.V.add(newNode);
                 this.VerticeIndexer.put(newNode.nodeLabel, newNode);
-                nodeMap.put(oldNode.nodeLabel, newNode);
+                this.V.add(newNode);
             }
 
             for (ArrowEdge oldEdge : other.E) {
                 ArrowEdge newEdge = new ArrowEdge(oldEdge);
-                newEdge.getFrom().addConnectedEdge(newEdge);
-                newEdge.getTo().inDegree++;
+                GraphNode fromNode = VerticeIndexer.get(oldEdge.getFrom().getNodeLabel());
+                GraphNode toNode = VerticeIndexer.get(oldEdge.getTo().getNodeLabel());
+
+                fromNode.addConnectedEdge(newEdge);
+                toNode.inDegree++;
+                fromNode.outDegree++;
                 if (newEdge.getFrom() != newEdge.getTo())
                     newEdge.getTo().addConnectedEdge(newEdge);
 

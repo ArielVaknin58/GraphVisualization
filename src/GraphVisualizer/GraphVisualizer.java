@@ -11,8 +11,8 @@ import java.util.Objects;
 
 
 //TO DO:
-// 1 - fix the bug where when a vertice is selected then its in/out degrees are current but when running code they arent.
-// 2 - create a window to enter file name for when saving a graph
+// 1
+// 2
 public class GraphVisualizer extends Application {
 
     public static void main(String[] args) {
