@@ -3,10 +3,12 @@ package Controllers;
 import Exceptions.InvalidEdgeException;
 import Exceptions.LoopException;
 import GraphVisualizer.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -51,17 +53,54 @@ public class GraphInputController extends Controller{
     private Graph G = new Graph(true);
 
 
-    public void initialize()
-    {
+    public void initialize() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Algorithms_Pane_Location));
-            ScrollPane algorithmsPane = loader.load();
+            // Load the main (Algorithms) pane
+            FXMLLoader algoLoader = new FXMLLoader(getClass().getResource(AppSettings.Algorithms_Pane_Location));
+            ScrollPane algorithmsPane = algoLoader.load();
+
+            // Load the node details pane (for when a GraphNode is focused)
+            FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource(AppSettings.Vertice_Algorithms_Pane_Location));
+            ScrollPane nodeDetailsPane = nodeLoader.load();
+
+            nodeDetailsPane.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+                // Only consume clicks on the pane itself, not on its children
+                if (event.getTarget().equals(nodeDetailsPane)) {
+                    event.consume();
+                }
+            });
+
+            // Initially show the algorithms pane
             algoPlaceholder.getChildren().setAll(algorithmsPane);
 
+            graphContainer.setOnMouseClicked(event -> {
+                // Only deselect if clicking on the background itself
+                if (event.getTarget() == graphContainer) {
+                    CurrentlyPressedNodeHelper.setCurrentNode(null);
+                }
+            });
+
+            // 👇 Register a reactive listener for node focus changes
+            CurrentlyPressedNodeHelper.setOnFocusChange(() -> {
+                Platform.runLater(() -> {
+                    if (CurrentlyPressedNodeHelper.hasFocus()) {
+                        // A node is in focus → show the node details pane
+
+                        ControllerManager.getVerticeWiseAlgorithmsController().updateCurrentNodeLabels();
+                        algoPlaceholder.getChildren().setAll(nodeDetailsPane);
+
+                    } else {
+                        // No node in focus → show the algorithms pane again
+                        algoPlaceholder.getChildren().setAll(algorithmsPane);
+                    }
+                });
+            });
+
         } catch (IOException e) {
-            AlertError(e,null);
+            AlertError(e, null);
         }
 
+        // Theme dropdown setup
         ThemeBox.getItems().addAll(Theme.values());
         ThemeBox.setValue(Theme.DEFAULT);
         ThemeBox.valueProperty().addListener((obs, oldTheme, newTheme) -> {
@@ -69,9 +108,11 @@ public class GraphInputController extends Controller{
                 ThemeManager.getThemeManager().switchTheme(newTheme);
             }
         });
-        ControllerManager.setGraphInputController(this);
 
+        // Register this controller for access elsewhere
+        ControllerManager.setGraphInputController(this);
     }
+
 
     public Graph getGraph()
     {
@@ -88,7 +129,7 @@ public class GraphInputController extends Controller{
     @FXML
     private void onSaveGraph()
     {
-        GraphSerializer.saveGraph(G,"FullGraph6");
+        GraphSerializer.saveGraph(G,"SimpleTriangle");
 
     }
     @FXML

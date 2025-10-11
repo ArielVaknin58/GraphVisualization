@@ -5,8 +5,6 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Polygon;
-
-import java.awt.*;
 import java.io.Serializable;
 
 public class ArrowEdge implements Serializable {
@@ -59,7 +57,7 @@ public class ArrowEdge implements Serializable {
         double endY = to.getCircle().getCenterY();
 
         shaft = new Line(startX, startY, endX, endY);
-        shaft.setStrokeWidth(2);
+        shaft.setStrokeWidth(AppSettings.EdgeWidth);
         shaft.setStroke(Color.GRAY);
 
         arrowHead = new Polygon(0,0, -AppSettings.ARROW_SIZE,-AppSettings.ARROW_SIZE, AppSettings.ARROW_SIZE,-AppSettings.ARROW_SIZE);

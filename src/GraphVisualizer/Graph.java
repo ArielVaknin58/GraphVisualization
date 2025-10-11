@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class Graph implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     public final ArrayList<GraphNode> V = new ArrayList<>();
     public final Hashtable<String, GraphNode> VerticeIndexer = new Hashtable<>();
@@ -54,8 +54,6 @@ public class Graph implements Serializable {
                     newEdge.getTo().addConnectedEdge(newEdge);
 
                 E.add(newEdge);
-                //newFrom.connectedEdges.add(newEdge);
-                //newTo.connectedEdges.add(newEdge);
             }
 
 
@@ -87,12 +85,14 @@ public class Graph implements Serializable {
         ArrowEdge edge = new ArrowEdge(fromNode, toNode);
 
         // Add edge to nodes
+        fromNode.neighborsList.add(toNode);
         fromNode.addConnectedEdge(edge);
         toNode.inDegree++;
+        fromNode.outDegree++;
         if (fromNode != toNode)
             toNode.addConnectedEdge(edge);
 
-        ArrowEdge toRemove = null;
+        ArrowEdge toRemove = null; //Removes old duplicate edge if exists
         for(ArrowEdge currentEdge : E)
         {
             if(currentEdge.getFrom().nodeLabel.equals(fromNode.nodeLabel) && currentEdge.getTo().nodeLabel.equals(toNode.nodeLabel))
@@ -107,9 +107,6 @@ public class Graph implements Serializable {
         });
     }
 
-    public Node findNodeByLabel(String label) {
-        return VerticeIndexer.get(label).getNodeObject();
-    }
 
     public void addGraphToGroup(Group root) {
         // Add edges first so nodes appear on top
@@ -148,7 +145,6 @@ public class Graph implements Serializable {
         E.removeAll(toRemove);
         V.remove(node);
         VerticeIndexer.remove(node.nodeLabel);
-        //ControllerManager.getGraphInputController().displayGraph(this);
     }
 
 
@@ -158,6 +154,7 @@ public class Graph implements Serializable {
         private transient Circle circle;
         private transient Text label;
         public List<ArrowEdge> connectedEdges = new ArrayList<>();
+        public List<GraphNode> neighborsList = new ArrayList<>();
         private String nodeLabel;
         public int inDegree;
         public int outDegree;
@@ -181,8 +178,6 @@ public class Graph implements Serializable {
 
         public GraphNode(GraphNode other) {
             this.nodeLabel = other.nodeLabel;
-            //this.inDegree = other.inDegree;
-            //this.outDegree = other.outDegree;
 
             this.circle = null;
             this.label = null;
@@ -190,6 +185,7 @@ public class Graph implements Serializable {
             this.G = null;
 
             this.connectedEdges = new ArrayList<>();
+            this.neighborsList = new ArrayList<>();
         }
 
         public void setGraph(Graph g)
@@ -200,47 +196,47 @@ public class Graph implements Serializable {
         private void initDragHandlers() {
             circle.setFocusTraversable(true);
             circle.setOnMouseClicked(event -> {
-                circle.requestFocus();
-
+                CurrentlyPressedNodeHelper.setCurrentNode(this);
+                System.out.println("Clicked node " + nodeLabel);
                 LoggerManager.Logger().fine("Clicked node " + nodeLabel);
 
             });
 
-            circle.setOnMousePressed(event -> {
-                circle.getStyleClass().add("selected");
-                circle.setUserData(new double[]{
-                        event.getSceneX(), event.getSceneY(),
-                        circle.getCenterX(), circle.getCenterY()
+                circle.setOnMousePressed(event -> {
+                    circle.getStyleClass().add("selected");
+                    circle.setUserData(new double[]{
+                            event.getSceneX(), event.getSceneY(),
+                            circle.getCenterX(), circle.getCenterY()
+                    });
                 });
-            });
 
-            circle.setOnMouseReleased(event -> {
-                circle.getStyleClass().remove("selected");
-            });
+                circle.setOnMouseReleased(event -> {
+                    circle.getStyleClass().remove("selected");
+                });
 
-            circle.setOnMouseDragged(event -> {
-                double[] data = (double[]) circle.getUserData();
-                double deltaX = event.getSceneX() - data[0];
-                double deltaY = event.getSceneY() - data[1];
+                circle.setOnMouseDragged(event -> {
+                    double[] data = (double[]) circle.getUserData();
+                    double deltaX = event.getSceneX() - data[0];
+                    double deltaY = event.getSceneY() - data[1];
 
-                circle.setCenterX(data[2] + deltaX);
-                circle.setCenterY(data[3] + deltaY);
+                    circle.setCenterX(data[2] + deltaX);
+                    circle.setCenterY(data[3] + deltaY);
 
-                // Move label along with circle
-                label.setX(circle.getCenterX() - AppSettings.nodeLabelPadding);
-                label.setY(circle.getCenterY() + AppSettings.nodeLabelPadding);
+                    // Move label along with circle
+                    label.setX(circle.getCenterX() - AppSettings.nodeLabelPadding);
+                    label.setY(circle.getCenterY() + AppSettings.nodeLabelPadding);
 
-                // Update connected edges
-                for (ArrowEdge edge : connectedEdges) {
-                    if(!edge.isShaftNull())
-                        edge.updatePosition();
-                }
-            });
+                    // Update connected edges
+                    for (ArrowEdge edge : connectedEdges) {
+                        if (!edge.isShaftNull())
+                            edge.updatePosition();
+                    }
+                });
+
         }
 
         public void addConnectedEdge(ArrowEdge edge) {
             connectedEdges.add(edge);
-            this.outDegree++;
         }
 
         public Circle getCircle() {

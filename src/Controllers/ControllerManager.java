@@ -6,6 +6,8 @@ public class ControllerManager {
 
     private static GraphWiseAlgorithmsController graphWiseAlgorithmsController;
 
+    private static VerticeWiseAlgorithmsController verticeWiseAlgorithmsController;
+
     public static void setGraphInputController(GraphInputController graphInputController) {
         ControllerManager.graphInputController = graphInputController;
     }
@@ -20,5 +22,13 @@ public class ControllerManager {
 
     public static GraphWiseAlgorithmsController getGraphWiseAlgorithmsController() {
         return graphWiseAlgorithmsController;
+    }
+
+    public static VerticeWiseAlgorithmsController getVerticeWiseAlgorithmsController() {
+        return verticeWiseAlgorithmsController;
+    }
+
+    public static void setVerticeWiseAlgorithmsController(VerticeWiseAlgorithmsController verticeWiseAlgorithmsController) {
+        ControllerManager.verticeWiseAlgorithmsController = verticeWiseAlgorithmsController;
     }
 }

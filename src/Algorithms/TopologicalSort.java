@@ -57,7 +57,7 @@ public class TopologicalSort extends Algorithm {
     @Override
     public void DisplayResults() {
 
-        StringBuilder print = new StringBuilder("The Topological Sort is: ");
+        StringBuilder print = new StringBuilder("The Topological Sort is: \n");
         Iterator<Graph.GraphNode> it = result.iterator();
         while (it.hasNext()) {
             Graph.GraphNode current = it.next();

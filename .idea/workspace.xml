@@ -6,20 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="37a3260c-e9a7-416e-aca4-76b50415fc74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/graph.log.0" beforeDir="false" afterPath="$PROJECT_DIR$/logs/graph.log.0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serializations/FullGraph6.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serializations/bloop.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/ControllerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ControllerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/GraphInputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphInputController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/ArrowEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/ArrowEdge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/Theme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/Theme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/LoggerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/LoggerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/ThemeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/ThemeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/AlgorithmsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/AlgorithmsPane.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/GenericPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/GenericPopup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/GraphInput.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/GraphInput.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/BlueTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/BlueTheme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/GreenTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/GreenTheme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/MagentaTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/MagentaTheme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/OrangeAndGreenTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/OrangeAndGreenTheme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/RedTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/RedTheme.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,21 +45,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GraphVisualizer.GraphVisualizer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GraphVisualizer.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;current&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ariel/IdeaProjects/ShticellProject&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GraphVisualizer.GraphVisualizer.executor": "Run",
+    "Application.GraphVisualizer.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "current",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Ariel/IdeaProjects/ShticellProject",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.JavaFX"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="GraphVisualizer.GraphVisualizer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GraphVisualizer.GraphVisualizer" />

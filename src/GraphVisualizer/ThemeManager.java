@@ -8,12 +8,11 @@ import java.util.List;
 public class ThemeManager {
 
     private final static ThemeManager instance = new ThemeManager();
-    private Theme currentTheme;  // currently applied theme
+    private Theme currentTheme;
     private final List<Scene> scenes;
 
     public ThemeManager() {
         scenes = new ArrayList<>();
-        //default
         currentTheme = Theme.DEFAULT;
     }
 
@@ -28,11 +27,8 @@ public class ThemeManager {
         applyTheme(scene);
     }
 
-    // Apply the current theme to a Scene
     private void applyTheme(Scene scene) {
         scene.getStylesheets().clear();
-//        if(currentTheme.equals(Theme.DEFAULT))
-//            return;
         String themePath = currentTheme.getCssPath();
         var url = getClass().getResource(themePath);
         if (url != null) {

@@ -1,8 +1,8 @@
 package GraphVisualizer;
 
 import Controllers.Controller;
+import Controllers.ControllerManager;
 import Exceptions.InvalidEdgeException;
-
 import javax.swing.*;
 import java.io.*;
 import java.nio.file.*;
@@ -24,7 +24,7 @@ public class GraphSerializer {
                 out.flush();
             }
 
-            LoggerManager.Logger().fine("Graph saved successfully to: " + graphFile.toAbsolutePath());
+            ControllerManager.getGraphWiseAlgorithmsController().PopupMessage("Graph saved successfully to: " + graphFile.toAbsolutePath());
 
         } catch (IOException e) {
             Controller.AlertError(e,null);
