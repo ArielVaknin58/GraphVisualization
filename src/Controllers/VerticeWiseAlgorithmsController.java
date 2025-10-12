@@ -2,6 +2,7 @@ package Controllers;
 
 import Algorithms.Algorithm;
 import Algorithms.BFS;
+import Algorithms.DFS;
 import Exceptions.InvalidAlgorithmInputException;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.CurrentlyPressedNodeHelper;
@@ -73,7 +74,7 @@ public class VerticeWiseAlgorithmsController extends Controller{
     private void run(Algorithm algorithm)  {
         if (!algorithm.checkValidity())
         {
-            AlertError(new InvalidAlgorithmInputException(algorithm),null);
+            AlertError(new InvalidAlgorithmInputException(algorithm));
         }
         algorithm.Run();
         algorithm.DisplayResults();
@@ -81,5 +82,10 @@ public class VerticeWiseAlgorithmsController extends Controller{
     public void OnBFSClick()
     {
         run(new BFS(new Graph(ControllerManager.getGraphInputController().getGraph()), currentNode));
+    }
+
+    public void OnDFSClick()
+    {
+        run(new DFS((ControllerManager.getGraphInputController().getGraph()), currentNode));
     }
 }

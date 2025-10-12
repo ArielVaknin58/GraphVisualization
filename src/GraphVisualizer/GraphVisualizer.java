@@ -36,7 +36,7 @@ public class GraphVisualizer extends Application {
         }
         catch (Exception e)
         {
-            Controller.AlertError(e,null);
+            Controller.AlertError(e);
         }
 
     }

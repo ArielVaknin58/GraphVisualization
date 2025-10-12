@@ -29,7 +29,7 @@ public class GraphWiseAlgorithmsController extends Controller{
     {
         if (!algorithm.checkValidity())
         {
-            AlertError(new InvalidAlgorithmInputException(algorithm),null);
+            AlertError(new InvalidAlgorithmInputException(algorithm));
         }
         algorithm.Run();
         algorithm.DisplayResults();

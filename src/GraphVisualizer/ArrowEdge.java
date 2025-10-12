@@ -71,6 +71,10 @@ public class ArrowEdge implements Serializable {
 
     }
 
+    public Line getShaft()
+    {
+        return shaft;
+    }
     public Group getEdgeGroup() {
         return edgeGroup;
     }

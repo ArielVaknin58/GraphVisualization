@@ -27,7 +27,7 @@ public class GraphSerializer {
             ControllerManager.getGraphWiseAlgorithmsController().PopupMessage("Graph "+fileName+".ser saved successfully !");
 
         } catch (IOException e) {
-            Controller.AlertError(e,null);
+            Controller.AlertError(e);
         }
     }
 
@@ -61,7 +61,7 @@ public class GraphSerializer {
             } catch (IOException | ClassNotFoundException e) {
                 LoggerManager.Logger().severe("Error loading graph: " + e.getMessage());
             } catch (InvalidEdgeException e) {
-                Controller.AlertError(e,null);
+                Controller.AlertError(e);
             }
         } else {
             LoggerManager.Logger().severe("File selection canceled by user.");

@@ -37,20 +37,6 @@ public class BFS extends Algorithm{
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
         this.AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
     }
-    @Override
-    public String getAlgorithmName() {
-        return this.AlgorithmName;
-    }
-
-    @Override
-    public String getAlgorithmDescription() {
-        return this.AlgorithmDescription;
-    }
-
-    @Override
-    public String getRequiredInputDescription() {
-        return this.requiredInput;
-    }
 
     @Override
     public void Run() {
@@ -109,7 +95,7 @@ public class BFS extends Algorithm{
 
         }catch (IOException e)
         {
-            AlertError(e,null);
+            AlertError(e);
         }
 
     }

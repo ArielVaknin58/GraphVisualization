@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="539.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphResultController">
+   <children>
+      <ScrollPane prefHeight="539.0" prefWidth="622.0">
+        <content>
+          <AnchorPane fx:id="graphOutputContainer" minHeight="0.0" minWidth="0.0" prefHeight="539.0" prefWidth="621.0" />
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

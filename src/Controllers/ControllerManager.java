@@ -12,6 +12,16 @@ public class ControllerManager {
 
     private static ResultsPaneController resultsPaneController;
 
+    private static GraphResultController graphResultController;
+
+    public static GraphResultController getGraphResultController() {
+        return graphResultController;
+    }
+
+    public static void setGraphResultController(GraphResultController graphResultController) {
+        ControllerManager.graphResultController = graphResultController;
+    }
+
     public static ResultsPaneController getResultsPaneController() {
         return resultsPaneController;
     }

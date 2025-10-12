@@ -27,6 +27,11 @@ public class ThemeManager {
         applyTheme(scene);
     }
 
+    public Theme getCurrentTheme()
+    {
+        return currentTheme;
+    }
+
     private void applyTheme(Scene scene) {
         scene.getStylesheets().clear();
         String themePath = currentTheme.getCssPath();

@@ -50,6 +50,10 @@ public class GraphInputController extends Controller{
     private int vertexCount = 0;
     private Graph G = new Graph(true);
 
+    public AnchorPane getGraphContainer()
+    {
+        return graphContainer;
+    }
 
     public void initialize() {
         try {
@@ -86,7 +90,7 @@ public class GraphInputController extends Controller{
             });
 
         } catch (IOException e) {
-            AlertError(e, null);
+            AlertError(e);
         }
 
         // Theme dropdown setup
@@ -146,7 +150,7 @@ public class GraphInputController extends Controller{
             popupStage.showAndWait();
         }
         catch (IOException e) {
-            AlertError(e,null);
+            AlertError(e);
         }
 
 
@@ -165,7 +169,7 @@ public class GraphInputController extends Controller{
 
             displayGraph(G);
         } catch (NumberFormatException e) {
-            AlertError(e,"input isn't a parsable integer");
+            AlertError(new Exception("input isn't a parsable integer"));
         }
     }
 
@@ -193,11 +197,11 @@ public class GraphInputController extends Controller{
         }
         catch (NumberFormatException e)
         {
-            AlertError(e,"input is not a valid edge syntax");
+            AlertError(new Exception("input is not a valid edge syntax"));
         }
         catch (InvalidEdgeException | LoopException e)
         {
-            AlertError(e,null);
+            AlertError(e);
         }
 
         System.out.println("Added edge: " + from + " → " + to);

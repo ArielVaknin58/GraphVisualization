@@ -21,11 +21,11 @@ import java.util.Objects;
 public class Controller {
 
 
-    public static void AlertError(Exception e,String optionalMessage){
+    public static void AlertError(Exception e){
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("error");
-        alert.setContentText(optionalMessage == null ? e.getMessage() : optionalMessage);
+        alert.setContentText(e.getMessage());
         alert.showAndWait();
     }
 
@@ -65,7 +65,7 @@ public class Controller {
             popupStage.setScene(popupScene);
             popupStage.showAndWait();
 
-        } catch (Exception e) {AlertError(e,null);}
+        } catch (Exception e) {AlertError(e);}
 
     }
 }

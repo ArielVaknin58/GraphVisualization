@@ -11,11 +11,11 @@ public abstract class Algorithm {
 
     Algorithm() {};
 
-    public abstract String getAlgorithmName();
+    public String getAlgorithmName() {return this.AlgorithmName;}
 
-    public abstract String getAlgorithmDescription();
+    public String getAlgorithmDescription() {return this.AlgorithmDescription;}
 
-    public abstract String getRequiredInputDescription();
+    public String getRequiredInputDescription() {return this.requiredInput;}
 
     public abstract void Run();
 
