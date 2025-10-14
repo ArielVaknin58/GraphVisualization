@@ -1,6 +1,8 @@
 package GraphVisualizer;
 
 
+import Controllers.Controller;
+import Controllers.ControllerManager;
 import Exceptions.InvalidEdgeException;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
@@ -40,29 +42,25 @@ public class Graph implements Serializable {
 
     public Graph(Graph other) {
 
-        this.isDirected = other.isDirected;
+        try
+        {
+            this.isDirected = other.isDirected;
 
-
-            for (GraphNode oldNode : other.V) {
-                GraphNode newNode = new GraphNode(oldNode);
-                newNode.setGraph(this);
-                this.VerticeIndexer.put(newNode.nodeLabel, newNode);
-                this.V.add(newNode);
+            for(GraphNode oldNode : other.V)
+            {
+                this.createNode(oldNode.getNodeLabel());
             }
-
-            for (ArrowEdge oldEdge : other.E) {
-                ArrowEdge newEdge = new ArrowEdge(oldEdge);
-                GraphNode fromNode = VerticeIndexer.get(oldEdge.getFrom().getNodeLabel());
-                GraphNode toNode = VerticeIndexer.get(oldEdge.getTo().getNodeLabel());
-
-                fromNode.addConnectedEdge(newEdge);
-                toNode.inDegree++;
-                fromNode.outDegree++;
-                if (newEdge.getFrom() != newEdge.getTo())
-                    newEdge.getTo().addConnectedEdge(newEdge);
-
-                E.add(newEdge);
+            for(ArrowEdge oldEdge : other.E)
+            {
+                this.createEdge(oldEdge.getFrom().getNodeLabel(),oldEdge.getTo().getNodeLabel());
             }
+        }catch (InvalidEdgeException e)
+        {
+            Controller.AlertError(e);
+        }catch (NullPointerException e)
+        {
+            Controller.AlertError(new Exception("The graph object is null"));
+        }
 
 
     }
@@ -201,6 +199,16 @@ public class Graph implements Serializable {
             if(obj.getClass().equals(this.getClass()))
                 return this.getNodeLabel().equals(((GraphNode) obj).nodeLabel);
             return false;
+        }
+
+        public ArrowEdge getneighborEdge(GraphNode node)
+        {
+            for(ArrowEdge edge : this.connectedEdges)
+            {
+                if(edge.getFrom().equals(this) && edge.getTo().equals(node))
+                    return edge;
+            }
+            return null;
         }
 
         public void setGraph(Graph g)

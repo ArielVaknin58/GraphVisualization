@@ -7,7 +7,9 @@
     <content>
         <AnchorPane fx:id="AlgorithmsPane" minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="200.0" styleClass="InnerComponents">
             <children>
-                <Button fx:id="TopologicalSortButton" layoutX="21.0" layoutY="61.0" mnemonicParsing="false" onAction="#OnTopologicalClick" prefHeight="25.0" prefWidth="143.0" text="Topological Sort" />
+                <Button fx:id="TopologicalSortButton" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnTopologicalClick" prefHeight="25.0" prefWidth="143.0" text="Topological Sort" />
+            <Button fx:id="eulerCircuitButton" layoutX="21.0" layoutY="50.0" mnemonicParsing="false" onAction="#OnEulerCircuitClick" prefHeight="25.0" prefWidth="143.0" text="Euler's Circuit" />
+            <Button fx:id="hamiltonButton" layoutX="21.0" layoutY="84.0" mnemonicParsing="false" onAction="#onHamiltonianCircuitClicked" prefHeight="25.0" prefWidth="145.0" text="Hamiltonian Circuit" />
             </children>
         </AnchorPane>
     </content>

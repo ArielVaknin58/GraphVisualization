@@ -10,10 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class DFS extends Algorithm{
 
@@ -21,6 +18,8 @@ public class DFS extends Algorithm{
     private Graph.GraphNode inputNode;
     private HashMap<String, Color> colors = new HashMap<>();
     private List<ArrowEdge> visitedEdges = new ArrayList<ArrowEdge>();
+    private Hashtable<ArrowEdge,Boolean> coloredEdges = new Hashtable<ArrowEdge, Boolean>();
+
 
 
     public DFS(Graph G, Graph.GraphNode inputNode)
@@ -104,37 +103,70 @@ public class DFS extends Algorithm{
         return false;
     }
 
-    private List<Graph.GraphNode> visitCycle(Graph.GraphNode node, List<Graph.GraphNode> nodeList)
+    private void visitRegular(Graph.GraphNode currentNode)
     {
-        colors.put(node.getNodeLabel(), Color.GREY);
-        nodeList.add(node);
-        for (Graph.GraphNode neighbor : node.neighborsList) {
+        colors.put(currentNode.getNodeLabel(), Color.GREY);
+
+        for (Graph.GraphNode neighbor : currentNode.neighborsList) {
             if (colors.get(neighbor.getNodeLabel()) == Color.WHITE) {
-                List<Graph.GraphNode> list = visitCycle(neighbor,nodeList);
-                if(list.getFirst().equals(list.getLast()))
-                    return list;
-            }
-            else
-            {
-                nodeList.add(neighbor);
-                return nodeList;
+                visitRegular(neighbor);
             }
 
         }
-
-        colors.put(node.getNodeLabel(), Color.BLACK);
-        return nodeList;
+        colors.put(currentNode.getNodeLabel(), Color.BLACK);
     }
 
     public List<Graph.GraphNode> findCircuit(Graph.GraphNode node)
     {
-        initColors();
+        initEdgesColors();
         List<Graph.GraphNode> myList = new ArrayList<>();
-        if (inputNode != null && colors.get(inputNode.getNodeLabel()) == Color.WHITE) {
-            myList = visitCycle(inputNode,myList);
+        Graph.GraphNode currentNode = node;
+        while(HasUnvisitedNeighbors(currentNode) != null)
+        {
+            Graph.GraphNode neighbor = HasUnvisitedNeighbors(currentNode);
+            coloredEdges.put(currentNode.getneighborEdge(neighbor),true);
+            if(!G.isDirected()) {
+                assert neighbor != null;
+                coloredEdges.put(neighbor.getneighborEdge(currentNode),true);
+            }
+            myList.add(neighbor);
+            currentNode = neighbor;
         }
 
         return myList;
+    }
+
+    Graph.GraphNode HasUnvisitedNeighbors(Graph.GraphNode node)
+    {
+        if(node == null || node.neighborsList.isEmpty()) return null;
+        for(ArrowEdge edge : node.connectedEdges)
+        {
+            if(edge.getFrom().equals(node) && coloredEdges.get(edge).equals(false))
+                return edge.getTo();
+        }
+        return null;
+    }
+
+    public void initEdgesColors()
+    {
+        for(ArrowEdge edge : G.E)
+        {
+            coloredEdges.put(edge,false);
+        }
+    }
+    public boolean isConnected()
+    {
+        initColors();
+        if (inputNode != null && colors.get(inputNode.getNodeLabel()) == Color.WHITE) {
+            visitRegular(inputNode);
+        }
+
+        for (Graph.GraphNode node : G.V)
+        {
+            if(colors.get(node.getNodeLabel()).equals(Color.WHITE))
+                return false;
+        }
+        return true;
     }
 
 //    private void dfsRecursiveWithDelay(Graph.GraphNode node, Runnable onFinished) {

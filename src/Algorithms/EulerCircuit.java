@@ -1,5 +1,6 @@
 package Algorithms;
 
+import Controllers.ControllerManager;
 import GraphVisualizer.Graph;
 
 import java.util.*;
@@ -17,30 +18,38 @@ public class EulerCircuit extends Algorithm{
     }
     @Override
     public void Run() {
+        if (G.V.isEmpty() || !checkCondition()) {
+            this.result = new ArrayList<>();
+            return;
+        }
 
-        if(checkCondition())
-        {
-            DFS dfs = new DFS(G,G.V.getFirst());
-            result = dfs.findCircuit(G.V.getFirst());
-            int[] indices = CheckForDuplicates(result);
-            int duplicate1Index = indices[0];
-            int duplicate2Index = indices[1];
+        DFS dfs = new DFS(G, G.V.getFirst());
+        dfs.initEdgesColors();
+        Graph.GraphNode startNode = G.V.getFirst();
+        List<Graph.GraphNode> circuit = new LinkedList<>();
 
-            while(duplicate1Index != -1 && duplicate2Index != -1)
-            {
-                duplicate1Index = Math.min(duplicate1Index, duplicate2Index);
-                duplicate2Index = Math.max(duplicate1Index, duplicate2Index);
+        circuit.add(startNode);
+        circuit.addAll(dfs.findCircuit(startNode));
 
-                // ✅ remove elements between the duplicates (exclusive)
-                if (duplicate2Index - duplicate1Index > 1) {
-                    result.subList(duplicate1Index + 1, duplicate2Index).clear();
-                }
+        int currentNodeIndex = 0;
+        while (currentNodeIndex < circuit.size()) {
+            Graph.GraphNode u = circuit.get(currentNodeIndex);
 
-                indices = CheckForDuplicates(result);
-                duplicate1Index = indices[0];
-                duplicate2Index = indices[1];
+            if (dfs.HasUnvisitedNeighbors(u) != null) {
+
+                List<Graph.GraphNode> subCircuit = dfs.findCircuit(u);
+                circuit.addAll(currentNodeIndex + 1, subCircuit);
+                currentNodeIndex = 0;
+
+            } else {
+                currentNodeIndex++;
             }
         }
+
+        // 3. Finalize result if the full circuit was found
+        // If the graph is fully traversed, the size of `circuit` should match G.V.size() + G.E.size()
+        // or rely on the fact that if checkCondition() passed, the loop completes if implemented correctly.
+        this.result = new ArrayList<>(circuit);
     }
 
     private int[] CheckForDuplicates(List<Graph.GraphNode> list) {
@@ -64,6 +73,20 @@ public class EulerCircuit extends Algorithm{
     @Override
     public void DisplayResults() {
 
+        StringBuilder print = new StringBuilder();
+        if(result.isEmpty())
+        {
+            print.append("There is no euler circuit in the graph.");
+        }
+        else
+        {
+            print.append("The resulted euler's circuit is :   ");
+            for(Graph.GraphNode node : result)
+                print.append(node.getNodeLabel()).append(" ");
+        }
+
+        ControllerManager.getGraphWiseAlgorithmsController().PopupMessage(print.toString());
+
     }
 
     // For G directed graph : G has Euler circuit iff in degree = out degree
@@ -86,13 +109,15 @@ public class EulerCircuit extends Algorithm{
         {
             for(Graph.GraphNode node : G.V)
             {
-                if((node.inDegree + node.outDegree) % 2 == 1)
+                if(node.neighborsList.size() % 2 == 1)
                 {
                     hasEulerCircuit = false;
                     break;
                 }
             }
         }
-        return  hasEulerCircuit;
+
+        DFS dfs = new DFS(G,G.V.getFirst());
+        return  hasEulerCircuit && dfs.isConnected();
     }
 }
