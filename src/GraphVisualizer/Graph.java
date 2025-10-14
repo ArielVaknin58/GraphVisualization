@@ -196,6 +196,13 @@ public class Graph implements Serializable {
             this.neighborsList = new ArrayList<>();
         }
 
+        @Override
+        public boolean equals(Object obj) {
+            if(obj.getClass().equals(this.getClass()))
+                return this.getNodeLabel().equals(((GraphNode) obj).nodeLabel);
+            return false;
+        }
+
         public void setGraph(Graph g)
         {
             this.G = g;

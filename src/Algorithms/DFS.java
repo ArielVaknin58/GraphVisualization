@@ -37,10 +37,7 @@ public class DFS extends Algorithm{
     @Override
     public void Run() {
 
-        for(Graph.GraphNode node : G.V)
-        {
-            colors.put(node.getNodeLabel(), Color.WHITE);
-        }
+        initColors();
         pane = ControllerManager.getGraphInputController().getGraphContainer();
         pane.getStylesheets().clear();
         pane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/resources/styles/DFSStyle.css")).toExternalForm());
@@ -48,6 +45,14 @@ public class DFS extends Algorithm{
         DisplayColorizedResultsGraph(pane);
         runDFSAnimation(inputNode);
 
+    }
+
+    private void initColors()
+    {
+        for(Graph.GraphNode node : G.V)
+        {
+            colors.put(node.getNodeLabel(), Color.WHITE);
+        }
     }
 
     private void runDFSAnimation(Graph.GraphNode startNode) {
@@ -69,21 +74,18 @@ public class DFS extends Algorithm{
         });
     }
 
-    public boolean HasCircle() {
+    public boolean HasCycle() {
+        initColors();
         boolean HasCycle = false;
-        // Step 1: Start DFS from the input node
         if (inputNode != null && colors.get(inputNode.getNodeLabel()) == Color.WHITE) {
             HasCycle |= visit(inputNode);
         }
 
-        // Step 2: Continue DFS for any remaining unvisited (white) nodes
-        // This ensures full coverage even if the graph is disconnected
         for (Graph.GraphNode node : G.V) {
             if (colors.get(node.getNodeLabel()) == Color.WHITE) {
                 HasCycle |= visit(node);
             }
         }
-
         return HasCycle;
     }
 
@@ -101,6 +103,40 @@ public class DFS extends Algorithm{
         colors.put(currentNode.getNodeLabel(), Color.BLACK);
         return false;
     }
+
+    private List<Graph.GraphNode> visitCycle(Graph.GraphNode node, List<Graph.GraphNode> nodeList)
+    {
+        colors.put(node.getNodeLabel(), Color.GREY);
+        nodeList.add(node);
+        for (Graph.GraphNode neighbor : node.neighborsList) {
+            if (colors.get(neighbor.getNodeLabel()) == Color.WHITE) {
+                List<Graph.GraphNode> list = visitCycle(neighbor,nodeList);
+                if(list.getFirst().equals(list.getLast()))
+                    return list;
+            }
+            else
+            {
+                nodeList.add(neighbor);
+                return nodeList;
+            }
+
+        }
+
+        colors.put(node.getNodeLabel(), Color.BLACK);
+        return nodeList;
+    }
+
+    public List<Graph.GraphNode> findCircuit(Graph.GraphNode node)
+    {
+        initColors();
+        List<Graph.GraphNode> myList = new ArrayList<>();
+        if (inputNode != null && colors.get(inputNode.getNodeLabel()) == Color.WHITE) {
+            myList = visitCycle(inputNode,myList);
+        }
+
+        return myList;
+    }
+
 //    private void dfsRecursiveWithDelay(Graph.GraphNode node, Runnable onFinished) {
 //        colors.put(node.getNodeLabel(), Color.GREY);
 //        Platform.runLater(() -> DisplayColorizedResultsGraph(pane));

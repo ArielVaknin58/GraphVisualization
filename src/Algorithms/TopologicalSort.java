@@ -1,9 +1,7 @@
 package Algorithms;
 
-import Controllers.Controller;
 import Controllers.ControllerManager;
 import GraphVisualizer.Graph;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,18 +14,9 @@ public class TopologicalSort extends Algorithm {
         super();
         result = new ArrayList<>();
         this.G = G;
-        this.requiredInput = "Acyclic directed Graph";
+        this.requiredInput = "Acyclic directed Graph G = (V,E)";
         this.AlgorithmName = "Topological Sort";
         this.AlgorithmDescription = "A topological sort is a linear ordering of vertices in a directed acyclic graph (DAG), where for every directed edge from vertex u to vertex v, u comes before v in the ordering.";
-    }
-    @Override
-    public String getAlgorithmName() {
-        return this.AlgorithmName;
-    }
-
-    @Override
-    public String getAlgorithmDescription() {
-        return this.AlgorithmDescription;
     }
 
     @Override
@@ -45,13 +34,8 @@ public class TopologicalSort extends Algorithm {
 
     @Override
     public Boolean checkValidity() {
-        //Run DFS
-        return true;
-    }
-
-    @Override
-    public String getRequiredInputDescription() {
-        return requiredInput;
+        DFS dfs = new DFS(G,G.V.getFirst());
+        return dfs.HasCycle();
     }
 
     @Override
