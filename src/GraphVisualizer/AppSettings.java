@@ -7,6 +7,7 @@ public class AppSettings {
     public static int nodeLabelPadding = 5;
     public static int EdgeWidth = 2;
     public static final double ARROW_SIZE = 10;
+    public static final int MAX_VERTICES = 15;
 
     public static final String App_Title = "GraphVisualizer";
     public static final String Graph_Input_Location = "/resources/GraphInput.fxml";

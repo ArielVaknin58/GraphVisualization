@@ -35,7 +35,7 @@ public class TopologicalSort extends Algorithm {
     @Override
     public Boolean checkValidity() {
         DFS dfs = new DFS(G,G.V.getFirst());
-        return dfs.HasCycle();
+        return dfs.HasCycle() && this.G.isDirected();
     }
 
     @Override

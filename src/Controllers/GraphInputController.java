@@ -1,6 +1,8 @@
 package Controllers;
 
+import Exceptions.InvalidAlgorithmInputException;
 import Exceptions.InvalidEdgeException;
+import Exceptions.InvalidGraphSizeException;
 import Exceptions.LoopException;
 import GraphVisualizer.*;
 import javafx.application.Platform;
@@ -159,17 +161,23 @@ public class GraphInputController extends Controller{
     @FXML
     private void onEnterVertices() {
         try {
+            graphContainer.getChildren().clear();
+            this.G = new Graph(DirectedCheckbox.isSelected());
             String input = verticesField.getText();
             if(input.isEmpty())
                 throw new NumberFormatException();
             vertexCount = Integer.parseInt(verticesField.getText());
-            enterButton.setDisable(true);
-            for(Integer i = 1 ; i <= vertexCount ; i++)
-                G.createNode(i.toString());
+            if(vertexCount > AppSettings.MAX_VERTICES)
+                throw new InvalidGraphSizeException();
+            //enterButton.setDisable(true);
+            for(int i = 1; i <= vertexCount ; i++)
+                G.createNode(Integer.toString(i));
 
             displayGraph(G);
         } catch (NumberFormatException e) {
             AlertError(new Exception("input isn't a parsable integer"));
+        } catch (InvalidGraphSizeException e) {
+            AlertError(e);
         }
     }
 
