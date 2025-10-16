@@ -11,15 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="37a3260c-e9a7-416e-aca4-76b50415fc74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/Algorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serializations/4eulercircuit.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serializations/4eulerundirected.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/DFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/DFS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/EulerCircuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/EulerCircuit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/HamiltonianCircuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/HamiltonianCircuit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controllers/GraphWiseAlgorithmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphWiseAlgorithmsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/VerticeWiseAlgorithmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/VerticeWiseAlgorithmsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/styles/DefaultTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/DefaultTheme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/AlgorithmsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/AlgorithmsPane.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,5 +84,19 @@
       <updated>1759753692096</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Algorithms/DFS.java</url>
+          <line>138</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

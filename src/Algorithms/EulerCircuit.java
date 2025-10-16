@@ -9,7 +9,7 @@ public class EulerCircuit extends Algorithm{
 
     private List<Graph.GraphNode> result = new ArrayList<>();
     public static final String AlgorithmDescription = "The Algorithm finds an Euler's circuit, which is a circuit in graph G that passes every edge exactly once.";
-
+    private Graph.GraphNode startingNode = null;
     public EulerCircuit(Graph G)
     {
         this.G = G;
@@ -25,7 +25,7 @@ public class EulerCircuit extends Algorithm{
 
         DFS dfs = new DFS(G, G.V.getFirst());
         dfs.initEdgesColors();
-        Graph.GraphNode startNode = G.V.getFirst();
+        Graph.GraphNode startNode = startingNode == null ? G.V.getFirst() : startingNode;
         List<Graph.GraphNode> circuit = new LinkedList<>();
 
         circuit.add(startNode);
@@ -52,6 +52,10 @@ public class EulerCircuit extends Algorithm{
         this.result = new ArrayList<>(circuit);
     }
 
+    public void setStartNode(Graph.GraphNode node)
+    {
+        this.startingNode = node;
+    }
     private int[] CheckForDuplicates(List<Graph.GraphNode> list) {
         Map<Graph.GraphNode, Integer> seen = new HashMap<>();
 
@@ -89,6 +93,10 @@ public class EulerCircuit extends Algorithm{
 
     }
 
+    public List<Graph.GraphNode> getResult()
+    {
+        return result;
+    }
     // For G directed graph : G has Euler circuit iff in degree = out degree
     // For G undirected graph : G has Euler circuit iff all degrees are even
     private boolean checkCondition()

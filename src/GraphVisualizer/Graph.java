@@ -95,6 +95,8 @@ public class Graph implements Serializable {
         fromNode.addConnectedEdge(edge);
         toNode.inDegree++;
         fromNode.outDegree++;
+        if(!this.isDirected)
+            fromNode.degree++;
         if (fromNode != toNode)
             toNode.addConnectedEdge(edge);
 
@@ -112,7 +114,6 @@ public class Graph implements Serializable {
             System.out.println("Clicked edge " + fromLabel + " -> " + toLabel);
         });
     }
-
 
     public void addGraphToGroup(Group root) {
         // Add edges first so nodes appear on top
@@ -154,7 +155,7 @@ public class Graph implements Serializable {
     }
 
 
-    public class GraphNode implements Serializable{
+    public static class GraphNode implements Serializable{
         private Graph G;
         private transient Group nodeObject;
         private transient Circle circle;
@@ -164,6 +165,7 @@ public class Graph implements Serializable {
         private String nodeLabel;
         public int inDegree;
         public int outDegree;
+        private int degree;
 
         public GraphNode(double x, double y, String textLabel,Graph G) {
             circle = new Circle(x, y, AppSettings.nodeRadius, Color.LIGHTBLUE);
@@ -211,6 +213,10 @@ public class Graph implements Serializable {
             return null;
         }
 
+        public int getDegree()
+        {
+            return degree;
+        }
         public void setGraph(Graph g)
         {
             this.G = g;

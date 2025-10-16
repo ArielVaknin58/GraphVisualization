@@ -125,7 +125,6 @@ public class DFS extends Algorithm{
             Graph.GraphNode neighbor = HasUnvisitedNeighbors(currentNode);
             coloredEdges.put(currentNode.getneighborEdge(neighbor),true);
             if(!G.isDirected()) {
-                assert neighbor != null;
                 coloredEdges.put(neighbor.getneighborEdge(currentNode),true);
             }
             myList.add(neighbor);
