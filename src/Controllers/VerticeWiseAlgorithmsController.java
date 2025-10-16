@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import GraphVisualizer.Graph;
 import javafx.scene.control.Button;
@@ -27,6 +28,8 @@ public class VerticeWiseAlgorithmsController extends Controller{
     private AnchorPane VerticeAlgorithmsPane;
     @FXML
     private Button BFSButton;
+    @FXML
+    private Button DFSButton;
     @FXML
     private Label verticeLabel;
     @FXML
@@ -45,6 +48,8 @@ public class VerticeWiseAlgorithmsController extends Controller{
     @FXML
     public void initialize() {
         ControllerManager.setVerticeWiseAlgorithmsController(this);
+        BFSButton.setTooltip(new Tooltip(BFS.AlgorithmDescription));
+        DFSButton.setTooltip(new Tooltip(DFS.AlgorithmDescription));
         currentNode = CurrentlyPressedNodeHelper.getCurrentNode();
     }
 

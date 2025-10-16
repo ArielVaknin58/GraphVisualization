@@ -22,6 +22,8 @@ public class BFS extends Algorithm{
 
     private Graph.GraphNode inputNode;
     private HashMap<String, Integer> result = new HashMap();
+    public static final String AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
+
 
     public BFS(Graph G, Graph.GraphNode inputNode)
     {
@@ -35,7 +37,6 @@ public class BFS extends Algorithm{
         }
         this.AlgorithmName = "BFS";
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
-        this.AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
     }
 
     @Override

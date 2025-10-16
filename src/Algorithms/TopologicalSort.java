@@ -9,14 +9,17 @@ import java.util.List;
 public class TopologicalSort extends Algorithm {
 
     private List<Graph.GraphNode> result;
+
+    public static final String AlgorithmDescription = "A topological sort is a linear ordering of vertices in a directed acyclic graph (DAG), where for every directed edge from vertex u to vertex v, u comes before v in the ordering.";
+
     public TopologicalSort(Graph G)
     {
         super();
         result = new ArrayList<>();
         this.G = G;
-        this.requiredInput = "Acyclic directed Graph G = (V,E)";
+        requiredInput = "Acyclic directed Graph G = (V,E)";
         this.AlgorithmName = "Topological Sort";
-        this.AlgorithmDescription = "A topological sort is a linear ordering of vertices in a directed acyclic graph (DAG), where for every directed edge from vertex u to vertex v, u comes before v in the ordering.";
+
     }
 
     @Override

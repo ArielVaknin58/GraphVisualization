@@ -6,6 +6,7 @@ import Algorithms.HamiltonianCircuit;
 import Algorithms.TopologicalSort;
 import Exceptions.InvalidAlgorithmInputException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import GraphVisualizer.Graph;
 import javafx.scene.control.Button;
@@ -26,6 +27,9 @@ public class GraphWiseAlgorithmsController extends Controller{
     public void initialize()
     {
         ControllerManager.setGraphWiseAlgorithmsController(this);
+        TopologicalSortButton.setTooltip(new Tooltip(TopologicalSort.AlgorithmDescription));
+        eulerCircuitButton.setTooltip(new Tooltip(EulerCircuit.AlgorithmDescription));
+        hamiltonButton.setTooltip(new Tooltip(HamiltonianCircuit.AlgorithmDescription));
     }
 
     private void run(Algorithm algorithm)

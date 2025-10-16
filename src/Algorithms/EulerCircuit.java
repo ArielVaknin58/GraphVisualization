@@ -8,13 +8,13 @@ import java.util.*;
 public class EulerCircuit extends Algorithm{
 
     private List<Graph.GraphNode> result = new ArrayList<>();
+    public static final String AlgorithmDescription = "The Algorithm finds an Euler's circuit, which is a circuit in graph G that passes every edge exactly once.";
 
     public EulerCircuit(Graph G)
     {
         this.G = G;
         this.AlgorithmName = "Euler's Circuit Algorithm";
         this.requiredInput = "A Graph G = (V,E)";
-        this.AlgorithmDescription = "The Algorithm finds an Euler's circuit, which is a circuit in graph G that passes every edge exactly once.";
     }
     @Override
     public void Run() {

@@ -19,7 +19,7 @@ public class DFS extends Algorithm{
     private HashMap<String, Color> colors = new HashMap<>();
     private List<ArrowEdge> visitedEdges = new ArrayList<ArrowEdge>();
     private Hashtable<ArrowEdge,Boolean> coloredEdges = new Hashtable<ArrowEdge, Boolean>();
-
+    public static final String AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by iterating over its neighbors and exhusting all the paths from one child before proceeding to the next - unlike BFS that exhusts all the children nodes before proceeding";
 
 
     public DFS(Graph G, Graph.GraphNode inputNode)
@@ -28,7 +28,6 @@ public class DFS extends Algorithm{
         this.inputNode = inputNode;
         this.AlgorithmName = "DFS";
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
-        this.AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by iterating over its neighbors and exhusting all the paths from one child before proceeding to the next - unlike BFS that exhusts all the children nodes before proceeding";
 
     }
 
