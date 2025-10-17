@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class DFS extends Algorithm{
@@ -19,6 +20,7 @@ public class DFS extends Algorithm{
     private HashMap<String, Color> colors = new HashMap<>();
     private List<ArrowEdge> visitedEdges = new ArrayList<ArrowEdge>();
     private Hashtable<ArrowEdge,Boolean> coloredEdges = new Hashtable<ArrowEdge, Boolean>();
+    private Hashtable<String,String> rootVertice;
     public static final String AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by iterating over its neighbors and exhusting all the paths from one child before proceeding to the next - unlike BFS that exhusts all the children nodes before proceeding";
 
 
@@ -28,7 +30,7 @@ public class DFS extends Algorithm{
         this.inputNode = inputNode;
         this.AlgorithmName = "DFS";
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
-
+        this.rootVertice = new Hashtable<>();
     }
 
 
@@ -328,5 +330,45 @@ public class DFS extends Algorithm{
                 (int) (c.getBlue() * 255));
     }
 
+    public Hashtable<String,String> FindConnectivityComponents()
+    {
+        if(G.isDirected()) return null;
+        initColors();
+        for(Graph.GraphNode current : G.V)
+        {
+            if (current != null && colors.get(current.getNodeLabel()) == Color.WHITE) {
+                visitWithRoot(current,current);
+            }
+        }
 
+        return rootVertice;
+    }
+
+    private void visitWithRoot(Graph.GraphNode currentNode,Graph.GraphNode root)
+    {
+        colors.put(currentNode.getNodeLabel(), Color.GREY);
+        String newValue;
+        if(currentNode.equals(root))
+        {
+            rootVertice.put(root.getNodeLabel(), currentNode.getNodeLabel());
+            newValue = rootVertice.get(root.getNodeLabel());
+
+        }
+        else
+            newValue = rootVertice.get(root.getNodeLabel()) +","+ currentNode.getNodeLabel();
+        rootVertice.put(root.getNodeLabel(),newValue);
+
+        for (Graph.GraphNode neighbor : currentNode.neighborsList) {
+            if (colors.get(neighbor.getNodeLabel()) == Color.WHITE) {
+                visitWithRoot(neighbor,root);
+            }
+
+        }
+        colors.put(currentNode.getNodeLabel(), Color.BLACK);
+    }
+
+    public Hashtable<String,String> getRootVertice()
+    {
+        return rootVertice;
+    }
 }

@@ -4,7 +4,6 @@ import Controllers.Controller;
 import Controllers.ControllerManager;
 import Exceptions.InvalidEdgeException;
 import GraphVisualizer.Graph;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class EulerPath extends Algorithm{
         // Find the odd-degree vertices first
         List<Graph.GraphNode> oddNodes = new ArrayList<>();
         for (Graph.GraphNode node : G.V) {
-            // Using (inDegree + outDegree) for undirected graphs as in checkCondition()
             if ((node.getDegree()) % 2 == 1) {
                 oddNodes.add(node);
             }

@@ -21,6 +21,8 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button hamiltonButton;
     @FXML
     private Button eulerPathButton;
+    @FXML
+    private Button connectivityButton;
 
 
     public void initialize()
@@ -64,6 +66,11 @@ public class GraphWiseAlgorithmsController extends Controller{
     public void onEulerPathClicked()
     {
         run(new EulerPath(new Graph(ControllerManager.getGraphInputController().getGraph())));
+    }
+
+    public void OnConnectivityClicked()
+    {
+        run(new ConnectivityComponents(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 }
 

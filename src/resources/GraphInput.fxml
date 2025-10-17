@@ -9,7 +9,7 @@
 
     <children>
         <!-- ScrollPane on the left side, fills available space -->
-        <ScrollPane fx:id="scrollPane" prefHeight="600.0" prefWidth="693.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="207.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="scrollPane" prefHeight="600.0" prefWidth="700.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="207.0" AnchorPane.topAnchor="0.0">
             <content>
                 <AnchorPane fx:id="graphContainer" minHeight="0.0" minWidth="0.0" />
             </content>

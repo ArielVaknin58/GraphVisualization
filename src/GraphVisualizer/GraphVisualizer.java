@@ -23,7 +23,6 @@ public class GraphVisualizer extends Application {
     public void start(Stage primaryStage) {
         try
         {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Graph_Input_Location));
             Scene scene = new Scene(loader.load());
             ThemeManager.getThemeManager().AddScene(scene);

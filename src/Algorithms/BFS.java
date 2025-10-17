@@ -79,10 +79,12 @@ public class BFS extends Algorithm{
             Stage popupStage = new Stage();
             popupStage.setTitle("Algorithm Results");
 
-            ObservableList<NodeResult> data = FXCollections.observableArrayList();
+            ObservableList<ResultPair<String,Integer>> data = FXCollections.observableArrayList();
 
             for (Map.Entry<String, Integer> entry : result.entrySet()) {
-                data.add(new NodeResult(entry.getKey(), entry.getValue()));
+                //data.add(new NodeResult(entry.getKey(), entry.getValue()));
+                data.add(new ResultPair<String,Integer>(entry.getKey(), entry.getValue()));
+
             }
 
             ControllerManager.getResultsPaneController().getResultsTable().setItems(data);

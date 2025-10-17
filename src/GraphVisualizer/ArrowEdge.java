@@ -28,11 +28,11 @@ public class ArrowEdge implements Serializable {
     {
         return this.shaft == null;
     }
+
     public ArrowEdge(ArrowEdge other) {
         this.from = other.from;
         this.to = other.to;
 
-        // Skip copying JavaFX visuals
         this.shaft = null;
         this.arrowHead = null;
         this.edgeGroup = null;
@@ -50,7 +50,6 @@ public class ArrowEdge implements Serializable {
     }
 
     private void createEdge(boolean isDirected) {
-        // Normal line + arrowhead
         double startX = from.getCircle().getCenterX();
         double startY = from.getCircle().getCenterY();
         double endX = to.getCircle().getCenterX();

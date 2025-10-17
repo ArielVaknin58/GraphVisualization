@@ -1,38 +1,40 @@
 package Controllers;
 
-import Algorithms.NodeResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+// You will also need to create a generic ResultPair class if you haven't already
+import Algorithms.ResultPair;
 
-public class ResultsPaneController extends Controller{
+public class ResultsPaneController<K, V> extends Controller {
 
     @FXML
-    private TableView<NodeResult> resultsTable;
+    private TableView<ResultPair<K, V>> resultsTable;
     @FXML
-    private TableColumn<NodeResult, String> nodeCol;
+    private TableColumn<ResultPair<K, V>, K> nodeCol;
     @FXML
-    private TableColumn<NodeResult, Integer> valueCol;
+    private TableColumn<ResultPair<K, V>, V> valueCol;
     @FXML
     private Label resultsLabel;
 
     public void initialize() {
         ControllerManager.setResultsPaneController(this);
-        nodeCol.setCellValueFactory(new PropertyValueFactory<>("node"));
+        // Important: Use "key" and "value" to match the property names in your ResultPair class
+        nodeCol.setCellValueFactory(new PropertyValueFactory<>("key"));
         valueCol.setCellValueFactory(new PropertyValueFactory<>("value"));
     }
 
-    public TableView<NodeResult> getResultsTable() {
+    public TableView<ResultPair<K, V>> getResultsTable() {
         return resultsTable;
     }
 
-    public TableColumn<NodeResult, Integer> getValueCol() {
+    public TableColumn<ResultPair<K, V>, V> getValueCol() {
         return valueCol;
     }
 
-    public TableColumn<NodeResult, String> getNodeCol() {
+    public TableColumn<ResultPair<K, V>, K> getNodeCol() {
         return nodeCol;
     }
 

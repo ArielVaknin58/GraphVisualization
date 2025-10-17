@@ -169,12 +169,12 @@ public class Graph implements Serializable {
 
         public GraphNode(double x, double y, String textLabel,Graph G) {
             circle = new Circle(x, y, AppSettings.nodeRadius, Color.LIGHTBLUE);
-            circle.getStyleClass().add("graph-node");
+            circle.getStyleClass().add(AppSettings.Graph_node_css_class);
 
             this.G = G;
             label = new Text(x - AppSettings.nodeLabelPadding, y + AppSettings.nodeLabelPadding, textLabel);
             label.setFill(Color.BLACK);
-            label.getStyleClass().add("node-label");
+            label.getStyleClass().add(AppSettings.node_label_css_class);
 
 
             nodeLabel = textLabel;
