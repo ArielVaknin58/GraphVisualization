@@ -46,3 +46,11 @@
 .graph-node.selected {
     -fx-effect: dropshadow(gaussian, #ff77ff, 30, 0.6, 0, 0);
 }
+
+.tooltip {
+    -fx-background-color: #FFFFE0; /* A light yellow, classic tooltip color */
+    -fx-text-fill: black;          /* Ensure text is black and visible */
+    -fx-background-radius: 4;      /* Optional: nice rounded corners */
+    -fx-padding: 5px;              /* Give the text some space */
+    -fx-font-size: 12px;           /* A readable font size */
+}

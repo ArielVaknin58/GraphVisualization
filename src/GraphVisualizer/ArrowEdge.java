@@ -2,6 +2,7 @@ package GraphVisualizer;
 
 
 import javafx.scene.Group;
+import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Polygon;
@@ -11,15 +12,16 @@ public class ArrowEdge implements Serializable {
 
     private Graph.GraphNode from;
     private Graph.GraphNode to;
-
+    private int weight;
     private transient Line shaft;
     private transient Polygon arrowHead;
     private transient Group edgeGroup;  // Holds the shaft + arrowhead
 
 
-    public ArrowEdge(Graph.GraphNode from, Graph.GraphNode to,boolean isDirected) {
+    public ArrowEdge(Graph.GraphNode from, Graph.GraphNode to,boolean isDirected,int weight) {
         this.from = from;
         this.to = to;
+        this.weight = weight;
         edgeGroup = new Group();
         createEdge(isDirected);
     }
@@ -38,6 +40,10 @@ public class ArrowEdge implements Serializable {
         this.edgeGroup = null;
     }
 
+    public int getWeight()
+    {
+        return this.weight;
+    }
 
     public Graph.GraphNode getFrom()
     {
@@ -67,6 +73,7 @@ public class ArrowEdge implements Serializable {
             updateArrowPosition(true);
             edgeGroup.getChildren().addAll(arrowHead);
         }
+
 
     }
 

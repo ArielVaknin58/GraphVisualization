@@ -21,6 +21,7 @@ public class DFS extends Algorithm{
     private List<ArrowEdge> visitedEdges = new ArrayList<ArrowEdge>();
     private Hashtable<ArrowEdge,Boolean> coloredEdges = new Hashtable<ArrowEdge, Boolean>();
     private Hashtable<String,String> rootVertice;
+    private int dfsAnimationNodeIndex = 0;
     public static final String AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by iterating over its neighbors and exhusting all the paths from one child before proceeding to the next - unlike BFS that exhusts all the children nodes before proceeding";
 
 
@@ -41,10 +42,60 @@ public class DFS extends Algorithm{
         pane = ControllerManager.getGraphInputController().getGraphContainer();
         pane.getStylesheets().clear();
         pane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/resources/styles/DFSStyle.css")).toExternalForm());
-        pane = ControllerManager.getGraphInputController().getGraphContainer();
-        DisplayColorizedResultsGraph(pane);
-        runDFSAnimation(inputNode);
 
+        visitedEdges.clear(); // IMPORTANT: Clear edges from previous run
+        dfsAnimationNodeIndex = 0; // Reset the component loop index
+
+        DisplayColorizedResultsGraph(pane);
+        if (inputNode != null) {
+            dfsRecursiveWithDelay(inputNode, this::runNextDfsComponent);
+        } else if (!G.V.isEmpty()) {
+            runNextDfsComponent();
+        } else {
+            cleanupDFSAnimation();
+        }
+    }
+
+    private void runNextDfsComponent() {
+        // Find the next node to start a new DFS traversal
+        while (dfsAnimationNodeIndex < G.V.size()) {
+            Graph.GraphNode node = G.V.get(dfsAnimationNodeIndex);
+            dfsAnimationNodeIndex++; // Increment index now for the *next* call
+
+            if (node != null && colors.get(node.getNodeLabel()) == Color.WHITE) {
+                dfsRecursiveWithDelay(node, this::runNextDfsComponent);
+
+                return;
+            }
+        }
+
+        // If the loop finishes, all nodes have been visited.
+        // Run the final cleanup.
+        cleanupDFSAnimation();
+    }
+
+    private void cleanupDFSAnimation() {
+        // Must run on FX thread
+        Platform.runLater(() -> {
+            for (Graph.GraphNode node : G.V) {
+                // Remove DFS classes
+                node.getCircle().getStyleClass().removeAll("node-white","node-grey","node-black");
+                // Clear any inline styles from DFS
+                node.getCircle().setStyle("");
+            }
+            for(ArrowEdge edge : G.E)
+            {
+                // Reset to default color (assuming black, change if different)
+                edge.getShaft().setStroke(Color.BLACK);
+                if (edge.getShaft() != null) {
+                    edge.getShaft().setFill(Color.BLACK);
+                }
+            }
+            pane.getStylesheets().clear();
+            ThemeManager.getThemeManager().AddScene(pane.getScene());
+            ThemeManager.getThemeManager().switchTheme(ThemeManager.getThemeManager().getCurrentTheme());
+            ControllerManager.getGraphInputController().displayGraph(G);
+        });
     }
 
     private void initColors()
@@ -55,24 +106,6 @@ public class DFS extends Algorithm{
         }
     }
 
-    private void runDFSAnimation(Graph.GraphNode startNode) {
-        dfsRecursiveWithDelay(startNode, () -> {
-            for (Graph.GraphNode node : G.V) {
-                // Remove DFS classes
-                node.getCircle().getStyleClass().removeAll("node-white","node-grey","node-black");
-                // Clear any inline styles from DFS
-                node.getCircle().setStyle("");
-            }
-            for(ArrowEdge edge : G.E)
-            {
-                edge.getShaft().setStroke(Color.BLACK);
-            }
-            pane.getStylesheets().clear();
-            ThemeManager.getThemeManager().AddScene(pane.getScene());
-            ThemeManager.getThemeManager().switchTheme(ThemeManager.getThemeManager().getCurrentTheme());
-            ControllerManager.getGraphInputController().displayGraph(G);
-        });
-    }
 
     public boolean HasCycle() {
         initColors();
@@ -169,49 +202,6 @@ public class DFS extends Algorithm{
         return true;
     }
 
-//    private void dfsRecursiveWithDelay(Graph.GraphNode node, Runnable onFinished) {
-//        colors.put(node.getNodeLabel(), Color.GREY);
-//        Platform.runLater(() -> DisplayColorizedResultsGraph(pane));
-//
-//        PauseTransition pause = new PauseTransition(Duration.seconds(0.8));
-//        pause.setOnFinished(event -> {
-//            AtomicInteger neighborsProcessed = new AtomicInteger();
-//            int totalNeighbors = node.neighborsList.size();
-//
-//            if (totalNeighbors == 0) {
-//                // Leaf node: finish processing this node
-//                finishNode(node, onFinished);
-//            } else {
-//                for (Graph.GraphNode neighbor : node.neighborsList) {
-//                    if (colors.get(neighbor.getNodeLabel()) == Color.WHITE) {
-//                        dfsRecursiveWithDelay(neighbor, () -> {
-//                            neighborsProcessed.getAndIncrement();
-//                            if (neighborsProcessed.get() == totalNeighbors) {
-//                                finishNode(node, onFinished);
-//                            }
-//                        });
-//                    } else {
-//                        neighborsProcessed.getAndIncrement();
-//                        if (neighborsProcessed.get() == totalNeighbors) {
-//                            finishNode(node, onFinished);
-//                        }
-//                    }
-//                }
-//            }
-//        });
-//        pause.play();
-//    }
-//
-//    private void finishNode(Graph.GraphNode node, Runnable onFinished) {
-//        colors.put(node.getNodeLabel(), Color.BLACK);
-//        Platform.runLater(() -> DisplayColorizedResultsGraph(pane));
-//
-//        PauseTransition endPause = new PauseTransition(Duration.seconds(0.8));
-//        endPause.setOnFinished(event -> {
-//            if (onFinished != null) onFinished.run();
-//        });
-//        endPause.play();
-//    }
 
     private void dfsRecursiveWithDelay(Graph.GraphNode node, Runnable onFinished) {
         // Mark this node as discovered (GRAY)
@@ -236,7 +226,7 @@ public class DFS extends Algorithm{
 
         Graph.GraphNode neighbor = neighbors.get(index);
         if (colors.get(neighbor.getNodeLabel()) == Color.WHITE) {
-            visitedEdges.add(new ArrowEdge(node,neighbor,G.isDirected()));
+            visitedEdges.add(new ArrowEdge(node,neighbor,G.isDirected(),0));
             // Explore this neighbor (recursive DFS)
             dfsRecursiveWithDelay(neighbor, () -> {
                 // After finishing neighbor, move to next
@@ -367,8 +357,4 @@ public class DFS extends Algorithm{
         colors.put(currentNode.getNodeLabel(), Color.BLACK);
     }
 
-    public Hashtable<String,String> getRootVertice()
-    {
-        return rootVertice;
-    }
 }

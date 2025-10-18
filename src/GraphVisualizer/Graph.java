@@ -5,6 +5,7 @@ import Controllers.Controller;
 import Controllers.ControllerManager;
 import Exceptions.InvalidEdgeException;
 import javafx.scene.Group;
+import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -52,11 +53,8 @@ public class Graph implements Serializable {
             }
             for(ArrowEdge oldEdge : other.E)
             {
-                this.createEdge(oldEdge.getFrom().getNodeLabel(),oldEdge.getTo().getNodeLabel());
+                this.createEdge(oldEdge.getFrom().getNodeLabel(),oldEdge.getTo().getNodeLabel(),oldEdge.getWeight());
             }
-        }catch (InvalidEdgeException e)
-        {
-            Controller.AlertError(e);
         }catch (NullPointerException e)
         {
             Controller.AlertError(new Exception("The graph object is null"));
@@ -65,6 +63,22 @@ public class Graph implements Serializable {
 
     }
 
+    public Graph Transpose()
+    {
+        if(!this.isDirected) return this;
+
+        Graph transpose = new Graph(true);
+        for(int i = 1; i <= this.V.size(); i++)
+        {
+            transpose.createNode(String.valueOf(i));
+        }
+        for(ArrowEdge edge : this.E)
+        {
+            transpose.createEdge(edge.getTo().getNodeLabel(),edge.getFrom().getNodeLabel(), edge.getWeight());
+        }
+
+        return transpose;
+    }
 
     public GraphNode createNode(String label) {
         Random rand = new Random();
@@ -82,37 +96,46 @@ public class Graph implements Serializable {
         return node;
     }
 
-    public void createEdge(String fromLabel, String toLabel) throws InvalidEdgeException {
-        GraphNode fromNode = VerticeIndexer.get(fromLabel);
-        GraphNode toNode = VerticeIndexer.get(toLabel);
-        if(fromNode == null || toNode == null)
-            throw new InvalidEdgeException();
+    public void createEdge(String fromLabel, String toLabel,int weight) {
+        try{
+            GraphNode fromNode = VerticeIndexer.get(fromLabel);
+            GraphNode toNode = VerticeIndexer.get(toLabel);
+            if(fromNode == null || toNode == null)
+                throw new InvalidEdgeException();
 
-        ArrowEdge edge = new ArrowEdge(fromNode, toNode,this.isDirected);
+            ArrowEdge edge = new ArrowEdge(fromNode, toNode,this.isDirected,0);
 
-        // Add edge to nodes
-        fromNode.neighborsList.add(toNode);
-        fromNode.addConnectedEdge(edge);
-        toNode.inDegree++;
-        fromNode.outDegree++;
-        if(!this.isDirected)
-            fromNode.degree++;
-        if (fromNode != toNode)
-            toNode.addConnectedEdge(edge);
+            // Add edge to nodes
+            fromNode.neighborsList.add(toNode);
+            fromNode.addConnectedEdge(edge);
+            toNode.inDegree++;
+            fromNode.outDegree++;
+            if(!this.isDirected)
+                fromNode.degree++;
+            if (fromNode != toNode)
+                toNode.addConnectedEdge(edge);
 
-        ArrowEdge toRemove = null; //Removes old duplicate edge if exists
-        for(ArrowEdge currentEdge : E)
+            ArrowEdge toRemove = null; //Removes old duplicate edge if exists
+            for(ArrowEdge currentEdge : E)
+            {
+                if(currentEdge.getFrom().nodeLabel.equals(fromNode.nodeLabel) && currentEdge.getTo().nodeLabel.equals(toNode.nodeLabel))
+                    toRemove = currentEdge;
+            }
+            if(toRemove != null) E.remove(toRemove);
+            E.add(edge);
+
+            Tooltip edgeTooltip = new Tooltip("Weight: " + weight);
+            Tooltip.install(edge.getShaft(), edgeTooltip);
+
+
+            edge.getEdgeGroup().setOnMouseClicked(e -> {
+                System.out.println("Clicked edge " + fromLabel + " -> " + toLabel);
+            });
+        }catch (InvalidEdgeException e)
         {
-            if(currentEdge.getFrom().nodeLabel.equals(fromNode.nodeLabel) && currentEdge.getTo().nodeLabel.equals(toNode.nodeLabel))
-                toRemove = currentEdge;
+            Controller.AlertError(e);
         }
-        if(toRemove != null) E.remove(toRemove);
-        E.add(edge);
 
-        // Optional click event on edge
-        edge.getEdgeGroup().setOnMouseClicked(e -> {
-            System.out.println("Clicked edge " + fromLabel + " -> " + toLabel);
-        });
     }
 
     public void addGraphToGroup(Group root) {

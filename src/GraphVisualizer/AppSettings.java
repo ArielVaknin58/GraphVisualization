@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public class AppSettings {
     public static int nodeRadius = 25;
     public static int nodeLabelPadding = 5;
-    public static int EdgeWidth = 2;
+    public static int EdgeWidth = 4;
     public static final double ARROW_SIZE = 10;
     public static final int MAX_VERTICES = 15;
 

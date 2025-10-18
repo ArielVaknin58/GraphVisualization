@@ -22,8 +22,8 @@
             </columnConstraints>
 
             <children>
-                <Label fx:id="enterVerticesLabel" prefHeight="17.0" prefWidth="191.0" text="Enter number of vertices:" GridPane.rowIndex="3" />
-                <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="170.0" spacing="10" GridPane.rowIndex="4">
+                <Label fx:id="enterVerticesLabel" prefHeight="17.0" prefWidth="191.0" text="Enter number of vertices:" GridPane.rowIndex="2" />
+                <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="170.0" spacing="10" GridPane.rowIndex="3">
                     <children>
                         <TextField fx:id="verticesField" prefHeight="25.0" prefWidth="108.0" />
                         <Button fx:id="enterButton" onAction="#onEnterVertices" prefHeight="25.0" prefWidth="56.0" text="Enter" />
@@ -33,8 +33,8 @@
                </GridPane.margin>
                 </HBox>
 
-                <Label fx:id="enterEdgesLabel" prefHeight="17.0" prefWidth="191.0" text="Enter edges:" GridPane.rowIndex="6" />
-                <HBox alignment="CENTER_LEFT" prefHeight="248.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="7">
+                <Label fx:id="enterEdgesLabel" prefHeight="17.0" prefWidth="191.0" text="Enter edges:" GridPane.rowIndex="5" />
+                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="190.0" spacing="5.0" GridPane.rowIndex="6">
                     <children>
                         <TextField fx:id="edgeStartField" prefWidth="40" />
                         <Label prefHeight="17.0" prefWidth="26.0" text="---&gt;">
@@ -63,30 +63,37 @@
                      </HBox.margin></ComboBox>
                </children>
             </HBox>
-            <Pane fx:id="algoPlaceholder" prefHeight="361.0" prefWidth="208.0" styleClass="InnerComponents" GridPane.rowIndex="8" />
-            <AnchorPane prefHeight="49.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="1">
+            <Pane fx:id="algoPlaceholder" prefHeight="328.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="9" />
+            <AnchorPane prefHeight="54.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="saveGraph" layoutX="8.0" layoutY="33.0" mnemonicParsing="false" onAction="#onSaveGraph" text="Save Graph" />
                   <Button fx:id="loadGraph" layoutX="100.0" layoutY="33.0" mnemonicParsing="false" onAction="#onLoadGraph" text="Load Graph" />
                   <Label layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="169.0" text="Graph import/export " />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
                   <CheckBox fx:id="DirectedCheckbox" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="141.0" selected="true" text="Directed" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="24.0" prefWidth="200.0" GridPane.rowIndex="7">
+               <children>
+                  <Label fx:id="weightLabel" layoutX="8.0" layoutY="8.0" prefHeight="17.0" prefWidth="50.0" text="weight :" />
+                  <TextField fx:id="weightField" layoutX="60.0" layoutY="6.0" prefHeight="25.0" prefWidth="62.0" />
                </children>
             </AnchorPane>
             </children>
          <rowConstraints>
             <RowConstraints maxHeight="132.0" minHeight="19.0" prefHeight="40.0" />
             <RowConstraints maxHeight="139.0" minHeight="22.0" prefHeight="64.0" />
-            <RowConstraints maxHeight="145.0" minHeight="18.0" prefHeight="18.0" />
             <RowConstraints maxHeight="145.0" minHeight="12.0" prefHeight="20.0" />
             <RowConstraints maxHeight="193.0" minHeight="28.0" prefHeight="28.0" />
             <RowConstraints maxHeight="193.0" minHeight="0.0" prefHeight="26.0" />
             <RowConstraints maxHeight="381.0" minHeight="11.0" prefHeight="22.0" />
-            <RowConstraints maxHeight="482.0" minHeight="26.0" prefHeight="36.0" />
-            <RowConstraints maxHeight="482.0" minHeight="124.0" prefHeight="346.0" />
+            <RowConstraints maxHeight="482.0" minHeight="26.0" prefHeight="48.0" />
+            <RowConstraints maxHeight="145.0" minHeight="18.0" prefHeight="37.0" />
+            <RowConstraints maxHeight="145.0" minHeight="18.0" prefHeight="19.0" />
+            <RowConstraints maxHeight="482.0" minHeight="124.0" prefHeight="313.0" />
          </rowConstraints>
         </GridPane>
     </children>

@@ -51,7 +51,7 @@ public class GraphSerializer {
                     }
                     ArrayList<ArrowEdge> list = new ArrayList<>(g.E);
                     for (ArrowEdge edge : list) {
-                        g.createEdge(edge.getFrom().getNodeLabel(), edge.getTo().getNodeLabel());
+                        g.createEdge(edge.getFrom().getNodeLabel(), edge.getTo().getNodeLabel(),0);
                     }
 
                     return g;
@@ -60,8 +60,6 @@ public class GraphSerializer {
                 }
             } catch (IOException | ClassNotFoundException e) {
                 LoggerManager.Logger().severe("Error loading graph: " + e.getMessage());
-            } catch (InvalidEdgeException e) {
-                Controller.AlertError(e);
             }
         } else {
             LoggerManager.Logger().severe("File selection canceled by user.");

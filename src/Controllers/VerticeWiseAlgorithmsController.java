@@ -33,8 +33,6 @@ public class VerticeWiseAlgorithmsController extends Controller{
     @FXML
     private Label verticeLabel;
     @FXML
-    private Label verticeWeight;
-    @FXML
     private Label inDegree;
     @FXML
     private Label outDegree;
@@ -58,7 +56,6 @@ public class VerticeWiseAlgorithmsController extends Controller{
         currentNode = CurrentlyPressedNodeHelper.getCurrentNode();
         if (currentNode != null) {
             verticeLabel.setText(currentNode.getNodeLabel());
-            verticeWeight.setText("0");
             if (ControllerManager.getGraphInputController().getGraph().isDirected())
             {
                 inLabel.setText("in Degree :");

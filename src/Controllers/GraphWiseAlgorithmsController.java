@@ -32,6 +32,7 @@ public class GraphWiseAlgorithmsController extends Controller{
         eulerCircuitButton.setTooltip(new Tooltip(EulerCircuit.AlgorithmDescription));
         hamiltonButton.setTooltip(new Tooltip(HamiltonianCircuit.AlgorithmDescription));
         eulerPathButton.setTooltip(new Tooltip(EulerPath.AlgorithmDescription));
+        connectivityButton.setTooltip(new Tooltip(ConnectivityComponents.AlgorithmDescription));
     }
 
     private void run(Algorithm algorithm)

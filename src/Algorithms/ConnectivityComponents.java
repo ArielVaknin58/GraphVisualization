@@ -61,9 +61,7 @@ public class ConnectivityComponents extends Algorithm{
             ObservableList<ResultPair<String,String>> data = FXCollections.observableArrayList();
 
             for (Map.Entry<String, String> entry : result.entrySet()) {
-                //data.add(new NodeResult(entry.getKey(), entry.getValue()));
                 data.add(new ResultPair<String,String>(entry.getKey(), entry.getValue()));
-
             }
 
             ControllerManager.getResultsPaneController().getResultsTable().setItems(data);

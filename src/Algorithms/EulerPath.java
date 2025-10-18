@@ -55,10 +55,10 @@ public class EulerPath extends Algorithm{
             Graph.GraphNode dummyNode = copyG.VerticeIndexer.get(dummyNodeLabel);
 
             // 2. Connect the odd vertices to the new vertex
-            copyG.createEdge(oddVertice1.getNodeLabel(), dummyNodeLabel);
-            copyG.createEdge(dummyNodeLabel, oddVertice1.getNodeLabel());
-            copyG.createEdge(oddVertice2.getNodeLabel(), dummyNodeLabel);
-            copyG.createEdge(dummyNodeLabel, oddVertice2.getNodeLabel());
+            copyG.createEdge(oddVertice1.getNodeLabel(), dummyNodeLabel,0);
+            copyG.createEdge(dummyNodeLabel, oddVertice1.getNodeLabel(),0);
+            copyG.createEdge(oddVertice2.getNodeLabel(), dummyNodeLabel,0);
+            copyG.createEdge(dummyNodeLabel, oddVertice2.getNodeLabel(),0);
 
             // 3. Find the Euler Circuit on the MODIFIED graph
             EulerCircuit eulerCircuit = new EulerCircuit(copyG);
@@ -89,9 +89,6 @@ public class EulerPath extends Algorithm{
                 this.result = path;
                 return;
             }
-
-        } catch (InvalidEdgeException e) {
-            Controller.AlertError(e);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -8,17 +8,15 @@
     <content>
         <AnchorPane fx:id="VerticeAlgorithmsPane" minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="200.0" styleClass="InnerComponents">
             <children>
-                <Button fx:id="BFSButton" layoutX="14.0" layoutY="126.0" mnemonicParsing="false" onAction="#OnBFSClick" prefHeight="25.0" prefWidth="162.0" text="BFS" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="105.0" layoutX="13.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
+                <Button fx:id="BFSButton" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#OnBFSClick" prefHeight="25.0" prefWidth="162.0" text="BFS" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="88.0" layoutX="13.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
             <Label layoutX="21.0" layoutY="21.0" prefHeight="17.0" prefWidth="96.0" text="Vertice label : " />
-            <Label fx:id="verticeLabel" layoutX="108.0" layoutY="21.0" prefHeight="17.0" prefWidth="60.0" />
-            <Label layoutX="21.0" layoutY="44.0" prefHeight="17.0" prefWidth="115.0" text="Vertice weight :" />
-            <Label fx:id="verticeWeight" layoutX="117.0" layoutY="44.0" prefHeight="17.0" prefWidth="45.0" />
-            <Label fx:id="inLabel" layoutX="21.0" layoutY="68.0" prefHeight="17.0" prefWidth="91.0" text="In degree :" />
-            <Label fx:id="outLabel" layoutX="21.0" layoutY="91.0" prefHeight="17.0" prefWidth="98.0" text="Out degree :" />
-            <Label fx:id="inDegree" layoutX="94.0" layoutY="68.0" prefHeight="17.0" prefWidth="67.0" />
-            <Label fx:id="outDegree" layoutX="95.0" layoutY="91.0" prefHeight="17.0" prefWidth="71.0" />
-            <Button fx:id="DFSButton" layoutX="15.0" layoutY="163.0" mnemonicParsing="false" onAction="#OnDFSClick" prefHeight="25.0" prefWidth="158.0" text="DFS" />
+            <Label fx:id="verticeLabel" layoutX="101.0" layoutY="21.0" prefHeight="17.0" prefWidth="60.0" />
+            <Label fx:id="inLabel" layoutX="24.0" layoutY="47.0" prefHeight="17.0" prefWidth="91.0" text="In degree :" />
+            <Label fx:id="outLabel" layoutX="21.0" layoutY="74.0" prefHeight="17.0" prefWidth="98.0" text="Out degree :" />
+            <Label fx:id="inDegree" layoutX="86.0" layoutY="47.0" prefHeight="17.0" prefWidth="67.0" />
+            <Label fx:id="outDegree" layoutX="95.0" layoutY="74.0" prefHeight="17.0" prefWidth="71.0" />
+            <Button fx:id="DFSButton" layoutX="16.0" layoutY="139.0" mnemonicParsing="false" onAction="#OnDFSClick" prefHeight="25.0" prefWidth="158.0" text="DFS" />
             </children>
         </AnchorPane>
     </content>

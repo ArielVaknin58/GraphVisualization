@@ -1,5 +1,6 @@
 package Controllers;
 
+import Algorithms.ConnectivityComponents;
 import Exceptions.InvalidAlgorithmInputException;
 import Exceptions.InvalidEdgeException;
 import Exceptions.InvalidGraphSizeException;
@@ -48,6 +49,10 @@ public class GraphInputController extends Controller{
     private Button loadGraph;
     @FXML
     private CheckBox DirectedCheckbox;
+    @FXML
+    private TextField weightField;
+    @FXML
+    private Label weightLabel;
 
     private int vertexCount = 0;
     private Graph G = new Graph(true);
@@ -95,7 +100,7 @@ public class GraphInputController extends Controller{
             AlertError(e);
         }
 
-        // Theme dropdown setup
+        weightLabel.setTooltip(new Tooltip("Optional : add weight to edges. leave empty for value 0."));
         ThemeBox.getItems().addAll(Theme.values());
         ThemeBox.setValue(Theme.DEFAULT);
         ThemeBox.valueProperty().addListener((obs, oldTheme, newTheme) -> {
@@ -106,15 +111,9 @@ public class GraphInputController extends Controller{
 
         DirectedCheckbox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
             enterButton.setDisable(false);
-            if (isNowSelected) {
-                System.out.println("graph is directed");
-            } else {
-                System.out.println("graph isnt directed");
-            }
             graphContainer.getChildren().clear();
             this.G = new Graph(isNowSelected);
         });
-        // Register this controller for access elsewhere
         ControllerManager.setGraphInputController(this);
     }
 
@@ -194,12 +193,17 @@ public class GraphInputController extends Controller{
             }
             Integer intFrom = Integer.parseInt(from);
             Integer intTo = Integer.parseInt(to);
+            String weightInput = weightField.getText();
+            int weight = 0;
+            if(!weightInput.isEmpty())
+                weight = Integer.parseInt(weightInput);
+
 
             if(intFrom.equals(intTo))
                 throw new LoopException();
-            G.createEdge(intFrom.toString(),intTo.toString());
+            G.createEdge(intFrom.toString(),intTo.toString(),weight);
             if(!G.isDirected())
-                G.createEdge(intTo.toString(),intFrom.toString());
+                G.createEdge(intTo.toString(),intFrom.toString(),weight);
 
             displayGraph(G);
         }
