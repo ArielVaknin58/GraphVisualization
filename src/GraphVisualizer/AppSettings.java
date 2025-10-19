@@ -17,6 +17,7 @@ public class AppSettings {
     public static final String Vertice_Algorithms_Pane_Location = "/resources/VerticeAlgorithmsPane.fxml";
     public static final String save_Graph_Popup_location = "/resources/saveGraphPopup.fxml";
     public static final String Results_Popup_location = "/resources/results.fxml";
+    public static final String DFS_style_css_location = "/resources/styles/DFSStyle.css";
     public static final String Graph_results_location = "/resources/GraphResultPane.fxml";
     public static final String Graph_node_css_class = "graph-node";
     public static final String node_label_css_class = "node-label";

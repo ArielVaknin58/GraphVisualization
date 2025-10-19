@@ -70,7 +70,8 @@ public class Graph implements Serializable {
         Graph transpose = new Graph(true);
         for(int i = 1; i <= this.V.size(); i++)
         {
-            transpose.createNode(String.valueOf(i));
+            GraphNode node = transpose.createNode(String.valueOf(i));
+            transpose.VerticeIndexer.put(String.valueOf(i),node);
         }
         for(ArrowEdge edge : this.E)
         {

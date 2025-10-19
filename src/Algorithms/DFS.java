@@ -10,7 +10,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class DFS extends Algorithm{
@@ -21,6 +20,7 @@ public class DFS extends Algorithm{
     private List<ArrowEdge> visitedEdges = new ArrayList<ArrowEdge>();
     private Hashtable<ArrowEdge,Boolean> coloredEdges = new Hashtable<ArrowEdge, Boolean>();
     private Hashtable<String,String> rootVertice;
+    private List<Graph.GraphNode> finishTimeList;
     private int dfsAnimationNodeIndex = 0;
     public static final String AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by iterating over its neighbors and exhusting all the paths from one child before proceeding to the next - unlike BFS that exhusts all the children nodes before proceeding";
 
@@ -32,8 +32,9 @@ public class DFS extends Algorithm{
         this.AlgorithmName = "DFS";
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
         this.rootVertice = new Hashtable<>();
+        this.finishTimeList = new ArrayList<>();
+        initColors();
     }
-
 
     @Override
     public void Run() {
@@ -41,7 +42,7 @@ public class DFS extends Algorithm{
         initColors();
         pane = ControllerManager.getGraphInputController().getGraphContainer();
         pane.getStylesheets().clear();
-        pane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/resources/styles/DFSStyle.css")).toExternalForm());
+        pane.getStylesheets().add(Objects.requireNonNull(getClass().getResource(AppSettings.DFS_style_css_location)).toExternalForm());
 
         visitedEdges.clear(); // IMPORTANT: Clear edges from previous run
         dfsAnimationNodeIndex = 0; // Reset the component loop index
@@ -69,8 +70,6 @@ public class DFS extends Algorithm{
             }
         }
 
-        // If the loop finishes, all nodes have been visited.
-        // Run the final cleanup.
         cleanupDFSAnimation();
     }
 
@@ -107,32 +106,39 @@ public class DFS extends Algorithm{
     }
 
 
-    public boolean HasCycle() {
+    public boolean isAcyclic() {
         initColors();
-        boolean HasCycle = false;
         if (inputNode != null && colors.get(inputNode.getNodeLabel()) == Color.WHITE) {
-            HasCycle |= visit(inputNode);
+            if (visit(inputNode)) {
+                return false;
+            }
         }
 
         for (Graph.GraphNode node : G.V) {
             if (colors.get(node.getNodeLabel()) == Color.WHITE) {
-                HasCycle |= visit(node);
+                if (visit(node)) {
+                    return false;
+                }
             }
         }
-        return HasCycle;
+
+        return true;
     }
 
     private boolean visit(Graph.GraphNode currentNode) {
         colors.put(currentNode.getNodeLabel(), Color.GREY);
 
-        for (Graph.GraphNode neighbor : currentNode.neighborsList) {
-            if (colors.get(neighbor.getNodeLabel()) == Color.WHITE) {
-                visit(neighbor);
-            }
-            else
+        for (Graph.GraphNode neighbor : currentNode.neighborsList)
+        {
+            Color neighborColor = colors.get(neighbor.getNodeLabel());
+            if (neighborColor == Color.GREY) {
                 return true;
+            } else if (neighborColor == Color.WHITE) {
+                if (visit(neighbor)) {
+                    return true;
+                }
+            }
         }
-
         colors.put(currentNode.getNodeLabel(), Color.BLACK);
         return false;
     }
@@ -148,6 +154,7 @@ public class DFS extends Algorithm{
 
         }
         colors.put(currentNode.getNodeLabel(), Color.BLACK);
+        finishTimeList.add(currentNode);
     }
 
     public List<Graph.GraphNode> findCircuit(Graph.GraphNode node)
@@ -334,6 +341,30 @@ public class DFS extends Algorithm{
         return rootVertice;
     }
 
+    public String FindDirectedComponent(Graph.GraphNode current)
+    {
+        if(current == null || colors.get(current.getNodeLabel()) != Color.WHITE)
+            return "";
+
+        if (colors.get(current.getNodeLabel()) == Color.WHITE) {
+            visitWithRoot(current,current);
+        }
+
+        return rootVertice.get(current.getNodeLabel());
+    }
+    public List<Graph.GraphNode> DFSWithEndTimeList()
+    {
+        if(!G.isDirected()) return null;
+        initColors();
+        for(Graph.GraphNode current : G.V)
+        {
+            if (current != null && colors.get(current.getNodeLabel()) == Color.WHITE) {
+                visitRegular(current);
+            }
+        }
+
+        return finishTimeList;
+    }
     private void visitWithRoot(Graph.GraphNode currentNode,Graph.GraphNode root)
     {
         colors.put(currentNode.getNodeLabel(), Color.GREY);

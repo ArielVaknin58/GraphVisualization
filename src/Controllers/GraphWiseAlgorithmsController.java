@@ -23,6 +23,8 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button eulerPathButton;
     @FXML
     private Button connectivityButton;
+    @FXML
+    private Button KosarajuButton;
 
 
     public void initialize()
@@ -30,9 +32,10 @@ public class GraphWiseAlgorithmsController extends Controller{
         ControllerManager.setGraphWiseAlgorithmsController(this);
         TopologicalSortButton.setTooltip(new Tooltip(TopologicalSort.AlgorithmDescription));
         eulerCircuitButton.setTooltip(new Tooltip(EulerCircuit.AlgorithmDescription));
-        hamiltonButton.setTooltip(new Tooltip(HamiltonianCircuit.AlgorithmDescription));
+        hamiltonButton.setTooltip(new Tooltip(HamiltonianPath.AlgorithmDescription));
         eulerPathButton.setTooltip(new Tooltip(EulerPath.AlgorithmDescription));
         connectivityButton.setTooltip(new Tooltip(ConnectivityComponents.AlgorithmDescription));
+        KosarajuButton.setTooltip((new Tooltip(KosarajuSharirAlgorithm.AlgorithmDescription)));
     }
 
     private void run(Algorithm algorithm)
@@ -58,9 +61,9 @@ public class GraphWiseAlgorithmsController extends Controller{
         run(new EulerCircuit(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 
-    public void onHamiltonianCircuitClicked()
+    public void onHamiltonianPathClicked()
     {
-        run(new HamiltonianCircuit(new Graph(ControllerManager.getGraphInputController().getGraph())));
+        run(new HamiltonianPath(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 
 
@@ -72,6 +75,11 @@ public class GraphWiseAlgorithmsController extends Controller{
     public void OnConnectivityClicked()
     {
         run(new ConnectivityComponents(new Graph(ControllerManager.getGraphInputController().getGraph())));
+    }
+
+    public void OnKosarajuClick()
+    {
+        run(new KosarajuSharirAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 }
 

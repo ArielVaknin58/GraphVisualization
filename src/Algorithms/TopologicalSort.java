@@ -17,7 +17,7 @@ public class TopologicalSort extends Algorithm {
         super();
         result = new ArrayList<>();
         this.G = G;
-        requiredInput = "Acyclic directed Graph G = (V,E)";
+        requiredInput = "Acyclic directed graph";
         this.AlgorithmName = "Topological Sort";
 
     }
@@ -25,20 +25,52 @@ public class TopologicalSort extends Algorithm {
     @Override
     public void Run() {
 
-        Graph.GraphNode source = checkForSources();
+        Graph.GraphNode source = checkForSources().getFirst();
         while(source != null)
         {
             result.add(source);
             G.RemoveVertice(source);
-            source = checkForSources();
+            List<Graph.GraphNode> sources = checkForSources();
+            if(sources.isEmpty())
+                source = null;
+            else
+                source = sources.getFirst();
         }
 
+    }
+
+    public boolean isSingularSort()
+    {
+        if(this.G.V.isEmpty())
+            return true;
+
+        result = new ArrayList<>();
+        List<Graph.GraphNode> sources;
+        Graph.GraphNode source;
+
+        while (!this.G.getNodes().isEmpty())
+        {
+            sources = checkForSources();
+            if (sources.size() != 1) {
+                return false;
+            }
+            source = sources.getFirst();
+            result.add(source);
+            G.RemoveVertice(source);
+        }
+
+        return true;
+    }
+
+    public List<Graph.GraphNode> getResult()
+    {
+        return result;
     }
 
     @Override
     public Boolean checkValidity() {
         DFS dfs = new DFS(G,G.V.getFirst());
-        return dfs.HasCycle() && this.G.isDirected();
+        return dfs.isAcyclic() && this.G.isDirected();
     }
 
     @Override
@@ -58,14 +90,15 @@ public class TopologicalSort extends Algorithm {
     }
 
 
-    private Graph.GraphNode checkForSources()
+    private List<Graph.GraphNode> checkForSources()
     {
+        List<Graph.GraphNode> result = new ArrayList<>();
         for(Graph.GraphNode node : G.getNodes())
         {
             if (node.inDegree == 0)
-                return node;
+                result.add(node);
         }
 
-        return null;
+        return result;
     }
 }

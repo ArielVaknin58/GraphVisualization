@@ -9,9 +9,10 @@
             <children>
                 <Button fx:id="TopologicalSortButton" layoutX="18.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnTopologicalClick" prefHeight="25.0" prefWidth="160.0" text="Topological Sort" />
             <Button fx:id="eulerCircuitButton" layoutX="18.0" layoutY="46.0" mnemonicParsing="false" onAction="#OnEulerCircuitClick" prefHeight="25.0" prefWidth="160.0" text="Euler's Circuit" />
-            <Button fx:id="hamiltonButton" layoutX="20.0" layoutY="111.0" mnemonicParsing="false" onAction="#onHamiltonianCircuitClicked" prefHeight="25.0" prefWidth="160.0" text="Hamiltonian Circuit" />
+            <Button fx:id="hamiltonButton" layoutX="20.0" layoutY="111.0" mnemonicParsing="false" onAction="#onHamiltonianPathClicked" prefHeight="25.0" prefWidth="160.0" text="Hamiltonian Path" />
             <Button fx:id="eulerPathButton" layoutX="19.0" layoutY="78.0" mnemonicParsing="false" onAction="#onEulerPathClicked" prefHeight="25.0" prefWidth="160.0" text="Euler's Path" />
             <Button fx:id="connectivityButton" layoutX="20.0" layoutY="143.0" mnemonicParsing="false" onAction="#OnConnectivityClicked" prefHeight="25.0" prefWidth="160.0" text="Connectivity Components" />
+            <Button fx:id="KosarajuButton" layoutX="19.0" layoutY="175.0" mnemonicParsing="false" onAction="#OnKosarajuClick" prefHeight="25.0" prefWidth="162.0" text="Kosaraju-Sharir Algorithm" />
             </children>
         </AnchorPane>
     </content>
