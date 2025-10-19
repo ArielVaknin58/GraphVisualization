@@ -111,9 +111,9 @@ public class EulerPath extends Algorithm{
 
     @Override
     public Boolean checkValidity() {
-
+        if(G.V.isEmpty())
+            return false;
         DFS dfs = new DFS(G,G.V.getFirst());
-
         return !this.G.isDirected() && dfs.isConnected();
     }
 

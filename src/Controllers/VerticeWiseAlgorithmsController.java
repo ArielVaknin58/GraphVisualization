@@ -3,6 +3,7 @@ package Controllers;
 import Algorithms.Algorithm;
 import Algorithms.BFS;
 import Algorithms.DFS;
+import Algorithms.ShortestPathsTree;
 import Exceptions.InvalidAlgorithmInputException;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.CurrentlyPressedNodeHelper;
@@ -40,6 +41,8 @@ public class VerticeWiseAlgorithmsController extends Controller{
     private Label outLabel;
     @FXML
     private Label inLabel;
+    @FXML
+    private Button shortestPathsButton;
 
     private Graph.GraphNode currentNode;
 
@@ -48,6 +51,7 @@ public class VerticeWiseAlgorithmsController extends Controller{
         ControllerManager.setVerticeWiseAlgorithmsController(this);
         BFSButton.setTooltip(new Tooltip(BFS.AlgorithmDescription));
         DFSButton.setTooltip(new Tooltip(DFS.AlgorithmDescription));
+        shortestPathsButton.setTooltip(new Tooltip(ShortestPathsTree.AlgorithmDescription));
         currentNode = CurrentlyPressedNodeHelper.getCurrentNode();
     }
 
@@ -89,5 +93,10 @@ public class VerticeWiseAlgorithmsController extends Controller{
     public void OnDFSClick()
     {
         run(new DFS((ControllerManager.getGraphInputController().getGraph()), currentNode));
+    }
+
+    public void OnShortestPathsTreeClick()
+    {
+        run(new ShortestPathsTree(new Graph(ControllerManager.getGraphInputController().getGraph()), currentNode));
     }
 }

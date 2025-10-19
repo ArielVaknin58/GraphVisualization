@@ -21,7 +21,6 @@ public class ResultsPaneController<K, V> extends Controller {
 
     public void initialize() {
         ControllerManager.setResultsPaneController(this);
-        // Important: Use "key" and "value" to match the property names in your ResultPair class
         nodeCol.setCellValueFactory(new PropertyValueFactory<>("key"));
         valueCol.setCellValueFactory(new PropertyValueFactory<>("value"));
     }

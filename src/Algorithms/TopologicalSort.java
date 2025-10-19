@@ -69,6 +69,8 @@ public class TopologicalSort extends Algorithm {
 
     @Override
     public Boolean checkValidity() {
+        if(G.V.isEmpty())
+            return false;
         DFS dfs = new DFS(G,G.V.getFirst());
         return dfs.isAcyclic() && this.G.isDirected();
     }

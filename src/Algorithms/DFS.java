@@ -259,7 +259,7 @@ public class DFS extends Algorithm{
 
     @Override
     public Boolean checkValidity() {
-        return true;
+        return !G.V.isEmpty();
     }
 
     @Override

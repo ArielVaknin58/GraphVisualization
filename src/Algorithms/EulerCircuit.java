@@ -18,7 +18,7 @@ public class EulerCircuit extends Algorithm{
     }
     @Override
     public void Run() {
-        if (G.V.isEmpty() || !checkCondition()) {
+        if (!checkCondition()) {
             this.result = new ArrayList<>();
             return;
         }
@@ -46,9 +46,6 @@ public class EulerCircuit extends Algorithm{
             }
         }
 
-        // 3. Finalize result if the full circuit was found
-        // If the graph is fully traversed, the size of `circuit` should match G.V.size() + G.E.size()
-        // or rely on the fact that if checkCondition() passed, the loop completes if implemented correctly.
         this.result = new ArrayList<>(circuit);
     }
 
@@ -56,22 +53,10 @@ public class EulerCircuit extends Algorithm{
     {
         this.startingNode = node;
     }
-    private int[] CheckForDuplicates(List<Graph.GraphNode> list) {
-        Map<Graph.GraphNode, Integer> seen = new HashMap<>();
-
-        for (int i = 0; i < list.size(); i++) {
-            Graph.GraphNode node = list.get(i);
-            if (seen.containsKey(node)) {
-                return new int[]{seen.get(node), i}; // first and second indices
-            }
-            seen.put(node, i);
-        }
-        return new int[]{-1, -1}; // no duplicates found
-    }
 
     @Override
     public Boolean checkValidity() {
-        return true;
+        return !G.V.isEmpty();
     }
 
     @Override
@@ -97,6 +82,7 @@ public class EulerCircuit extends Algorithm{
     {
         return result;
     }
+
     // For G directed graph : G has Euler circuit iff in degree = out degree
     // For G undirected graph : G has Euler circuit iff all degrees are even
     private boolean checkCondition()

@@ -192,6 +192,7 @@ public class Graph implements Serializable {
         private int degree;
 
         public GraphNode(double x, double y, String textLabel,Graph G) {
+
             circle = new Circle(x, y, AppSettings.nodeRadius, Color.LIGHTBLUE);
             circle.getStyleClass().add(AppSettings.Graph_node_css_class);
 
@@ -208,8 +209,10 @@ public class Graph implements Serializable {
         }
 
 
+
         public GraphNode(GraphNode other) {
             this.nodeLabel = other.nodeLabel;
+
 
             this.circle = null;
             this.label = null;

@@ -21,6 +21,8 @@ public class HamiltonianPath extends Algorithm{
     @Override
     public void Run() {
 
+        if(G.V.isEmpty())
+            return;
         TopologicalSort sort = new TopologicalSort(this.G);
         if(sort.isSingularSort())
         {
@@ -31,6 +33,8 @@ public class HamiltonianPath extends Algorithm{
 
     @Override
     public Boolean checkValidity() {
+        if(G.V.isEmpty())
+            return true;
         DFS dfs = new DFS(G,G.V.getFirst());
         return dfs.isAcyclic() && this.G.isDirected();
     }

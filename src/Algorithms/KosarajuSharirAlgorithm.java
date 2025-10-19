@@ -9,14 +9,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static Controllers.Controller.AlertError;
 
@@ -57,6 +58,10 @@ public class KosarajuSharirAlgorithm extends Algorithm{
         return this.G.isDirected();
     }
 
+    public Hashtable<String,String> getResult()
+    {
+        return result;
+    }
     @Override
     public void DisplayResults() {
         try {
@@ -67,6 +72,8 @@ public class KosarajuSharirAlgorithm extends Algorithm{
             controller.getNodeCol().setText("Node index");
             controller.getValueCol().setText("Strong Connectivity Component");
             Stage popupStage = new Stage();
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
+            popupStage.getIcons().add(icon);
             popupStage.setTitle("Algorithm Results");
 
             ObservableList<ResultPair<String,String>> data = FXCollections.observableArrayList();

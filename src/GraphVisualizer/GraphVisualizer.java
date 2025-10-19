@@ -21,6 +21,12 @@ public class GraphVisualizer extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
+        loadMainStage(primaryStage);
+    }
+
+    private void loadMainStage(Stage primaryStage)
+    {
         try
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Graph_Input_Location));
@@ -37,7 +43,6 @@ public class GraphVisualizer extends Application {
         {
             Controller.AlertError(e);
         }
-
     }
 
 

@@ -25,6 +25,8 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button connectivityButton;
     @FXML
     private Button KosarajuButton;
+    @FXML
+    private Button superGraphButton;
 
 
     public void initialize()
@@ -36,6 +38,7 @@ public class GraphWiseAlgorithmsController extends Controller{
         eulerPathButton.setTooltip(new Tooltip(EulerPath.AlgorithmDescription));
         connectivityButton.setTooltip(new Tooltip(ConnectivityComponents.AlgorithmDescription));
         KosarajuButton.setTooltip((new Tooltip(KosarajuSharirAlgorithm.AlgorithmDescription)));
+        superGraphButton.setTooltip(new Tooltip(SuperGraph.AlgorithmDescription));
     }
 
     private void run(Algorithm algorithm)
@@ -80,6 +83,10 @@ public class GraphWiseAlgorithmsController extends Controller{
     public void OnKosarajuClick()
     {
         run(new KosarajuSharirAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
+    }
+    public void OnSuperGraphClicked()
+    {
+        run(new SuperGraph(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 }
 

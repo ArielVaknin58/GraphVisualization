@@ -3,13 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="539.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphResultController">
+<AnchorPane prefHeight="712.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphResultController">
    <children>
-      <ScrollPane prefHeight="539.0" prefWidth="622.0">
+      <ScrollPane prefHeight="599.0" prefWidth="673.0">
         <content>
-          <AnchorPane fx:id="graphOutputContainer" minHeight="0.0" minWidth="0.0" prefHeight="539.0" prefWidth="621.0" />
+          <AnchorPane fx:id="graphOutputContainer" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="700.0" />
         </content>
       </ScrollPane>
+      <Button fx:id="saveResultButton" layoutX="372.0" layoutY="639.0" mnemonicParsing="false" onAction="#onSaveGraph" prefHeight="25.0" prefWidth="95.0" text="Save Result" />
+      <Label alignment="CENTER" layoutX="222.0" layoutY="643.0" prefHeight="17.0" prefWidth="95.0" text="Save Graph ?" />
    </children>
 </AnchorPane>
