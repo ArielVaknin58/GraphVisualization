@@ -47,7 +47,8 @@ public class GraphSerializer {
 
                     int numVertices = g.V.size();
                     for (int i = 1; i <= numVertices; i++) {
-                        g.createNode(Integer.toString(i));
+                        Graph.GraphNode current = g.VerticeIndexer.get(Integer.toString(i));
+                        g.createNodeWithCoordinates(current.getxPosition(), current.getyPosition(), Integer.toString(i));
                     }
                     ArrayList<ArrowEdge> list = new ArrayList<>(g.E);
                     for (ArrowEdge edge : list) {

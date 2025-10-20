@@ -1,5 +1,6 @@
 package Controllers;
 
+import GraphVisualizer.Graph;
 import GraphVisualizer.GraphSerializer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,12 +40,24 @@ public class SaveGraphPopupController extends  Controller{
             return;
         }
 
+
         System.out.println("Saving graph as: " + filename + ".ser");
 
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
 
-        GraphSerializer.saveGraph(ControllerManager.getGraphInputController().getGraph(), filename);
+        Graph graphToSave = ControllerManager.getGraphInputController().getGraph();
+        if(graphToSave == null)
+        {
+            AlertError(new Exception("Graph is null !"));
+            return;
+        }
+        for(Graph.GraphNode node : graphToSave.V)
+        {
+            node.xPosition = node.getCircle().getCenterX();
+            node.yPosition = node.getCircle().getCenterY();
+        }
+        GraphSerializer.saveGraph(graphToSave, filename);
     }
 
 

@@ -97,6 +97,20 @@ public class Graph implements Serializable {
         return node;
     }
 
+    public GraphNode createNodeWithCoordinates(double x,double y, String label)
+    {
+        GraphNode node = new GraphNode(x, y, label,this);
+        if(VerticeIndexer.containsKey(node.nodeLabel))
+        {
+            GraphNode oldNode = VerticeIndexer.get(node.nodeLabel);
+            VerticeIndexer.remove(node.nodeLabel);
+            V.remove(oldNode);
+        }
+        V.add(node);
+        VerticeIndexer.put(label, node);
+        return node;
+    }
+
     public void createEdge(String fromLabel, String toLabel,int weight) {
         try{
             GraphNode fromNode = VerticeIndexer.get(fromLabel);
@@ -190,9 +204,19 @@ public class Graph implements Serializable {
         public int inDegree;
         public int outDegree;
         private int degree;
+        public double xPosition;
+        public double yPosition;
+
+
+        public double getxPosition() { return xPosition; }
+        public void setxPosition(double x) { this.xPosition = x; }
+        public double getyPosition() { return yPosition; }
+        public void setyPosition(double y) { this.yPosition = y; }
 
         public GraphNode(double x, double y, String textLabel,Graph G) {
 
+            xPosition = x;
+            yPosition = y;
             circle = new Circle(x, y, AppSettings.nodeRadius, Color.LIGHTBLUE);
             circle.getStyleClass().add(AppSettings.Graph_node_css_class);
 

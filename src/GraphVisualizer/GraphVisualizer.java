@@ -11,7 +11,7 @@ import java.util.Objects;
 
 
 //TO DO:
-// 1
+// 1 
 // 2
 public class GraphVisualizer extends Application {
 
