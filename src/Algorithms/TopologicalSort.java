@@ -78,17 +78,24 @@ public class TopologicalSort extends Algorithm {
     @Override
     public void DisplayResults() {
 
-        StringBuilder print = new StringBuilder("The Topological Sort is: \n");
-        Iterator<Graph.GraphNode> it = result.iterator();
-        while (it.hasNext()) {
-            Graph.GraphNode current = it.next();
-            print.append(current.getNodeLabel());
-            if (it.hasNext()) {
-                print.append(" --> ");
+        if(this.result.isEmpty())
+        {
+            ControllerManager.getGraphWiseAlgorithmsController().infoPopup("The graph doesn't have a topological sort.");
+        }
+        else {
+            StringBuilder print = new StringBuilder("The Topological Sort is: \n");
+            Iterator<Graph.GraphNode> it = result.iterator();
+            while (it.hasNext()) {
+                Graph.GraphNode current = it.next();
+                print.append(current.getNodeLabel());
+                if (it.hasNext()) {
+                    print.append(" --> ");
+                }
             }
+
+            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup(print.toString());
         }
 
-        ControllerManager.getGraphWiseAlgorithmsController().PopupMessage(print.toString());
     }
 
 

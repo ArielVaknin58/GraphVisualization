@@ -35,22 +35,24 @@ public class ShortestPathsTree extends Algorithm{
     @Override
     public void Run() {
 
-        for(Integer i = 1 ; i <= this.G.V.size() ; i++)
+        for(Graph.GraphNode currentNode : this.G.V)
         {
-            this.result.createNode(String.valueOf(i));
+            this.result.createNodeWithCoordinates(currentNode.xPosition, currentNode.yPosition, currentNode.getNodeLabel());
         }
 
         BFS bfs = new BFS(G,inputNode);
         bfs.Run();
-        HashMap<String,Integer> bfsResult = bfs.getDistancesResults();
+        HashMap<String,String> bfsResult = bfs.getParents();
 
-        for(ArrowEdge edge : G.E)
+        for(String nodeLabel : bfsResult.keySet())
         {
-            int fromValue = bfsResult.get(edge.getFrom().getNodeLabel());
-            int toValue = bfsResult.get(edge.getTo().getNodeLabel());
-            if(toValue == fromValue + 1)
-                result.createEdge(edge.getFrom().getNodeLabel(),edge.getTo().getNodeLabel(),0);
+            if(bfsResult.get(nodeLabel) != null)
+            {
+                Graph.GraphNode parent = this.G.VerticeIndexer.get(bfsResult.get(nodeLabel));
+                result.createEdge(parent.getNodeLabel(),nodeLabel,0);
+            }
         }
+
 
     }
 

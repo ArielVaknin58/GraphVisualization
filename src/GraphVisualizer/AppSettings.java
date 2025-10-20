@@ -10,6 +10,8 @@ public class AppSettings {
     public static final int MAX_VERTICES = 15;
 
     public static final String App_Title = "GraphVisualizer";
+    public static final String SUCCESS_ICON_LOCATION = "/resources/GreenV.png";
+    public static final String INFO_ICON_LOCATION = "/resources/exclamation.png";
     public static final String Graph_Input_Location = "/resources/GraphInput.fxml";
     public static final String Generic_PopupWindow_location = "/resources/GenericPopup.fxml";
     public static final String Algorithms_Pane_Location = "/resources/AlgorithmsPane.fxml";

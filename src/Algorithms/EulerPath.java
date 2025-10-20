@@ -1,8 +1,6 @@
 package Algorithms;
 
-import Controllers.Controller;
 import Controllers.ControllerManager;
-import Exceptions.InvalidEdgeException;
 import GraphVisualizer.Graph;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,14 +122,15 @@ public class EulerPath extends Algorithm{
         if(result.isEmpty())
         {
             print.append("There is no euler path in the graph.");
+            ControllerManager.getGraphWiseAlgorithmsController().infoPopup(print.toString());
         }
         else
         {
             print.append("The resulted euler's path is :   ");
             for(Graph.GraphNode node : result)
                 print.append(node.getNodeLabel()).append(" ");
+            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup(print.toString());
         }
 
-        ControllerManager.getGraphWiseAlgorithmsController().PopupMessage(print.toString());
     }
 }

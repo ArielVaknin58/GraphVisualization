@@ -45,14 +45,17 @@ public class HamiltonianPath extends Algorithm{
         if(result.isEmpty())
         {
             print.append("There is no hamiltonian path in the graph.");
+            ControllerManager.getGraphWiseAlgorithmsController().infoPopup(print.toString());
+
         }
         else
         {
             print.append("The resulted hamiltonian path is :   ");
             for(Graph.GraphNode node : result)
                 print.append(node.getNodeLabel()).append(" ");
+            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup(print.toString());
+
         }
 
-        ControllerManager.getGraphWiseAlgorithmsController().PopupMessage(print.toString());
     }
 }

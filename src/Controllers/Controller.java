@@ -29,7 +29,42 @@ public class Controller {
         alert.showAndWait();
     }
 
-    public void PopupMessage(String message) {
+    public void SuccessPopup(String message) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Generic_PopupWindow_location));
+            AnchorPane pane = loader.load();
+
+            Label label = (Label) pane.lookup("#label");
+            ImageView myImage = (ImageView) pane.lookup("#myImage");
+            myImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.SUCCESS_ICON_LOCATION))));
+            label.setText(message);
+
+            FadeTransition fade = new FadeTransition();
+            fade.setNode(myImage);
+            fade.setDuration(Duration.millis(1000));
+            fade.setCycleCount(TranslateTransition.INDEFINITE);
+            fade.setInterpolator(Interpolator.LINEAR);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+            fade.play();
+
+            Stage popupStage = new Stage();
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            popupStage.setTitle("result");
+
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
+            popupStage.getIcons().add(icon);
+            Scene popupScene = new Scene(pane, 430, 150);
+            ThemeManager.getThemeManager().AddScene(popupScene);
+            popupStage.setScene(popupScene);
+            popupStage.showAndWait();
+
+        } catch (Exception e) {AlertError(e);}
+
+    }
+
+    public void infoPopup(String message) {
 
         try {
             // Load FXML
@@ -39,6 +74,7 @@ public class Controller {
             // Lookup for label and image
             Label label = (Label) pane.lookup("#label");
             ImageView myImage = (ImageView) pane.lookup("#myImage");
+            myImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.INFO_ICON_LOCATION))));
 
             // Ensure label is set correctly
             label.setText(message);
@@ -57,6 +93,7 @@ public class Controller {
             Stage popupStage = new Stage();
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setTitle("result");
+            popupStage.setResizable(false);
 
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
             popupStage.getIcons().add(icon);
@@ -68,4 +105,6 @@ public class Controller {
         } catch (Exception e) {AlertError(e);}
 
     }
+
+
 }

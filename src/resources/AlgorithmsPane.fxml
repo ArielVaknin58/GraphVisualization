@@ -14,6 +14,7 @@
             <Button fx:id="connectivityButton" layoutX="20.0" layoutY="143.0" mnemonicParsing="false" onAction="#OnConnectivityClicked" prefHeight="25.0" prefWidth="160.0" text="Connectivity Components" />
             <Button fx:id="KosarajuButton" layoutX="19.0" layoutY="175.0" mnemonicParsing="false" onAction="#OnKosarajuClick" prefHeight="25.0" prefWidth="162.0" text="Kosaraju-Sharir Algorithm" />
             <Button fx:id="superGraphButton" layoutX="18.0" layoutY="207.0" mnemonicParsing="false" onAction="#OnSuperGraphClicked" prefHeight="25.0" prefWidth="162.0" text="Super-Graph" />
+            <Button fx:id="bipartiteButton" layoutX="19.0" layoutY="239.0" mnemonicParsing="false" onAction="#OnBipartiteClicked" prefHeight="25.0" prefWidth="160.0" text="Bipartite Division" />
             </children>
         </AnchorPane>
     </content>

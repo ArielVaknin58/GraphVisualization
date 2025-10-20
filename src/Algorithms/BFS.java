@@ -24,6 +24,7 @@ public class BFS extends Algorithm{
     private Graph.GraphNode inputNode;
     private HashMap<String, String> result = new HashMap();
     private HashMap<String, Integer> distancesResult = new HashMap<>();
+    private HashMap<String,String> parents = new HashMap<>();
     public static final String AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
 
 
@@ -35,6 +36,7 @@ public class BFS extends Algorithm{
         {
             result.put(node.getNodeLabel(),String.valueOf(Integer.MAX_VALUE));
             distancesResult.put(node.getNodeLabel(),Integer.MAX_VALUE);
+            parents.put(node.getNodeLabel(), null);
         }
         result.put(inputNode.getNodeLabel(),"0");
         distancesResult.put(inputNode.getNodeLabel(),0);
@@ -57,6 +59,7 @@ public class BFS extends Algorithm{
                 if (currentDistance + 1 < value) {
                     result.put(node.getNodeLabel(), String.valueOf(currentDistance + 1));
                     distancesResult.put(node.getNodeLabel(),currentDistance + 1);
+                    parents.put(node.getNodeLabel(), current.getNodeLabel());
                     Q.add(node);
                 }
 
@@ -74,6 +77,10 @@ public class BFS extends Algorithm{
     public HashMap<String,Integer> getDistancesResults()
     {
         return distancesResult;
+    }
+
+    public HashMap<String, String> getParents() {
+        return parents;
     }
 
     @Override

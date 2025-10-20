@@ -27,6 +27,8 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button KosarajuButton;
     @FXML
     private Button superGraphButton;
+    @FXML
+    private Button bipartiteButton;
 
 
     public void initialize()
@@ -39,6 +41,7 @@ public class GraphWiseAlgorithmsController extends Controller{
         connectivityButton.setTooltip(new Tooltip(ConnectivityComponents.AlgorithmDescription));
         KosarajuButton.setTooltip((new Tooltip(KosarajuSharirAlgorithm.AlgorithmDescription)));
         superGraphButton.setTooltip(new Tooltip(SuperGraph.AlgorithmDescription));
+        bipartiteButton.setTooltip(new Tooltip(BiPartite.AlgorithmDescription));
     }
 
     private void run(Algorithm algorithm)
@@ -84,9 +87,15 @@ public class GraphWiseAlgorithmsController extends Controller{
     {
         run(new KosarajuSharirAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
+
     public void OnSuperGraphClicked()
     {
         run(new SuperGraph(new Graph(ControllerManager.getGraphInputController().getGraph())));
+    }
+
+    public void OnBipartiteClicked()
+    {
+        run(new BiPartite(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 }
 

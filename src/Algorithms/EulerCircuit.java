@@ -66,15 +66,17 @@ public class EulerCircuit extends Algorithm{
         if(result.isEmpty())
         {
             print.append("There is no euler circuit in the graph.");
+            ControllerManager.getGraphWiseAlgorithmsController().infoPopup(print.toString());
         }
         else
         {
             print.append("The resulted euler's circuit is :   ");
             for(Graph.GraphNode node : result)
                 print.append(node.getNodeLabel()).append(" ");
+            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup(print.toString());
         }
 
-        ControllerManager.getGraphWiseAlgorithmsController().PopupMessage(print.toString());
+
 
     }
 

@@ -2,7 +2,7 @@ package GraphVisualizer;
 
 import Controllers.Controller;
 import Controllers.ControllerManager;
-import Exceptions.InvalidEdgeException;
+
 import javax.swing.*;
 import java.io.*;
 import java.nio.file.*;
@@ -24,7 +24,7 @@ public class GraphSerializer {
                 out.flush();
             }
 
-            ControllerManager.getGraphWiseAlgorithmsController().PopupMessage("Graph "+fileName+".ser saved successfully !");
+            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup("Graph "+fileName+".ser saved successfully !");
 
         } catch (IOException e) {
             Controller.AlertError(e);

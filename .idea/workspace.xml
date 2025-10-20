@@ -11,12 +11,20 @@
   <component name="ChangeListManager">
     <list default="true" id="37a3260c-e9a7-416e-aca4-76b50415fc74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serializations/triangle.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BFS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/SaveGraphPopupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/SaveGraphPopupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/EulerCircuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/EulerCircuit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/EulerPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/EulerPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/HamiltonianPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/HamiltonianPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/ShortestPathsTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/ShortestPathsTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/GraphWiseAlgorithmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphWiseAlgorithmsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/AlgorithmsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/AlgorithmsPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/GenericPopup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/GenericPopup.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

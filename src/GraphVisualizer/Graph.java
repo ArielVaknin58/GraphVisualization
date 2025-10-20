@@ -2,11 +2,11 @@ package GraphVisualizer;
 
 
 import Controllers.Controller;
-import Controllers.ControllerManager;
 import Exceptions.InvalidEdgeException;
 import javafx.scene.Group;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -49,7 +49,7 @@ public class Graph implements Serializable {
 
             for(GraphNode oldNode : other.V)
             {
-                this.createNode(oldNode.getNodeLabel());
+                this.createNodeWithCoordinates(oldNode.xPosition, oldNode.yPosition, oldNode.getNodeLabel());
             }
             for(ArrowEdge oldEdge : other.E)
             {
@@ -97,7 +97,7 @@ public class Graph implements Serializable {
         return node;
     }
 
-    public GraphNode createNodeWithCoordinates(double x,double y, String label)
+    public void createNodeWithCoordinates(double x, double y, String label)
     {
         GraphNode node = new GraphNode(x, y, label,this);
         if(VerticeIndexer.containsKey(node.nodeLabel))
@@ -108,7 +108,6 @@ public class Graph implements Serializable {
         }
         V.add(node);
         VerticeIndexer.put(label, node);
-        return node;
     }
 
     public void createEdge(String fromLabel, String toLabel,int weight) {
@@ -232,7 +231,11 @@ public class Graph implements Serializable {
             initNodeEvents();
         }
 
-
+        public void ChangeColor(Color color)
+        {
+            circle.setStyle("-fx-fill: " + toHex(color) + ";");
+            nodeObject = new Group(this.circle,label);
+        }
 
         public GraphNode(GraphNode other) {
             this.nodeLabel = other.nodeLabel;
@@ -330,7 +333,17 @@ public class Graph implements Serializable {
         public String getNodeLabel() {
             return nodeLabel;
         }
+
+        private String toHex(Color color) {
+            int r = (int) (color.getRed() * 255);
+            int g = (int) (color.getGreen() * 255);
+            int b = (int) (color.getBlue() * 255);
+
+            // Format as a 6-digit hex string
+            return String.format("#%02X%02X%02X", r, g, b);
+        }
+
+
+
     }
-
-
 }
