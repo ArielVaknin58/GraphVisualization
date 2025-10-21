@@ -4,11 +4,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<ScrollPane fx:id="scroll" prefHeight="350.0" prefWidth="200.0" styleClass="InnerComponents" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VerticeWiseAlgorithmsController">
+<ScrollPane fx:id="scroll" prefWidth="200.0" styleClass="InnerComponents" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VerticeWiseAlgorithmsController">
     <content>
-        <AnchorPane fx:id="VerticeAlgorithmsPane" minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="200.0" styleClass="InnerComponents">
+        <AnchorPane fx:id="VerticeAlgorithmsPane" minHeight="0.0" minWidth="0.0" prefWidth="195.0" styleClass="InnerComponents">
             <children>
-                <Button fx:id="BFSButton" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" onAction="#OnBFSClick" prefHeight="25.0" prefWidth="162.0" text="BFS" />
+            <VBox alignment="TOP_CENTER" layoutX="13.0" layoutY="108.0" prefHeight="494.0" prefWidth="163.0" spacing="10.0" styleClass="InnerComponents">
+               <children>
+                      <Button fx:id="BFSButton" mnemonicParsing="false" onAction="#OnBFSClick" prefHeight="25.0" prefWidth="162.0" text="BFS" />
+                  <Button fx:id="DFSButton" mnemonicParsing="false" onAction="#OnDFSClick" prefHeight="25.0" prefWidth="163.0" text="DFS" />
+                  <Button fx:id="bellmanFordButton" mnemonicParsing="false" onAction="#OnLightestPathsClick" prefHeight="25.0" prefWidth="161.0" text="Lightest Paths Algorithm" />
+                  <Button fx:id="shortestPathsButton" mnemonicParsing="false" onAction="#OnShortestPathsTreeClick" prefHeight="25.0" prefWidth="159.0" text="Shortest Paths Tree" />
+               </children>
+            </VBox>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="88.0" layoutX="13.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="161.0" />
             <Label layoutX="21.0" layoutY="21.0" prefHeight="17.0" prefWidth="96.0" text="Vertice label : " />
             <Label fx:id="verticeLabel" layoutX="101.0" layoutY="21.0" prefHeight="17.0" prefWidth="60.0" />
@@ -16,9 +23,6 @@
             <Label fx:id="outLabel" layoutX="21.0" layoutY="74.0" prefHeight="17.0" prefWidth="98.0" text="Out degree :" />
             <Label fx:id="inDegree" layoutX="86.0" layoutY="47.0" prefHeight="17.0" prefWidth="67.0" />
             <Label fx:id="outDegree" layoutX="95.0" layoutY="74.0" prefHeight="17.0" prefWidth="71.0" />
-            <Button fx:id="DFSButton" layoutX="13.0" layoutY="139.0" mnemonicParsing="false" onAction="#OnDFSClick" prefHeight="25.0" prefWidth="163.0" text="DFS" />
-            <Button fx:id="shortestPathsButton" layoutX="16.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnShortestPathsTreeClick" prefHeight="25.0" prefWidth="159.0" text="Shortest Paths Tree" />
-            <Button fx:id="bellmanFordButton" layoutX="15.0" layoutY="173.0" mnemonicParsing="false" onAction="#OnLightestPathsClick" prefHeight="25.0" prefWidth="161.0" text="Lightest Paths Algorithm" />
             </children>
         </AnchorPane>
     </content>

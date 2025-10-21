@@ -17,8 +17,8 @@ public class DFS extends Algorithm{
     private AnchorPane pane;
     private Graph.GraphNode inputNode;
     private HashMap<String, Color> colors = new HashMap<>();
-    private List<ArrowEdge> visitedEdges = new ArrayList<ArrowEdge>();
-    private Hashtable<ArrowEdge,Boolean> coloredEdges = new Hashtable<ArrowEdge, Boolean>();
+    private List<DirectedEdge> visitedEdges = new ArrayList<DirectedEdge>();
+    private Hashtable<DirectedEdge,Boolean> coloredEdges = new Hashtable<DirectedEdge, Boolean>();
     private Hashtable<String,String> rootVertice;
     private List<Graph.GraphNode> finishTimeList;
     private int dfsAnimationNodeIndex = 0;
@@ -82,7 +82,7 @@ public class DFS extends Algorithm{
                 // Clear any inline styles from DFS
                 node.getCircle().setStyle("");
             }
-            for(ArrowEdge edge : G.E)
+            for(DirectedEdge edge : G.E)
             {
                 // Reset to default color (assuming black, change if different)
                 edge.getShaft().setStroke(Color.BLACK);
@@ -179,7 +179,7 @@ public class DFS extends Algorithm{
     Graph.GraphNode HasUnvisitedNeighbors(Graph.GraphNode node)
     {
         if(node == null || node.neighborsList.isEmpty()) return null;
-        for(ArrowEdge edge : node.connectedEdges)
+        for(DirectedEdge edge : node.connectedEdges)
         {
             if(edge.getFrom().equals(node) && coloredEdges.get(edge).equals(false))
                 return edge.getTo();
@@ -189,7 +189,7 @@ public class DFS extends Algorithm{
 
     public void initEdgesColors()
     {
-        for(ArrowEdge edge : G.E)
+        for(DirectedEdge edge : G.E)
         {
             coloredEdges.put(edge,false);
         }
@@ -233,7 +233,7 @@ public class DFS extends Algorithm{
 
         Graph.GraphNode neighbor = neighbors.get(index);
         if (colors.get(neighbor.getNodeLabel()) == Color.WHITE) {
-            visitedEdges.add(new ArrowEdge(node,neighbor,G.isDirected(),0));
+            visitedEdges.add(new DirectedEdge(node,neighbor,G.isDirected(),0));
             // Explore this neighbor (recursive DFS)
             dfsRecursiveWithDelay(neighbor, () -> {
                 // After finishing neighbor, move to next
@@ -278,9 +278,9 @@ public class DFS extends Algorithm{
 
     private void addGraphToGroup(Group root) {
         // Add edges first
-        for (ArrowEdge edge : G.E) {
+        for (DirectedEdge edge : G.E) {
             boolean matched = false;
-            for (ArrowEdge visitedEdge : visitedEdges) {
+            for (DirectedEdge visitedEdge : visitedEdges) {
                 if (edge.getFrom().getNodeLabel().equals(visitedEdge.getFrom().getNodeLabel())
                         && edge.getTo().getNodeLabel().equals(visitedEdge.getTo().getNodeLabel()) || edge.getFrom().getNodeLabel().equals(visitedEdge.getTo().getNodeLabel())
                         && edge.getTo().getNodeLabel().equals(visitedEdge.getFrom().getNodeLabel())) {

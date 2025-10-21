@@ -2,13 +2,12 @@ package GraphVisualizer;
 
 
 import javafx.scene.Group;
-import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Polygon;
 import java.io.Serializable;
 
-public class ArrowEdge implements Serializable {
+public class DirectedEdge implements Serializable,Comparable {
 
     private Graph.GraphNode from;
     private Graph.GraphNode to;
@@ -18,7 +17,7 @@ public class ArrowEdge implements Serializable {
     private transient Group edgeGroup;  // Holds the shaft + arrowhead
 
 
-    public ArrowEdge(Graph.GraphNode from, Graph.GraphNode to,boolean isDirected,int weight) {
+    public DirectedEdge(Graph.GraphNode from, Graph.GraphNode to, boolean isDirected, int weight) {
         this.from = from;
         this.to = to;
         this.weight = weight;
@@ -32,7 +31,7 @@ public class ArrowEdge implements Serializable {
         return this.shaft == null;
     }
 
-    public ArrowEdge(ArrowEdge other) {
+    public DirectedEdge(DirectedEdge other) {
         this.from = other.from;
         this.to = other.to;
         this.weight = other.getWeight();
@@ -40,6 +39,19 @@ public class ArrowEdge implements Serializable {
         this.shaft = null;
         this.arrowHead = null;
         this.edgeGroup = null;
+    }
+
+    public void ChangeColor(Color color)
+    {
+        String hexColor = toHex(color);
+        shaft.setStyle("-fx-stroke: " + hexColor + ";");
+        if (arrowHead != null) {
+            arrowHead.setStyle(
+                    "-fx-fill: " + hexColor + ";" +
+                            "-fx-stroke: " + hexColor + ";"
+            );
+        }
+
     }
 
     public int getWeight()
@@ -81,6 +93,15 @@ public class ArrowEdge implements Serializable {
         }
 
 
+    }
+
+    private String toHex(Color color) {
+        int r = (int) (color.getRed() * 255);
+        int g = (int) (color.getGreen() * 255);
+        int b = (int) (color.getBlue() * 255);
+
+        // Format as a 6-digit hex string
+        return String.format("#%02X%02X%02X", r, g, b);
     }
 
     public Line getShaft()
@@ -134,4 +155,11 @@ public class ArrowEdge implements Serializable {
 
     }
 
+    @Override
+    public int compareTo(Object o) {
+        DirectedEdge other = (DirectedEdge) o;
+        if(this.weight == other.getWeight())
+            return 0;
+        return this.weight > other.weight ? 1 : -1;
+    }
 }

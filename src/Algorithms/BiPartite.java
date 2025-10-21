@@ -4,7 +4,7 @@ import Controllers.Controller;
 import Controllers.ControllerManager;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
-import GraphVisualizer.ArrowEdge;
+import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.fxml.FXMLLoader;
@@ -42,7 +42,7 @@ public class BiPartite extends Algorithm{
         BFS bfs = new BFS(this.G,this.G.V.getFirst());
         bfs.Run();
         bfsRESULT = bfs.getDistancesResults();
-        for(ArrowEdge edge : this.G.E)
+        for(DirectedEdge edge : this.G.E)
         {
             if(Objects.equals(bfsRESULT.get(edge.getFrom().getNodeLabel()), bfsRESULT.get(edge.getTo().getNodeLabel())))
                 return;

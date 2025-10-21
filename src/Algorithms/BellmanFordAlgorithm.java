@@ -1,10 +1,9 @@
 package Algorithms;
 
-import Controllers.Controller;
 import Controllers.ControllerManager;
 import Controllers.ResultsPaneController;
 import GraphVisualizer.AppSettings;
-import GraphVisualizer.ArrowEdge;
+import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.collections.FXCollections;
@@ -61,11 +60,11 @@ public class BellmanFordAlgorithm extends Algorithm{
         init();
         for(int i = 1; i < this.G.V.size(); i++)
         {
-            for(ArrowEdge edge : this.G.E)
+            for(DirectedEdge edge : this.G.E)
                 relax(edge.getFrom(),edge.getTo(),edge);
         }
 
-        for(ArrowEdge edge : this.G.E)
+        for(DirectedEdge edge : this.G.E)
         {
             if(relax(edge.getFrom(),edge.getTo(),edge))
             {
@@ -73,12 +72,6 @@ public class BellmanFordAlgorithm extends Algorithm{
             }
         }
 
-    }
-
-    public boolean GraphHasNegativeCycle()
-    {
-        Run();
-        return hasNegativeCycles;
     }
 
     @Override
@@ -132,7 +125,7 @@ public class BellmanFordAlgorithm extends Algorithm{
 
     }
 
-    private boolean relax(Graph.GraphNode source, Graph.GraphNode dest, ArrowEdge edge)
+    private boolean relax(Graph.GraphNode source, Graph.GraphNode dest, DirectedEdge edge)
     {
         int sourceWeight = weightedPaths.get(source);
         int destWeight = weightedPaths.get(dest);

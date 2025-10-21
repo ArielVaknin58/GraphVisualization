@@ -6,7 +6,6 @@ import Exceptions.InvalidEdgeException;
 import javafx.scene.Group;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
@@ -22,7 +21,7 @@ public class Graph implements Serializable {
 
     public final ArrayList<GraphNode> V = new ArrayList<>();
     public final Hashtable<String, GraphNode> VerticeIndexer = new Hashtable<>();
-    public final ArrayList<ArrowEdge> E = new ArrayList<>();
+    public final ArrayList<DirectedEdge> E = new ArrayList<>();
     private boolean isDirected = true;
 
 
@@ -51,7 +50,7 @@ public class Graph implements Serializable {
             {
                 this.createNodeWithCoordinates(oldNode.xPosition, oldNode.yPosition, oldNode.getNodeLabel());
             }
-            for(ArrowEdge oldEdge : other.E)
+            for(DirectedEdge oldEdge : other.E)
             {
                 this.createEdge(oldEdge.getFrom().getNodeLabel(),oldEdge.getTo().getNodeLabel(),oldEdge.getWeight());
             }
@@ -73,7 +72,7 @@ public class Graph implements Serializable {
             GraphNode node = transpose.createNode(String.valueOf(i));
             transpose.VerticeIndexer.put(String.valueOf(i),node);
         }
-        for(ArrowEdge edge : this.E)
+        for(DirectedEdge edge : this.E)
         {
             transpose.createEdge(edge.getTo().getNodeLabel(),edge.getFrom().getNodeLabel(), edge.getWeight());
         }
@@ -110,14 +109,14 @@ public class Graph implements Serializable {
         VerticeIndexer.put(label, node);
     }
 
-    public void createEdge(String fromLabel, String toLabel,int weight) {
+    public DirectedEdge createEdge(String fromLabel, String toLabel,int weight) {
         try{
             GraphNode fromNode = VerticeIndexer.get(fromLabel);
             GraphNode toNode = VerticeIndexer.get(toLabel);
             if(fromNode == null || toNode == null)
                 throw new InvalidEdgeException();
 
-            ArrowEdge edge = new ArrowEdge(fromNode, toNode,this.isDirected,weight);
+            DirectedEdge edge = new DirectedEdge(fromNode, toNode,this.isDirected,weight);
 
             // Add edge to nodes
             fromNode.neighborsList.add(toNode);
@@ -129,8 +128,8 @@ public class Graph implements Serializable {
             if (fromNode != toNode)
                 toNode.addConnectedEdge(edge);
 
-            ArrowEdge toRemove = null; //Removes old duplicate edge if exists
-            for(ArrowEdge currentEdge : E)
+            DirectedEdge toRemove = null; //Removes old duplicate edge if exists
+            for(DirectedEdge currentEdge : E)
             {
                 if(currentEdge.getFrom().nodeLabel.equals(fromNode.nodeLabel) && currentEdge.getTo().nodeLabel.equals(toNode.nodeLabel))
                     toRemove = currentEdge;
@@ -146,16 +145,18 @@ public class Graph implements Serializable {
             edge.getEdgeGroup().setOnMouseClicked(e -> {
                 System.out.println("Clicked edge " + fromLabel + " -> " + toLabel);
             });
+            return edge;
         }catch (InvalidEdgeException e)
         {
             Controller.AlertError(e);
         }
 
+        return null;
     }
 
     public void addGraphToGroup(Group root) {
         // Add edges first so nodes appear on top
-        for (ArrowEdge edge : E) {
+        for (DirectedEdge edge : E) {
             root.getChildren().add(edge.getEdgeGroup());
         }
         for (GraphNode node : V) {
@@ -167,14 +168,14 @@ public class Graph implements Serializable {
         return V;
     }
 
-    public ArrayList<ArrowEdge> getEdges() {
+    public ArrayList<DirectedEdge> getEdges() {
         return E;
     }
 
     public void RemoveVertice(GraphNode node)
     {
-        List<ArrowEdge> toRemove = new ArrayList<>();
-        for(ArrowEdge edge : E)
+        List<DirectedEdge> toRemove = new ArrayList<>();
+        for(DirectedEdge edge : E)
         {
             if(node.nodeLabel.equals(edge.getFrom().nodeLabel))
             {
@@ -198,7 +199,7 @@ public class Graph implements Serializable {
         private transient Group nodeObject;
         private transient Circle circle;
         private transient Text label;
-        public List<ArrowEdge> connectedEdges = new ArrayList<>();
+        public List<DirectedEdge> connectedEdges = new ArrayList<>();
         public List<GraphNode> neighborsList = new ArrayList<>();
         private String nodeLabel;
         public int inDegree;
@@ -257,9 +258,9 @@ public class Graph implements Serializable {
             return false;
         }
 
-        public ArrowEdge getneighborEdge(GraphNode node)
+        public DirectedEdge getneighborEdge(GraphNode node)
         {
-            for(ArrowEdge edge : this.connectedEdges)
+            for(DirectedEdge edge : this.connectedEdges)
             {
                 if(edge.getFrom().equals(this) && edge.getTo().equals(node))
                     return edge;
@@ -310,7 +311,7 @@ public class Graph implements Serializable {
                 label.setY(circle.getCenterY() + AppSettings.nodeLabelPadding);
 
                 // Update connected edges
-                for (ArrowEdge edge : connectedEdges) {
+                for (DirectedEdge edge : connectedEdges) {
                     if (!edge.isShaftNull())
                         edge.updatePosition(this.G.isDirected);
                 }
@@ -318,7 +319,7 @@ public class Graph implements Serializable {
 
         }
 
-        public void addConnectedEdge(ArrowEdge edge) {
+        public void addConnectedEdge(DirectedEdge edge) {
             connectedEdges.add(edge);
         }
 

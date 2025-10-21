@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphInputController">
+<AnchorPane prefHeight="637.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphInputController">
 
     <children>
         <!-- ScrollPane on the left side, fills available space -->
-        <ScrollPane fx:id="scrollPane" prefHeight="600.0" prefWidth="784.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="207.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="scrollPane" prefHeight="600.0" prefWidth="700.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="207.0" AnchorPane.topAnchor="0.0">
             <content>
-                <AnchorPane fx:id="graphContainer" minHeight="0.0" minWidth="0.0" />
+                <AnchorPane fx:id="graphContainer" minHeight="0.0" minWidth="0.0" prefHeight="730.0" prefWidth="849.0" />
             </content>
         </ScrollPane>
 
         <!-- GridPane on the right side -->
-        <GridPane fx:id="controlPanel" prefHeight="100.0" prefWidth="200.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <GridPane fx:id="controlPanel" prefWidth="200.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
             </columnConstraints>
@@ -34,7 +34,7 @@
                 </HBox>
 
                 <Label fx:id="enterEdgesLabel" prefHeight="17.0" prefWidth="191.0" text="Enter edges:" GridPane.rowIndex="5" />
-                <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="190.0" spacing="5.0" GridPane.rowIndex="6">
+                <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="190.0" spacing="5.0" GridPane.rowIndex="6">
                     <children>
                         <TextField fx:id="edgeStartField" prefWidth="40" />
                         <Label prefHeight="17.0" prefWidth="26.0" text="---&gt;">
@@ -63,8 +63,8 @@
                      </HBox.margin></ComboBox>
                </children>
             </HBox>
-            <Pane fx:id="algoPlaceholder" prefHeight="328.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="9" />
-            <AnchorPane prefHeight="54.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="1">
+            <Pane fx:id="algoPlaceholder" prefHeight="250.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="9" />
+            <AnchorPane prefHeight="49.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="saveGraph" layoutX="8.0" layoutY="33.0" mnemonicParsing="false" onAction="#onSaveGraph" text="Save Graph" />
                   <Button fx:id="loadGraph" layoutX="100.0" layoutY="33.0" mnemonicParsing="false" onAction="#onLoadGraph" text="Load Graph" />
@@ -76,10 +76,10 @@
                   <CheckBox fx:id="DirectedCheckbox" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="141.0" selected="true" text="Directed" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="24.0" prefWidth="200.0" GridPane.rowIndex="7">
+            <AnchorPane prefHeight="20.0" prefWidth="200.0" GridPane.rowIndex="7">
                <children>
                   <Label fx:id="weightLabel" layoutX="8.0" layoutY="8.0" prefHeight="17.0" prefWidth="50.0" text="weight :" />
-                  <TextField fx:id="weightField" layoutX="60.0" layoutY="6.0" prefHeight="25.0" prefWidth="62.0" />
+                  <TextField fx:id="weightField" layoutX="60.0" layoutY="6.0" prefWidth="50.0" />
                </children>
             </AnchorPane>
             </children>
@@ -90,10 +90,10 @@
             <RowConstraints maxHeight="193.0" minHeight="28.0" prefHeight="28.0" />
             <RowConstraints maxHeight="193.0" minHeight="0.0" prefHeight="26.0" />
             <RowConstraints maxHeight="381.0" minHeight="11.0" prefHeight="22.0" />
-            <RowConstraints maxHeight="482.0" minHeight="26.0" prefHeight="48.0" />
-            <RowConstraints maxHeight="145.0" minHeight="18.0" prefHeight="37.0" />
-            <RowConstraints maxHeight="145.0" minHeight="18.0" prefHeight="19.0" />
-            <RowConstraints maxHeight="482.0" minHeight="124.0" prefHeight="313.0" />
+            <RowConstraints maxHeight="482.0" minHeight="26.0" prefHeight="36.0" />
+            <RowConstraints maxHeight="145.0" minHeight="18.0" prefHeight="31.0" />
+            <RowConstraints maxHeight="145.0" minHeight="11.0" prefHeight="17.0" />
+             <RowConstraints minHeight="124.0" prefHeight="346.0" vgrow="ALWAYS" />
          </rowConstraints>
         </GridPane>
     </children>

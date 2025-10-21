@@ -50,8 +50,8 @@ public class GraphSerializer {
                         Graph.GraphNode current = g.VerticeIndexer.get(Integer.toString(i));
                         g.createNodeWithCoordinates(current.getxPosition(), current.getyPosition(), Integer.toString(i));
                     }
-                    ArrayList<ArrowEdge> list = new ArrayList<>(g.E);
-                    for (ArrowEdge edge : list) {
+                    ArrayList<DirectedEdge> list = new ArrayList<>(g.E);
+                    for (DirectedEdge edge : list) {
                         g.createEdge(edge.getFrom().getNodeLabel(), edge.getTo().getNodeLabel(), edge.getWeight());
                     }
 

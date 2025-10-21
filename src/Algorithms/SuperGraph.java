@@ -3,7 +3,7 @@ package Algorithms;
 import Controllers.Controller;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
-import GraphVisualizer.ArrowEdge;
+import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +49,7 @@ public class SuperGraph extends Algorithm{
             this.result.createNode(ksaResult.get(Hvertice));
             components.put(Hvertice, new HashSet<>(Arrays.asList(ksaResult.get(Hvertice).split(","))));
         }
-        for(ArrowEdge edge : G.E)
+        for(DirectedEdge edge : G.E)
         {
             String fromLabel = edge.getFrom().getNodeLabel();
             String toLabel = edge.getTo().getNodeLabel();

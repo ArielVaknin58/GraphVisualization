@@ -7,12 +7,13 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import GraphVisualizer.Graph;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
 
 public class GraphWiseAlgorithmsController extends Controller{
 
     @FXML
-    private AnchorPane AlgorithmsPane;
+    private VBox AlgorithmsPane;
     @FXML
     private Button TopologicalSortButton;
     @FXML
@@ -31,6 +32,8 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button bipartiteButton;
     @FXML
     private Button FloydWarshallButton;
+    @FXML
+    private Button mstButton;
 
 
     public void initialize()
@@ -45,6 +48,7 @@ public class GraphWiseAlgorithmsController extends Controller{
         superGraphButton.setTooltip(new Tooltip(SuperGraph.AlgorithmDescription));
         bipartiteButton.setTooltip(new Tooltip(BiPartite.AlgorithmDescription));
         FloydWarshallButton.setTooltip(new Tooltip(FloydWarshallAlgorithm.AlgorithmDescription));
+        mstButton.setTooltip(new Tooltip(PrimAlgorithm.AlgorithmDescription));
     }
 
     private void run(Algorithm algorithm)
@@ -104,6 +108,11 @@ public class GraphWiseAlgorithmsController extends Controller{
     public void OnFloydWarshallClicked()
     {
         run(new FloydWarshallAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
+    }
+
+    public void onmstButtonClicked()
+    {
+        run(new PrimAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 }
 

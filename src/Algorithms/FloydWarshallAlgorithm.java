@@ -3,7 +3,7 @@ package Algorithms;
 import Controllers.ControllerManager;
 import Controllers.ResultsPaneController;
 import GraphVisualizer.AppSettings;
-import GraphVisualizer.ArrowEdge;
+import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.beans.property.SimpleStringProperty;
@@ -63,7 +63,7 @@ public class FloydWarshallAlgorithm extends Algorithm{
             }
         }
 
-        for(ArrowEdge edge : G.E)
+        for(DirectedEdge edge : G.E)
         {
             weightsMatrix.get(edge.getFrom()).put(edge.getTo(), edge.getWeight());
         }
@@ -117,8 +117,7 @@ public class FloydWarshallAlgorithm extends Algorithm{
         }
 
         try {
-            // 1. Load the FXML and Controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Results_Popup_location)); // Use your constant for "results.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Results_Popup_location));
             Scene scene = new Scene(loader.load());
             ThemeManager.getThemeManager().AddScene(scene);
             ResultsPaneController controller = loader.getController();
@@ -158,7 +157,7 @@ public class FloydWarshallAlgorithm extends Algorithm{
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
             resultStage.getIcons().add(icon);
             resultStage.initModality(Modality.APPLICATION_MODAL);
-            resultStage.setTitle("Algorithm Result: " + this.AlgorithmName);
+            resultStage.setTitle(this.AlgorithmName +" results");
             resultStage.setScene(scene);
             resultStage.show();
 

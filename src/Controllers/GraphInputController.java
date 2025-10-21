@@ -70,6 +70,11 @@ public class GraphInputController extends Controller{
             FXMLLoader nodeLoader = new FXMLLoader(getClass().getResource(AppSettings.Vertice_Algorithms_Pane_Location));
             ScrollPane nodeDetailsPane = nodeLoader.load();
 
+            nodeDetailsPane.prefWidthProperty().bind(algoPlaceholder.widthProperty());
+            nodeDetailsPane.prefHeightProperty().bind(algoPlaceholder.heightProperty());
+            algorithmsPane.prefWidthProperty().bind(algoPlaceholder.widthProperty());
+            algorithmsPane.prefHeightProperty().bind(algoPlaceholder.heightProperty());
+
             nodeDetailsPane.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
                 if (event.getTarget().equals(nodeDetailsPane)) {
                     event.consume();
@@ -88,6 +93,7 @@ public class GraphInputController extends Controller{
                 Platform.runLater(() -> {
                     if (CurrentlyPressedNodeHelper.hasFocus()) {
                         ControllerManager.getVerticeWiseAlgorithmsController().updateCurrentNodeLabels();
+
                         algoPlaceholder.getChildren().setAll(nodeDetailsPane);
 
                     } else {
@@ -127,7 +133,7 @@ public class GraphInputController extends Controller{
     private void onLoadGraph()
     {
         this.G = GraphSerializer.loadGraph();
-        assert G != null;
+        if(G == null) return;
         displayGraph(G);
     }
 
@@ -198,7 +204,7 @@ public class GraphInputController extends Controller{
             if(!weightInput.isEmpty())
             {
                 weight = Integer.parseInt(weightInput);
-                if(weight < 0 || weight > 100000)
+                if(weight < -100000 || weight > 100000)
                     throw new InvalidEdgeException();
             }
 

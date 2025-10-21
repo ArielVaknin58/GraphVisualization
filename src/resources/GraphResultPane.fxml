@@ -3,14 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="712.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphResultController">
-   <children>
-      <ScrollPane prefHeight="599.0" prefWidth="673.0">
-        <content>
-          <AnchorPane fx:id="graphOutputContainer" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="700.0" />
-        </content>
-      </ScrollPane>
-      <Button fx:id="saveResultButton" layoutX="372.0" layoutY="639.0" mnemonicParsing="false" onAction="#onSaveGraph" prefHeight="25.0" prefWidth="95.0" text="Save Result" />
-      <Label alignment="CENTER" layoutX="222.0" layoutY="643.0" prefHeight="17.0" prefWidth="95.0" text="Save Graph ?" />
-   </children>
+<AnchorPane prefHeight="477.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphResultController">
+    <children>
+
+        <ScrollPane AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <AnchorPane fx:id="graphOutputContainer" minHeight="600.0" minWidth="700.0" />
+            </content>
+        </ScrollPane>
+
+        <Button fx:id="saveResultButton" layoutX="370.0" mnemonicParsing="false" onAction="#onSaveGraph" prefHeight="25.0" prefWidth="95.0" text="Save Result" AnchorPane.bottomAnchor="14.0" />
+        <Label alignment="CENTER" layoutX="216.0" prefHeight="17.0" prefWidth="95.0" text="Save Graph ?" AnchorPane.bottomAnchor="18.0" />
+
+    </children>
 </AnchorPane>
