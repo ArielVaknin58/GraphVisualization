@@ -1,16 +1,27 @@
 package Algorithms;
 
+import Controllers.Controller;
 import Controllers.ControllerManager;
+import Controllers.GraphResultController;
+import GraphVisualizer.AppSettings;
+import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import GraphVisualizer.ThemeManager;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HamiltonianPath extends Algorithm{
 
     public static final String AlgorithmDescription = "The algorithm gets a graph G=(V,E) and returns a path where each vertice appears exactly once.";
     private List<Graph.GraphNode> result;
-
+    private Graph graphResult;
     public HamiltonianPath(Graph G)
     {
         this.G = G;
@@ -23,11 +34,29 @@ public class HamiltonianPath extends Algorithm{
 
         if(G.V.isEmpty())
             return;
-        TopologicalSort sort = new TopologicalSort(this.G);
+        TopologicalSort sort = new TopologicalSort(new Graph(this.G));
         if(sort.isSingularSort())
         {
             result = sort.getResult();
         }
+
+    }
+
+    private void BuildResultGraph()
+    {
+        this.graphResult = new Graph(this.G);
+        for(int i = 0 ; i < result.size() - 1; i++)
+        {
+            Graph.GraphNode node = graphResult.VerticeIndexer.get(result.get(i).getNodeLabel());
+            node.ChangeColor(Color.RED);
+            for(DirectedEdge edge : node.connectedEdges)
+            {
+                if(edge.getTo().equals(result.get(i+1)))
+                    edge.ChangeColor(Color.RED);
+            }
+        }
+        graphResult.VerticeIndexer.get(result.getFirst().getNodeLabel()).ChangeColor(Color.BLUEVIOLET);
+        graphResult.VerticeIndexer.get(result.getLast().getNodeLabel()).ChangeColor(Color.BLUEVIOLET);
 
     }
 
@@ -41,21 +70,50 @@ public class HamiltonianPath extends Algorithm{
 
     @Override
     public void DisplayResults() {
-        StringBuilder print = new StringBuilder();
-        if(result.isEmpty())
-        {
-            print.append("There is no hamiltonian path in the graph.");
-            ControllerManager.getGraphWiseAlgorithmsController().infoPopup(print.toString());
-
+        if (result.isEmpty()) {
+            ControllerManager.getGraphInputController().infoPopup("The graph contains a negative-weight cycle !");
+            return;
         }
-        else
+        try
         {
-            print.append("The resulted hamiltonian path is :   ");
-            for(Graph.GraphNode node : result)
-                print.append(node.getNodeLabel()).append(" ");
-            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup(print.toString());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Graph_results_location));
+            Scene scene = new Scene(loader.load());
+            ThemeManager.getThemeManager().AddScene(scene);
+            GraphResultController controller = loader.getController();
+            BuildResultGraph();
+            controller.displayGraph(this.graphResult);
 
+            Stage resultStage = new Stage();
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
+            resultStage.getIcons().add(icon);
+            //resultStage.initModality(Modality.APPLICATION_MODAL);
+            resultStage.setTitle(this.AlgorithmName+" results :");
+
+            resultStage.setScene(scene);
+            resultStage.show();
         }
-
+        catch (Exception e)
+        {
+            Controller.AlertError(e);
+        }
     }
+//    @Override
+//    public void DisplayResults() {
+//        StringBuilder print = new StringBuilder();
+//        if(result.isEmpty())
+//        {
+//            print.append("There is no hamiltonian path in the graph.");
+//            ControllerManager.getGraphWiseAlgorithmsController().infoPopup(print.toString());
+//
+//        }
+//        else
+//        {
+//            print.append("The resulted hamiltonian path is :   ");
+//            for(Graph.GraphNode node : result)
+//                print.append(node.getNodeLabel()).append(" ");
+//            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup(print.toString());
+//
+//        }
+//
+//    }
 }

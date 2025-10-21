@@ -3,14 +3,17 @@ package Algorithms;
 import Controllers.Controller;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
+import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -34,6 +37,7 @@ public class ShortestPathsTree extends Algorithm{
     @Override
     public void Run() {
 
+        this.result = new Graph(this.G);
         for(Graph.GraphNode currentNode : this.G.V)
         {
             this.result.createNodeWithCoordinates(currentNode.xPosition, currentNode.yPosition, currentNode.getNodeLabel());
@@ -48,11 +52,10 @@ public class ShortestPathsTree extends Algorithm{
             if(bfsResult.get(nodeLabel) != null)
             {
                 Graph.GraphNode parent = this.G.VerticeIndexer.get(bfsResult.get(nodeLabel));
-                result.createEdge(parent.getNodeLabel(),nodeLabel,0);
+                DirectedEdge edge = result.createEdge(parent.getNodeLabel(),nodeLabel,0);
+                edge.ChangeColor(Color.RED);
             }
         }
-
-
     }
 
 

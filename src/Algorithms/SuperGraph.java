@@ -65,6 +65,11 @@ public class SuperGraph extends Algorithm{
         }
     }
 
+    public Hashtable<String, Set<String>> getComponents()
+    {
+        return components;
+    }
+
     private String findComponent(String Nodelabel)
     {
         for(String componentKey : components.keySet())
