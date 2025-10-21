@@ -52,7 +52,7 @@ public class GraphSerializer {
                     }
                     ArrayList<ArrowEdge> list = new ArrayList<>(g.E);
                     for (ArrowEdge edge : list) {
-                        g.createEdge(edge.getFrom().getNodeLabel(), edge.getTo().getNodeLabel(),0);
+                        g.createEdge(edge.getFrom().getNodeLabel(), edge.getTo().getNodeLabel(), edge.getWeight());
                     }
 
                     return g;

@@ -117,7 +117,7 @@ public class Graph implements Serializable {
             if(fromNode == null || toNode == null)
                 throw new InvalidEdgeException();
 
-            ArrowEdge edge = new ArrowEdge(fromNode, toNode,this.isDirected,0);
+            ArrowEdge edge = new ArrowEdge(fromNode, toNode,this.isDirected,weight);
 
             // Add edge to nodes
             fromNode.neighborsList.add(toNode);
@@ -138,6 +138,7 @@ public class Graph implements Serializable {
             if(toRemove != null) E.remove(toRemove);
             E.add(edge);
 
+            edge.setWeight(weight);
             Tooltip edgeTooltip = new Tooltip("Weight: " + weight);
             Tooltip.install(edge.getShaft(), edgeTooltip);
 
@@ -239,7 +240,6 @@ public class Graph implements Serializable {
 
         public GraphNode(GraphNode other) {
             this.nodeLabel = other.nodeLabel;
-
 
             this.circle = null;
             this.label = null;

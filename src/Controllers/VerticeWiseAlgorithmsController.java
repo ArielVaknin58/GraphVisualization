@@ -1,9 +1,6 @@
 package Controllers;
 
-import Algorithms.Algorithm;
-import Algorithms.BFS;
-import Algorithms.DFS;
-import Algorithms.ShortestPathsTree;
+import Algorithms.*;
 import Exceptions.InvalidAlgorithmInputException;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.CurrentlyPressedNodeHelper;
@@ -28,10 +25,6 @@ public class VerticeWiseAlgorithmsController extends Controller{
     @FXML
     private AnchorPane VerticeAlgorithmsPane;
     @FXML
-    private Button BFSButton;
-    @FXML
-    private Button DFSButton;
-    @FXML
     private Label verticeLabel;
     @FXML
     private Label inDegree;
@@ -42,7 +35,13 @@ public class VerticeWiseAlgorithmsController extends Controller{
     @FXML
     private Label inLabel;
     @FXML
+    private Button BFSButton;
+    @FXML
+    private Button DFSButton;
+    @FXML
     private Button shortestPathsButton;
+    @FXML
+    private Button bellmanFordButton;
 
     private Graph.GraphNode currentNode;
 
@@ -52,6 +51,7 @@ public class VerticeWiseAlgorithmsController extends Controller{
         BFSButton.setTooltip(new Tooltip(BFS.AlgorithmDescription));
         DFSButton.setTooltip(new Tooltip(DFS.AlgorithmDescription));
         shortestPathsButton.setTooltip(new Tooltip(ShortestPathsTree.AlgorithmDescription));
+        bellmanFordButton.setTooltip(new Tooltip(BellmanFordAlgorithm.AlgorithmDescription));
         currentNode = CurrentlyPressedNodeHelper.getCurrentNode();
     }
 
@@ -98,5 +98,10 @@ public class VerticeWiseAlgorithmsController extends Controller{
     public void OnShortestPathsTreeClick()
     {
         run(new ShortestPathsTree(new Graph(ControllerManager.getGraphInputController().getGraph()), currentNode));
+    }
+
+    public void OnLightestPathsClick()
+    {
+        run(new BellmanFordAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()), currentNode));
     }
 }

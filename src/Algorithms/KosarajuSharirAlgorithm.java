@@ -74,7 +74,7 @@ public class KosarajuSharirAlgorithm extends Algorithm{
             Stage popupStage = new Stage();
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
             popupStage.getIcons().add(icon);
-            popupStage.setTitle("Algorithm Results");
+            popupStage.setTitle(this.AlgorithmName+" results :");
 
             ObservableList<ResultPair<String,String>> data = FXCollections.observableArrayList();
 

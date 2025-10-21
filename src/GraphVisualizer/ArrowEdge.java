@@ -26,20 +26,6 @@ public class ArrowEdge implements Serializable {
         createEdge(isDirected);
     }
 
-    public void reinitializeTransientFields(boolean isDirected) {
-        // Ensure nodes are ready. They must be re-linked by loadGraph *before* this is called.
-        if (this.from == null || this.to == null || this.from.getCircle() == null || this.to.getCircle() == null) {
-            // Ideally, use your LoggerManager here
-            System.err.println("Error: Cannot re-initialize edge. 'from' or 'to' nodes are not ready.");
-            return;
-        }
-
-        // Re-create the main group
-        this.edgeGroup = new Group();
-
-        // Call the existing private method to rebuild the JavaFX parts
-        createEdge(isDirected);
-    }
 
     public boolean isShaftNull()
     {
@@ -49,6 +35,7 @@ public class ArrowEdge implements Serializable {
     public ArrowEdge(ArrowEdge other) {
         this.from = other.from;
         this.to = other.to;
+        this.weight = other.getWeight();
 
         this.shaft = null;
         this.arrowHead = null;
@@ -60,6 +47,10 @@ public class ArrowEdge implements Serializable {
         return this.weight;
     }
 
+    public void setWeight(int weight)
+    {
+        this.weight = weight;
+    }
     public Graph.GraphNode getFrom()
     {
         return from;

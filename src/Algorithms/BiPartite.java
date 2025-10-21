@@ -102,7 +102,7 @@ public class BiPartite extends Algorithm{
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
             resultStage.getIcons().add(icon);
             resultStage.initModality(Modality.APPLICATION_MODAL);
-            resultStage.setTitle("Graph result");
+            resultStage.setTitle(this.AlgorithmName+" results :");
 
             resultStage.setScene(scene);
             resultStage.show();

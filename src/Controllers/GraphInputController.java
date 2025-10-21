@@ -196,8 +196,11 @@ public class GraphInputController extends Controller{
             String weightInput = weightField.getText();
             int weight = 0;
             if(!weightInput.isEmpty())
+            {
                 weight = Integer.parseInt(weightInput);
-
+                if(weight < 0 || weight > 100000)
+                    throw new InvalidEdgeException();
+            }
 
             if(intFrom.equals(intTo))
                 throw new LoopException();
