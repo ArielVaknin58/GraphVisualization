@@ -125,4 +125,7 @@ public class BFS extends Algorithm{
         }
 
     }
+
+    @Override
+    public void CreateOutputGraph() {}
 }

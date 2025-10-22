@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -21,9 +22,9 @@ public class GraphResultController extends Controller{
 
     @FXML
     private AnchorPane graphOutputContainer;
-
     @FXML
     private Button saveResultButton;
+
 
     private Graph graph;
     @FXML

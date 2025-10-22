@@ -125,6 +125,9 @@ public class BellmanFordAlgorithm extends Algorithm{
 
     }
 
+    @Override
+    public void CreateOutputGraph() {}
+
     private boolean relax(Graph.GraphNode source, Graph.GraphNode dest, DirectedEdge edge)
     {
         int sourceWeight = weightedPaths.get(source);

@@ -166,6 +166,9 @@ public class FloydWarshallAlgorithm extends Algorithm{
         }
     }
 
+    @Override
+    public void CreateOutputGraph() {}
+
     private ObservableList<ObservableList<String>> createMatrix(List<Graph.GraphNode> orderedNodes)
     {
         ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();

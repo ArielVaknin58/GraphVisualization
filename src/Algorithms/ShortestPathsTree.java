@@ -21,8 +21,7 @@ public class ShortestPathsTree extends Algorithm{
 
     public static final String AlgorithmDescription = "The algorithm returns a tree that presents all the shortest paths from vertice s in graph G to all the vertices";
     private Graph.GraphNode inputNode;
-    private Graph result;
-
+    private HashMap<String,String> bfsResult;
 
     public ShortestPathsTree(Graph graph, Graph.GraphNode node)
     {
@@ -30,32 +29,17 @@ public class ShortestPathsTree extends Algorithm{
         this.inputNode = node;
         this.AlgorithmName = "Shortest Paths Algorithm";
         this.requiredInput = "A graph G and a vertice v from G.";
-        result = new Graph(false);
+        this.bfsResult = new HashMap<>();
     }
 
 
     @Override
     public void Run() {
 
-        this.result = new Graph(this.G);
-        for(Graph.GraphNode currentNode : this.G.V)
-        {
-            this.result.createNodeWithCoordinates(currentNode.xPosition, currentNode.yPosition, currentNode.getNodeLabel());
-        }
-
         BFS bfs = new BFS(G,inputNode);
         bfs.Run();
-        HashMap<String,String> bfsResult = bfs.getParents();
+        bfsResult = bfs.getParents();
 
-        for(String nodeLabel : bfsResult.keySet())
-        {
-            if(bfsResult.get(nodeLabel) != null)
-            {
-                Graph.GraphNode parent = this.G.VerticeIndexer.get(bfsResult.get(nodeLabel));
-                DirectedEdge edge = result.createEdge(parent.getNodeLabel(),nodeLabel,0);
-                edge.ChangeColor(Color.RED);
-            }
-        }
     }
 
 
@@ -67,26 +51,25 @@ public class ShortestPathsTree extends Algorithm{
 
     @Override
     public void DisplayResults() {
-        try
+        loadResultsPane();
+    }
+
+    @Override
+    public void CreateOutputGraph() {
+        this.graphResult = new Graph(this.G);
+        for(Graph.GraphNode currentNode : this.G.V)
         {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Graph_results_location));
-            Scene scene = new Scene(loader.load());
-            ThemeManager.getThemeManager().AddScene(scene);
-            GraphResultController controller = loader.getController();
-            controller.displayGraph(this.result);
-
-            Stage resultStage = new Stage();
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
-            resultStage.getIcons().add(icon);
-            resultStage.initModality(Modality.APPLICATION_MODAL);
-            resultStage.setTitle(this.AlgorithmName+" results :");
-
-            resultStage.setScene(scene);
-            resultStage.show();
+            this.graphResult.createNodeWithCoordinates(currentNode.xPosition, currentNode.yPosition, currentNode.getNodeLabel());
         }
-        catch (Exception e)
+
+        for(String nodeLabel : bfsResult.keySet())
         {
-            Controller.AlertError(e);
+            if(bfsResult.get(nodeLabel) != null)
+            {
+                Graph.GraphNode parent = this.G.VerticeIndexer.get(bfsResult.get(nodeLabel));
+                DirectedEdge edge = graphResult.createEdge(parent.getNodeLabel(),nodeLabel,0);
+                edge.ChangeColor(Color.RED);
+            }
         }
     }
 }

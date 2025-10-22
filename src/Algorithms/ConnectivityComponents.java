@@ -1,8 +1,11 @@
 package Algorithms;
 
+import Controllers.Controller;
 import Controllers.ControllerManager;
+import Controllers.GraphResultController;
 import Controllers.ResultsPaneController;
 import GraphVisualizer.AppSettings;
+import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.collections.FXCollections;
@@ -11,13 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static Controllers.Controller.AlertError;
 
@@ -26,7 +28,6 @@ public class ConnectivityComponents extends Algorithm{
 
     public static final String AlgorithmDescription = "An algorithm that finds Connectivity components in an undirected graph.";
     private Hashtable<String,String> result;
-
 
     public ConnectivityComponents(Graph G)
     {
@@ -38,9 +39,40 @@ public class ConnectivityComponents extends Algorithm{
 
     @Override
     public void Run() {
+        if(G.V.isEmpty())
+            return;
         DFS dfs = new DFS(G,null);
         result = dfs.FindConnectivityComponents();
 
+    }
+
+    public void CreateOutputGraph()
+    {
+        Hashtable<String, Set<String>> components = new Hashtable<>();
+        for(String Hvertice : result.keySet())
+        {
+            components.put(Hvertice, new HashSet<>(Arrays.asList(result.get(Hvertice).split(","))));
+        }
+        List<Color> colors = KosarajuSharirAlgorithm.generateColors(components.size());
+        this.graphResult = new Graph(this.G);
+        int componentNumber = 0;
+        for(String componentIndex : components.keySet())
+        {
+            Set<String> verticesLabels = components.get(componentIndex);
+            for(String verticeLabel : verticesLabels)
+            {
+                Graph.GraphNode node = graphResult.VerticeIndexer.get(verticeLabel);
+                node.ChangeColor(colors.get(componentNumber));
+            }
+
+            for(DirectedEdge edge : graphResult.E)
+            {
+                if(verticesLabels.contains(edge.getFrom().getNodeLabel()) && verticesLabels.contains(edge.getTo().getNodeLabel()))
+                    edge.ChangeColor(colors.get(componentNumber));
+            }
+
+            componentNumber++;
+        }
     }
 
     @Override
@@ -50,36 +82,7 @@ public class ConnectivityComponents extends Algorithm{
 
     @Override
     public void DisplayResults() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Results_Popup_location));
-            AnchorPane resultsPane = loader.load();
-            ResultsPaneController controller = loader.getController();
-            controller.getResultsLabel().setText("Connectivity components for the graph are :");
-            controller.getNodeCol().setText("Node index");
-            controller.getValueCol().setText("Connectivity Component");
-            Stage popupStage = new Stage();
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
-            popupStage.getIcons().add(icon);
-            popupStage.setTitle(this.AlgorithmName+" results :");
-
-            ObservableList<ResultPair<String,String>> data = FXCollections.observableArrayList();
-
-            for (Map.Entry<String, String> entry : result.entrySet()) {
-                data.add(new ResultPair<String,String>(entry.getKey(), entry.getValue()));
-            }
-
-            ControllerManager.getResultsPaneController().getResultsTable().setItems(data);
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-
-            Scene scene = new Scene(resultsPane);
-            popupStage.setScene(scene);
-            ThemeManager.getThemeManager().AddScene(scene);
-
-            popupStage.show();
-
-        }catch (IOException e)
-        {
-            AlertError(e);
-        }
+        loadResultsPane();
     }
+
 }

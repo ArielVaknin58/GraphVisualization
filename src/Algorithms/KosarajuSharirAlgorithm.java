@@ -26,7 +26,6 @@ public class KosarajuSharirAlgorithm extends Algorithm{
 
     public static final String AlgorithmDescription = "The algorithm find strongly connected components in a given directed graph.";
     private Hashtable<String,String> result;
-    private Graph graphResult;
 
     public KosarajuSharirAlgorithm(Graph graph)
     {
@@ -55,10 +54,12 @@ public class KosarajuSharirAlgorithm extends Algorithm{
 
     }
 
-    private void CreateOutputGraph()
+    @Override
+    public void CreateOutputGraph()
     {
         SuperGraph sg = new SuperGraph(this.G);
         sg.Run();
+        sg.CreateOutputGraph();
         Hashtable<String,Set<String>> components = sg.getComponents();
         List<Color> colors = generateColors(components.size());
         this.graphResult = new Graph(this.G);
@@ -87,38 +88,17 @@ public class KosarajuSharirAlgorithm extends Algorithm{
         return this.G.isDirected();
     }
 
+    @Override
+    public void DisplayResults() {
+        loadResultsPane();
+    }
+
     public Hashtable<String,String> getResult()
     {
         return result;
     }
 
-    @Override
-    public void DisplayResults() {
-        try
-        {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Graph_results_location));
-            Scene scene = new Scene(loader.load());
-            ThemeManager.getThemeManager().AddScene(scene);
-            GraphResultController controller = loader.getController();
-            CreateOutputGraph();
-            controller.displayGraph(this.graphResult);
-
-            Stage resultStage = new Stage();
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
-            resultStage.getIcons().add(icon);
-            //resultStage.initModality(Modality.APPLICATION_MODAL);
-            resultStage.setTitle(this.AlgorithmName+" results :");
-
-            resultStage.setScene(scene);
-            resultStage.show();
-        }
-        catch (Exception e)
-        {
-            Controller.AlertError(e);
-        }
-    }
-
-    public List<Color> generateColors(int n) {
+    public static List<Color> generateColors(int n) {
         List<Color> colors = new ArrayList<>();
         if (n <= 0) {
             return colors;

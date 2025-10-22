@@ -1,15 +1,25 @@
 package Algorithms;
 
+import Controllers.Controller;
 import Controllers.ControllerManager;
+import Controllers.GraphResultController;
+import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
+import GraphVisualizer.ThemeManager;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class TopologicalSort extends Algorithm {
 
     private List<Graph.GraphNode> result;
-
     public static final String AlgorithmDescription = "A topological sort is a linear ordering of vertices in a directed acyclic graph (DAG), where for every directed edge from vertex u to vertex v, u comes before v in the ordering.";
 
     public TopologicalSort(Graph G)
@@ -62,6 +72,7 @@ public class TopologicalSort extends Algorithm {
         return true;
     }
 
+
     public List<Graph.GraphNode> getResult()
     {
         return result;
@@ -82,20 +93,23 @@ public class TopologicalSort extends Algorithm {
         {
             ControllerManager.getGraphWiseAlgorithmsController().infoPopup("The graph doesn't have a topological sort.");
         }
-        else {
-            StringBuilder print = new StringBuilder("The Topological Sort is: \n");
-            Iterator<Graph.GraphNode> it = result.iterator();
-            while (it.hasNext()) {
-                Graph.GraphNode current = it.next();
-                print.append(current.getNodeLabel());
-                if (it.hasNext()) {
-                    print.append(" --> ");
-                }
-            }
+        loadResultsPane();
+    }
 
-            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup(print.toString());
+    @Override
+    public void CreateOutputGraph() {
+        this.graphResult = new Graph(true);
+        for(Graph.GraphNode node : this.result)
+        {
+            this.graphResult.createNode(node.getNodeLabel());
         }
 
+        for(int i = 0; i < result.size() - 1 ; i++)
+        {
+            Graph.GraphNode current = result.get(i);
+            Graph.GraphNode next = result.get(i+1);
+            this.graphResult.createEdge(current.getNodeLabel(), next.getNodeLabel(),0);
+        }
     }
 
 

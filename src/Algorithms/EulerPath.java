@@ -133,4 +133,7 @@ public class EulerPath extends Algorithm{
         }
 
     }
+
+    @Override
+    public void CreateOutputGraph() {}
 }

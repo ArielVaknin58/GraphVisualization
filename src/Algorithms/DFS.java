@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.util.*;
 
@@ -267,6 +268,9 @@ public class DFS extends Algorithm{
     {
         ThemeManager.getThemeManager().switchTheme(ThemeManager.getThemeManager().getCurrentTheme());
     }
+
+    @Override
+    public void CreateOutputGraph() {}
 
     private void DisplayColorizedResultsGraph(Pane pane)
     {

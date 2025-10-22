@@ -11,10 +11,24 @@
   <component name="ChangeListManager">
     <list default="true" id="37a3260c-e9a7-416e-aca4-76b50415fc74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/Algorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/BellmanFordAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BellmanFordAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/BiPartite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BiPartite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/ConnectivityComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/ConnectivityComponents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/DFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/DFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/EulerCircuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/EulerCircuit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/EulerPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/EulerPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/FloydWarshallAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/FloydWarshallAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/HamiltonianPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/HamiltonianPath.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/KosarajuSharirAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/KosarajuSharirAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/PrimAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/PrimAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/ShortestPathsTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/ShortestPathsTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/SuperGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/SuperGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/GraphResultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphResultController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/GraphResultPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/GraphResultPane.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +46,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ArielVaknin58"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ArielVaknin58/GraphVisualization.git",
+    "accountId": "8230652d-b5c5-45a6-b0f6-486fda600eff"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -41,21 +67,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.GraphVisualizer.GraphVisualizer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GraphVisualizer.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;current&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ariel/IdeaProjects/GraphVisualizer/src&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GraphVisualizer.GraphVisualizer.executor": "Run",
+    "Application.GraphVisualizer.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "current",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Ariel/IdeaProjects/GraphVisualizer",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="GraphVisualizer.GraphVisualizer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GraphVisualizer.GraphVisualizer" />
@@ -71,6 +103,14 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -79,7 +119,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1759753692096</updated>
+      <workItem from="1761158663371" duration="6781000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

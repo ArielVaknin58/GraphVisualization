@@ -20,7 +20,6 @@ import java.util.Objects;
 public class BiPartite extends Algorithm{
 
     public static final String AlgorithmDescription = "This algorithm returns a division of graph G into 2 cut (U,V), where every edge - if exists - crosses one to the other.";
-    private Graph result;
     private boolean isBipartite;
     private HashMap<String,Integer> bfsRESULT;
 
@@ -29,7 +28,6 @@ public class BiPartite extends Algorithm{
         this.G = graph;
         this.requiredInput = "Undirected, fully connected graph.";
         this.AlgorithmName = "Bipartite graph algorithm";
-        this.result = new Graph(false);
         this.isBipartite = false;
         this.bfsRESULT = new HashMap<>();
     }
@@ -49,25 +47,9 @@ public class BiPartite extends Algorithm{
         }
 
         isBipartite = true;
-        BuildBipartiteColoredGraph();
 
     }
 
-    private void BuildBipartiteColoredGraph()
-    {
-        this.result = new Graph(this.G);
-        for(Graph.GraphNode node : result.V)
-        {
-            if(bfsRESULT.get(node.getNodeLabel()) % 2 == 0)
-            {
-                node.ChangeColor(Color.RED);
-            }
-            else
-            {
-                node.ChangeColor(Color.BLUEVIOLET);
-            }
-        }
-    }
 
     @Override
     public Boolean checkValidity()
@@ -88,28 +70,23 @@ public class BiPartite extends Algorithm{
             ControllerManager.getGraphInputController().infoPopup("The given graph isn't bipartite.");
             return;
         }
+        loadResultsPane();
+    }
 
-        try
+    @Override
+    public void CreateOutputGraph()
+    {
+        this.graphResult = new Graph(this.G);
+        for(Graph.GraphNode node : graphResult.V)
         {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Graph_results_location));
-            Scene scene = new Scene(loader.load());
-            ThemeManager.getThemeManager().AddScene(scene);
-            BuildBipartiteColoredGraph();
-            GraphResultController controller = loader.getController();
-            controller.displayGraph(this.result);
-
-            Stage resultStage = new Stage();
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
-            resultStage.getIcons().add(icon);
-            resultStage.initModality(Modality.APPLICATION_MODAL);
-            resultStage.setTitle(this.AlgorithmName+" results :");
-
-            resultStage.setScene(scene);
-            resultStage.show();
-        }
-        catch (Exception e)
-        {
-            Controller.AlertError(e);
+            if(bfsRESULT.get(node.getNodeLabel()) % 2 == 0)
+            {
+                node.ChangeColor(Color.RED);
+            }
+            else
+            {
+                node.ChangeColor(Color.BLUEVIOLET);
+            }
         }
     }
 }

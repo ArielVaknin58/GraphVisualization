@@ -23,15 +23,14 @@ public class PrimAlgorithm extends Algorithm {
     public static final String AlgorithmDescription = "The algorithm finds minimal spanning tree in a given undirected graph.";
     private HashMap<Graph.GraphNode,Boolean> isInTree;
     private HashMap<Graph.GraphNode,Integer> weightsToConnect;
-    private HashMap<Graph.GraphNode, Graph.GraphNode> parents;
-    private Graph result;
+    private HashMap<Graph.GraphNode, Graph.GraphNode> parents;;
 
     public PrimAlgorithm(Graph graph)
     {
         this.G = graph;
         this.AlgorithmName = "Prim's Algorithm";
         this.requiredInput = "A weighted, undirected and fully connected graph";
-        this.result = new Graph(false);
+        this.graphResult = new Graph(false);
         init();
     }
 
@@ -83,23 +82,6 @@ public class PrimAlgorithm extends Algorithm {
             }
         }
 
-        BuildMinSpanningTree();
-
-    }
-
-    private void BuildMinSpanningTree()
-    {
-        this.result = new Graph(this.G);
-        for(Graph.GraphNode node : parents.keySet())
-        {
-            Graph.GraphNode parent = parents.get(node);
-            if(parent != null)
-            {
-                DirectedEdge edge = result.createEdge(parent.getNodeLabel(),node.getNodeLabel(),0);
-                edge.ChangeColor(Color.RED);
-            }
-        }
-
     }
 
     private boolean relax(Graph.GraphNode source, Graph.GraphNode dest, DirectedEdge edge)
@@ -131,26 +113,20 @@ public class PrimAlgorithm extends Algorithm {
 
     @Override
     public void DisplayResults() {
-        try
-        {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Graph_results_location));
-            Scene scene = new Scene(loader.load());
-            ThemeManager.getThemeManager().AddScene(scene);
-            GraphResultController controller = loader.getController();
-            controller.displayGraph(this.result);
+        loadResultsPane();
+    }
 
-            Stage resultStage = new Stage();
-            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
-            resultStage.getIcons().add(icon);
-            //resultStage.initModality(Modality.APPLICATION_MODAL);
-            resultStage.setTitle(this.AlgorithmName+" results :");
-
-            resultStage.setScene(scene);
-            resultStage.show();
-        }
-        catch (Exception e)
+    @Override
+    public void CreateOutputGraph() {
+        this.graphResult = new Graph(this.G);
+        for(Graph.GraphNode node : parents.keySet())
         {
-            Controller.AlertError(e);
+            Graph.GraphNode parent = parents.get(node);
+            if(parent != null)
+            {
+                DirectedEdge edge = graphResult.createEdge(parent.getNodeLabel(),node.getNodeLabel(),0);
+                edge.ChangeColor(Color.RED);
+            }
         }
     }
 }
