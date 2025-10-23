@@ -11,24 +11,32 @@
   <component name="ChangeListManager">
     <list default="true" id="37a3260c-e9a7-416e-aca4-76b50415fc74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/Algorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serializations/3components6.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serializations/HamiltonPath6dir.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serializations/spanningTree8.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serializations/topoSort5.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/BFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BFS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/BellmanFordAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BellmanFordAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/BiPartite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/BiPartite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/ConnectivityComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/ConnectivityComponents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/DFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/DFS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/EulerCircuit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/EulerCircuit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/EulerPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/EulerPath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/FloydWarshallAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/FloydWarshallAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/HamiltonianPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/HamiltonianPath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithms/KosarajuSharirAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/KosarajuSharirAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithms/MinCutAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/MinCutAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/PrimAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/PrimAlgorithm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/ShortestPathsTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/ShortestPathsTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/SuperGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/SuperGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithms/TopologicalSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controllers/GraphResultController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphResultController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/ControllerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/ControllerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/GraphInputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/GraphInputController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controllers/VerticeWiseAlgorithmsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controllers/VerticeWiseAlgorithmsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/InvalidEdgeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/InvalidEdgeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/AppSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/DirectedEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/DirectedEdge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphVisualizer/GraphVisualizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/GraphResultPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/GraphResultPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/AlgorithmsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/AlgorithmsPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/GraphInput.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/GraphInput.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/VerticeAlgorithmsPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/VerticeAlgorithmsPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/styles/GreenTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/GreenTheme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/styles/MagentaTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/MagentaTheme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/styles/RedTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/styles/RedTheme.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,18 +54,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ArielVaknin58"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ArielVaknin58&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ArielVaknin58/GraphVisualization.git",
-    "accountId": "8230652d-b5c5-45a6-b0f6-486fda600eff"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ArielVaknin58/GraphVisualization.git&quot;,
+    &quot;accountId&quot;: &quot;8230652d-b5c5-45a6-b0f6-486fda600eff&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -74,6 +82,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "current",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Ariel/IdeaProjects/GraphVisualizer",
     "node.js.detected.package.eslint": "true",
@@ -119,11 +128,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1759753692096</updated>
-      <workItem from="1761158663371" duration="6781000" />
+      <workItem from="1761158663371" duration="9031000" />
+      <workItem from="1761216967660" duration="20464000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Controllers/VerticeWiseAlgorithmsController.java</url>
+          <line>119</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

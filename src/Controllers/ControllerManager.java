@@ -14,6 +14,16 @@ public class ControllerManager {
 
     private static GraphResultController graphResultController;
 
+    private static MaxFlowPopupController maxFlowPopupController;
+
+    public static void setMaxFlowPopupController(MaxFlowPopupController maxFlowPopupController) {
+        ControllerManager.maxFlowPopupController = maxFlowPopupController;
+    }
+
+    public static MaxFlowPopupController getMaxFlowPopupController() {
+        return maxFlowPopupController;
+    }
+
     public static GraphResultController getGraphResultController() {
         return graphResultController;
     }

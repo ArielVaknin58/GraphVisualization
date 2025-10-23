@@ -7,4 +7,5 @@ public class InvalidEdgeException extends Exception{
         return "one of the vertices doesn't exist";
     }
 
+
 }

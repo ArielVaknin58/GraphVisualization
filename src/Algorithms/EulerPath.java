@@ -53,10 +53,10 @@ public class EulerPath extends Algorithm{
             Graph.GraphNode dummyNode = copyG.VerticeIndexer.get(dummyNodeLabel);
 
             // 2. Connect the odd vertices to the new vertex
-            copyG.createEdge(oddVertice1.getNodeLabel(), dummyNodeLabel,0);
-            copyG.createEdge(dummyNodeLabel, oddVertice1.getNodeLabel(),0);
-            copyG.createEdge(oddVertice2.getNodeLabel(), dummyNodeLabel,0);
-            copyG.createEdge(dummyNodeLabel, oddVertice2.getNodeLabel(),0);
+            copyG.createEdge(oddVertice1.getNodeLabel(), dummyNodeLabel);
+            copyG.createEdge(dummyNodeLabel, oddVertice1.getNodeLabel());
+            copyG.createEdge(oddVertice2.getNodeLabel(), dummyNodeLabel);
+            copyG.createEdge(dummyNodeLabel, oddVertice2.getNodeLabel());
 
             // 3. Find the Euler Circuit on the MODIFIED graph
             EulerCircuit eulerCircuit = new EulerCircuit(copyG);

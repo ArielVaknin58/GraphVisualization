@@ -124,7 +124,7 @@ public class PrimAlgorithm extends Algorithm {
             Graph.GraphNode parent = parents.get(node);
             if(parent != null)
             {
-                DirectedEdge edge = graphResult.createEdge(parent.getNodeLabel(),node.getNodeLabel(),0);
+                DirectedEdge edge = graphResult.createEdge(parent.getNodeLabel(),node.getNodeLabel());
                 edge.ChangeColor(Color.RED);
             }
         }

@@ -6,7 +6,7 @@
 
 
 .button {
-    -fx-background-color: #c61a37;   /* A greenish color */
+    -fx-background-color: #a5162eff;   /* A greenish color */
     -fx-text-fill: white;            /* White text */
     -fx-background-radius: 5px;      /* Rounded corners */
     -fx-border-radius: 5px;

@@ -14,6 +14,8 @@ import java.util.Objects;
 // 1 flows ?
 // 2 implement verification algorithms for NP-hard problems. the user inserts a number of runs the algorithm will guess imput and return the result.
 // 3 optimization algorithms ?
+// 4 quick build special graphs - full graph, tree, etc
+
 public class GraphVisualizer extends Application {
 
     public static void main(String[] args) {

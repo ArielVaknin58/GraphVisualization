@@ -12,19 +12,44 @@ public class DirectedEdge implements Serializable,Comparable {
     private Graph.GraphNode from;
     private Graph.GraphNode to;
     private int weight;
+    private int flow;
+    private int capacity;
     private transient Line shaft;
     private transient Polygon arrowHead;
     private transient Group edgeGroup;  // Holds the shaft + arrowhead
 
 
-    public DirectedEdge(Graph.GraphNode from, Graph.GraphNode to, boolean isDirected, int weight) {
+    public DirectedEdge(Graph.GraphNode from, Graph.GraphNode to, boolean isDirected, int weight, int flow, int capacity) {
         this.from = from;
         this.to = to;
         this.weight = weight;
+        this.flow = flow;
+        this.capacity = capacity;
         edgeGroup = new Group();
         createEdge(isDirected);
     }
 
+    public DirectedEdge(Graph.GraphNode from, Graph.GraphNode to, boolean isDirected)
+    {
+        this(from,to,isDirected,0,0,0);
+    }
+
+    public DirectedEdge(Graph.GraphNode from, Graph.GraphNode to, boolean isDirected, int weight)
+    {
+        this(from,to,isDirected,weight,0,0);
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getFlow() {
+        return flow;
+    }
+
+    public void setFlow(int flow) {
+        this.flow = flow;
+    }
 
     public boolean isShaftNull()
     {

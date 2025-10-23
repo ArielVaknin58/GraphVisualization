@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import GraphVisualizer.Graph;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class VerticeWiseAlgorithmsController extends Controller{
@@ -42,6 +44,8 @@ public class VerticeWiseAlgorithmsController extends Controller{
     private Button shortestPathsButton;
     @FXML
     private Button bellmanFordButton;
+    @FXML
+    private Button maxflowButton;
 
     private Graph.GraphNode currentNode;
 
@@ -52,6 +56,7 @@ public class VerticeWiseAlgorithmsController extends Controller{
         DFSButton.setTooltip(new Tooltip(DFS.AlgorithmDescription));
         shortestPathsButton.setTooltip(new Tooltip(ShortestPathsTree.AlgorithmDescription));
         bellmanFordButton.setTooltip(new Tooltip(BellmanFordAlgorithm.AlgorithmDescription));
+        maxflowButton.setTooltip(new Tooltip(FordFelkersonAlgorithm.AlgorithmDescription));
         currentNode = CurrentlyPressedNodeHelper.getCurrentNode();
     }
 
@@ -85,23 +90,55 @@ public class VerticeWiseAlgorithmsController extends Controller{
         algorithm.Run();
         algorithm.DisplayResults();
     }
-    public void OnBFSClick()
+
+    @FXML
+    private void OnBFSClick()
     {
         run(new BFS(new Graph(ControllerManager.getGraphInputController().getGraph()), currentNode));
     }
 
-    public void OnDFSClick()
+    @FXML
+    private void OnDFSClick()
     {
         run(new DFS((ControllerManager.getGraphInputController().getGraph()), currentNode));
     }
-
-    public void OnShortestPathsTreeClick()
+    @FXML
+    private void OnShortestPathsTreeClick()
     {
         run(new ShortestPathsTree(new Graph(ControllerManager.getGraphInputController().getGraph()), currentNode));
     }
-
-    public void OnLightestPathsClick()
+    @FXML
+    private void OnLightestPathsClick()
     {
         run(new BellmanFordAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()), currentNode));
     }
+
+    @FXML
+    private void OnfordFelkersonClicked()
+    {
+        try {
+            FXMLLoader saveGraphLoader = new FXMLLoader(getClass().getResource(AppSettings.Max_Flow_Popup_Location));
+            AnchorPane saveGraphPane = saveGraphLoader.load();
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Enter Destination vertice");
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
+            popupStage.getIcons().add(icon);
+
+            Scene popupScene = new Scene(saveGraphPane);
+            popupStage.setScene(popupScene);
+            ThemeManager.getThemeManager().AddScene(popupScene);
+            popupStage.showAndWait();
+        }
+        catch (IOException e) {
+            AlertError(e);
+        }
+    }
+
+    public void runFordFelkerson(Graph.GraphNode destination)
+    {
+        run(new FordFelkersonAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()), currentNode,destination));
+    }
+
 }

@@ -108,7 +108,7 @@ public class TopologicalSort extends Algorithm {
         {
             Graph.GraphNode current = result.get(i);
             Graph.GraphNode next = result.get(i+1);
-            this.graphResult.createEdge(current.getNodeLabel(), next.getNodeLabel(),0);
+            this.graphResult.createEdge(current.getNodeLabel(), next.getNodeLabel());
         }
     }
 

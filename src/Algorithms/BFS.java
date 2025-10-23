@@ -3,6 +3,7 @@ package Algorithms;
 import Controllers.ControllerManager;
 import Controllers.ResultsPaneController;
 import GraphVisualizer.AppSettings;
+import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.collections.FXCollections;

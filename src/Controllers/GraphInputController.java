@@ -1,10 +1,6 @@
 package Controllers;
 
-import Algorithms.ConnectivityComponents;
-import Exceptions.InvalidAlgorithmInputException;
-import Exceptions.InvalidEdgeException;
-import Exceptions.InvalidGraphSizeException;
-import Exceptions.LoopException;
+import Exceptions.*;
 import GraphVisualizer.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -53,6 +49,8 @@ public class GraphInputController extends Controller{
     private TextField weightField;
     @FXML
     private Label weightLabel;
+    @FXML
+    private TextField capacityField;
 
     private int vertexCount = 0;
     private Graph G = new Graph(true);
@@ -204,15 +202,25 @@ public class GraphInputController extends Controller{
             if(!weightInput.isEmpty())
             {
                 weight = Integer.parseInt(weightInput);
-                if(weight < -100000 || weight > 100000)
+                if(weight < -AppSettings.MAX_WEIGHT || weight > AppSettings.MAX_WEIGHT)
                     throw new InvalidEdgeException();
+            }
+
+            String capacity = capacityField.getText();
+            int capacityAmount = 0;
+            if (!capacity.isEmpty())
+            {
+                capacityAmount = Integer.parseInt(capacity);
+                if(capacityAmount < 0)
+                    throw new InvalidCapacityException();
+
             }
 
             if(intFrom.equals(intTo))
                 throw new LoopException();
-            G.createEdge(intFrom.toString(),intTo.toString(),weight);
+            G.createEdge(intFrom.toString(),intTo.toString(),weight,0,capacityAmount);
             if(!G.isDirected())
-                G.createEdge(intTo.toString(),intFrom.toString(),weight);
+                G.createEdge(intTo.toString(),intFrom.toString(),weight,0,capacityAmount);
 
             displayGraph(G);
         }
@@ -220,7 +228,7 @@ public class GraphInputController extends Controller{
         {
             AlertError(new Exception("input is not a valid edge syntax"));
         }
-        catch (InvalidEdgeException | LoopException e)
+        catch (InvalidEdgeException | LoopException | InvalidCapacityException e)
         {
             AlertError(e);
         }

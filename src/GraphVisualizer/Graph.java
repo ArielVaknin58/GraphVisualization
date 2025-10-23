@@ -32,10 +32,6 @@ public class Graph implements Serializable {
         this.isDirected = isDirected;
     }
 
-    public void setDirected(boolean directed) {
-        isDirected = directed;
-    }
-
     public boolean isDirected() {
         return isDirected;
     }
@@ -52,7 +48,7 @@ public class Graph implements Serializable {
             }
             for(DirectedEdge oldEdge : other.E)
             {
-                this.createEdge(oldEdge.getFrom().getNodeLabel(),oldEdge.getTo().getNodeLabel(),oldEdge.getWeight());
+                this.createEdge(oldEdge.getFrom().getNodeLabel(),oldEdge.getTo().getNodeLabel(),oldEdge.getWeight(), oldEdge.getFlow(), oldEdge.getCapacity());
             }
         }catch (NullPointerException e)
         {
@@ -74,7 +70,7 @@ public class Graph implements Serializable {
         }
         for(DirectedEdge edge : this.E)
         {
-            transpose.createEdge(edge.getTo().getNodeLabel(),edge.getFrom().getNodeLabel(), edge.getWeight());
+            transpose.createEdge(edge.getTo().getNodeLabel(),edge.getFrom().getNodeLabel(), edge.getWeight(), edge.getFlow(), edge.getCapacity());
         }
 
         return transpose;
@@ -109,14 +105,35 @@ public class Graph implements Serializable {
         VerticeIndexer.put(label, node);
     }
 
-    public DirectedEdge createEdge(String fromLabel, String toLabel,int weight) {
+    public DirectedEdge createEdge(String fromLabel, String toLabel)
+    {
+        return this.createEdge(fromLabel,toLabel,0,0,0);
+    }
+
+    public void removeEdge(String fromLabel, String toLabel)
+    {
+
+        GraphNode fromNode = VerticeIndexer.get(fromLabel);
+        GraphNode toNode = VerticeIndexer.get(toLabel);
+
+        DirectedEdge edge = new DirectedEdge(fromNode,toNode,this.isDirected());
+
+        fromNode.neighborsList.remove(toNode);
+        fromNode.connectedEdges.remove(edge);
+        toNode.inDegree--;
+        fromNode.outDegree--;
+
+
+    }
+
+    public DirectedEdge createEdge(String fromLabel, String toLabel,int weight, int flow, int capacity) {
         try{
             GraphNode fromNode = VerticeIndexer.get(fromLabel);
             GraphNode toNode = VerticeIndexer.get(toLabel);
             if(fromNode == null || toNode == null)
                 throw new InvalidEdgeException();
 
-            DirectedEdge edge = new DirectedEdge(fromNode, toNode,this.isDirected,weight);
+            DirectedEdge edge = new DirectedEdge(fromNode, toNode,this.isDirected,weight,flow,capacity);
 
             // Add edge to nodes
             fromNode.neighborsList.add(toNode);
@@ -138,7 +155,7 @@ public class Graph implements Serializable {
             E.add(edge);
 
             edge.setWeight(weight);
-            Tooltip edgeTooltip = new Tooltip("Weight: " + weight);
+            Tooltip edgeTooltip = new Tooltip("Weight: " + weight + ", Flow : "+flow+", Capacity : "+capacity);
             Tooltip.install(edge.getShaft(), edgeTooltip);
 
 
@@ -256,6 +273,11 @@ public class Graph implements Serializable {
             if(obj.getClass().equals(this.getClass()))
                 return this.getNodeLabel().equals(((GraphNode) obj).nodeLabel);
             return false;
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(nodeLabel);
         }
 
         public DirectedEdge getneighborEdge(GraphNode node)

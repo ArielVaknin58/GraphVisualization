@@ -67,7 +67,7 @@ public class ShortestPathsTree extends Algorithm{
             if(bfsResult.get(nodeLabel) != null)
             {
                 Graph.GraphNode parent = this.G.VerticeIndexer.get(bfsResult.get(nodeLabel));
-                DirectedEdge edge = graphResult.createEdge(parent.getNodeLabel(),nodeLabel,0);
+                DirectedEdge edge = graphResult.createEdge(parent.getNodeLabel(),nodeLabel);
                 edge.ChangeColor(Color.RED);
             }
         }

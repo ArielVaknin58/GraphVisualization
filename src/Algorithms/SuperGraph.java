@@ -81,7 +81,7 @@ public class SuperGraph extends Algorithm{
             assert fromComponent != null;
             if(!fromComponent.equals(toComponent))
             {
-                this.graphResult.createEdge(fromComponent,toComponent,0);
+                this.graphResult.createEdge(fromComponent,toComponent);
             }
 
         }

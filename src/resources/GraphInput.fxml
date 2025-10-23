@@ -9,14 +9,14 @@
 
     <children>
         <!-- ScrollPane on the left side, fills available space -->
-        <ScrollPane fx:id="scrollPane" prefHeight="600.0" prefWidth="700.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="207.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="scrollPane" prefHeight="637.0" prefWidth="680.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="222.0" AnchorPane.topAnchor="0.0">
             <content>
                 <AnchorPane fx:id="graphContainer" minHeight="0.0" minWidth="0.0" prefHeight="730.0" prefWidth="849.0" />
             </content>
         </ScrollPane>
 
         <!-- GridPane on the right side -->
-        <GridPane fx:id="controlPanel" prefWidth="200.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <GridPane fx:id="controlPanel" prefHeight="637.0" prefWidth="216.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
             </columnConstraints>
@@ -42,7 +42,6 @@
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
                         <TextField fx:id="edgeEndField" prefWidth="40" />
-                        <Button fx:id="addButton" onAction="#onAddEdge" prefHeight="25.0" prefWidth="53.0" text="Add" />
                     </children>
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
@@ -63,7 +62,7 @@
                      </HBox.margin></ComboBox>
                </children>
             </HBox>
-            <Pane fx:id="algoPlaceholder" prefHeight="250.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="9" />
+            <Pane fx:id="algoPlaceholder" prefHeight="345.0" prefWidth="207.0" styleClass="InnerComponents" GridPane.rowIndex="10" />
             <AnchorPane prefHeight="49.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="saveGraph" layoutX="8.0" layoutY="33.0" mnemonicParsing="false" onAction="#onSaveGraph" text="Save Graph" />
@@ -76,12 +75,22 @@
                   <CheckBox fx:id="DirectedCheckbox" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="141.0" selected="true" text="Directed" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="20.0" prefWidth="200.0" GridPane.rowIndex="7">
+            <AnchorPane prefHeight="24.0" prefWidth="216.0" GridPane.rowIndex="7">
                <children>
-                  <Label fx:id="weightLabel" layoutX="8.0" layoutY="8.0" prefHeight="17.0" prefWidth="50.0" text="weight :" />
-                  <TextField fx:id="weightField" layoutX="60.0" layoutY="6.0" prefWidth="50.0" />
+                  <Label fx:id="weightLabel" layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="50.0" text="weight :" />
+                  <TextField fx:id="weightField" layoutX="64.0" layoutY="2.0" prefHeight="17.0" prefWidth="50.0" />
+                        <Button fx:id="addButton" layoutX="137.0" layoutY="2.0" onAction="#onAddEdge" prefHeight="25.0" prefWidth="53.0" text="Add" />
                </children>
             </AnchorPane>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="216.0" spacing="10.0" GridPane.rowIndex="8">
+               <children>
+                  <Label text="Capacity :" />
+                  <TextField fx:id="capacityField" prefHeight="25.0" prefWidth="60.0" promptText="capacity" />
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </GridPane.margin>
+            </HBox>
             </children>
          <rowConstraints>
             <RowConstraints maxHeight="132.0" minHeight="19.0" prefHeight="40.0" />
@@ -92,7 +101,8 @@
             <RowConstraints maxHeight="381.0" minHeight="11.0" prefHeight="22.0" />
             <RowConstraints maxHeight="482.0" minHeight="26.0" prefHeight="36.0" />
             <RowConstraints maxHeight="145.0" minHeight="18.0" prefHeight="31.0" />
-            <RowConstraints maxHeight="145.0" minHeight="11.0" prefHeight="17.0" />
+            <RowConstraints maxHeight="145.0" minHeight="11.0" prefHeight="27.0" />
+            <RowConstraints maxHeight="145.0" minHeight="11.0" prefHeight="16.0" />
              <RowConstraints minHeight="124.0" prefHeight="346.0" vgrow="ALWAYS" />
          </rowConstraints>
         </GridPane>

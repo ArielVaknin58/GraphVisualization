@@ -8,6 +8,7 @@ public class AppSettings {
     public static int EdgeWidth = 4;
     public static final double ARROW_SIZE = 10;
     public static final int MAX_VERTICES = 15;
+    public static final int MAX_WEIGHT = 1000000;
 
     public static final String App_Title = "GraphVisualizer";
     public static final String SUCCESS_ICON_LOCATION = "/resources/GreenV.png";
@@ -21,6 +22,7 @@ public class AppSettings {
     public static final String Results_Popup_location = "/resources/results.fxml";
     public static final String DFS_style_css_location = "/resources/styles/DFSStyle.css";
     public static final String Graph_results_location = "/resources/GraphResultPane.fxml";
+    public static final String Max_Flow_Popup_Location = "/resources/maxFlowPopup.fxml";
     public static final String Graph_node_css_class = "graph-node";
     public static final String node_label_css_class = "node-label";
 

@@ -5,7 +5,7 @@
 }
 
 .button {
-    -fx-background-color: #b820b8; /* Slightly darker magenta for buttons */
+    -fx-background-color: #961a96ff; /* Slightly darker magenta for buttons */
     -fx-text-fill: white;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
