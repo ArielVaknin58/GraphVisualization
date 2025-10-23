@@ -31,12 +31,12 @@ public class DirectedEdge implements Serializable,Comparable {
 
     public DirectedEdge(Graph.GraphNode from, Graph.GraphNode to, boolean isDirected)
     {
-        this(from,to,isDirected,0,0,0);
+        this(from,to,isDirected,0,0,1);
     }
 
     public DirectedEdge(Graph.GraphNode from, Graph.GraphNode to, boolean isDirected, int weight)
     {
-        this(from,to,isDirected,weight,0,0);
+        this(from,to,isDirected,weight,0,1);
     }
 
     public int getCapacity() {

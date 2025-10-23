@@ -44,6 +44,15 @@ public class FordFelkersonAlgorithm extends Algorithm{
         }
     }
 
+    public Map<Graph.GraphNode, Map<Graph.GraphNode, DirectedEdge>> getAdjMap()
+    {
+        return adjMap;
+    }
+
+    public Graph getGraph()
+    {
+        return G;
+    }
     @Override
     public void Run() {
         init();

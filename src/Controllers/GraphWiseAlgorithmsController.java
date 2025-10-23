@@ -34,6 +34,8 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button FloydWarshallButton;
     @FXML
     private Button mstButton;
+    @FXML
+    private Button mincutButton;
 
 
     public void initialize()
@@ -48,6 +50,7 @@ public class GraphWiseAlgorithmsController extends Controller{
         superGraphButton.setTooltip(new Tooltip(SuperGraph.AlgorithmDescription));
         bipartiteButton.setTooltip(new Tooltip(BiPartite.AlgorithmDescription));
         FloydWarshallButton.setTooltip(new Tooltip(FloydWarshallAlgorithm.AlgorithmDescription));
+        mincutButton.setTooltip(new Tooltip(MinCutAlgorithm.AlgorithmDescription));
         mstButton.setTooltip(new Tooltip(PrimAlgorithm.AlgorithmDescription));
     }
 
@@ -113,6 +116,11 @@ public class GraphWiseAlgorithmsController extends Controller{
     public void onmstButtonClicked()
     {
         run(new PrimAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
+    }
+
+    public void OnMinCutClicked()
+    {
+        run(new MinCutAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 }
 
