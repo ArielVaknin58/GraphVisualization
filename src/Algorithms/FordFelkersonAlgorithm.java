@@ -23,15 +23,8 @@ public class FordFelkersonAlgorithm extends Algorithm{
         this.t = t;
         this.AlgorithmName = "Ford-Felkerson Algorithm";
         this.requiredInput = "A directed graph G, and vertices s and t from G";
+        this.adjMap = this.G.getAdjacencyMap();
 
-        // Build an adjacency map for quick edge lookup from this.G
-        this.adjMap = new HashMap<>();
-        for (Graph.GraphNode node : this.G.V) {
-            adjMap.put(node, new HashMap<>());
-        }
-        for (DirectedEdge edge : this.G.E) {
-            adjMap.get(edge.getFrom()).put(edge.getTo(), edge);
-        }
 
     }
 
@@ -44,10 +37,6 @@ public class FordFelkersonAlgorithm extends Algorithm{
         }
     }
 
-    public Map<Graph.GraphNode, Map<Graph.GraphNode, DirectedEdge>> getAdjMap()
-    {
-        return adjMap;
-    }
 
     public Graph getGraph()
     {

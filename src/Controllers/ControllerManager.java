@@ -16,6 +16,16 @@ public class ControllerManager {
 
     private static MaxFlowPopupController maxFlowPopupController;
 
+    private static NDPopupController ndPopupController;
+
+    public static NDPopupController getNdPopupController() {
+        return ndPopupController;
+    }
+
+    public static void setNdPopupController(NDPopupController ndPopupController) {
+        ControllerManager.ndPopupController = ndPopupController;
+    }
+
     public static void setMaxFlowPopupController(MaxFlowPopupController maxFlowPopupController) {
         ControllerManager.maxFlowPopupController = maxFlowPopupController;
     }

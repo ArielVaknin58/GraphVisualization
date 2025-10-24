@@ -11,7 +11,7 @@ import java.util.Objects;
 
 
 //TO DO:
-// 1 flows ?
+// 1
 // 2 implement verification algorithms for NP-hard problems. the user inserts a number of runs the algorithm will guess imput and return the result.
 // 3 optimization algorithms ?
 // 4 quick build special graphs - full graph, tree, etc

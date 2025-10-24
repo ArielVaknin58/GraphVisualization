@@ -24,6 +24,8 @@ public class GraphResultController extends Controller{
     private AnchorPane graphOutputContainer;
     @FXML
     private Button saveResultButton;
+    @FXML
+    private Label stateNDLabel;
 
 
     private Graph graph;
@@ -38,6 +40,10 @@ public class GraphResultController extends Controller{
         Group group = new Group();
         graph.addGraphToGroup(group);
         graphOutputContainer.getChildren().add(group);
+    }
+
+    public Label getStateNDLabel() {
+        return stateNDLabel;
     }
 
     @FXML

@@ -20,6 +20,7 @@
             <Button fx:id="connectivityButton" mnemonicParsing="false" onAction="#OnConnectivityClicked" prefHeight="25.0" prefWidth="160.0" text="Connectivity Components" />
             <Button fx:id="bipartiteButton" mnemonicParsing="false" onAction="#OnBipartiteClicked" prefHeight="25.0" prefWidth="160.0" text="Bipartite Division" />
             <Button fx:id="mstButton" mnemonicParsing="false" onAction="#onmstButtonClicked" prefHeight="25.0" prefWidth="160.0" text="Minimum Spanning Tree" />
+            <Button fx:id="isButton" alignment="CENTER" mnemonicParsing="false" onAction="#OnISClicked" prefWidth="160.0" text="Independent Set Algorithm" />
             <Label alignment="CENTER" prefWidth="160.0" text="- Both -" />
             <Button fx:id="eulerCircuitButton" mnemonicParsing="false" onAction="#OnEulerCircuitClick" prefHeight="25.0" prefWidth="160.0" text="Euler's Circuit" />
          </children>

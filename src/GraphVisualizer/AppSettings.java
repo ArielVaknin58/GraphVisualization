@@ -23,6 +23,7 @@ public class AppSettings {
     public static final String DFS_style_css_location = "/resources/styles/DFSStyle.css";
     public static final String Graph_results_location = "/resources/GraphResultPane.fxml";
     public static final String Max_Flow_Popup_Location = "/resources/maxFlowPopup.fxml";
+    public static final String ND_Popup_Location = "/resources/NDpopup.fxml";
     public static final String Graph_node_css_class = "graph-node";
     public static final String node_label_css_class = "node-label";
 

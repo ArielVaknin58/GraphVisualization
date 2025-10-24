@@ -2,12 +2,24 @@ package Controllers;
 
 import Algorithms.*;
 import Exceptions.InvalidAlgorithmInputException;
+import GraphVisualizer.AppSettings;
+import GraphVisualizer.ThemeManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import GraphVisualizer.Graph;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
+import java.util.function.BiConsumer;
 
 
 public class GraphWiseAlgorithmsController extends Controller{
@@ -36,6 +48,8 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button mstButton;
     @FXML
     private Button mincutButton;
+    @FXML
+    private Button isButton;
 
 
     public void initialize()
@@ -52,6 +66,7 @@ public class GraphWiseAlgorithmsController extends Controller{
         FloydWarshallButton.setTooltip(new Tooltip(FloydWarshallAlgorithm.AlgorithmDescription));
         mincutButton.setTooltip(new Tooltip(MinCutAlgorithm.AlgorithmDescription));
         mstButton.setTooltip(new Tooltip(PrimAlgorithm.AlgorithmDescription));
+        isButton.setTooltip(new Tooltip(IndependentSetAlgorithm.AlgorithmDescription));
     }
 
     private void run(Algorithm algorithm)
@@ -121,6 +136,46 @@ public class GraphWiseAlgorithmsController extends Controller{
     public void OnMinCutClicked()
     {
         run(new MinCutAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
+    }
+
+    public void OnISClicked()
+    {
+        LoadNDController("size of independent set :",this::runIS);
+    }
+
+    public void runIS(int iterations,int k)
+    {
+        run(new IndependentSetAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()),iterations,k));
+    }
+
+    private void LoadNDController(String kDesctiption, BiConsumer<Integer, Integer> methodToUse)
+    {
+        try
+        {
+            if(ControllerManager.getNdPopupController() == null)
+            {
+                FXMLLoader NDLoader = new FXMLLoader(getClass().getResource(AppSettings.ND_Popup_Location));
+                Pane NDPopupPane = NDLoader.load();
+                NDPopupController controller = NDLoader.getController();
+                ControllerManager.setNdPopupController(controller);
+                controller.setMethod(methodToUse);
+
+                Stage popupStage = new Stage();
+                popupStage.setTitle("Non-Deterministic Decision");
+                popupStage.initModality(Modality.APPLICATION_MODAL);
+                javafx.scene.image.Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
+                popupStage.getIcons().add(icon);
+                controller.getKLabel().setText(kDesctiption);
+
+                Scene popupScene = new Scene(NDPopupPane);
+                popupStage.setScene(popupScene);
+                ThemeManager.getThemeManager().AddScene(popupScene);
+                popupStage.showAndWait();
+            }
+
+        } catch (Exception e) {
+            AlertError(e);
+        }
     }
 }
 

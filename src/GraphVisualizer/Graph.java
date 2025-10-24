@@ -10,10 +10,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Graph implements Serializable {
 
@@ -21,6 +18,7 @@ public class Graph implements Serializable {
 
     public final ArrayList<GraphNode> V = new ArrayList<>();
     public final Hashtable<String, GraphNode> VerticeIndexer = new Hashtable<>();
+    private final Map<Graph.GraphNode, Map<GraphNode, DirectedEdge>> adjacencyMap = new Hashtable<>();
     public final ArrayList<DirectedEdge> E = new ArrayList<>();
     private boolean isDirected = true;
 
@@ -58,6 +56,9 @@ public class Graph implements Serializable {
 
     }
 
+    public Map<Graph.GraphNode, Map<GraphNode, DirectedEdge>> getAdjacencyMap() {
+        return adjacencyMap;
+    }
     public Graph Transpose()
     {
         if(!this.isDirected) return this;
@@ -89,6 +90,7 @@ public class Graph implements Serializable {
         }
         V.add(node);
         VerticeIndexer.put(label, node);
+        this.adjacencyMap.put(node, new HashMap<>());
         return node;
     }
 
@@ -102,6 +104,7 @@ public class Graph implements Serializable {
             V.remove(oldNode);
         }
         V.add(node);
+        this.adjacencyMap.put(node, new HashMap<>());
         VerticeIndexer.put(label, node);
     }
 
@@ -154,6 +157,7 @@ public class Graph implements Serializable {
             if(toRemove != null) E.remove(toRemove);
             E.add(edge);
 
+            adjacencyMap.get(edge.getFrom()).put(edge.getTo(), edge);
             edge.setWeight(weight);
             Tooltip edgeTooltip = new Tooltip("Weight: " + weight + ", Flow : "+flow+", Capacity : "+capacity);
             Tooltip.install(edge.getShaft(), edgeTooltip);

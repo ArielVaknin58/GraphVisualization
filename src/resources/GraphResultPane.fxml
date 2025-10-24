@@ -8,12 +8,19 @@
 
         <ScrollPane AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <AnchorPane fx:id="graphOutputContainer" minHeight="600.0" minWidth="700.0" />
+                <AnchorPane fx:id="graphOutputContainer" minHeight="600.0" minWidth="700.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="524.0" layoutY="445.0" prefHeight="17.0" prefWidth="95.0" text="Save Graph ?" />
+               </children></AnchorPane>
             </content>
         </ScrollPane>
-
-        <Button fx:id="saveResultButton" layoutX="370.0" mnemonicParsing="false" onAction="#onSaveGraph" prefHeight="25.0" prefWidth="95.0" text="Save Result" AnchorPane.bottomAnchor="14.0" />
+      <VBox layoutX="370.0" layoutY="438.0" AnchorPane.bottomAnchor="14.0">
+         <children>
+      
+              <Button fx:id="saveResultButton" mnemonicParsing="false" onAction="#onSaveGraph" prefHeight="25.0" prefWidth="95.0" text="Save Result" />
+         </children>
+      </VBox>
         <Label alignment="CENTER" layoutX="216.0" prefHeight="17.0" prefWidth="95.0" text="Save Graph ?" AnchorPane.bottomAnchor="18.0" />
-
+        <Label fx:id="stateNDLabel" alignment="CENTER" layoutX="527.0" prefHeight="25.0" prefWidth="161.0" AnchorPane.bottomAnchor="14.0" />
     </children>
 </AnchorPane>
