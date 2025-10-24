@@ -50,6 +50,12 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button mincutButton;
     @FXML
     private Button isButton;
+    @FXML
+    private Button vertexCoverButton;
+    @FXML
+    private Button maxCutButton;
+    @FXML
+    private Button CliqueButton;
 
 
     public void initialize()
@@ -67,6 +73,9 @@ public class GraphWiseAlgorithmsController extends Controller{
         mincutButton.setTooltip(new Tooltip(MinCutAlgorithm.AlgorithmDescription));
         mstButton.setTooltip(new Tooltip(PrimAlgorithm.AlgorithmDescription));
         isButton.setTooltip(new Tooltip(IndependentSetAlgorithm.AlgorithmDescription));
+        vertexCoverButton.setTooltip(new Tooltip(VertexCover.AlgorithmDescription));
+        maxCutButton.setTooltip(new Tooltip(MaxCut.AlgorithmDescription));
+        CliqueButton.setTooltip(new Tooltip(Clique.AlgorithmDescription));
     }
 
     private void run(Algorithm algorithm)
@@ -148,12 +157,39 @@ public class GraphWiseAlgorithmsController extends Controller{
         run(new IndependentSetAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()),iterations,k));
     }
 
+    public void OnVertexCoverClicked()
+    {
+        LoadNDController("size of vertex cover :",this::runVertexCover);
+    }
+
+    public void runVertexCover(int iterations,int k)
+    {
+        run(new VertexCover(new Graph(ControllerManager.getGraphInputController().getGraph()),iterations,k));
+    }
+
+    public void OnMaxCutClicked()
+    {
+        LoadNDController("size of cut :",this::runMaxCut);
+    }
+
+    public void runMaxCut(int iterations,int k)
+    {
+        run(new MaxCut(new Graph(ControllerManager.getGraphInputController().getGraph()),iterations,k));
+    }
+
+    public void OnClique()
+    {
+        LoadNDController("size of clique set :",this::runClique);
+    }
+
+    public void runClique(int iterations,int k)
+    {
+        run(new Clique(new Graph(ControllerManager.getGraphInputController().getGraph()),iterations,k));
+    }
     private void LoadNDController(String kDesctiption, BiConsumer<Integer, Integer> methodToUse)
     {
         try
         {
-            if(ControllerManager.getNdPopupController() == null)
-            {
                 FXMLLoader NDLoader = new FXMLLoader(getClass().getResource(AppSettings.ND_Popup_Location));
                 Pane NDPopupPane = NDLoader.load();
                 NDPopupController controller = NDLoader.getController();
@@ -171,7 +207,6 @@ public class GraphWiseAlgorithmsController extends Controller{
                 popupStage.setScene(popupScene);
                 ThemeManager.getThemeManager().AddScene(popupScene);
                 popupStage.showAndWait();
-            }
 
         } catch (Exception e) {
             AlertError(e);

@@ -3,28 +3,26 @@ package Algorithms;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import javafx.scene.paint.Color;
-import java.util.*;
 
-public class IndependentSetAlgorithm extends NonDeterministicAlgorithm{
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
-    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has an independent set of size k.";
+public class MaxCut extends NonDeterministicAlgorithm{
 
-    public IndependentSetAlgorithm(Graph g, int iterations,int k)
+    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a cut of size k.";
+
+    public MaxCut(Graph g, int iterations, int k)
     {
-        super(g, iterations, k);
-        this.AlgorithmName = "Non-Deterministic Independent Set Algorithm";
+        super(g,iterations,k);
+        this.AlgorithmName = "Non-Deterministic Max-Cut Algorithm";
         this.requiredInput = "undirected graph";
     }
+
     @Override
     public void Run() {
 
-        if(this.G.V.isEmpty())
-        {
-            isSetFound = true;
-            return;
-        }
         currentSet = init();
-        isSetFound = checkIfIndependentSet(currentSet);
 
     }
 
@@ -32,32 +30,15 @@ public class IndependentSetAlgorithm extends NonDeterministicAlgorithm{
     {
         Set<Graph.GraphNode> nodes = new HashSet<>();
         Random rand = new Random();
+        int size = rand.nextInt(1,this.G.V.size()+1);
 
-        while(nodes.size() < setSize)
+        while(nodes.size() < size)
         {
             int index = rand.nextInt(1,this.G.V.size()+1);
             nodes.add(this.G.VerticeIndexer.get(Integer.toString(index)));
         }
 
         return nodes;
-    }
-
-    public boolean getIsSetFound() {
-        return isSetFound;
-    }
-
-    public Set<Graph.GraphNode> getCurrentSet() {
-        return currentSet;
-    }
-
-    private boolean checkIfIndependentSet(Set<Graph.GraphNode> kset) {
-        for (DirectedEdge edge : this.G.E)
-        {
-            if (kset.contains(edge.getFrom()) && kset.contains(edge.getTo())) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override
@@ -79,24 +60,24 @@ public class IndependentSetAlgorithm extends NonDeterministicAlgorithm{
             return;
         }
 
-        // Color the nodes
         for(Graph.GraphNode node : currentSet) {
             Graph.GraphNode copyNode = this.graphResult.VerticeIndexer.get(node.getNodeLabel());
             if (copyNode != null) {
-                copyNode.ChangeColor(isSetFound ? Color.LIMEGREEN : Color.PINK); // Green if found, Pink if not
+                copyNode.ChangeColor(Color.LIMEGREEN);
             }
         }
 
-        if(isSetFound) return; // If found, don't color edges
-
-        // If not found, find and color bad edges
+        int counter = 0;
         for (DirectedEdge edge : this.G.E) {
-            if (currentSet.contains(edge.getFrom()) && currentSet.contains(edge.getTo())) {
-                // Get the *copy* of the edge from the new graph
+            if (currentSet.contains(edge.getFrom()) && !currentSet.contains(edge.getTo())  || (!currentSet.contains(edge.getFrom()) && currentSet.contains(edge.getTo())))
+            {
+                counter++;
                 DirectedEdge edgeCopy = this.graphResult.getAdjacencyMap().get(edge.getFrom()).get(edge.getTo());
                 if (edgeCopy != null) {
                     edgeCopy.ChangeColor(Color.RED);
                 }
+                if(counter == 2*setSize)
+                    isSetFound = true;
             }
         }
     }

@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,7 +24,17 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
     protected Set<Graph.GraphNode> currentSet;
     protected boolean isSetFound;
     protected Timeline timeline;
+    protected int counter = 1;
 
+
+    NonDeterministicAlgorithm(Graph g, int iterations, int k)
+    {
+        this.G = g;
+        this.iterations = iterations;
+        this.setSize = k;
+        this.isSetFound = false;
+        this.currentSet = new HashSet<>();
+    }
     protected void LoadAndRun()
     {
         try {
@@ -42,7 +53,7 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
             resultStage.setTitle(this.AlgorithmName + " results :");
             resultStage.setScene(scene);
             resultStage.show();
-            controller.getStateNDLabel().setText("Looking...");
+            controller.getStateNDLabel().setText("Looking... "+counter+"/"+iterations);
             // --- USE A TIMELINE FOR THE ANIMATION ---
 
             // Stop any previous timeline
@@ -63,6 +74,8 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
                     return;
                 }
 
+                counter++;
+                controller.getStateNDLabel().setText("Looking... "+counter+"/"+iterations);
                 Run();
                 CreateOutputGraph();
                 controller.displayGraph(this.graphResult);

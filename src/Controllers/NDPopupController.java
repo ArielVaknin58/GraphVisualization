@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
 import java.util.function.BiConsumer;
 
 public class NDPopupController extends Controller{
@@ -54,8 +56,14 @@ public class NDPopupController extends Controller{
 
             int iteration = Integer.parseInt(iterations);
             int k = Integer.parseInt(K);
+            if(iteration <= 0 || (k < 0 || k > ControllerManager.getGraphInputController().getGraph().V.size()))
+            {
+                AlertError(new Exception("Please enter a valid iteration/k values."));
+                return;
+            }
 
-            NDPopupPane.getScene().getWindow().hide();
+            Stage stage = (Stage) NDPopupPane.getScene().getWindow();
+            stage.close();
             method.accept(iteration,k);
 
         }catch (NumberFormatException e) {
