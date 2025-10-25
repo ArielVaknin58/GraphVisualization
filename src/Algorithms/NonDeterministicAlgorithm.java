@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

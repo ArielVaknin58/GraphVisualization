@@ -24,6 +24,7 @@
             <Button fx:id="vertexCoverButton" alignment="CENTER" mnemonicParsing="false" onAction="#OnVertexCoverClicked" prefWidth="160.0" text="Vertex Cover Algorithm" />
             <Button fx:id="maxCutButton" alignment="CENTER" mnemonicParsing="false" onAction="#OnMaxCutClicked" prefWidth="160.0" text="Max-Cut" />
             <Button fx:id="CliqueButton" alignment="CENTER" layoutX="23.0" layoutY="494.0" mnemonicParsing="false" onAction="#OnClique" prefWidth="160.0" text="Clique" />
+            <Button fx:id="kColorsButton" alignment="CENTER" layoutX="23.0" layoutY="529.0" mnemonicParsing="false" onAction="#OnkColorsClicked" prefWidth="160.0" text="K-Colors" />
             <Label alignment="CENTER" prefWidth="160.0" text="- Both -" />
             <Button fx:id="eulerCircuitButton" mnemonicParsing="false" onAction="#OnEulerCircuitClick" prefHeight="25.0" prefWidth="160.0" text="Euler's Circuit" />
          </children>

@@ -22,9 +22,6 @@ public class Graph implements Serializable {
     public final ArrayList<DirectedEdge> E = new ArrayList<>();
     private boolean isDirected = true;
 
-
-
-    // ------------------- Graph Methods -------------------
     public Graph(boolean isDirected)
     {
         this.isDirected = isDirected;

@@ -113,6 +113,7 @@ public class GraphInputController extends Controller{
             }
         });
 
+        DirectedCheckbox.setSelected(false);
         DirectedCheckbox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
             enterButton.setDisable(false);
             graphContainer.getChildren().clear();

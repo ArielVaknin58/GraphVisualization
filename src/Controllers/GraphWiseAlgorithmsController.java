@@ -56,11 +56,18 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button maxCutButton;
     @FXML
     private Button CliqueButton;
+    @FXML
+    private Button kColorsButton;
 
 
     public void initialize()
     {
         ControllerManager.setGraphWiseAlgorithmsController(this);
+        initTooltips();
+    }
+
+    private void initTooltips()
+    {
         TopologicalSortButton.setTooltip(new Tooltip(TopologicalSort.AlgorithmDescription));
         eulerCircuitButton.setTooltip(new Tooltip(EulerCircuit.AlgorithmDescription));
         hamiltonButton.setTooltip(new Tooltip(HamiltonianPath.AlgorithmDescription));
@@ -76,6 +83,7 @@ public class GraphWiseAlgorithmsController extends Controller{
         vertexCoverButton.setTooltip(new Tooltip(VertexCover.AlgorithmDescription));
         maxCutButton.setTooltip(new Tooltip(MaxCut.AlgorithmDescription));
         CliqueButton.setTooltip(new Tooltip(Clique.AlgorithmDescription));
+        kColorsButton.setTooltip(new Tooltip(kColors.AlgorithmDescription));
     }
 
     private void run(Algorithm algorithm)
@@ -185,6 +193,16 @@ public class GraphWiseAlgorithmsController extends Controller{
     public void runClique(int iterations,int k)
     {
         run(new Clique(new Graph(ControllerManager.getGraphInputController().getGraph()),iterations,k));
+    }
+
+    public void OnkColorsClicked()
+    {
+        LoadNDController("number of different colors :",this::runkColors);
+    }
+
+    public void runkColors(int iterations,int k)
+    {
+        run(new kColors(new Graph(ControllerManager.getGraphInputController().getGraph()),iterations,k));
     }
     private void LoadNDController(String kDesctiption, BiConsumer<Integer, Integer> methodToUse)
     {

@@ -1,23 +1,9 @@
 package Algorithms;
 
-import Controllers.Controller;
-import Controllers.ControllerManager;
-import Controllers.GraphResultController;
-import Controllers.ResultsPaneController;
-import GraphVisualizer.AppSettings;
+
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
-import GraphVisualizer.ThemeManager;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import java.io.IOException;
 import java.util.*;
 
 import static Controllers.Controller.AlertError;

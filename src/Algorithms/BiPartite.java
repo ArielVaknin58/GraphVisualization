@@ -62,6 +62,13 @@ public class BiPartite extends Algorithm{
         return !this.G.isDirected() && dfs.isConnected();
     }
 
+    public Graph getResultsGraph()
+    {
+        if(isBipartite)
+            return this.graphResult;
+        return null;
+    }
+
     @Override
     public void DisplayResults()
     {
