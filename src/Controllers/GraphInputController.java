@@ -58,6 +58,7 @@ public class GraphInputController extends Controller{
     private ContextMenu graphPaneContextMenu;
     private ContextMenuEvent currentContextMenuEvent;
     private ContextMenu verticeContextMenu;
+    private ContextMenu edgeContextMenu;
 
     private int vertexCount = 0;
     private Graph G = new Graph(true);
@@ -155,14 +156,15 @@ public class GraphInputController extends Controller{
                 {
                     verticeContextMenu.hide();
                 }
+                if(edgeContextMenu != null && edgeContextMenu.isShowing())
+                {
+                    edgeContextMenu.hide();
+                }
                 if (event.getTarget() == graphContainer) {
                     System.out.println("Primary click on container background - Deselecting node.");
 
-                    //CurrentlyPressedNodeHelper.setCurrentNode(null);
-                    // Add any UI update logic needed after deselection here
                 }
             }
-            // Hide context menu if it's showing
 
         });
     }
@@ -342,23 +344,32 @@ public class GraphInputController extends Controller{
 
     public void showEdgeContextMenu(DirectedEdge edge, ContextMenuEvent event) {
         // Create menu items
-        MenuItem deleteItem = new MenuItem("Delete edge "+edge.getFrom().getNodeLabel()+"-->"+edge.getTo().getNodeLabel());
+        edgeContextMenu = new ContextMenu();
+
+        MenuItem deleteItem;
+        if(this.G.isDirected())
+            deleteItem = new MenuItem("Delete edge "+edge.getFrom().getNodeLabel()+"-->"+edge.getTo().getNodeLabel());
+        else
+            deleteItem = new MenuItem("Delete edge between "+edge.getFrom().getNodeLabel()+" and "+edge.getTo().getNodeLabel());
         deleteItem.setOnAction(e -> {
+            if (edgeContextMenu.isShowing()) {
+                edgeContextMenu.hide();
+            }
             if(!this.G.isDirected())
                 this.G.removeEdge(edge.getTo().getNodeLabel(),edge.getFrom().getNodeLabel());
             this.G.removeEdge(edge.getFrom().getNodeLabel(),edge.getTo().getNodeLabel());
             displayGraph(G);
+
         });
 
 
-        ContextMenu contextMenu = new ContextMenu();
-        contextMenu.getItems().addAll(deleteItem);
+        edgeContextMenu.getItems().addAll(deleteItem);
         edge.getEdgeGroup().setOnMouseClicked(event1 -> {
-            if (contextMenu.isShowing()) {
-                contextMenu.hide();
+            if (edgeContextMenu.isShowing()) {
+                edgeContextMenu.hide();
             }
         });
-        contextMenu.show(graphContainer, event.getScreenX(), event.getScreenY());
+        edgeContextMenu.show(graphContainer, event.getScreenX(), event.getScreenY());
     }
 
     private void run(Algorithm algorithm)  {

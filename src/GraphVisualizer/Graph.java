@@ -11,11 +11,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
 public class Graph implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 2L;
 
     public final ArrayList<GraphNode> V = new ArrayList<>();
@@ -163,6 +165,8 @@ public class Graph implements Serializable {
             if(fromNode == null || toNode == null)
                 throw new InvalidEdgeException();
 
+            if(adjacencyMap.get(fromNode).containsKey(toNode))
+                return adjacencyMap.get(fromNode).get(toNode);
             DirectedEdge edge = new DirectedEdge(fromNode, toNode,this.isDirected,weight,flow,capacity);
 
             // Add edge to nodes
@@ -222,20 +226,42 @@ public class Graph implements Serializable {
     public void RemoveVertice(GraphNode node)
     {
         List<DirectedEdge> toRemove = new ArrayList<>();
-        for(DirectedEdge edge : E)
+//        for(DirectedEdge edge : E)
+//        {
+//            if(node.nodeLabel.equals(edge.getFrom().nodeLabel))
+//            {
+//                GraphNode toVertice = edge.getTo();
+//                toRemove.add(edge);
+//                toVertice.inDegree--;
+//                //toVertice.neighborsList.remove(toVertice);
+//            }
+//            else if(node.nodeLabel.equals(edge.getTo().nodeLabel))
+//            {
+//                toRemove.add(edge);
+//                edge.getFrom().outDegree--;
+//            }
+//        }
+        if(this.isDirected())
         {
-            if(node.nodeLabel.equals(edge.getFrom().nodeLabel))
+            for(DirectedEdge edge : node.connectedEdges)
             {
-                toRemove.add(edge);
-                edge.getTo().inDegree--;
-            }
-            else if(node.nodeLabel.equals(edge.getTo().nodeLabel))
-            {
-                toRemove.add(edge);
+                this.adjacencyMap.get(edge.getFrom()).remove(edge.getTo());
                 edge.getFrom().outDegree--;
+                edge.getTo().inDegree--;
+                edge.getFrom().neighborsList.remove(edge.getTo());
             }
         }
-        E.removeAll(toRemove);
+        else
+        {
+            for(DirectedEdge edge : node.connectedEdges)
+            {
+                this.adjacencyMap.get(edge.getFrom()).remove(edge.getTo());
+                edge.getFrom().neighborsList.remove(edge.getTo());
+                edge.getFrom().degree--;
+            }
+        }
+
+        E.removeAll(node.connectedEdges);
         V.remove(node);
         VerticeIndexer.remove(node.nodeLabel);
         availableLabels.add(Integer.parseInt(node.nodeLabel));
@@ -369,6 +395,9 @@ public class Graph implements Serializable {
                 }
             });
 
+            Tooltip tooltip = new Tooltip(this.G.isDirected() ? "inDegree : "+this.inDegree+"\noutDegree :"+this.outDegree : "Degree : "+this.degree);
+            Tooltip.install(nodeObject, tooltip);
+
             nodeObject.setOnContextMenuRequested(event -> {
                 // 'event.consume()' is important! It stops the default
                 // "Save As" menu (from the browser/JavaFX) from appearing.
@@ -383,6 +412,14 @@ public class Graph implements Serializable {
                     // 'this' refers to the GraphNode object
                     controller.showVertexContextMenu(this, event);
                 }
+            });
+
+            nodeObject.setOnMouseEntered(event -> {
+                String tooltipText = this.G.isDirected()
+                        ? "inDegree : " + this.inDegree + "\noutDegree : " + this.outDegree
+                        : "Degree : " + this.degree;
+
+                tooltip.setText(tooltipText);
             });
 
         }
