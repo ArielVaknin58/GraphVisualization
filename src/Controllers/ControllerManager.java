@@ -6,8 +6,6 @@ public class ControllerManager {
 
     private static GraphWiseAlgorithmsController graphWiseAlgorithmsController;
 
-    private static VerticeWiseAlgorithmsController verticeWiseAlgorithmsController;
-
     private static SaveGraphPopupController saveGraphPopupController;
 
     private static ResultsPaneController resultsPaneController;
@@ -74,11 +72,4 @@ public class ControllerManager {
         return graphWiseAlgorithmsController;
     }
 
-    public static VerticeWiseAlgorithmsController getVerticeWiseAlgorithmsController() {
-        return verticeWiseAlgorithmsController;
-    }
-
-    public static void setVerticeWiseAlgorithmsController(VerticeWiseAlgorithmsController verticeWiseAlgorithmsController) {
-        ControllerManager.verticeWiseAlgorithmsController = verticeWiseAlgorithmsController;
-    }
 }

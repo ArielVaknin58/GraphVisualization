@@ -15,11 +15,17 @@ public class MaxFlowPopupController extends Controller{
     @FXML
     private Button enterButton;
 
+    private Graph.GraphNode sourceVertice;
 
     @FXML
     private void initialize()
     {
         ControllerManager.setMaxFlowPopupController(this);
+    }
+
+    public void setSourceVertice(Graph.GraphNode sourceVertice)
+    {
+        this.sourceVertice = sourceVertice;
     }
 
     @FXML
@@ -35,7 +41,7 @@ public class MaxFlowPopupController extends Controller{
                 return;
             }
 
-            ControllerManager.getVerticeWiseAlgorithmsController().runFordFelkerson(destination);
+            ControllerManager.getGraphInputController().runFordFelkerson(sourceVertice,destination);
             popupPane.getScene().getWindow().hide();
         }catch (NumberFormatException e)
         {

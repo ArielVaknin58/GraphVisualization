@@ -58,7 +58,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.GraphVisualizer.GraphVisualizer.executor": "Run",
+    "Application.GraphVisualizer.GraphVisualizer.executor": "Debug",
     "Application.GraphVisualizer.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",

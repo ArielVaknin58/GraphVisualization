@@ -2,6 +2,8 @@ package GraphVisualizer;
 
 
 import Controllers.Controller;
+import Controllers.ControllerManager;
+import Controllers.GraphInputController;
 import Exceptions.InvalidEdgeException;
 import javafx.scene.Group;
 import javafx.scene.control.Tooltip;
@@ -20,6 +22,7 @@ public class Graph implements Serializable {
     public final Hashtable<String, GraphNode> VerticeIndexer = new Hashtable<>();
     private final Map<Graph.GraphNode, Map<GraphNode, DirectedEdge>> adjacencyMap = new Hashtable<>();
     public final ArrayList<DirectedEdge> E = new ArrayList<>();
+    private List<Integer> availableLabels = new ArrayList<>();
     private boolean isDirected = true;
 
     public Graph(boolean isDirected)
@@ -78,20 +81,32 @@ public class Graph implements Serializable {
         Random rand = new Random();
         int x = rand.nextInt(1,14);
         int y = rand.nextInt(1,12);
-        GraphNode node = new GraphNode(50 + 50*x, 50+50*y, label,this);
-        if(VerticeIndexer.containsKey(node.nodeLabel))
-        {
-            GraphNode oldNode = VerticeIndexer.get(node.nodeLabel);
-            VerticeIndexer.remove(node.nodeLabel);
-            V.remove(oldNode);
-        }
-        V.add(node);
-        VerticeIndexer.put(label, node);
-        this.adjacencyMap.put(node, new HashMap<>());
-        return node;
+        //GraphNode node = new GraphNode(50 + 50*x, 50+50*y, label,this);
+//        if(VerticeIndexer.containsKey(node.nodeLabel))
+//        {
+//            GraphNode oldNode = VerticeIndexer.get(node.nodeLabel);
+//            VerticeIndexer.remove(node.nodeLabel);
+//            V.remove(oldNode);
+//        }
+//        V.add(node);
+//        VerticeIndexer.put(label, node);
+//        this.adjacencyMap.put(node, new HashMap<>());
+        return createNodeWithCoordinates(50 + 50*x, 50+50*y,label);
     }
 
-    public void createNodeWithCoordinates(double x, double y, String label)
+    public void createAvailableNode(double x, double y)
+    {
+        if(availableLabels.isEmpty()) {
+            createNodeWithCoordinates(x, y, String.valueOf(this.V.size() + 1));
+            return;
+        }
+        Optional<Integer> label = availableLabels.stream().sorted().findFirst();
+        availableLabels.remove(label.get());
+        createNodeWithCoordinates(x, y, String.valueOf(label.get()));
+
+    }
+
+    public GraphNode createNodeWithCoordinates(double x, double y, String label)
     {
         GraphNode node = new GraphNode(x, y, label,this);
         if(VerticeIndexer.containsKey(node.nodeLabel))
@@ -103,6 +118,7 @@ public class Graph implements Serializable {
         V.add(node);
         this.adjacencyMap.put(node, new HashMap<>());
         VerticeIndexer.put(label, node);
+        return node;
     }
 
     public DirectedEdge createEdge(String fromLabel, String toLabel)
@@ -110,20 +126,34 @@ public class Graph implements Serializable {
         return this.createEdge(fromLabel,toLabel,0,0,0);
     }
 
-    public void removeEdge(String fromLabel, String toLabel)
-    {
-
+    public DirectedEdge removeEdge(String fromLabel, String toLabel) {
         GraphNode fromNode = VerticeIndexer.get(fromLabel);
         GraphNode toNode = VerticeIndexer.get(toLabel);
 
-        DirectedEdge edge = new DirectedEdge(fromNode,toNode,this.isDirected());
+        if (fromNode == null || toNode == null) {
+            return null; // Nodes don't exist
+        }
 
+        DirectedEdge edge = adjacencyMap.get(fromNode).remove(toNode);
+
+        if (edge == null) {
+            return null;
+        }
+
+        E.remove(edge);
         fromNode.neighborsList.remove(toNode);
         fromNode.connectedEdges.remove(edge);
+        toNode.connectedEdges.remove(edge);
+
         toNode.inDegree--;
         fromNode.outDegree--;
+        if (!this.isDirected) {
+            fromNode.degree--;
+            toNode.neighborsList.remove(fromNode);
+            toNode.degree--;
+        }
 
-
+        return edge; // Return the edge so the UI can remove it
     }
 
     public DirectedEdge createEdge(String fromLabel, String toLabel,int weight, int flow, int capacity) {
@@ -173,7 +203,6 @@ public class Graph implements Serializable {
     }
 
     public void addGraphToGroup(Group root) {
-        // Add edges first so nodes appear on top
         for (DirectedEdge edge : E) {
             root.getChildren().add(edge.getEdgeGroup());
         }
@@ -209,6 +238,7 @@ public class Graph implements Serializable {
         E.removeAll(toRemove);
         V.remove(node);
         VerticeIndexer.remove(node.nodeLabel);
+        availableLabels.add(Integer.parseInt(node.nodeLabel));
     }
 
 
@@ -303,7 +333,6 @@ public class Graph implements Serializable {
         private void initNodeEvents() {
             circle.setFocusTraversable(true);
             circle.setOnMouseClicked(event -> {
-                CurrentlyPressedNodeHelper.setCurrentNode(this);
                 System.out.println("Clicked node " + nodeLabel);
                 LoggerManager.Logger().fine("Clicked node " + nodeLabel);
 
@@ -337,6 +366,22 @@ public class Graph implements Serializable {
                 for (DirectedEdge edge : connectedEdges) {
                     if (!edge.isShaftNull())
                         edge.updatePosition(this.G.isDirected);
+                }
+            });
+
+            nodeObject.setOnContextMenuRequested(event -> {
+                // 'event.consume()' is important! It stops the default
+                // "Save As" menu (from the browser/JavaFX) from appearing.
+                event.consume();
+
+                // Call the helper method from the controller.
+                // You need a way to get the controller. This assumes your
+                // 'G' (Graph) object has a reference to its controller.
+                GraphInputController controller = ControllerManager.getGraphInputController(); // You'll need to implement this getter
+
+                if (controller != null) {
+                    // 'this' refers to the GraphNode object
+                    controller.showVertexContextMenu(this, event);
                 }
             });
 

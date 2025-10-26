@@ -1,6 +1,8 @@
 package GraphVisualizer;
 
 
+import Controllers.ControllerManager;
+import Controllers.GraphInputController;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -109,6 +111,7 @@ public class DirectedEdge implements Serializable,Comparable {
         shaft.setStroke(Color.GRAY);
         edgeGroup.getChildren().addAll(shaft);
 
+
         if(isDirected)
         {
             arrowHead = new Polygon(0,0, -AppSettings.ARROW_SIZE,-AppSettings.ARROW_SIZE, AppSettings.ARROW_SIZE,-AppSettings.ARROW_SIZE);
@@ -116,6 +119,27 @@ public class DirectedEdge implements Serializable,Comparable {
             updateArrowPosition(true);
             edgeGroup.getChildren().addAll(arrowHead);
         }
+
+        initEdgeContextMenu();
+    }
+
+    private void initEdgeContextMenu()
+    {
+        edgeGroup.setOnContextMenuRequested(event -> {
+            // 'event.consume()' is important! It stops the default
+            // "Save As" menu (from the browser/JavaFX) from appearing.
+            event.consume();
+
+            // Call the helper method from the controller.
+            // You need a way to get the controller. This assumes your
+            // 'G' (Graph) object has a reference to its controller.
+            GraphInputController controller = ControllerManager.getGraphInputController(); // You'll need to implement this getter
+
+            if (controller != null) {
+                // 'this' refers to the GraphNode object
+                controller.showEdgeContextMenu(this, event);
+            }
+        });
 
 
     }
@@ -178,6 +202,17 @@ public class DirectedEdge implements Serializable,Comparable {
             arrowHead.setRotate(angle - 90);
         }
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        DirectedEdge e = (DirectedEdge)obj;
+        return e.from.equals(from) && e.to.equals(to);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(from.getNodeLabel(),to.getNodeLabel());
     }
 
     @Override
