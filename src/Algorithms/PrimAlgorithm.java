@@ -64,37 +64,44 @@ public class PrimAlgorithm extends Algorithm {
 
         while (!Q.isEmpty()) {
             Graph.GraphNode currentNode = Q.poll();
+
             if (weightsToConnect.get(currentNode) == Integer.MAX_VALUE) {
-                break;
+                continue;
             }
+
             isInTree.put(currentNode, true);
+
             for (DirectedEdge edge : currentNode.connectedEdges) {
+
+                Graph.GraphNode neighborNode;
                 if (edge.getFrom().equals(currentNode)) {
-                    Graph.GraphNode neighborNode = edge.getTo();
-                    if (!isInTree.get(neighborNode)) {
-                        boolean relaxed = relax(currentNode, neighborNode, edge);
-                        if (relaxed) {
-                            Q.remove(neighborNode);
-                            Q.add(neighborNode);
-                        }
+                    neighborNode = edge.getTo();
+                } else {
+                    neighborNode = edge.getFrom();
+                }
+
+                if (!isInTree.get(neighborNode)) {
+
+                    boolean relaxed = relax(currentNode, neighborNode, edge);
+
+                    if (relaxed) {
+
+                        Q.remove(neighborNode);
+                        Q.add(neighborNode);
                     }
                 }
             }
         }
-
     }
 
     private boolean relax(Graph.GraphNode source, Graph.GraphNode dest, DirectedEdge edge)
     {
-        int sourceWeight = weightsToConnect.get(source);
         int destWeight = weightsToConnect.get(dest);
         int edgeWeight = edge.getWeight();
 
-        // This check correctly prevents integer overflow
-        if (sourceWeight != Integer.MAX_VALUE && destWeight > sourceWeight + edgeWeight)
+        if (destWeight > edgeWeight)
         {
-            // Use the local variables for the update
-            weightsToConnect.put(dest, sourceWeight + edgeWeight);
+            weightsToConnect.put(dest, edgeWeight);
             parents.put(dest, source);
             return true;
         }
@@ -124,8 +131,10 @@ public class PrimAlgorithm extends Algorithm {
             Graph.GraphNode parent = parents.get(node);
             if(parent != null)
             {
-                DirectedEdge edge = graphResult.createEdge(parent.getNodeLabel(),node.getNodeLabel());
+                DirectedEdge edge = graphResult.getAdjacencyMap().get(parent).get(node);
                 edge.ChangeColor(Color.RED);
+                DirectedEdge otherEdge = graphResult.getAdjacencyMap().get(node).get(parent);
+                otherEdge.ChangeColor(Color.RED);
             }
         }
     }

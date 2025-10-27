@@ -10,12 +10,6 @@ import javafx.fxml.FXMLLoader;
 import java.util.Objects;
 
 
-//TO DO:
-// 1  graph modifications : delete and update edges
-// 2  quick build special graphs - full graph, tree, etc
-// 3
-// 4
-
 public class GraphVisualizer extends Application {
 
     public static void main(String[] args) {

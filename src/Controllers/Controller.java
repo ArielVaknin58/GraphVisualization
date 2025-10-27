@@ -55,7 +55,8 @@ public class Controller {
 
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
             popupStage.getIcons().add(icon);
-            Scene popupScene = new Scene(pane, 430, 150);
+            Scene popupScene = new Scene(pane, 400, 200);
+            popupStage.resizableProperty().setValue(Boolean.FALSE);
             ThemeManager.getThemeManager().AddScene(popupScene);
             popupStage.setScene(popupScene);
             popupStage.showAndWait();

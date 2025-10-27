@@ -8,12 +8,12 @@
    <children>
       <Label layoutX="22.0" layoutY="88.0" prefHeight="25.0" prefWidth="143.0" text="Number of iterations :" />
       <TextField fx:id="iterationsField" layoutX="164.0" layoutY="85.0" prefHeight="32.0" prefWidth="67.0" />
-      <Button fx:id="EnterButton" layoutX="206.0" layoutY="136.0" mnemonicParsing="false" onAction="#OnEnterClicked" prefHeight="16.0" prefWidth="82.0" text="Enter" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="14.0" prefHeight="67.0" prefWidth="473.0" text="GraphVisualizer iteratively usus Non-Deterministic algorithms to nondeterministically decide NP-hard problems. Select the number of iterations to run (and a given k for the size of the solution)" wrapText="true">
+      <Button fx:id="EnterButton" layoutX="214.0" layoutY="136.0" mnemonicParsing="false" onAction="#OnEnterClicked" prefHeight="25.0" prefWidth="122.0" text="Enter" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="14.0" prefHeight="67.0" prefWidth="501.0" text="GraphVisualizer iteratively usus Non-Deterministic algorithms to nondeterministically decide NP-hard problems. Select the number of iterations to run (and a given k for the size of the solution)" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label fx:id="KLabel" layoutX="247.0" layoutY="92.0" prefHeight="17.0" prefWidth="136.0" />
+      <Label fx:id="KLabel" layoutX="247.0" layoutY="92.0" prefHeight="17.0" prefWidth="180.0" />
       <TextField fx:id="KField" layoutX="435.0" layoutY="88.0" prefHeight="25.0" prefWidth="82.0" />
    </children>
 </AnchorPane>

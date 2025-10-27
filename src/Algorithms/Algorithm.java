@@ -1,6 +1,7 @@
 package Algorithms;
 
 import Controllers.Controller;
+import Controllers.ControllerManager;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
@@ -36,6 +37,10 @@ public abstract class Algorithm {
 
     protected void loadResultsPane()
     {
+        if(this.G.V.isEmpty())
+        {
+            ControllerManager.getGraphInputController().infoPopup("Graph is empty,nothing to show");
+        }
         try
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(AppSettings.Graph_results_location));

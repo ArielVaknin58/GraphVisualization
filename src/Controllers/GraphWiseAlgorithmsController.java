@@ -217,6 +217,7 @@ public class GraphWiseAlgorithmsController extends Controller{
                 Stage popupStage = new Stage();
                 popupStage.setTitle("Non-Deterministic Decision");
                 popupStage.initModality(Modality.APPLICATION_MODAL);
+                popupStage.resizableProperty().set(false);
                 javafx.scene.image.Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
                 popupStage.getIcons().add(icon);
                 controller.getKLabel().setText(kDesctiption);
