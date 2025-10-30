@@ -1,0 +1,56 @@
+/* Magenta Theme - GraphVisualizer by Ariel Vaknin */
+
+.InnerComponents {
+    -fx-background-color: #e028e8; /* Magenta background for the inner components */
+}
+
+.button {
+    -fx-background-color: #961a96ff; /* Slightly darker magenta for buttons */
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.label {
+    -fx-font-family: "Eras Demi ITC";
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+    -fx-background-color: #a31ca1; /* Darker shade on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #891989; /* Even darker when pressed */
+}
+
+.button:disabled {
+    -fx-background-color: #d58ed5; /* Light magenta for disabled buttons */
+    -fx-text-fill: #E0E0E0; /* Lighter text for disabled buttons */
+}
+
+.graph-node {
+    -fx-fill: #e028e8;          /* fill color */
+    -fx-stroke: #000000;        /* border color */
+    -fx-stroke-width: 2px;      /* border thickness */
+}
+
+.graph-node:pressed {
+    -fx-fill: derive(#e028e8, -30%); /* 30% darker */
+}
+
+.node-label {
+    fill: #000000;
+}
+
+.graph-node.selected {
+    -fx-effect: dropshadow(gaussian, #ff77ff, 30, 0.6, 0, 0);
+}
+
+.tooltip {
+    -fx-background-color: #FFFFE0; /* A light yellow, classic tooltip color */
+    -fx-text-fill: black;          /* Ensure text is black and visible */
+    -fx-background-radius: 4;      /* Optional: nice rounded corners */
+    -fx-padding: 5px;              /* Give the text some space */
+    -fx-font-size: 12px;           /* A readable font size */
+}

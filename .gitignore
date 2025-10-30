@@ -1,34 +1,56 @@
-### IntelliJ IDEA ###
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+# ### IntelliJ IDEA ###
+# out/
+# !**/src/main/**/out/
+# !**/src/test/**/out/
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+# ### Eclipse ###
+# .apt_generated
+# .classpath
+# .factorypath
+# .project
+# .settings
+# .springBeans
+# .sts4-cache
+# bin/
+# !**/src/main/**/bin/
+# !**/src/test/**/bin/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+# ### NetBeans ###
+# /nbproject/private/
+# /nbbuild/
+# /dist/
+# /nbdist/
+# /.nb-gradle/
 
-### VS Code ###
-.vscode/
+# ### VS Code ###
+# .vscode/
 
-### Mac OS ###
+# ### Mac OS ###
+# .DS_Store
+# # Ignore Gradle project-specific cache directory
+# .gradle
+
+# # Ignore Gradle build output directory
+# build
+
+# Java
+*.class
+
+# Maven
+target/
+
+# Logs
+*.log
+logs/
+
+# IntelliJ / IDE files (These can store secrets!)
+.idea/
+*.iml
+
+# Serialized files (from your project)
+*.ser
+Serializations/
+
+# OS files
 .DS_Store
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Ignore Gradle build output directory
-build
+Thumbs.db

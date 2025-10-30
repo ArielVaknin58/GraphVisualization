@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane prefHeight="350.0" prefWidth="200.0" styleClass="InnerComponents" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphWiseAlgorithmsController">
+    <content>
+      <VBox fx:id="AlgorithmsPane" alignment="TOP_CENTER" prefHeight="613.0" prefWidth="185.0" spacing="10.0" styleClass="InnerComponents">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="160.0" text="- Directed Graphs -" />
+                <Button fx:id="TopologicalSortButton" mnemonicParsing="false" onAction="#OnTopologicalClick" prefHeight="25.0" prefWidth="160.0" text="Topological Sort" />
+            <Button fx:id="hamiltonButton" mnemonicParsing="false" onAction="#onHamiltonianPathClicked" prefHeight="25.0" prefWidth="160.0" text="Hamiltonian Path" />
+            <Button fx:id="KosarajuButton" mnemonicParsing="false" onAction="#OnKosarajuClick" prefHeight="25.0" prefWidth="162.0" text="Kosaraju-Sharir Algorithm" />
+            <Button fx:id="superGraphButton" mnemonicParsing="false" onAction="#OnSuperGraphClicked" prefHeight="25.0" prefWidth="162.0" text="Super-Graph" />
+            <Button fx:id="FloydWarshallButton" mnemonicParsing="false" onAction="#OnFloydWarshallClicked" prefHeight="25.0" prefWidth="160.0" text="Floyd-Warshall Algorithm" />
+            <Button fx:id="mincutButton" alignment="CENTER" mnemonicParsing="false" onAction="#OnMinCutClicked" prefWidth="160.0" text="Min-Cut Algorithm" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="160.0" text="- Undirected Graphs -" />
+            <Button fx:id="eulerPathButton" mnemonicParsing="false" onAction="#onEulerPathClicked" prefHeight="25.0" prefWidth="160.0" text="Euler's Path" />
+            <Button fx:id="connectivityButton" mnemonicParsing="false" onAction="#OnConnectivityClicked" prefHeight="25.0" prefWidth="160.0" text="Connectivity Components" />
+            <Button fx:id="bipartiteButton" mnemonicParsing="false" onAction="#OnBipartiteClicked" prefHeight="25.0" prefWidth="160.0" text="Bipartite Division" />
+            <Button fx:id="mstButton" mnemonicParsing="false" onAction="#onmstButtonClicked" prefHeight="25.0" prefWidth="160.0" text="Minimum Spanning Tree" />
+            <Button fx:id="isButton" alignment="CENTER" mnemonicParsing="false" onAction="#OnISClicked" prefWidth="160.0" text="Independent Set Algorithm" />
+            <Button fx:id="vertexCoverButton" alignment="CENTER" mnemonicParsing="false" onAction="#OnVertexCoverClicked" prefWidth="160.0" text="Vertex Cover Algorithm" />
+            <Button fx:id="maxCutButton" alignment="CENTER" mnemonicParsing="false" onAction="#OnMaxCutClicked" prefWidth="160.0" text="Max-Cut" />
+            <Button fx:id="CliqueButton" alignment="CENTER" layoutX="23.0" layoutY="494.0" mnemonicParsing="false" onAction="#OnClique" prefWidth="160.0" text="Clique" />
+            <Button fx:id="kColorsButton" alignment="CENTER" layoutX="23.0" layoutY="529.0" mnemonicParsing="false" onAction="#OnkColorsClicked" prefWidth="160.0" text="K-Colors" />
+            <Label alignment="CENTER" prefWidth="160.0" text="- Both -" />
+            <Button fx:id="eulerCircuitButton" mnemonicParsing="false" onAction="#OnEulerCircuitClick" prefHeight="25.0" prefWidth="160.0" text="Euler's Circuit" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+    </content>
+</ScrollPane>
