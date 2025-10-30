@@ -1,6 +1,5 @@
 package GraphVisualizer;
 
-
 import Controllers.Controller;
 import javafx.application.Application;
 import javafx.scene.Scene;

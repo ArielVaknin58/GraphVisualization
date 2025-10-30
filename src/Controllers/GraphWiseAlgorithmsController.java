@@ -4,6 +4,8 @@ import Algorithms.*;
 import Exceptions.InvalidAlgorithmInputException;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.ThemeManager;
+import Services.GeminiService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -58,6 +60,8 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button CliqueButton;
     @FXML
     private Button kColorsButton;
+    @FXML
+    private Button bloopButton;
 
 
     public void initialize()
@@ -97,6 +101,23 @@ public class GraphWiseAlgorithmsController extends Controller{
             algorithm.Run();
             algorithm.DisplayResults();
         }
+
+    }
+
+    public void onBloopClicked()
+    {
+        GeminiService gs = new GeminiService();
+        new Thread(() -> {
+
+            // 1. This runs on the background thread (won't freeze the UI)
+            String explanation = gs.generateContent("Explain who is Taylor swift");
+
+            // 2. Once the work is done, post the UI update back to the JavaFX thread
+            Platform.runLater(() -> {
+                infoPopup(explanation);
+            });
+
+        }).start();
 
     }
     public void OnTopologicalClick()

@@ -1,0 +1,57 @@
+/* Orange and Green Theme - GraphVisualizer by Ariel Vaknin */
+
+.InnerComponents {
+    -fx-background-color: #05ea10;
+}
+
+
+.button {
+    -fx-background-color: #fd7709;   /* A greenish color */
+    -fx-text-fill: #20d690;            /* White text */
+    -fx-background-radius: 5px;      /* Rounded corners */
+    -fx-border-radius: 5px;
+}
+
+.label {
+    -fx-font-family: "Eras Demi ITC";
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.button:pressed {
+    -fx-background-color: #388E3C;
+}
+
+.button:disabled {
+    -fx-background-color: #A5D6A7;
+    -fx-text-fill: #E0E0E0;
+}
+
+.graph-node {
+    -fx-fill: #fd7709;          /* fill color */
+    -fx-stroke: #000000;        /* border color */
+    -fx-stroke-width: 2px;      /* border thickness */
+}
+
+.graph-node:pressed {
+    -fx-fill: derive(#fd7709, -30%); /* 30% darker */
+}
+
+.node-label {
+    fill: #000000;
+}
+
+.graph-node.selected {
+    -fx-effect: dropshadow(gaussian, #05ea10, 30, 0.6, 0, 0);
+}
+
+.tooltip {
+    -fx-background-color: #FFFFE0; /* A light yellow, classic tooltip color */
+    -fx-text-fill: black;          /* Ensure text is black and visible */
+    -fx-background-radius: 4;      /* Optional: nice rounded corners */
+    -fx-padding: 5px;              /* Give the text some space */
+    -fx-font-size: 12px;           /* A readable font size */
+}

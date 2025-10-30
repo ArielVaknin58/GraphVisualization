@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="477.0" prefWidth="718.0" styleClass="InnerComponents" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphResultController">
+    <children>
+
+        <ScrollPane AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <AnchorPane fx:id="graphOutputContainer" minHeight="600.0" minWidth="700.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="524.0" layoutY="445.0" prefHeight="17.0" prefWidth="95.0" text="Save Graph ?" />
+               </children></AnchorPane>
+            </content>
+        </ScrollPane>
+      <VBox layoutX="370.0" layoutY="438.0" AnchorPane.bottomAnchor="14.0">
+         <children>
+      
+              <Button fx:id="saveResultButton" mnemonicParsing="false" onAction="#onSaveGraph" prefHeight="25.0" prefWidth="95.0" text="Save Result" />
+         </children>
+      </VBox>
+        <Label alignment="CENTER" layoutX="216.0" prefHeight="17.0" prefWidth="95.0" text="Save Graph ?" AnchorPane.bottomAnchor="18.0" />
+        <Label fx:id="stateNDLabel" alignment="CENTER" layoutX="527.0" prefHeight="25.0" prefWidth="161.0" AnchorPane.bottomAnchor="14.0" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="637.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphInputController">
+
+    <children>
+        <!-- ScrollPane on the left side, fills available space -->
+        <ScrollPane fx:id="scrollPane" prefHeight="637.0" prefWidth="680.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="222.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <AnchorPane fx:id="graphContainer" minHeight="0.0" minWidth="0.0" prefHeight="730.0" prefWidth="849.0" />
+            </content>
+        </ScrollPane>
+
+        <!-- GridPane on the right side -->
+        <GridPane fx:id="controlPanel" prefHeight="637.0" prefWidth="216.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+            </columnConstraints>
+
+            <children>
+                <Label fx:id="enterVerticesLabel" prefHeight="17.0" prefWidth="191.0" text="Enter number of vertices:" GridPane.rowIndex="2" />
+                <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="170.0" spacing="10" GridPane.rowIndex="3">
+                    <children>
+                        <TextField fx:id="verticesField" prefHeight="25.0" prefWidth="108.0" />
+                        <Button fx:id="enterButton" onAction="#onEnterVertices" prefHeight="25.0" prefWidth="56.0" text="Enter" />
+                    </children>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+                </HBox>
+
+                <Label fx:id="enterEdgesLabel" prefHeight="17.0" prefWidth="191.0" text="Enter edges:" GridPane.rowIndex="5" />
+                <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="190.0" spacing="5.0" GridPane.rowIndex="6">
+                    <children>
+                        <TextField fx:id="edgeStartField" prefWidth="40" />
+                        <Label prefHeight="17.0" prefWidth="26.0" text="---&gt;">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                        <TextField fx:id="edgeEndField" prefWidth="40" />
+                    </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+                </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="50.0" text="Theme :">
+                     <HBox.margin>
+                        <Insets right="10.0" top="15.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding></Label>
+                  <ComboBox fx:id="ThemeBox" prefHeight="25.0" prefWidth="130.0">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin></ComboBox>
+               </children>
+            </HBox>
+            <Pane fx:id="algoPlaceholder" prefHeight="345.0" prefWidth="207.0" styleClass="InnerComponents" GridPane.rowIndex="10" />
+            <AnchorPane prefHeight="49.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="1">
+               <children>
+                  <Button fx:id="saveGraph" layoutX="8.0" layoutY="33.0" mnemonicParsing="false" onAction="#onSaveGraph" text="Save Graph" />
+                  <Button fx:id="loadGraph" layoutX="100.0" layoutY="33.0" mnemonicParsing="false" onAction="#onLoadGraph" text="Load Graph" />
+                  <Label layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="169.0" text="Graph import/export " />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <CheckBox fx:id="DirectedCheckbox" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="141.0" selected="true" text="Directed" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="24.0" prefWidth="216.0" GridPane.rowIndex="7">
+               <children>
+                  <Label fx:id="weightLabel" layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="50.0" text="weight :" />
+                  <TextField fx:id="weightField" layoutX="64.0" layoutY="2.0" prefHeight="17.0" prefWidth="50.0" />
+                        <Button fx:id="addButton" layoutX="137.0" layoutY="2.0" onAction="#onAddEdge" prefHeight="25.0" prefWidth="53.0" text="Add" />
+               </children>
+            </AnchorPane>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="216.0" spacing="10.0" GridPane.rowIndex="8">
+               <children>
+                  <Label text="Capacity :" />
+                  <TextField fx:id="capacityField" prefHeight="25.0" prefWidth="60.0" promptText="capacity" />
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </GridPane.margin>
+            </HBox>
+            </children>
+         <rowConstraints>
+            <RowConstraints maxHeight="132.0" minHeight="19.0" prefHeight="40.0" />
+            <RowConstraints maxHeight="139.0" minHeight="22.0" prefHeight="64.0" />
+            <RowConstraints maxHeight="145.0" minHeight="12.0" prefHeight="20.0" />
+            <RowConstraints maxHeight="193.0" minHeight="28.0" prefHeight="28.0" />
+            <RowConstraints maxHeight="193.0" minHeight="0.0" prefHeight="26.0" />
+            <RowConstraints maxHeight="381.0" minHeight="11.0" prefHeight="22.0" />
+            <RowConstraints maxHeight="482.0" minHeight="26.0" prefHeight="36.0" />
+            <RowConstraints maxHeight="145.0" minHeight="18.0" prefHeight="31.0" />
+            <RowConstraints maxHeight="145.0" minHeight="11.0" prefHeight="27.0" />
+            <RowConstraints maxHeight="145.0" minHeight="11.0" prefHeight="16.0" />
+             <RowConstraints minHeight="124.0" prefHeight="346.0" vgrow="ALWAYS" />
+         </rowConstraints>
+        </GridPane>
+    </children>
+</AnchorPane>

@@ -26,6 +26,7 @@ public class AppSettings {
     public static final String Graph_node_css_class = "graph-node";
     public static final String node_label_css_class = "node-label";
 
+    public static final String AI_model_used = "gemini-2.5-pro";
 
 
 }
