@@ -3,6 +3,7 @@ package Controllers;
 import Algorithms.*;
 import Exceptions.*;
 import GraphVisualizer.*;
+import Services.GraphData;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class GraphInputController extends Controller{
@@ -61,7 +63,7 @@ public class GraphInputController extends Controller{
     private ContextMenu edgeContextMenu;
 
     private int vertexCount = 0;
-    private Graph G = new Graph(true);
+    private static Graph G = new Graph(true);
 
     public AnchorPane getGraphContainer()
     {
@@ -135,9 +137,15 @@ public class GraphInputController extends Controller{
             graphPaneContextMenu.hide(); // Hide after action
         });
 
+        MenuItem AIGraphCreation = new MenuItem("create graph with AI");
+        AIGraphCreation.setOnAction(event -> {
+            System.out.println("build AI graph action");
+            loadGraphPromptPopup();
+            graphPaneContextMenu.hide();
 
+        });
         // Add the direct items AND THE SUBMENU to the main context menu
-        graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem);
+        graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem, AIGraphCreation);
 
         // --- Event Handlers for the Pane ---
         graphContainer.setOnContextMenuRequested(event -> {
@@ -182,6 +190,25 @@ public class GraphInputController extends Controller{
         displayGraph(G);
     }
 
+    private void loadGraphPromptPopup()
+    {
+        try {
+            FXMLLoader saveGraphLoader = new FXMLLoader(getClass().getResource(AppSettings.graph_Prompt_Popup_Location));
+            AnchorPane saveGraphPane = saveGraphLoader.load();
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("create graph with AI prompt");
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+            Scene popupScene = new Scene(saveGraphPane);
+            popupStage.setScene(popupScene);
+            ThemeManager.getThemeManager().AddScene(popupScene);
+            popupStage.showAndWait();
+        }
+        catch (IOException e) {
+            AlertError(e);
+        }
+    }
     @FXML
     private void onSaveGraph()
     {
@@ -208,6 +235,37 @@ public class GraphInputController extends Controller{
 
     }
 
+    public static void CreateGraphStatic(GraphData data) {
+        if (data == null || data.nodes == null || data.edges == null) {
+            Controller.AlertError(new Exception("AI returned invalid graph data."));
+            return;
+        }
+
+        // 1. Create the new graph
+        G = new Graph(data.isDirected);
+
+        // 2. Create all the nodes
+        for (String nodeID : data.nodes) {
+            if (nodeID != null && !nodeID.trim().isEmpty()) {
+                G.createNode(nodeID);
+            }
+        }
+
+        // 3. Create all the edges
+        for (Services.EdgeData edge : data.edges) {
+            if (edge != null && edge.from != null && edge.to != null) {
+                try {
+                    G.createEdge(edge.from, edge.to);
+
+                } catch (Exception e) {
+                    System.err.println("Error creating edge: " + e.getMessage());
+                }
+            }
+        }
+
+        displayGraph(G);
+
+    }
     @FXML
     private void onEnterVertices() {
         try {
@@ -219,7 +277,6 @@ public class GraphInputController extends Controller{
             vertexCount = Integer.parseInt(verticesField.getText());
             if(vertexCount > AppSettings.MAX_VERTICES)
                 throw new InvalidGraphSizeException();
-            //enterButton.setDisable(true);
             for(int i = 1; i <= vertexCount ; i++)
                 G.createNode(Integer.toString(i));
 
@@ -413,10 +470,10 @@ public class GraphInputController extends Controller{
         run(new FordFelkersonAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()), sourceNode,destination));
     }
 
-    public void displayGraph(Graph graph) {
-        graphContainer.getChildren().clear();
+    public static void displayGraph(Graph graph) {
+        ControllerManager.getGraphInputController().graphContainer.getChildren().clear();
         Group group = new Group();
         graph.addGraphToGroup(group);
-        graphContainer.getChildren().add(group);
+        ControllerManager.getGraphInputController().graphContainer.getChildren().add(group);
     }
 }

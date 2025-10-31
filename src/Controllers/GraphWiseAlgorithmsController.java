@@ -5,6 +5,8 @@ import Exceptions.InvalidAlgorithmInputException;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.ThemeManager;
 import Services.GeminiService;
+import Services.GraphData;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import resources.LoadingPopup;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -104,22 +107,6 @@ public class GraphWiseAlgorithmsController extends Controller{
 
     }
 
-    public void onBloopClicked()
-    {
-        GeminiService gs = new GeminiService();
-        new Thread(() -> {
-
-            // 1. This runs on the background thread (won't freeze the UI)
-            String explanation = gs.generateContent("Explain who is Taylor swift");
-
-            // 2. Once the work is done, post the UI update back to the JavaFX thread
-            Platform.runLater(() -> {
-                infoPopup(explanation);
-            });
-
-        }).start();
-
-    }
     public void OnTopologicalClick()
     {
         run(new TopologicalSort(new Graph(ControllerManager.getGraphInputController().getGraph())));

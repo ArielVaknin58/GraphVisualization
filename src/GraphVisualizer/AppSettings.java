@@ -27,6 +27,7 @@ public class AppSettings {
     public static final String node_label_css_class = "node-label";
 
     public static final String AI_model_used = "gemini-2.5-pro";
+    public static final String graph_Prompt_Popup_Location = "/resources/graphPromptPopup.fxml";
 
 
 }

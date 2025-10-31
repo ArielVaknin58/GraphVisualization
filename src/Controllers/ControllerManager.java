@@ -16,6 +16,17 @@ public class ControllerManager {
 
     private static NDPopupController ndPopupController;
 
+    private static graphPromptPopupController graphPromptPopupController;
+
+    public static Controllers.graphPromptPopupController getGraphPromptPopupController() {
+        return graphPromptPopupController;
+    }
+
+    public static void setGraphPromptPopupController(graphPromptPopupController graphPromptPopupController)
+    {
+        graphPromptPopupController = graphPromptPopupController;
+    }
+
     public static NDPopupController getNdPopupController() {
         return ndPopupController;
     }

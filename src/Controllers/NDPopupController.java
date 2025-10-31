@@ -26,7 +26,6 @@ public class NDPopupController extends Controller{
     private BiConsumer<Integer,Integer> method;
 
 
-
     @FXML
     public void initialize()
     {

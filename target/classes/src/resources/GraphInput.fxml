@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="637.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphInputController">
+<AnchorPane prefHeight="754.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GraphInputController">
 
     <children>
         <!-- ScrollPane on the left side, fills available space -->
         <ScrollPane fx:id="scrollPane" prefHeight="637.0" prefWidth="680.0" styleClass="InnerComponents" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="222.0" AnchorPane.topAnchor="0.0">
             <content>
-                <AnchorPane fx:id="graphContainer" minHeight="0.0" minWidth="0.0" prefHeight="730.0" prefWidth="849.0" />
+                <AnchorPane fx:id="graphContainer" minHeight="0.0" minWidth="0.0" prefHeight="803.0" prefWidth="1050.0" />
             </content>
         </ScrollPane>
 
@@ -62,8 +62,8 @@
                      </HBox.margin></ComboBox>
                </children>
             </HBox>
-            <Pane fx:id="algoPlaceholder" prefHeight="345.0" prefWidth="207.0" styleClass="InnerComponents" GridPane.rowIndex="10" />
-            <AnchorPane prefHeight="49.0" prefWidth="200.0" styleClass="InnerComponents" GridPane.rowIndex="1">
+            <Pane fx:id="algoPlaceholder" prefHeight="408.0" prefWidth="216.0" styleClass="InnerComponents" GridPane.rowIndex="10" />
+            <AnchorPane prefHeight="48.0" prefWidth="216.0" styleClass="InnerComponents" GridPane.rowIndex="1">
                <children>
                   <Button fx:id="saveGraph" layoutX="8.0" layoutY="33.0" mnemonicParsing="false" onAction="#onSaveGraph" text="Save Graph" />
                   <Button fx:id="loadGraph" layoutX="100.0" layoutY="33.0" mnemonicParsing="false" onAction="#onLoadGraph" text="Load Graph" />
@@ -85,7 +85,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="216.0" spacing="10.0" GridPane.rowIndex="8">
                <children>
                   <Label text="Capacity :" />
-                  <TextField fx:id="capacityField" prefHeight="25.0" prefWidth="60.0" promptText="capacity" />
+                  <TextField fx:id="capacityField" prefHeight="25.0" prefWidth="60.0" />
                </children>
                <GridPane.margin>
                   <Insets bottom="5.0" top="5.0" />
