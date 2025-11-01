@@ -18,6 +18,16 @@ public class ControllerManager {
 
     private static graphPromptPopupController graphPromptPopupController;
 
+    private static ChatController chatController;
+
+    public static ChatController getChatController() {
+        return chatController;
+    }
+
+    public static void setChatController(ChatController chatController) {
+        ControllerManager.chatController = chatController;
+    }
+
     public static Controllers.graphPromptPopupController getGraphPromptPopupController() {
         return graphPromptPopupController;
     }

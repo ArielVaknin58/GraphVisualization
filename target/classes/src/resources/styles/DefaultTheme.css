@@ -61,3 +61,51 @@
     -fx-padding: 5px;              /* Give the text some space */
     -fx-font-size: 12px;           /* A readable font size */
 }
+
+/* Make the ListView background transparent */
+.list-view {
+    -fx-background-color: transparent;
+}
+
+/* This is the key for aesthetics:
+  Make the ListCell (the "row") itself invisible.
+*/
+.chat-list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 5px; /* Add some spacing BETWEEN bubbles */
+}
+
+/* Style for the user's name ("user: ") */
+.sender-user {
+    -fx-fill: #0060E0; /* Dark blue */
+    -fx-font-weight: bold;
+}
+
+/* Style for the user's bubble (applied to the TextFlow) */
+.chat-bubble-user {
+    -fx-background-color: #fdfdfd; /* Bright blue */
+    -fx-background-radius: 15;
+    -fx-padding: 8px 12px;
+}
+/* This makes the actual text content inside the user's bubble white */
+.chat-bubble-user .text {
+    -fx-fill: white;
+}
+
+
+/* Style for the model's name ("model: ") */
+.sender-model {
+    -fx-fill: #006400; /* Dark green */
+    -fx-font-weight: bold;
+}
+
+/* Style for the model's bubble (applied to the TextFlow) */
+.chat-bubble-model {
+    -fx-background-color: #E5E5EA; /* Light gray */
+    -fx-background-radius: 15;
+    -fx-padding: 8px 12px;
+}
+/* This makes the actual text content inside the model's bubble black */
+.chat-bubble-model .text {
+    -fx-fill: black;
+}
