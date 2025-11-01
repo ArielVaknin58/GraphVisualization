@@ -3,7 +3,11 @@ package Controllers;
 import Algorithms.*;
 import Exceptions.*;
 import GraphVisualizer.*;
+import Services.GeminiService;
 import Services.GraphData;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import resources.LoadingPopup;
 
 import java.io.IOException;
 import java.util.List;
@@ -126,7 +131,7 @@ public class GraphInputController extends Controller{
                 this.G.createAvailableNode(currentContextMenuEvent.getX(),currentContextMenuEvent.getY());
                 displayGraph(G);
             }
-            graphPaneContextMenu.hide(); // Hide after action
+            graphPaneContextMenu.hide();
         });
 
         MenuItem clearGraphItem = new MenuItem("Clear Graph");
@@ -134,7 +139,7 @@ public class GraphInputController extends Controller{
             System.out.println("Clear Graph action");
             this.G = new Graph(DirectedCheckbox.isSelected());
             displayGraph(G);
-            graphPaneContextMenu.hide(); // Hide after action
+            graphPaneContextMenu.hide();
         });
 
         MenuItem AIGraphCreation = new MenuItem("create graph with AI");
@@ -144,13 +149,23 @@ public class GraphInputController extends Controller{
             graphPaneContextMenu.hide();
 
         });
-        // Add the direct items AND THE SUBMENU to the main context menu
-        graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem, AIGraphCreation);
+
+        MenuItem AIGraphExplainator = new MenuItem("Explain graph stats");
+        AIGraphExplainator.setOnAction(event ->{
+            System.out.println("explain graph stats");
+            GeminiService gs = GeminiService.getInstance();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            String jsonReport = gson.toJson(GraphInputController.G.getGraphReportMap());
+            ExplainGraphWithPrompt(gs.getfinalPromptForExplainer(jsonReport));
+            graphPaneContextMenu.hide();
+        });
+
+        graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem, AIGraphCreation, AIGraphExplainator);
 
         // --- Event Handlers for the Pane ---
         graphContainer.setOnContextMenuRequested(event -> {
             currentContextMenuEvent = event;
-            System.out.println("Context menu requested"); // Logging
+            System.out.println("Context menu requested");
             graphPaneContextMenu.show(graphContainer, event.getScreenX(), event.getScreenY());
             event.consume();
         });
@@ -175,6 +190,20 @@ public class GraphInputController extends Controller{
             }
 
         });
+    }
+
+    private void ExplainGraphWithPrompt(String finalPrompt) {
+        GeminiService gs = GeminiService.getInstance();
+        LoadingPopup loadingPopup = new LoadingPopup();
+        loadingPopup.show();
+        new Thread(() -> {
+
+            String analysis = gs.generateContent(finalPrompt);
+            Platform.runLater(() -> {
+                infoPopup(analysis);
+                loadingPopup.hide();
+            });
+        }).start();
     }
 
     public Graph getGraph()
@@ -236,32 +265,34 @@ public class GraphInputController extends Controller{
     }
 
     public static void CreateGraphStatic(GraphData data) {
-        if (data == null || data.nodes == null || data.edges == null) {
-            Controller.AlertError(new Exception("AI returned invalid graph data."));
-            return;
-        }
-
-        // 1. Create the new graph
-        G = new Graph(data.isDirected);
-
-        // 2. Create all the nodes
-        for (String nodeID : data.nodes) {
-            if (nodeID != null && !nodeID.trim().isEmpty()) {
-                G.createNode(nodeID);
+        try{
+            if (data == null || data.nodes == null || data.edges == null) {
+                Controller.AlertError(new Exception("AI returned invalid graph data."));
+                return;
             }
-        }
 
-        // 3. Create all the edges
-        for (Services.EdgeData edge : data.edges) {
-            if (edge != null && edge.from != null && edge.to != null) {
-                try {
-                    G.createEdge(edge.from, edge.to);
+            // 1. Create the new graph
+            G = new Graph(data.isDirected);
 
-                } catch (Exception e) {
-                    System.err.println("Error creating edge: " + e.getMessage());
+            // 2. Create all the nodes
+            if(data.nodes.size() > AppSettings.MAX_VERTICES)
+                throw new InvalidGraphSizeException();
+            for (String nodeID : data.nodes) {
+                if (nodeID != null && !nodeID.trim().isEmpty()) {
+                    G.createNode(nodeID);
                 }
             }
+
+            // 3. Create all the edges
+            for (Services.EdgeData edge : data.edges) {
+                if (edge != null && edge.from != null && edge.to != null) {
+                    G.createEdge(edge.from, edge.to, edge.weight,0,0);
+                }
+            }
+        }catch (Exception e) {
+            AlertError(e);
         }
+
 
         displayGraph(G);
 

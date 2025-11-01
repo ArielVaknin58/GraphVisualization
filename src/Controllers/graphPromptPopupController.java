@@ -31,7 +31,7 @@ public class graphPromptPopupController extends Controller{
     @FXML
     private void OnCreateClicked()
     {
-        GeminiService gs = new GeminiService();
+        GeminiService gs = GeminiService.getInstance();
         LoadingPopup loadingPopup = new LoadingPopup();
 
         String text = promptBox.getText();

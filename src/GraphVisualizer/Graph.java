@@ -1,6 +1,7 @@
 package GraphVisualizer;
 
 
+import Algorithms.DFS;
 import Controllers.Controller;
 import Controllers.ControllerManager;
 import Controllers.GraphInputController;
@@ -226,21 +227,6 @@ public class Graph implements Serializable {
     public void RemoveVertice(GraphNode node)
     {
         List<DirectedEdge> toRemove = new ArrayList<>();
-//        for(DirectedEdge edge : E)
-//        {
-//            if(node.nodeLabel.equals(edge.getFrom().nodeLabel))
-//            {
-//                GraphNode toVertice = edge.getTo();
-//                toRemove.add(edge);
-//                toVertice.inDegree--;
-//                //toVertice.neighborsList.remove(toVertice);
-//            }
-//            else if(node.nodeLabel.equals(edge.getTo().nodeLabel))
-//            {
-//                toRemove.add(edge);
-//                edge.getFrom().outDegree--;
-//            }
-//        }
         if(this.isDirected())
         {
             for(DirectedEdge edge : node.connectedEdges)
@@ -267,6 +253,25 @@ public class Graph implements Serializable {
         availableLabels.add(Integer.parseInt(node.nodeLabel));
     }
 
+    public Map<String, Object> getGraphReportMap()
+    {
+        int nodeCount = this.V.size();
+        int edgeCount = this.E.size();
+        boolean isConnected = false;
+        if (nodeCount > 0) {
+            DFS dfs = new DFS(this,this.V.getFirst());
+            isConnected = dfs.isConnected();
+        }
+
+        Map<String, Object> graphReportMap = new HashMap<>();
+
+        graphReportMap.put("nodeCount", nodeCount);
+        graphReportMap.put("edgeCount", edgeCount);
+        graphReportMap.put("isDirected", this.isDirected());
+        graphReportMap.put("isConnected", isConnected);
+
+        return graphReportMap;
+    }
 
     public static class GraphNode implements Serializable{
         private Graph G;
