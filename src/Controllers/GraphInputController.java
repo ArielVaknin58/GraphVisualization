@@ -142,25 +142,24 @@ public class GraphInputController extends Controller{
             graphPaneContextMenu.hide();
         });
 
-        MenuItem AIGraphCreation = new MenuItem("create graph with AI");
-        AIGraphCreation.setOnAction(event -> {
-            System.out.println("build AI graph action");
-            loadGraphPromptPopup();
-            graphPaneContextMenu.hide();
+//        MenuItem AIGraphCreation = new MenuItem("create graph with AI");
+//        AIGraphCreation.setOnAction(event -> {
+//            System.out.println("build AI graph action");
+//            loadGraphPromptPopup();
+//            graphPaneContextMenu.hide();
+//
+//        });
 
-        });
+//        MenuItem AIGraphExplainator = new MenuItem("Explain graph stats");
+//        AIGraphExplainator.setOnAction(event ->{
+//            System.out.println("explain graph stats");
+//
+//            graphPaneContextMenu.hide();
+//        });
 
-        MenuItem AIGraphExplainator = new MenuItem("Explain graph stats");
-        AIGraphExplainator.setOnAction(event ->{
-            System.out.println("explain graph stats");
-            GeminiService gs = GeminiService.getInstance();
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String jsonReport = gson.toJson(GraphInputController.G.getGraphReportMap());
-            ExplainGraphWithPrompt(gs.getfinalPromptForExplainer(jsonReport));
-            graphPaneContextMenu.hide();
-        });
+        //graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem, AIGraphCreation, AIGraphExplainator);
+        graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem);
 
-        graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem, AIGraphCreation, AIGraphExplainator);
 
         // --- Event Handlers for the Pane ---
         graphContainer.setOnContextMenuRequested(event -> {
@@ -192,19 +191,19 @@ public class GraphInputController extends Controller{
         });
     }
 
-    private void ExplainGraphWithPrompt(String finalPrompt) {
-        GeminiService gs = GeminiService.getInstance();
-        LoadingPopup loadingPopup = new LoadingPopup();
-        loadingPopup.show();
-        new Thread(() -> {
-
-            String analysis = gs.generateContent(finalPrompt);
-            Platform.runLater(() -> {
-                infoPopup(analysis);
-                loadingPopup.hide();
-            });
-        }).start();
-    }
+//    private void ExplainGraphWithPrompt(String finalPrompt) {
+//        GeminiService gs = GeminiService.getInstance();
+//        LoadingPopup loadingPopup = new LoadingPopup();
+//        loadingPopup.show();
+//        new Thread(() -> {
+//
+//            String analysis = gs.generateContent(finalPrompt);
+//            Platform.runLater(() -> {
+//                infoPopup(analysis);
+//                loadingPopup.hide();
+//            });
+//        }).start();
+//    }
 
     public Graph getGraph()
     {
@@ -219,25 +218,26 @@ public class GraphInputController extends Controller{
         displayGraph(G);
     }
 
-    private void loadGraphPromptPopup()
-    {
-        try {
-            FXMLLoader saveGraphLoader = new FXMLLoader(getClass().getResource(AppSettings.graph_Prompt_Popup_Location));
-            AnchorPane saveGraphPane = saveGraphLoader.load();
+//    private void loadGraphPromptPopup()
+//    {
+//        try {
+//            FXMLLoader saveGraphLoader = new FXMLLoader(getClass().getResource(AppSettings.graph_Prompt_Popup_Location));
+//            AnchorPane saveGraphPane = saveGraphLoader.load();
+//
+//            Stage popupStage = new Stage();
+//            popupStage.setTitle("create graph with AI prompt");
+//
+//            popupStage.initModality(Modality.APPLICATION_MODAL);
+//            Scene popupScene = new Scene(saveGraphPane);
+//            popupStage.setScene(popupScene);
+//            ThemeManager.getThemeManager().AddScene(popupScene);
+//            popupStage.showAndWait();
+//        }
+//        catch (IOException e) {
+//            AlertError(e);
+//        }
+//    }
 
-            Stage popupStage = new Stage();
-            popupStage.setTitle("create graph with AI prompt");
-
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            Scene popupScene = new Scene(saveGraphPane);
-            popupStage.setScene(popupScene);
-            ThemeManager.getThemeManager().AddScene(popupScene);
-            popupStage.showAndWait();
-        }
-        catch (IOException e) {
-            AlertError(e);
-        }
-    }
     @FXML
     private void onSaveGraph()
     {

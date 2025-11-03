@@ -10,6 +10,8 @@ public class GraphData {
     public List<String> nodes;
     public List<EdgeData> edges;
 
+    public GraphData() {}
+
     public GraphData(Graph graph) {
         this.isDirected = graph.isDirected();
         this.nodes = new ArrayList<>();

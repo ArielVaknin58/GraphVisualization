@@ -2,6 +2,7 @@ package Services;
 
 import GraphVisualizer.AppSettings;
 import com.google.genai.Client;
+import com.google.genai.types.GenerateContentConfig;
 import com.google.genai.types.GenerateContentResponse;
 import com.google.genai.errors.ApiException; // Correct package is "exceptions"
 import java.io.IOException; // This is required for network calls
@@ -57,6 +58,24 @@ public class GeminiService {
 
         return "Error: Failed to get response.";
     }
+
+    public String generateContentWithConfig(String promptText, GenerateContentConfig config) {
+        if (!isReady()) {
+            return "Error: GeminiService is not initialized. Please set the GEMINI_API_KEY.";
+        }
+
+        try {
+            GenerateContentResponse response = client.models.generateContent(AppSettings.AI_model_used, promptText, config);
+            return response.text();
+
+        } catch (ApiException e) {
+            Platform.runLater(() -> {
+                Controller.AlertError(e);
+            });
+        }
+        return "Error: Failed to get response.";
+    }
+
 
     public String getFinalPromptText(String userPrompt) {
         String finalPrompt = "You are a graph data generator. Parse the user's request and return " +

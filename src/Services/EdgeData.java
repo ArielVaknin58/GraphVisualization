@@ -8,6 +8,9 @@ public class EdgeData {
     public String to;
     public int weight;
 
+    public EdgeData() {}
+
+
     public EdgeData(DirectedEdge edge) {
         this.from = edge.getFrom().getNodeLabel();
         this.to = edge.getTo().getNodeLabel();

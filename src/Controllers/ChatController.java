@@ -4,6 +4,12 @@ import GraphVisualizer.Graph;
 import Services.ChatRecord; // Make sure this is: public record ChatRecord(String role, String content) {}
 import Services.GeminiService;
 import Services.GraphData;
+import Services.GraphTools;
+import autovalue.shaded.org.objectweb.asm.Type;
+import com.google.genai.types.FunctionDeclaration;
+import com.google.genai.types.GenerateContentConfig;
+import com.google.genai.types.Schema;
+import com.google.genai.types.Tool;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.application.Platform; // Import this!
@@ -11,13 +17,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text; // Import Text and TextFlow
 import javafx.scene.text.TextFlow;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,11 +40,44 @@ public class ChatController extends Controller {
     @FXML
     private TextArea inputArea;
 
+    private GraphTools tools;
     private GeminiService geminiService = GeminiService.getInstance();
     private Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Create this once
+    private GenerateContentConfig geminiToolConfig;
 
+    public GenerateContentConfig getConfig()
+    {
+        return geminiToolConfig;
+    }
     @FXML
     public void initialize() {
+
+        tools = new GraphTools();
+        try {
+            Method runBFS = GraphTools.class.getMethod("runBFS",String.class);
+            Method runDFS = GraphTools.class.getMethod("runDFS",String.class);
+            Method runBipartite = GraphTools.class.getMethod("runBiPartite",String.class);
+            Method createGraph = GraphTools.class.getMethod("CreateDescribedGraph",String.class);
+            Method explainGraph = GraphTools.class.getMethod("ExplainGraph",String.class);
+            Method kosarajuAlgorithm = GraphTools.class.getMethod("runKosarajuAlgorithm",String.class);
+            Method superGraph = GraphTools.class.getMethod("runSuperGraphAlgorithm",String.class);
+
+            geminiToolConfig = GenerateContentConfig.builder().tools(Tool.builder().functions(runBFS).build(),
+                                                                     Tool.builder().functions(runDFS).build(),
+                                                                     Tool.builder().functions(runBipartite).build(),
+                                                                     Tool.builder().functions(createGraph).build(),
+                                                                     Tool.builder().functions(explainGraph).build(),
+                                                                     Tool.builder().functions(kosarajuAlgorithm).build(),
+                                                                     Tool.builder().functions(superGraph).build()
+
+
+                    ).build();
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            // Handle error - maybe show a warning to the user
+            addMessageToChat(new ChatRecord("model", "Error: Could not load AI tools."));
+        }
         ControllerManager.setChatController(this);
         chatView.setItems(chatHistory);
         chatView.setCellFactory(lv -> new ListCell<ChatRecord>() {
@@ -105,7 +144,7 @@ public class ChatController extends Controller {
             @Override
             protected String call() throws Exception {
                 Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Typing...")));
-                return geminiService.generateContent(masterPrompt);
+                return geminiService.generateContentWithConfig(masterPrompt,geminiToolConfig);
             }
         };
 
