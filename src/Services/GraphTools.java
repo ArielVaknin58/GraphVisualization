@@ -87,7 +87,7 @@ public class GraphTools {
 
         new Thread(() -> {
 
-            String jsonResponse = gs.generateContentWithConfig(finalPrompt, ControllerManager.getChatController().getConfig());
+            String jsonResponse = gs.generateContent(finalPrompt);
 
             int firstBrace = jsonResponse.indexOf('{');
             int lastBrace = jsonResponse.lastIndexOf('}');

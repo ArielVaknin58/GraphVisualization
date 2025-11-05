@@ -53,6 +53,8 @@ public class GraphResultController extends Controller{
             FXMLLoader saveGraphLoader = new FXMLLoader(getClass().getResource(AppSettings.save_Graph_Popup_location));
             AnchorPane saveGraphPane = saveGraphLoader.load();
 
+            graphOutputContainer.setPrefWidth(AppSettings.CONTAINER_WIDTH);
+            graphOutputContainer.setPrefHeight(AppSettings.CONTAINER_HEIGHT);
             Stage popupStage = new Stage();
             popupStage.setTitle("Save Graph");
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));

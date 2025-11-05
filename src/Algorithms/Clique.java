@@ -70,12 +70,15 @@ public class Clique extends NonDeterministicAlgorithm{
         {
             for(Graph.GraphNode node2 : currentSet)
             {
-                if (node1.neighborsList.contains(node2))
+                if(!node1.equals(node2))
                 {
-                    this.graphResult.getAdjacencyMap().get(node1).get(node2).ChangeColor(Color.RED);
+                    if (node1.neighborsList.contains(node2))
+                    {
+                        this.graphResult.getAdjacencyMap().get(node1).get(node2).ChangeColor(Color.RED);
+                    }
+                    else
+                        isSetFound = false;
                 }
-                else
-                    isSetFound = false;
             }
         }
 

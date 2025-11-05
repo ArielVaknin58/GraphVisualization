@@ -43,41 +43,32 @@ public class ChatController extends Controller {
     private GraphTools tools;
     private GeminiService geminiService = GeminiService.getInstance();
     private Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Create this once
-    private GenerateContentConfig geminiToolConfig;
+    //private GenerateContentConfig geminiToolConfig;
 
-    public GenerateContentConfig getConfig()
-    {
-        return geminiToolConfig;
-    }
+
     @FXML
     public void initialize() {
 
         tools = new GraphTools();
-        try {
-            Method runBFS = GraphTools.class.getMethod("runBFS",String.class);
-            Method runDFS = GraphTools.class.getMethod("runDFS",String.class);
-            Method runBipartite = GraphTools.class.getMethod("runBiPartite",String.class);
-            Method createGraph = GraphTools.class.getMethod("CreateDescribedGraph",String.class);
-            Method explainGraph = GraphTools.class.getMethod("ExplainGraph",String.class);
-            Method kosarajuAlgorithm = GraphTools.class.getMethod("runKosarajuAlgorithm",String.class);
-            Method superGraph = GraphTools.class.getMethod("runSuperGraphAlgorithm",String.class);
+        //            Method runBFS = GraphTools.class.getMethod("runBFS",String.class);
+//            Method runDFS = GraphTools.class.getMethod("runDFS",String.class);
+//            Method runBipartite = GraphTools.class.getMethod("runBiPartite",String.class);
+//            Method createGraph = GraphTools.class.getMethod("CreateDescribedGraph",String.class);
+//            Method explainGraph = GraphTools.class.getMethod("ExplainGraph",String.class);
+//            Method kosarajuAlgorithm = GraphTools.class.getMethod("runKosarajuAlgorithm",String.class);
+//            Method superGraph = GraphTools.class.getMethod("runSuperGraphAlgorithm",String.class);
+//
+//            geminiToolConfig = GenerateContentConfig.builder().tools(Tool.builder().functions(runBFS).build(),
+//                                                                     Tool.builder().functions(runDFS).build(),
+//                                                                     Tool.builder().functions(runBipartite).build(),
+//                                                                     Tool.builder().functions(createGraph).build(),
+//                                                                     Tool.builder().functions(explainGraph).build(),
+//                                                                     Tool.builder().functions(kosarajuAlgorithm).build(),
+//                                                                     Tool.builder().functions(superGraph).build()
+//
+//
+//                    ).build();
 
-            geminiToolConfig = GenerateContentConfig.builder().tools(Tool.builder().functions(runBFS).build(),
-                                                                     Tool.builder().functions(runDFS).build(),
-                                                                     Tool.builder().functions(runBipartite).build(),
-                                                                     Tool.builder().functions(createGraph).build(),
-                                                                     Tool.builder().functions(explainGraph).build(),
-                                                                     Tool.builder().functions(kosarajuAlgorithm).build(),
-                                                                     Tool.builder().functions(superGraph).build()
-
-
-                    ).build();
-
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            // Handle error - maybe show a warning to the user
-            addMessageToChat(new ChatRecord("model", "Error: Could not load AI tools."));
-        }
         ControllerManager.setChatController(this);
         chatView.setItems(chatHistory);
         chatView.setCellFactory(lv -> new ListCell<ChatRecord>() {
@@ -144,7 +135,7 @@ public class ChatController extends Controller {
             @Override
             protected String call() throws Exception {
                 Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Typing...")));
-                return geminiService.generateContentWithConfig(masterPrompt,geminiToolConfig);
+                return geminiService.generateContent(masterPrompt);
             }
         };
 

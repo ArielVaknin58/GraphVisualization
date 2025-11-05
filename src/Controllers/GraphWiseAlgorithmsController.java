@@ -63,8 +63,6 @@ public class GraphWiseAlgorithmsController extends Controller{
     private Button CliqueButton;
     @FXML
     private Button kColorsButton;
-    @FXML
-    private Button chatOpener;
 
 
     public void initialize()
@@ -107,29 +105,6 @@ public class GraphWiseAlgorithmsController extends Controller{
 
     }
 
-    public void OnChatOpenerClicked()
-    {
-        try
-        {
-            FXMLLoader NDLoader = new FXMLLoader(getClass().getResource(AppSettings.chat_window_location));
-            Pane chatWindow = NDLoader.load();
-            NDLoader.getController();
-
-            Stage popupStage = new Stage();
-            popupStage.setTitle("chat with AI");
-            popupStage.resizableProperty().set(false);
-            javafx.scene.image.Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));
-            popupStage.getIcons().add(icon);
-
-            Scene popupScene = new Scene(chatWindow);
-            popupStage.setScene(popupScene);
-            ThemeManager.getThemeManager().AddScene(popupScene);
-            popupStage.showAndWait();
-
-        } catch (Exception e) {
-            AlertError(e);
-        }
-    }
 
     public void OnTopologicalClick()
     {

@@ -82,8 +82,8 @@ public class Graph implements Serializable {
 
     public GraphNode createNode(String label) {
         Random rand = new Random();
-        int x = rand.nextInt(1,14);
-        int y = rand.nextInt(1,12);
+        int x = rand.nextInt(1,AppSettings.CONTAINER_WIDTH / 50); //14
+        int y = rand.nextInt(1,AppSettings.CONTAINER_HEIGHT / 50); //12
         //GraphNode node = new GraphNode(50 + 50*x, 50+50*y, label,this);
 //        if(VerticeIndexer.containsKey(node.nodeLabel))
 //        {
