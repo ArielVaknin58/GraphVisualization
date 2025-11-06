@@ -62,6 +62,8 @@ public class GraphInputController extends Controller{
     private Label weightLabel;
     @FXML
     private TextField capacityField;
+    @FXML
+    private CheckBox apiModeCheckbox;
     private ContextMenu graphPaneContextMenu;
     private ContextMenuEvent currentContextMenuEvent;
     private ContextMenu verticeContextMenu;
@@ -73,6 +75,10 @@ public class GraphInputController extends Controller{
     public AnchorPane getGraphContainer()
     {
         return graphContainer;
+    }
+
+    public boolean isApiMode() {
+        return apiModeCheckbox.isSelected();
     }
 
     public void initialize() {
@@ -104,6 +110,7 @@ public class GraphInputController extends Controller{
         });
 
         DirectedCheckbox.setSelected(false);
+        apiModeCheckbox.setSelected(false);
         DirectedCheckbox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
             enterButton.setDisable(false);
             graphContainer.getChildren().clear();
@@ -274,8 +281,6 @@ public class GraphInputController extends Controller{
         catch (IOException e) {
             AlertError(e);
         }
-
-
     }
 
     public static void CreateGraphStatic(GraphData data) {
@@ -482,6 +487,8 @@ public class GraphInputController extends Controller{
         else
         {
             algorithm.Run();
+            if(isApiMode())
+                algorithm.OutputContentToFile();
             algorithm.DisplayResults();
         }
 

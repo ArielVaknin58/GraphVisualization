@@ -3,15 +3,24 @@ package Algorithms;
 import Controllers.Controller;
 import Controllers.ControllerManager;
 import Controllers.GraphResultController;
+import Controllers.SaveGraphPopupController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 public abstract class Algorithm {
@@ -34,6 +43,52 @@ public abstract class Algorithm {
     public abstract void DisplayResults();
 
     public abstract void CreateOutputGraph();
+
+
+    public void OutputContentToFile()
+    {
+        try {
+            FXMLLoader saveGraphLoader = new FXMLLoader(getClass().getResource(AppSettings.save_Graph_Popup_location));
+            AnchorPane saveGraphPane = saveGraphLoader.load();
+            SaveGraphPopupController loader = saveGraphLoader.getController();
+
+
+            Stage popupStage = new Stage();
+            popupStage.setTitle("Save Results as file");
+
+            popupStage.initModality(Modality.APPLICATION_MODAL);
+
+            Scene popupScene = new Scene(saveGraphPane);
+            popupStage.setScene(popupScene);
+            loader.setAlgorithm(this);
+
+            ThemeManager.getThemeManager().AddScene(popupScene);
+
+            popupStage.showAndWait();
+        }
+        catch (IOException e) {
+            Controller.AlertError(e);
+        }
+    }
+
+
+    public void PrintOutputToFile(String fileName)
+    {
+        try {
+            Path apiModeOutput = Paths.get(System.getProperty("user.dir"), "ApiModeOutput");
+            Files.createDirectories(apiModeOutput);
+            Path textFile = apiModeOutput.resolve(fileName + ".txt");
+
+            WriteOutputToFile(textFile);
+
+            ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup("results stored as : " + fileName + ".txt");
+
+        } catch (IOException e) {
+            Controller.AlertError(e);
+        }
+    }
+
+    protected void WriteOutputToFile(Path fileName) {};
 
     protected void loadResultsPane()
     {

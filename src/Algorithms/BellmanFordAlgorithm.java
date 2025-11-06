@@ -16,6 +16,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -127,6 +131,27 @@ public class BellmanFordAlgorithm extends Algorithm{
 
     @Override
     public void CreateOutputGraph() {}
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ "---");
+            for (Map.Entry<Graph.GraphNode, Integer> entry : weightedPaths.entrySet()) {
+                String displayWeight = (entry.getValue() == Integer.MAX_VALUE) ? "∞" : entry.getValue().toString();
+                out.println(entry.getKey().getNodeLabel()+" : "+displayWeight);
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
+
+
+    }
 
     private boolean relax(Graph.GraphNode source, Graph.GraphNode dest, DirectedEdge edge)
     {

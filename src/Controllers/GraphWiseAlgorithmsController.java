@@ -93,15 +93,22 @@ public class GraphWiseAlgorithmsController extends Controller{
 
     private void run(Algorithm algorithm)
     {
-        if (!algorithm.checkValidity())
+        try
         {
-            AlertError(new InvalidAlgorithmInputException(algorithm));
-        }
-        else
+            if (!algorithm.checkValidity())
+            {
+                AlertError(new InvalidAlgorithmInputException(algorithm));
+            }
+            else
+            {
+                algorithm.Run();
+                algorithm.DisplayResults();
+            }
+        }catch (Exception e)
         {
-            algorithm.Run();
-            algorithm.DisplayResults();
+            AlertError(e);
         }
+
 
     }
 

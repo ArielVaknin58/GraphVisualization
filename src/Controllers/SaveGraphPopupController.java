@@ -1,5 +1,6 @@
 package Controllers;
 
+import Algorithms.Algorithm;
 import GraphVisualizer.Graph;
 import GraphVisualizer.GraphSerializer;
 import javafx.fxml.FXML;
@@ -12,17 +13,23 @@ public class SaveGraphPopupController extends  Controller{
 
     @FXML
     private TextField nameInput;
-
     @FXML
     private Button saveButton;
-
     @FXML
     private Label errorLabel;
+    @FXML
+    private Label saveLabel;
+
+    private Algorithm currentAlgorithm;
 
     @FXML
     private void initialize() {
         errorLabel.setText(""); // start with no error message
         ControllerManager.setSaveGraphPopupController(this);
+    }
+
+    public void setAlgorithm(Algorithm algorithm) {
+        currentAlgorithm = algorithm;
     }
 
     @FXML
@@ -41,6 +48,11 @@ public class SaveGraphPopupController extends  Controller{
         }
 
 
+        if(!ControllerManager.getGraphInputController().isApiMode())
+            saveLabel.setText("Please enter filename to be saved (will be saved as name.ser) :");
+        else
+            saveLabel.setText("Please enter filename to be saved (will be saved as name.txt) :");
+
         System.out.println("Saving graph as: " + filename + ".ser");
 
         Stage stage = (Stage) saveButton.getScene().getWindow();
@@ -57,7 +69,12 @@ public class SaveGraphPopupController extends  Controller{
             node.xPosition = node.getCircle().getCenterX();
             node.yPosition = node.getCircle().getCenterY();
         }
-        GraphSerializer.saveGraph(graphToSave, filename);
+        if(!ControllerManager.getGraphInputController().isApiMode())
+            GraphSerializer.saveGraph(graphToSave, filename);
+        else
+        {
+            currentAlgorithm.PrintOutputToFile(filename);
+        }
     }
 
 
