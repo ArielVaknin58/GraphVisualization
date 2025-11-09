@@ -19,6 +19,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import static Controllers.Controller.AlertError;
@@ -43,6 +47,40 @@ public class ConnectivityComponents extends Algorithm{
             return;
         DFS dfs = new DFS(G,null);
         result = dfs.FindConnectivityComponents();
+
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            Hashtable<String, Set<String>> components = new Hashtable<>();
+            for(String Hvertice : result.keySet())
+            {
+                components.put(Hvertice, new HashSet<>(Arrays.asList(result.get(Hvertice).split(","))));
+            }
+            this.graphResult = new Graph(this.G);
+            int componentNumber = 0;
+            for(String componentIndex : components.keySet())
+            {
+                out.print("component #"+(componentNumber+1)+": ");
+                Set<String> verticesLabels = components.get(componentIndex);
+                for(String verticeLabel : verticesLabels)
+                {
+                    out.print(verticeLabel+", ");
+                }
+                out.println();
+                componentNumber++;
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
 
     }
 
@@ -85,4 +123,8 @@ public class ConnectivityComponents extends Algorithm{
         loadResultsPane();
     }
 
+    @Override
+    public void PrintOutputToFile(String fileName) {
+        super.PrintOutputToFile(fileName);
+    }
 }

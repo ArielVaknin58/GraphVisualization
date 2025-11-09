@@ -7,7 +7,7 @@
 <AnchorPane fx:id="saveGraphPane" prefHeight="128.0" prefWidth="391.0" styleClass="InnerComponents" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SaveGraphPopupController">
 
    <children>
-      <Label layoutX="19.0" layoutY="24.0" prefHeight="17.0" prefWidth="360.0" text="Please enter filename to be saved (will be saved as name.ser) :" />
+      <Label fx:id="saveLabel" layoutX="19.0" layoutY="24.0" prefHeight="17.0" prefWidth="360.0" />
       <Button fx:id="saveButton" layoutX="220.0" layoutY="60.0" mnemonicParsing="false" onAction="#onSaveGraphSaveClicked" prefHeight="25.0" prefWidth="77.0" text="Save" />
       <TextField fx:id="nameInput" layoutX="51.0" layoutY="60.0" />
       <Label fx:id="errorLabel" alignment="CENTER" layoutX="51.0" layoutY="91.0" prefHeight="17.0" prefWidth="244.0" textFill="#f21a02">

@@ -16,6 +16,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import static Controllers.Controller.AlertError;
@@ -168,6 +173,37 @@ public class FloydWarshallAlgorithm extends Algorithm{
 
     @Override
     public void CreateOutputGraph() {}
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            for (Graph.GraphNode node : weightsMatrix.keySet()) {
+                int counter = 1;
+                out.println("vertice "+node.getNodeLabel()+" :");
+                for(Graph.GraphNode node1 : weightsMatrix.get(node).keySet())
+                {
+                    if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0)
+                    {
+                        out.println(node1.getNodeLabel() + " : " + weightsMatrix.get(node).get(node1) );
+                    }
+                    else
+                    {
+                        out.print(node1.getNodeLabel() + " : " + weightsMatrix.get(node).get(node1) +" ");
+                    }
+                    counter++;
+                }
+
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
+    }
 
     private ObservableList<ObservableList<String>> createMatrix(List<Graph.GraphNode> orderedNodes)
     {

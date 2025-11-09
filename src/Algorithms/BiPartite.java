@@ -14,8 +14,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+
+import static Controllers.Controller.AlertError;
 
 public class BiPartite extends Algorithm{
 
@@ -62,12 +69,6 @@ public class BiPartite extends Algorithm{
         return !this.G.isDirected() && dfs.isConnected();
     }
 
-    public Graph getResultsGraph()
-    {
-        if(isBipartite)
-            return this.graphResult;
-        return null;
-    }
 
     @Override
     public void DisplayResults()
@@ -96,4 +97,38 @@ public class BiPartite extends Algorithm{
             }
         }
     }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+
+        try (PrintWriter out = new PrintWriter(Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results "+" ---");
+            if(isBipartite)
+            {
+                for(Graph.GraphNode node : graphResult.V)
+                {
+                    if(bfsRESULT.get(node.getNodeLabel()) % 2 == 0)
+                    {
+                        out.println(node.getNodeLabel() + " - " + "SIDE A");
+                    }
+                    else
+                    {
+                        out.println(node.getNodeLabel() + " - " + "SIDE B");
+                    }
+                }
+            }
+            else
+            {
+                out.println("--- The given graph isn't bipartite. ---");
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
+
+    }
+
 }

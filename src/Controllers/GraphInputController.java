@@ -70,7 +70,7 @@ public class GraphInputController extends Controller{
     private ContextMenu edgeContextMenu;
 
     private int vertexCount = 0;
-    private static Graph G = new Graph(true);
+    private static Graph G = new Graph(false);
 
     public AnchorPane getGraphContainer()
     {
@@ -80,6 +80,7 @@ public class GraphInputController extends Controller{
     public boolean isApiMode() {
         return apiModeCheckbox.isSelected();
     }
+
 
     public void initialize() {
         try {
@@ -444,8 +445,7 @@ public class GraphInputController extends Controller{
                 contextMenu.hide();
             }
         });
-        // Show the menu at the mouse's screen position
-        // We show it "on" the graphPane, but at the mouse's coordinates
+
         contextMenu.show(graphContainer, event.getScreenX(), event.getScreenY());
     }
 

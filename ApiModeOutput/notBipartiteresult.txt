@@ -1,0 +1,5 @@
+--- Bipartite graph algorithm Results  ---
+--- The given graph isn't bipartite. ---
+----------------------------------------------
+
+

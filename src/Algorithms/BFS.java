@@ -16,6 +16,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import static Controllers.Controller.AlertError;
@@ -121,6 +125,25 @@ public class BFS extends Algorithm{
             popupStage.show();
 
         }catch (IOException e)
+        {
+            AlertError(e);
+        }
+
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ "---");
+            for (Map.Entry<String, String> entry : result.entrySet()) {
+                out.println(entry.getKey()+" : "+entry.getValue());
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
         {
             AlertError(e);
         }

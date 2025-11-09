@@ -2,6 +2,10 @@ package Services;
 
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,5 +27,11 @@ public class GraphData {
             this.edges.add(new EdgeData(edge));
         }
 
+    }
+
+    public void PrintJsonGraphToFile(PrintWriter out)
+    {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        gson.toJson(this, out);
     }
 }

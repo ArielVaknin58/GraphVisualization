@@ -137,6 +137,7 @@ public class BellmanFordAlgorithm extends Algorithm{
 
         try (PrintWriter out = new PrintWriter(
                 Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+
             out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ "---");
             for (Map.Entry<Graph.GraphNode, Integer> entry : weightedPaths.entrySet()) {
                 String displayWeight = (entry.getValue() == Integer.MAX_VALUE) ? "∞" : entry.getValue().toString();

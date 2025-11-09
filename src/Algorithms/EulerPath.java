@@ -1,9 +1,17 @@
 package Algorithms;
 
 import Controllers.ControllerManager;
+import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
+
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import static Controllers.Controller.AlertError;
 
 public class EulerPath extends Algorithm{
 
@@ -107,12 +115,41 @@ public class EulerPath extends Algorithm{
 
     }
 
+
     @Override
     public Boolean checkValidity() {
         if(G.V.isEmpty())
             return false;
         DFS dfs = new DFS(G,G.V.getFirst());
         return !this.G.isDirected() && dfs.isConnected();
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            int counter = 1;
+            for (Graph.GraphNode node : result) {
+                if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
+                {
+                    out.println(node.getNodeLabel());
+                    if(!node.equals(result.getLast()))
+                        out.print("--> ");
+                }
+                else
+                {
+                    out.print(node.getNodeLabel() + "--> ");
+                }
+                counter++;
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
     }
 
     @Override

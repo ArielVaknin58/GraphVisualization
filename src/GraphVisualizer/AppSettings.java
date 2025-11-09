@@ -1,10 +1,13 @@
 package GraphVisualizer;
 
 
+import com.google.genai.types.UpscaleImageResponse;
+
 public class AppSettings {
     public static int nodeRadius = 25;
     public static int nodeLabelPadding = 5;
     public static int EdgeWidth = 4;
+    public static int VERTICES_IN_LINE_IN_FILES = 5;
     public static final double ARROW_SIZE = 10;
     public static final int MAX_VERTICES = 30;
     public static final int MAX_WEIGHT = 1000000;

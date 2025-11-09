@@ -11,7 +11,13 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import jdk.jshell.spi.ExecutionControl;
 
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
+
+import static Controllers.Controller.AlertError;
 
 public class DFS extends Algorithm{
 
@@ -22,6 +28,7 @@ public class DFS extends Algorithm{
     private Hashtable<DirectedEdge,Boolean> coloredEdges = new Hashtable<DirectedEdge, Boolean>();
     private Hashtable<String,String> rootVertice;
     private List<Graph.GraphNode> finishTimeList;
+    private List<Graph.GraphNode> StartTimeList;
     private int dfsAnimationNodeIndex = 0;
     public static final String AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by iterating over its neighbors and exhusting all the paths from one child before proceeding to the next - unlike BFS that exhusts all the children nodes before proceeding";
 
@@ -34,6 +41,7 @@ public class DFS extends Algorithm{
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
         this.rootVertice = new Hashtable<>();
         this.finishTimeList = new ArrayList<>();
+        this.StartTimeList = new ArrayList<>();
         initColors();
     }
 
@@ -147,6 +155,7 @@ public class DFS extends Algorithm{
     private void visitRegular(Graph.GraphNode currentNode)
     {
         colors.put(currentNode.getNodeLabel(), Color.GREY);
+        StartTimeList.add(currentNode);
 
         for (Graph.GraphNode neighbor : currentNode.neighborsList) {
             if (colors.get(neighbor.getNodeLabel()) == Color.WHITE) {
@@ -343,6 +352,36 @@ public class DFS extends Algorithm{
         }
 
         return rootVertice;
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        initColors();
+        visitRegular(inputNode);
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ "---");
+            int counter = 1;
+            for (Graph.GraphNode node : StartTimeList) {
+                if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(StartTimeList.getLast()))
+                {
+                    out.println(node.getNodeLabel());
+                    if(!node.equals(StartTimeList.getLast()))
+                        out.print("--> ");
+                }
+                else
+                {
+                    out.print(node.getNodeLabel() + "--> ");
+                }
+                counter++;
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
     }
 
     public String FindDirectedComponent(Graph.GraphNode current)

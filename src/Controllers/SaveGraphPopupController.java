@@ -24,7 +24,11 @@ public class SaveGraphPopupController extends  Controller{
 
     @FXML
     private void initialize() {
-        errorLabel.setText(""); // start with no error message
+        errorLabel.setText("");
+        if(!ControllerManager.getGraphInputController().isApiMode())
+            saveLabel.setText("Please enter filename to be saved (will be saved as name.ser) :");
+        else
+            saveLabel.setText("Please enter filename to be saved (will be saved as name.txt) :");
         ControllerManager.setSaveGraphPopupController(this);
     }
 
@@ -48,10 +52,6 @@ public class SaveGraphPopupController extends  Controller{
         }
 
 
-        if(!ControllerManager.getGraphInputController().isApiMode())
-            saveLabel.setText("Please enter filename to be saved (will be saved as name.ser) :");
-        else
-            saveLabel.setText("Please enter filename to be saved (will be saved as name.txt) :");
 
         System.out.println("Saving graph as: " + filename + ".ser");
 

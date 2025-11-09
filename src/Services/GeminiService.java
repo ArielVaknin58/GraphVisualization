@@ -78,17 +78,16 @@ public class GeminiService {
 
 
     public String getFinalPromptText(String userPrompt) {
-        String finalPrompt = "You are a graph data generator. Parse the user's request and return " +
+        return "You are a graph data generator. Parse the user's request and return " +
                 "ONLY a single, valid JSON object based on the 'GraphData' and 'EdgeData' " +
                 "Java classes. The JSON must have these keys: isDirected (boolean), " +
                 "nodes (a list of strings that can be parsed to numbers, starting from 1 and not 0), and edges (a list of objects, " +
-                "each with 'from' and 'to' string keys where the values can be parsed to numbers. and if the graph is undirected then also create the other edge. also edges can have weights so if it isn't mentioned then the weight of the edge is 0).\n\n" +
+                "each with 'from' and 'to' string keys where the values can be parsed to numbers. and if the graph is undirected then also create the other edge. also edges can have weights so if it isn't mentioned then the weight of the edge is 0). edges can also have capacities, if not mentioned then the value is 0.\n\n" +
                 "User Request: \"" + userPrompt + "\"";
-        return finalPrompt;
     }
 
     public String getfinalPromptForExplainer(String graphReport) {
-        String prompt = "You are an expert graph analyst. Your job is to take the " +
+        return "You are an expert graph analyst. Your job is to take the " +
                 "following pre-computed graph report (in JSON format) and write " +
                 "a human-readable summary for a user.\n\n" +
                 "Here is the graph report:\n" +
@@ -98,6 +97,5 @@ public class GeminiService {
                 "2. Whether the graph is directed or undirected.\n" +
                 "3. A clear statement, based on the isConnected flag, about whether " +
                 "the graph is connected or has separate parts.";
-        return prompt;
     }
 }
