@@ -6,6 +6,9 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import Services.GraphData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -14,8 +17,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Objects;
+
+import static Controllers.Controller.AlertError;
 
 public class ShortestPathsTree extends Algorithm{
 
@@ -70,6 +79,36 @@ public class ShortestPathsTree extends Algorithm{
                 DirectedEdge edge = graphResult.createEdge(parent.getNodeLabel(),nodeLabel);
                 edge.ChangeColor(Color.RED);
             }
+        }
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        Graph graph = new Graph(false);
+        for(Graph.GraphNode currentNode : this.G.V)
+        {
+            graph.createNodeWithCoordinates(currentNode.xPosition, currentNode.yPosition, currentNode.getNodeLabel());
+        }
+        for(String nodeLabel : bfsResult.keySet())
+        {
+            if(bfsResult.get(nodeLabel) != null)
+            {
+                Graph.GraphNode parent = this.G.VerticeIndexer.get(bfsResult.get(nodeLabel));
+                graph.createEdge(parent.getNodeLabel(),nodeLabel);
+            }
+        }
+
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(new GraphData(graph), out);
+            out.println("\n----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
         }
     }
 }

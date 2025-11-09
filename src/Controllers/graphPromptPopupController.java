@@ -53,6 +53,7 @@ public class graphPromptPopupController extends Controller{
                 // If we can't find a { or }, the response is bad.
                 Platform.runLater(() -> {
                     Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
+                    loadingPopup.hide();
                     System.out.println(jsonResponse);
                 });
                 return;

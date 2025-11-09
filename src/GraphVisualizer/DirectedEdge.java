@@ -62,6 +62,8 @@ public class DirectedEdge implements Serializable,Comparable {
         this.from = other.from;
         this.to = other.to;
         this.weight = other.getWeight();
+        this.capacity = other.getCapacity();
+        this.flow = other.getFlow();
 
         this.shaft = null;
         this.arrowHead = null;

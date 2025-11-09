@@ -1,0 +1,236 @@
+--- Ford-Felkerson Algorithm Results from vertice 10 to 1 ---
+{
+  "isDirected": true,
+  "nodes": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15"
+  ],
+  "edges": [
+    {
+      "from": "1",
+      "to": "8",
+      "weight": 0,
+      "capacity": 78,
+      "flow": 0
+    },
+    {
+      "from": "1",
+      "to": "12",
+      "weight": 0,
+      "capacity": 45,
+      "flow": 0
+    },
+    {
+      "from": "2",
+      "to": "5",
+      "weight": 0,
+      "capacity": 91,
+      "flow": 0
+    },
+    {
+      "from": "2",
+      "to": "14",
+      "weight": 0,
+      "capacity": 23,
+      "flow": 7
+    },
+    {
+      "from": "3",
+      "to": "1",
+      "weight": 0,
+      "capacity": 66,
+      "flow": 57
+    },
+    {
+      "from": "3",
+      "to": "7",
+      "weight": 0,
+      "capacity": 5,
+      "flow": 0
+    },
+    {
+      "from": "4",
+      "to": "9",
+      "weight": 0,
+      "capacity": 88,
+      "flow": 0
+    },
+    {
+      "from": "4",
+      "to": "15",
+      "weight": 0,
+      "capacity": 31,
+      "flow": 0
+    },
+    {
+      "from": "5",
+      "to": "2",
+      "weight": 0,
+      "capacity": 100,
+      "flow": 7
+    },
+    {
+      "from": "5",
+      "to": "11",
+      "weight": 0,
+      "capacity": 12,
+      "flow": 0
+    },
+    {
+      "from": "6",
+      "to": "3",
+      "weight": 0,
+      "capacity": 57,
+      "flow": 7
+    },
+    {
+      "from": "6",
+      "to": "10",
+      "weight": 0,
+      "capacity": 74,
+      "flow": 0
+    },
+    {
+      "from": "7",
+      "to": "4",
+      "weight": 0,
+      "capacity": 29,
+      "flow": 0
+    },
+    {
+      "from": "7",
+      "to": "13",
+      "weight": 0,
+      "capacity": 95,
+      "flow": 0
+    },
+    {
+      "from": "8",
+      "to": "6",
+      "weight": 0,
+      "capacity": 41,
+      "flow": 0
+    },
+    {
+      "from": "8",
+      "to": "14",
+      "weight": 0,
+      "capacity": 82,
+      "flow": 0
+    },
+    {
+      "from": "9",
+      "to": "1",
+      "weight": 0,
+      "capacity": 19,
+      "flow": 0
+    },
+    {
+      "from": "9",
+      "to": "12",
+      "weight": 0,
+      "capacity": 63,
+      "flow": 0
+    },
+    {
+      "from": "10",
+      "to": "5",
+      "weight": 0,
+      "capacity": 7,
+      "flow": 7
+    },
+    {
+      "from": "10",
+      "to": "15",
+      "weight": 0,
+      "capacity": 50,
+      "flow": 50
+    },
+    {
+      "from": "11",
+      "to": "2",
+      "weight": 0,
+      "capacity": 33,
+      "flow": 0
+    },
+    {
+      "from": "11",
+      "to": "8",
+      "weight": 0,
+      "capacity": 98,
+      "flow": 0
+    },
+    {
+      "from": "12",
+      "to": "7",
+      "weight": 0,
+      "capacity": 21,
+      "flow": 0
+    },
+    {
+      "from": "12",
+      "to": "9",
+      "weight": 0,
+      "capacity": 48,
+      "flow": 0
+    },
+    {
+      "from": "13",
+      "to": "4",
+      "weight": 0,
+      "capacity": 76,
+      "flow": 0
+    },
+    {
+      "from": "13",
+      "to": "11",
+      "weight": 0,
+      "capacity": 1,
+      "flow": 0
+    },
+    {
+      "from": "14",
+      "to": "6",
+      "weight": 0,
+      "capacity": 85,
+      "flow": 7
+    },
+    {
+      "from": "14",
+      "to": "10",
+      "weight": 0,
+      "capacity": 39,
+      "flow": 0
+    },
+    {
+      "from": "15",
+      "to": "3",
+      "weight": 0,
+      "capacity": 55,
+      "flow": 50
+    },
+    {
+      "from": "15",
+      "to": "13",
+      "weight": 0,
+      "capacity": 68,
+      "flow": 0
+    }
+  ]
+}
+----------------------------------------------
+
+

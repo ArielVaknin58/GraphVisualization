@@ -6,13 +6,22 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import Services.GraphData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
+
+import static Controllers.Controller.AlertError;
 
 public class SuperGraph extends Algorithm{
 
@@ -84,6 +93,24 @@ public class SuperGraph extends Algorithm{
                 this.graphResult.createEdge(fromComponent,toComponent);
             }
 
+        }
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        CreateOutputGraph();
+
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(new GraphData(graphResult), out);
+            out.println("\n----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
         }
     }
 }

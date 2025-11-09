@@ -104,7 +104,8 @@ public class GraphWiseAlgorithmsController extends Controller{
                 algorithm.Run();
                 if(ControllerManager.getGraphInputController().isApiMode())
                     algorithm.OutputContentToFile();
-                algorithm.DisplayResults();
+                else
+                    algorithm.DisplayResults();
             }
         }catch (Exception e)
         {

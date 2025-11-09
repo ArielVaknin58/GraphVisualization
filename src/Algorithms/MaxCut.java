@@ -2,11 +2,20 @@ package Algorithms;
 
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import Services.GraphData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.scene.paint.Color;
 
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
+import static Controllers.Controller.AlertError;
 
 public class MaxCut extends NonDeterministicAlgorithm{
 
@@ -81,4 +90,5 @@ public class MaxCut extends NonDeterministicAlgorithm{
             }
         }
     }
+
 }

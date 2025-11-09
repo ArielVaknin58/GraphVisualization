@@ -2,9 +2,15 @@ package Algorithms;
 
 import GraphVisualizer.Graph;
 import javafx.scene.paint.Color;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+
+import static Controllers.Controller.AlertError;
 
 public class Clique extends NonDeterministicAlgorithm{
 
@@ -81,8 +87,34 @@ public class Clique extends NonDeterministicAlgorithm{
                 }
             }
         }
+    }
 
 
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            for(int counter = 1; counter <= this.iterations && !isSetFound; counter++)
+            {
+                Run();
+                out.println("Iteration #"+counter+":");
+                out.print("       current set: ");
+                for(Graph.GraphNode node : currentSet)
+                    out.print(node.getNodeLabel()+", ");
+                out.println(" --> not a clique");
+                CreateOutputGraph();
+                if(isSetFound)
+                    out.println(" --> Clique of size "+this.setSize+" found !");
+            }
+            if(!isSetFound)
+                out.println("\n--Clique of size "+this.setSize+" not found --");
+            out.println("----------------------------------------------\n\n");
 
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
     }
 }

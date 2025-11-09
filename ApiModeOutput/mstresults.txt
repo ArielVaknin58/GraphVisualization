@@ -1,0 +1,86 @@
+--- Prim's Algorithm Results ---
+{
+  "isDirected": false,
+  "nodes": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+  ],
+  "edges": [
+    {
+      "from": "2",
+      "to": "1",
+      "weight": 3,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "3",
+      "to": "1",
+      "weight": 4,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "4",
+      "to": "1",
+      "weight": 5,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "5",
+      "to": "1",
+      "weight": 6,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "6",
+      "to": "1",
+      "weight": 7,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "7",
+      "to": "1",
+      "weight": 8,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "8",
+      "to": "1",
+      "weight": 9,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "9",
+      "to": "1",
+      "weight": 10,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "10",
+      "to": "1",
+      "weight": 11,
+      "capacity": 0,
+      "flow": 0
+    }
+  ]
+}
+Tree Weight: 63
+
+----------------------------------------------
+
+

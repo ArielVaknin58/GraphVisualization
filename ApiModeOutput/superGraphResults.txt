@@ -1,0 +1,36 @@
+--- Super Graph Algorithm Results ---
+{
+  "isDirected": true,
+  "nodes": [
+    "4,6,5",
+    "1,3,2",
+    "8",
+    "7"
+  ],
+  "edges": [
+    {
+      "from": "1,3,2",
+      "to": "4,6,5",
+      "weight": 0,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "7",
+      "to": "8",
+      "weight": 0,
+      "capacity": 0,
+      "flow": 0
+    },
+    {
+      "from": "4,6,5",
+      "to": "7",
+      "weight": 0,
+      "capacity": 0,
+      "flow": 0
+    }
+  ]
+}
+----------------------------------------------
+
+

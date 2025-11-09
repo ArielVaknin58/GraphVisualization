@@ -13,9 +13,15 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static Controllers.Controller.AlertError;
 
 public class HamiltonianPath extends Algorithm{
 
@@ -77,4 +83,31 @@ public class HamiltonianPath extends Algorithm{
         graphResult.VerticeIndexer.get(result.getLast().getNodeLabel()).ChangeColor(Color.BLUEVIOLET);
     }
 
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            int counter = 1;
+            for (Graph.GraphNode node : result) {
+                if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
+                {
+                    out.println(node.getNodeLabel());
+                    if(!node.equals(result.getLast()))
+                        out.print("--> ");
+                }
+                else
+                {
+                    out.print(node.getNodeLabel() + "--> ");
+                }
+                counter++;
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
+    }
 }

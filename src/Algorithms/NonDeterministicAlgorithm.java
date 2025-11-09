@@ -1,6 +1,7 @@
 package Algorithms;
 
 import Controllers.Controller;
+import Controllers.ControllerManager;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
@@ -44,7 +45,8 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
 
             Run();
             CreateOutputGraph();
-            controller.displayGraph(this.graphResult);
+            if(!ControllerManager.getGraphInputController().isApiMode())
+                controller.displayGraph(this.graphResult);
 
             Stage resultStage = new Stage();
             Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(AppSettings.App_Icon_location)));

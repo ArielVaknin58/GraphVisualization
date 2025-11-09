@@ -1,10 +1,21 @@
 package Algorithms;
 
+import Controllers.ControllerManager;
+import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import Services.GraphData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.scene.paint.Color;
 
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
+
+import static Controllers.Controller.AlertError;
 
 public class FordFelkersonAlgorithm extends Algorithm{
 
@@ -145,5 +156,22 @@ public class FordFelkersonAlgorithm extends Algorithm{
                 edge.ChangeColor(Color.BLUE);
         }
 
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+s.getNodeLabel()+" to "+t.getNodeLabel()+" ---");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(new GraphData(this.G), out);
+            out.println("\nMax Flow: "+this.maxFlow);
+            out.println("\n----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
     }
 }

@@ -12,10 +12,16 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+
+import static Controllers.Controller.AlertError;
 
 public class TopologicalSort extends Algorithm {
 
@@ -112,6 +118,33 @@ public class TopologicalSort extends Algorithm {
         }
     }
 
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            int counter = 1;
+            for (Graph.GraphNode node : result) {
+                if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
+                {
+                    out.println(node.getNodeLabel());
+                    if(!node.equals(result.getLast()))
+                        out.print("--> ");
+                }
+                else
+                {
+                    out.print(node.getNodeLabel() + "--> ");
+                }
+                counter++;
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
+    }
 
     private List<Graph.GraphNode> checkForSources()
     {

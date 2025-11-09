@@ -4,6 +4,11 @@ package Algorithms;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import javafx.scene.paint.Color;
+
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 import static Controllers.Controller.AlertError;
@@ -99,5 +104,40 @@ public class KosarajuSharirAlgorithm extends Algorithm{
         }
 
         return colors;
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            Hashtable<String, Set<String>> components = new Hashtable<>();
+            for(String Hvertice : result.keySet())
+            {
+                components.put(Hvertice, new HashSet<>(Arrays.asList(result.get(Hvertice).split(","))));
+            }
+            this.graphResult = new Graph(this.G);
+            int componentNumber = 0;
+            for(String componentIndex : components.keySet())
+            {
+                out.print("component #"+(componentNumber+1)+": ");
+                Set<String> verticesLabels = components.get(componentIndex);
+                for(String verticeLabel : verticesLabels)
+                {
+                    out.print(verticeLabel+", ");
+                }
+                out.println();
+                componentNumber++;
+            }
+
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
+
     }
 }

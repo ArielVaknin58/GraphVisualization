@@ -2,10 +2,20 @@ package Algorithms;
 
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import Services.GraphData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.scene.paint.Color;
+
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+
+import static Controllers.Controller.AlertError;
 
 public class MinCutAlgorithm extends Algorithm{
 
@@ -79,5 +89,50 @@ public class MinCutAlgorithm extends Algorithm{
             }
         }
 
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        Graph graph = new Graph(true);
+        for(Graph.GraphNode node : this.flowingGraph.V)
+        {
+            graph.createNodeWithCoordinates(node.getxPosition(),node.yPosition,node.getNodeLabel());
+        }
+        for(DirectedEdge edge : this.flowingGraph.E)
+        {
+            if(edge.getCapacity() - edge.getFlow() > 0)
+                graph.createEdge(edge.getFrom().getNodeLabel(),edge.getTo().getNodeLabel());
+        }
+        BFS bfs = new BFS(graph,graph.V.getFirst());
+        bfs.Run();
+        HashMap<String,Integer> bfsResults = bfs.getDistancesResults();
+        Set<Graph.GraphNode> S = new HashSet<Graph.GraphNode>();
+        for(Graph.GraphNode node : graph.V)
+        {
+            if(bfsResults.get(node.getNodeLabel()) != Integer.MAX_VALUE)
+                S.add(node);
+        }
+
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            out.print("S : ");
+            for(Graph.GraphNode node : S)
+            {
+                out.print(node.getNodeLabel()+", ");
+            }
+            out.print("\nV\\S : ");
+            for(Graph.GraphNode node : G.V)
+            {
+                if(!S.contains(node))
+                    out.print(node.getNodeLabel()+", ");
+            }
+            out.println("\n----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
     }
 }

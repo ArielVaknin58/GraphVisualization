@@ -306,7 +306,7 @@ public class GraphInputController extends Controller{
             // 3. Create all the edges
             for (Services.EdgeData edge : data.edges) {
                 if (edge != null && edge.from != null && edge.to != null) {
-                    G.createEdge(edge.from, edge.to, edge.weight,0,0);
+                    G.createEdge(edge.from, edge.to, edge.weight,0, edge.capacity);
                 }
             }
         }catch (Exception e) {
