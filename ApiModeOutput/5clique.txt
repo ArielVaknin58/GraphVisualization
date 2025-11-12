@@ -1,0 +1,1006 @@
+--- Non-Deterministic Clique Algorithm Results ---
+Iteration #1:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #2:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #3:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #4:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #5:
+       current set: 1, 3, 4, 6, 7,  --> not a clique
+Iteration #6:
+       current set: 3, 4, 5, 7, 8,  --> not a clique
+Iteration #7:
+       current set: 1, 2, 4, 6, 7,  --> not a clique
+Iteration #8:
+       current set: 1, 4, 5, 6, 7,  --> not a clique
+Iteration #9:
+       current set: 2, 4, 5, 6, 8,  --> not a clique
+Iteration #10:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #11:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #12:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #13:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #14:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #15:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #16:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #17:
+       current set: 1, 3, 5, 6, 7,  --> not a clique
+Iteration #18:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #19:
+       current set: 1, 5, 6, 7, 8,  --> not a clique
+Iteration #20:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #21:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #22:
+       current set: 1, 3, 5, 6, 8,  --> not a clique
+Iteration #23:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #24:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #25:
+       current set: 1, 2, 3, 4, 8,  --> not a clique
+Iteration #26:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #27:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #28:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #29:
+       current set: 1, 2, 3, 5, 6,  --> not a clique
+Iteration #30:
+       current set: 2, 4, 5, 6, 8,  --> not a clique
+Iteration #31:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #32:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #33:
+       current set: 1, 3, 5, 6, 7,  --> not a clique
+Iteration #34:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #35:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #36:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #37:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #38:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #39:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #40:
+       current set: 1, 2, 4, 5, 8,  --> not a clique
+Iteration #41:
+       current set: 2, 3, 4, 5, 6,  --> not a clique
+Iteration #42:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #43:
+       current set: 1, 2, 4, 6, 7,  --> not a clique
+Iteration #44:
+       current set: 1, 2, 3, 4, 5,  --> not a clique
+Iteration #45:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #46:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #47:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #48:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #49:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #50:
+       current set: 1, 3, 5, 6, 8,  --> not a clique
+Iteration #51:
+       current set: 2, 3, 5, 7, 8,  --> not a clique
+Iteration #52:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #53:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #54:
+       current set: 2, 3, 4, 6, 8,  --> not a clique
+Iteration #55:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #56:
+       current set: 1, 2, 4, 6, 8,  --> not a clique
+Iteration #57:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #58:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #59:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #60:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #61:
+       current set: 1, 2, 3, 4, 5,  --> not a clique
+Iteration #62:
+       current set: 1, 2, 5, 7, 8,  --> not a clique
+Iteration #63:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #64:
+       current set: 2, 3, 4, 5, 6,  --> not a clique
+Iteration #65:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #66:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #67:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #68:
+       current set: 2, 4, 5, 6, 7,  --> not a clique
+Iteration #69:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #70:
+       current set: 2, 3, 4, 6, 7,  --> not a clique
+Iteration #71:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #72:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #73:
+       current set: 1, 2, 3, 4, 6,  --> not a clique
+Iteration #74:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #75:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #76:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #77:
+       current set: 2, 3, 4, 6, 7,  --> not a clique
+Iteration #78:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #79:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #80:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #81:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #82:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #83:
+       current set: 1, 2, 3, 4, 8,  --> not a clique
+Iteration #84:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #85:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #86:
+       current set: 1, 2, 3, 5, 6,  --> not a clique
+Iteration #87:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #88:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #89:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #90:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #91:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #92:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #93:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #94:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #95:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #96:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #97:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #98:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #99:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #100:
+       current set: 2, 3, 4, 6, 8,  --> not a clique
+Iteration #101:
+       current set: 2, 4, 5, 6, 8,  --> not a clique
+Iteration #102:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #103:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #104:
+       current set: 1, 2, 3, 4, 8,  --> not a clique
+Iteration #105:
+       current set: 2, 4, 5, 7, 8,  --> not a clique
+Iteration #106:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #107:
+       current set: 1, 5, 6, 7, 8,  --> not a clique
+Iteration #108:
+       current set: 3, 4, 5, 7, 8,  --> not a clique
+Iteration #109:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #110:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #111:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #112:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #113:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #114:
+       current set: 1, 2, 3, 4, 8,  --> not a clique
+Iteration #115:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #116:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #117:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #118:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #119:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #120:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #121:
+       current set: 1, 2, 5, 7, 8,  --> not a clique
+Iteration #122:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #123:
+       current set: 1, 3, 4, 6, 7,  --> not a clique
+Iteration #124:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #125:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #126:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #127:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #128:
+       current set: 2, 4, 5, 6, 7,  --> not a clique
+Iteration #129:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #130:
+       current set: 2, 3, 4, 5, 8,  --> not a clique
+Iteration #131:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #132:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #133:
+       current set: 2, 3, 4, 5, 8,  --> not a clique
+Iteration #134:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #135:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #136:
+       current set: 2, 3, 4, 7, 8,  --> not a clique
+Iteration #137:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #138:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #139:
+       current set: 3, 4, 5, 7, 8,  --> not a clique
+Iteration #140:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #141:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #142:
+       current set: 2, 3, 4, 6, 7,  --> not a clique
+Iteration #143:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #144:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #145:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #146:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #147:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #148:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #149:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #150:
+       current set: 2, 4, 5, 6, 8,  --> not a clique
+Iteration #151:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #152:
+       current set: 1, 3, 5, 6, 8,  --> not a clique
+Iteration #153:
+       current set: 1, 2, 4, 6, 7,  --> not a clique
+Iteration #154:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #155:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #156:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #157:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #158:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #159:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #160:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #161:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #162:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #163:
+       current set: 2, 3, 4, 6, 8,  --> not a clique
+Iteration #164:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #165:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #166:
+       current set: 1, 3, 5, 6, 7,  --> not a clique
+Iteration #167:
+       current set: 2, 3, 4, 6, 8,  --> not a clique
+Iteration #168:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #169:
+       current set: 1, 2, 3, 5, 6,  --> not a clique
+Iteration #170:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #171:
+       current set: 1, 3, 5, 6, 8,  --> not a clique
+Iteration #172:
+       current set: 1, 2, 5, 6, 8,  --> not a clique
+Iteration #173:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #174:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #175:
+       current set: 1, 2, 5, 6, 8,  --> not a clique
+Iteration #176:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #177:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #178:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #179:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #180:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #181:
+       current set: 1, 2, 3, 4, 6,  --> not a clique
+Iteration #182:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #183:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #184:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #185:
+       current set: 2, 3, 4, 6, 7,  --> not a clique
+Iteration #186:
+       current set: 2, 4, 5, 7, 8,  --> not a clique
+Iteration #187:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #188:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #189:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #190:
+       current set: 1, 3, 4, 6, 7,  --> not a clique
+Iteration #191:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #192:
+       current set: 1, 2, 4, 6, 8,  --> not a clique
+Iteration #193:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #194:
+       current set: 1, 2, 3, 4, 5,  --> not a clique
+Iteration #195:
+       current set: 1, 2, 3, 4, 5,  --> not a clique
+Iteration #196:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #197:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #198:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #199:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #200:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #201:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #202:
+       current set: 2, 4, 5, 6, 8,  --> not a clique
+Iteration #203:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #204:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #205:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #206:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #207:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #208:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #209:
+       current set: 2, 3, 5, 7, 8,  --> not a clique
+Iteration #210:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #211:
+       current set: 2, 3, 4, 5, 6,  --> not a clique
+Iteration #212:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #213:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #214:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #215:
+       current set: 1, 3, 4, 5, 6,  --> not a clique
+Iteration #216:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #217:
+       current set: 1, 2, 3, 5, 6,  --> not a clique
+Iteration #218:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #219:
+       current set: 2, 3, 4, 5, 8,  --> not a clique
+Iteration #220:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #221:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #222:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #223:
+       current set: 1, 2, 5, 6, 8,  --> not a clique
+Iteration #224:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #225:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #226:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #227:
+       current set: 2, 4, 5, 6, 8,  --> not a clique
+Iteration #228:
+       current set: 2, 3, 4, 6, 8,  --> not a clique
+Iteration #229:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #230:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #231:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #232:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #233:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #234:
+       current set: 3, 4, 5, 7, 8,  --> not a clique
+Iteration #235:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #236:
+       current set: 1, 5, 6, 7, 8,  --> not a clique
+Iteration #237:
+       current set: 1, 3, 4, 5, 6,  --> not a clique
+Iteration #238:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #239:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #240:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #241:
+       current set: 1, 2, 3, 4, 5,  --> not a clique
+Iteration #242:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #243:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #244:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #245:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #246:
+       current set: 1, 3, 4, 5, 6,  --> not a clique
+Iteration #247:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #248:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #249:
+       current set: 1, 2, 5, 6, 8,  --> not a clique
+Iteration #250:
+       current set: 1, 3, 5, 6, 7,  --> not a clique
+Iteration #251:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #252:
+       current set: 1, 2, 4, 6, 7,  --> not a clique
+Iteration #253:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #254:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #255:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #256:
+       current set: 1, 2, 3, 5, 6,  --> not a clique
+Iteration #257:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #258:
+       current set: 1, 2, 3, 4, 8,  --> not a clique
+Iteration #259:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #260:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #261:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #262:
+       current set: 1, 3, 5, 6, 8,  --> not a clique
+Iteration #263:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #264:
+       current set: 1, 3, 4, 6, 7,  --> not a clique
+Iteration #265:
+       current set: 1, 5, 6, 7, 8,  --> not a clique
+Iteration #266:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #267:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #268:
+       current set: 1, 2, 4, 6, 8,  --> not a clique
+Iteration #269:
+       current set: 2, 4, 5, 6, 7,  --> not a clique
+Iteration #270:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #271:
+       current set: 2, 3, 5, 7, 8,  --> not a clique
+Iteration #272:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #273:
+       current set: 2, 3, 4, 6, 8,  --> not a clique
+Iteration #274:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #275:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #276:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #277:
+       current set: 1, 2, 4, 5, 8,  --> not a clique
+Iteration #278:
+       current set: 2, 3, 4, 6, 8,  --> not a clique
+Iteration #279:
+       current set: 1, 3, 4, 6, 7,  --> not a clique
+Iteration #280:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #281:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #282:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #283:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #284:
+       current set: 2, 3, 4, 5, 6,  --> not a clique
+Iteration #285:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #286:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #287:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #288:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #289:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #290:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #291:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #292:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #293:
+       current set: 1, 2, 5, 7, 8,  --> not a clique
+Iteration #294:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #295:
+       current set: 1, 4, 5, 6, 7,  --> not a clique
+Iteration #296:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #297:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #298:
+       current set: 1, 3, 4, 5, 6,  --> not a clique
+Iteration #299:
+       current set: 2, 4, 5, 6, 7,  --> not a clique
+Iteration #300:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #301:
+       current set: 1, 2, 5, 7, 8,  --> not a clique
+Iteration #302:
+       current set: 1, 2, 4, 6, 8,  --> not a clique
+Iteration #303:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #304:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #305:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #306:
+       current set: 1, 4, 5, 6, 7,  --> not a clique
+Iteration #307:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #308:
+       current set: 1, 2, 4, 6, 7,  --> not a clique
+Iteration #309:
+       current set: 1, 2, 3, 5, 6,  --> not a clique
+Iteration #310:
+       current set: 2, 3, 4, 5, 8,  --> not a clique
+Iteration #311:
+       current set: 2, 4, 5, 7, 8,  --> not a clique
+Iteration #312:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #313:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #314:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #315:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #316:
+       current set: 1, 5, 6, 7, 8,  --> not a clique
+Iteration #317:
+       current set: 1, 2, 4, 5, 8,  --> not a clique
+Iteration #318:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #319:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #320:
+       current set: 1, 2, 4, 6, 8,  --> not a clique
+Iteration #321:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #322:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #323:
+       current set: 1, 2, 4, 6, 7,  --> not a clique
+Iteration #324:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #325:
+       current set: 1, 2, 3, 4, 5,  --> not a clique
+Iteration #326:
+       current set: 2, 3, 4, 5, 6,  --> not a clique
+Iteration #327:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #328:
+       current set: 1, 2, 5, 6, 8,  --> not a clique
+Iteration #329:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #330:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #331:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #332:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #333:
+       current set: 3, 4, 5, 7, 8,  --> not a clique
+Iteration #334:
+       current set: 2, 4, 5, 7, 8,  --> not a clique
+Iteration #335:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #336:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #337:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #338:
+       current set: 2, 3, 4, 6, 7,  --> not a clique
+Iteration #339:
+       current set: 3, 4, 5, 7, 8,  --> not a clique
+Iteration #340:
+       current set: 2, 3, 4, 6, 7,  --> not a clique
+Iteration #341:
+       current set: 1, 3, 5, 6, 7,  --> not a clique
+Iteration #342:
+       current set: 1, 3, 5, 6, 7,  --> not a clique
+Iteration #343:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #344:
+       current set: 1, 2, 3, 4, 5,  --> not a clique
+Iteration #345:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #346:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #347:
+       current set: 1, 2, 5, 6, 8,  --> not a clique
+Iteration #348:
+       current set: 1, 2, 4, 5, 8,  --> not a clique
+Iteration #349:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #350:
+       current set: 1, 4, 5, 6, 7,  --> not a clique
+Iteration #351:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #352:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #353:
+       current set: 1, 2, 3, 5, 6,  --> not a clique
+Iteration #354:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #355:
+       current set: 1, 2, 4, 6, 8,  --> not a clique
+Iteration #356:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #357:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #358:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #359:
+       current set: 2, 4, 5, 6, 8,  --> not a clique
+Iteration #360:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #361:
+       current set: 2, 3, 5, 7, 8,  --> not a clique
+Iteration #362:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #363:
+       current set: 3, 4, 5, 7, 8,  --> not a clique
+Iteration #364:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #365:
+       current set: 1, 2, 3, 4, 8,  --> not a clique
+Iteration #366:
+       current set: 1, 2, 5, 6, 8,  --> not a clique
+Iteration #367:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #368:
+       current set: 2, 3, 5, 7, 8,  --> not a clique
+Iteration #369:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #370:
+       current set: 1, 2, 4, 5, 8,  --> not a clique
+Iteration #371:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #372:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #373:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #374:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #375:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #376:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #377:
+       current set: 1, 2, 4, 6, 8,  --> not a clique
+Iteration #378:
+       current set: 1, 2, 4, 7, 8,  --> not a clique
+Iteration #379:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #380:
+       current set: 1, 3, 4, 6, 7,  --> not a clique
+Iteration #381:
+       current set: 2, 3, 4, 6, 7,  --> not a clique
+Iteration #382:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #383:
+       current set: 2, 4, 5, 6, 7,  --> not a clique
+Iteration #384:
+       current set: 1, 4, 5, 6, 7,  --> not a clique
+Iteration #385:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #386:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #387:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #388:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #389:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #390:
+       current set: 1, 5, 6, 7, 8,  --> not a clique
+Iteration #391:
+       current set: 2, 3, 4, 5, 6,  --> not a clique
+Iteration #392:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #393:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #394:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #395:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #396:
+       current set: 1, 2, 4, 6, 7,  --> not a clique
+Iteration #397:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #398:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #399:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #400:
+       current set: 2, 4, 5, 7, 8,  --> not a clique
+Iteration #401:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #402:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #403:
+       current set: 1, 2, 3, 4, 5,  --> not a clique
+Iteration #404:
+       current set: 1, 4, 5, 6, 7,  --> not a clique
+Iteration #405:
+       current set: 2, 3, 4, 5, 8,  --> not a clique
+Iteration #406:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #407:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #408:
+       current set: 1, 2, 5, 7, 8,  --> not a clique
+Iteration #409:
+       current set: 1, 4, 6, 7, 8,  --> not a clique
+Iteration #410:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #411:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #412:
+       current set: 3, 4, 6, 7, 8,  --> not a clique
+Iteration #413:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #414:
+       current set: 1, 2, 4, 6, 8,  --> not a clique
+Iteration #415:
+       current set: 2, 3, 5, 7, 8,  --> not a clique
+Iteration #416:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #417:
+       current set: 1, 2, 6, 7, 8,  --> not a clique
+Iteration #418:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #419:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #420:
+       current set: 1, 2, 4, 6, 7,  --> not a clique
+Iteration #421:
+       current set: 1, 5, 6, 7, 8,  --> not a clique
+Iteration #422:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #423:
+       current set: 1, 3, 5, 6, 8,  --> not a clique
+Iteration #424:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #425:
+       current set: 1, 2, 5, 7, 8,  --> not a clique
+Iteration #426:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #427:
+       current set: 1, 3, 5, 6, 7,  --> not a clique
+Iteration #428:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #429:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #430:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #431:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #432:
+       current set: 2, 3, 5, 6, 8,  --> not a clique
+Iteration #433:
+       current set: 1, 3, 5, 6, 7,  --> not a clique
+Iteration #434:
+       current set: 2, 3, 4, 7, 8,  --> not a clique
+Iteration #435:
+       current set: 2, 4, 6, 7, 8,  --> not a clique
+Iteration #436:
+       current set: 1, 2, 3, 7, 8,  --> not a clique
+Iteration #437:
+       current set: 1, 2, 3, 4, 8,  --> not a clique
+Iteration #438:
+       current set: 1, 4, 5, 6, 7,  --> not a clique
+Iteration #439:
+       current set: 3, 5, 6, 7, 8,  --> not a clique
+Iteration #440:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #441:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #442:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #443:
+       current set: 1, 2, 3, 5, 6,  --> not a clique
+Iteration #444:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #445:
+       current set: 1, 3, 4, 5, 6,  --> not a clique
+Iteration #446:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #447:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #448:
+       current set: 2, 5, 6, 7, 8,  --> not a clique
+Iteration #449:
+       current set: 1, 2, 5, 6, 8,  --> not a clique
+Iteration #450:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #451:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #452:
+       current set: 1, 3, 5, 7, 8,  --> not a clique
+Iteration #453:
+       current set: 3, 4, 5, 6, 8,  --> not a clique
+Iteration #454:
+       current set: 1, 2, 3, 6, 8,  --> not a clique
+Iteration #455:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #456:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #457:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #458:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #459:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #460:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #461:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #462:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #463:
+       current set: 2, 3, 4, 7, 8,  --> not a clique
+Iteration #464:
+       current set: 1, 2, 5, 7, 8,  --> not a clique
+Iteration #465:
+       current set: 1, 2, 3, 4, 7,  --> not a clique
+Iteration #466:
+       current set: 3, 4, 5, 7, 8,  --> not a clique
+Iteration #467:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #468:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #469:
+       current set: 3, 4, 5, 6, 7,  --> not a clique
+Iteration #470:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #471:
+       current set: 1, 2, 3, 5, 7,  --> not a clique
+Iteration #472:
+       current set: 1, 3, 4, 6, 8,  --> not a clique
+Iteration #473:
+       current set: 1, 3, 4, 6, 7,  --> not a clique
+Iteration #474:
+       current set: 1, 3, 4, 5, 7,  --> not a clique
+Iteration #475:
+       current set: 1, 3, 6, 7, 8,  --> not a clique
+Iteration #476:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #477:
+       current set: 1, 2, 4, 5, 7,  --> not a clique
+Iteration #478:
+       current set: 1, 4, 5, 6, 8,  --> not a clique
+Iteration #479:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #480:
+       current set: 1, 4, 5, 7, 8,  --> not a clique
+Iteration #481:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+Iteration #482:
+       current set: 2, 3, 4, 6, 8,  --> not a clique
+Iteration #483:
+       current set: 1, 3, 4, 7, 8,  --> not a clique
+Iteration #484:
+       current set: 4, 5, 6, 7, 8,  --> not a clique
+Iteration #485:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #486:
+       current set: 2, 3, 4, 5, 7,  --> not a clique
+Iteration #487:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #488:
+       current set: 1, 2, 3, 4, 8,  --> not a clique
+Iteration #489:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #490:
+       current set: 1, 2, 3, 6, 7,  --> not a clique
+Iteration #491:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #492:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #493:
+       current set: 1, 2, 4, 5, 8,  --> not a clique
+Iteration #494:
+       current set: 1, 3, 4, 5, 8,  --> not a clique
+Iteration #495:
+       current set: 2, 3, 5, 6, 7,  --> not a clique
+Iteration #496:
+       current set: 1, 2, 5, 6, 7,  --> not a clique
+Iteration #497:
+       current set: 2, 3, 5, 7, 8,  --> not a clique
+Iteration #498:
+       current set: 1, 2, 4, 5, 6,  --> not a clique
+Iteration #499:
+       current set: 2, 3, 6, 7, 8,  --> not a clique
+Iteration #500:
+       current set: 1, 2, 3, 5, 8,  --> not a clique
+
+--Clique of size 5 not found --
+----------------------------------------------
+
+

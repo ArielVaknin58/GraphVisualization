@@ -1,0 +1,15 @@
+--- k-colors Algorithm Results ---
+Iteration #1:
+       current set: 
+              1 : 0x00ff00ff
+              2 : 0x00ffffff
+              3 : 0x0000ffff
+              4 : 0xff00ffff
+              5 : 0x0000ffff
+              6 : 0xff0000ff
+              7 : 0xff00ffff
+              8 : 0xffff00ff
+ --> Coloring of size 6 found !
+----------------------------------------------
+
+

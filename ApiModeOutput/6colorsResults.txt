@@ -1,0 +1,70 @@
+--- k-colors Algorithm Results ---
+Iteration #1:
+       current set: 
+              1 : 0xff0000ff
+              2 : 0x0000ffff
+              3 : 0x00ff00ff
+              4 : 0xff00ffff
+              5 : 0xffff00ff
+              6 : 0x0000ffff
+              7 : 0xff0000ff
+              8 : 0xff00ffff
+ --> not a valid coloring..
+Iteration #2:
+       current set: 
+              1 : 0x00ff00ff
+              2 : 0xff0000ff
+              3 : 0xffff00ff
+              4 : 0x0000ffff
+              5 : 0x00ff00ff
+              6 : 0xff0000ff
+              7 : 0xff0000ff
+              8 : 0x00ff00ff
+ --> not a valid coloring..
+Iteration #3:
+       current set: 
+              1 : 0xffff00ff
+              2 : 0xff0000ff
+              3 : 0x00ffffff
+              4 : 0xff0000ff
+              5 : 0xffff00ff
+              6 : 0x0000ffff
+              7 : 0xffff00ff
+              8 : 0xff00ffff
+ --> not a valid coloring..
+Iteration #4:
+       current set: 
+              1 : 0xff00ffff
+              2 : 0xffff00ff
+              3 : 0xff0000ff
+              4 : 0xffff00ff
+              5 : 0x00ffffff
+              6 : 0xffff00ff
+              7 : 0xff00ffff
+              8 : 0xff0000ff
+ --> not a valid coloring..
+Iteration #5:
+       current set: 
+              1 : 0x00ff00ff
+              2 : 0xffff00ff
+              3 : 0xff00ffff
+              4 : 0x00ffffff
+              5 : 0x00ff00ff
+              6 : 0xffff00ff
+              7 : 0x00ff00ff
+              8 : 0x0000ffff
+ --> not a valid coloring..
+Iteration #6:
+       current set: 
+              1 : 0x00ffffff
+              2 : 0xff00ffff
+              3 : 0x00ff00ff
+              4 : 0xffff00ff
+              5 : 0x0000ffff
+              6 : 0x00ffffff
+              7 : 0x0000ffff
+              8 : 0xff00ffff
+ --> Coloring of size 6 found !
+----------------------------------------------
+
+

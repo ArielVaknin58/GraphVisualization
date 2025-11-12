@@ -53,7 +53,7 @@ public class SaveGraphPopupController extends  Controller{
 
 
 
-        System.out.println("Saving graph as: " + filename + ".ser");
+        System.out.println("Saving graph as: " + filename + (!ControllerManager.getGraphInputController().isApiMode() ? ".ser" : ".txt"));
 
         Stage stage = (Stage) saveButton.getScene().getWindow();
         stage.close();
@@ -69,11 +69,12 @@ public class SaveGraphPopupController extends  Controller{
             node.xPosition = node.getCircle().getCenterX();
             node.yPosition = node.getCircle().getCenterY();
         }
-        if(!ControllerManager.getGraphInputController().isApiMode())
+        if(!ControllerManager.getGraphInputController().isApiMode() && currentAlgorithm == null)
             GraphSerializer.saveGraph(graphToSave, filename);
-        else
+        else if(currentAlgorithm != null)
         {
             currentAlgorithm.PrintOutputToFile(filename);
+            currentAlgorithm = null;
         }
     }
 

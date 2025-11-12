@@ -1,0 +1,6 @@
+--- Non-Deterministic Max-Cut Algorithm Results ---
+Iteration #1:
+       current set: 1, 2, 3, 4, 6,  --> Cut of size 4 found !
+----------------------------------------------
+
+

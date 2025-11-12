@@ -2,10 +2,17 @@ package Algorithms;
 
 import GraphVisualizer.Graph;
 import javafx.scene.paint.Color;
+
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import static Controllers.Controller.AlertError;
 
 public class kColors extends NonDeterministicAlgorithm
 {
@@ -30,11 +37,12 @@ public class kColors extends NonDeterministicAlgorithm
 
     private Set<Graph.GraphNode> init()
     {
+        this.graphResult = new Graph(this.initialGraph);
         colors = KosarajuSharirAlgorithm.generateColors(setSize);
         Set<Graph.GraphNode> nodes = new HashSet<>();
         Random rand = new Random();
 
-        for(Graph.GraphNode node : initialGraph.V)
+        for(Graph.GraphNode node : graphResult.V)
         {
             int index = rand.nextInt(0,colors.size());
             Color color = colors.get(index);
@@ -57,7 +65,6 @@ public class kColors extends NonDeterministicAlgorithm
 
     @Override
     public void CreateOutputGraph() {
-        this.graphResult = new Graph(this.initialGraph);
         if(this.initialGraph.V.isEmpty())
         {
             isSetFound = true;
@@ -65,17 +72,12 @@ public class kColors extends NonDeterministicAlgorithm
         }
 
         isSetFound = true;
-        Random rand = new Random();
 
-        for(Graph.GraphNode node : this.graphResult.V) {
-            Color color = colors.get(rand.nextInt(0,colors.size()));
-            node.ChangeColor(color);
-        }
 
-        for(Graph.GraphNode node1 : currentSet) {
-            for(Graph.GraphNode node2 : currentSet) {
-                Color color1 = (Color) node1.getCircle().getFill();
-                Color color2 = (Color) node2.getCircle().getFill();
+        for(Graph.GraphNode node1 : this.graphResult.V) {
+            for(Graph.GraphNode node2 : this.graphResult.V) {
+                Color color1 = node1.getVerticeColor();
+                Color color2 = node2.getVerticeColor();
                 if(color1.equals(color2) && node1.getneighborEdge(node2) != null)
                 {
                     this.graphResult.getAdjacencyMap().get(node1).get(node2).ChangeColor(Color.RED);
@@ -84,5 +86,35 @@ public class kColors extends NonDeterministicAlgorithm
             }
         }
 
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            for(int counter = 1; counter <= this.iterations && !isSetFound; counter++)
+            {
+                Run();
+                out.println("Iteration #"+counter+":");
+                out.println("       current set: ");
+                for(Graph.GraphNode node : this.graphResult.V)
+                    out.println("              "+node.getNodeLabel()+" : "+node.getVerticeColor());
+                CreateOutputGraph();
+                if(isSetFound)
+                    out.println(" --> Coloring of size "+this.setSize+" found !");
+                else
+                    out.println(" --> not a valid coloring..");
+
+            }
+            if(!isSetFound)
+                out.println("\n--Coloring with "+this.setSize+" colors not found --");
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
+        }
     }
 }

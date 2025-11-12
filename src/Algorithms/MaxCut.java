@@ -19,8 +19,9 @@ import static Controllers.Controller.AlertError;
 
 public class MaxCut extends NonDeterministicAlgorithm{
 
-    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a cut of size k.";
+    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a cut of size at least k.";
 
+    private DirectedEdge edge;
     public MaxCut(Graph g, int iterations, int k)
     {
         super(g,iterations,k);
@@ -77,6 +78,7 @@ public class MaxCut extends NonDeterministicAlgorithm{
         }
 
         int counter = 0;
+        isSetFound = false;
         for (DirectedEdge edge : this.G.E) {
             if (currentSet.contains(edge.getFrom()) && !currentSet.contains(edge.getTo())  || (!currentSet.contains(edge.getFrom()) && currentSet.contains(edge.getTo())))
             {
@@ -88,6 +90,41 @@ public class MaxCut extends NonDeterministicAlgorithm{
                 if(counter == 2*setSize)
                     isSetFound = true;
             }
+            else if(currentSet.contains(edge.getFrom()) && currentSet.contains(edge.getTo()))
+            {
+                this.edge = edge;
+                isSetFound = false;
+            }
+        }
+    }
+
+    @Override
+    protected void WriteOutputToFile(Path fileName) {
+        try (PrintWriter out = new PrintWriter(
+                Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            for(int counter = 1; counter <= this.iterations && !isSetFound; counter++)
+            {
+                Run();
+                out.println("Iteration #"+counter+":");
+                out.print("       current set: ");
+                for(Graph.GraphNode node : currentSet)
+                    out.print(node.getNodeLabel()+", ");
+                CreateOutputGraph();
+                if(isSetFound)
+                    out.println(" --> Cut of size "+this.setSize+" found !");
+                else
+                    out.println(" --> not a Cut. "+ (this.edge != null ? "In-Cut Edge : "+edge.getFrom().getNodeLabel()+" and "+edge.getTo().getNodeLabel() : ""));
+
+            }
+            if(!isSetFound)
+                out.println("\n--Cut with size "+this.setSize+" not found --");
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            AlertError(e);
         }
     }
 

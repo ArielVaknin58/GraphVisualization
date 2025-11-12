@@ -1,7 +1,7 @@
 package GraphVisualizer;
 
 
-import com.google.genai.types.UpscaleImageResponse;
+import javafx.scene.paint.Color;
 
 public class AppSettings {
     public static int nodeRadius = 25;
@@ -13,6 +13,7 @@ public class AppSettings {
     public static final int MAX_WEIGHT = 1000000;
     public static final int CONTAINER_WIDTH = 2100; //1050
     public static final int CONTAINER_HEIGHT = 1600; //800
+    public static final Color INITIAL_VERTEXCOLOR = Color.LIGHTBLUE;
 
     public static final String App_Title = "GraphVisualizer";
     public static final String SUCCESS_ICON_LOCATION = "/resources/GreenV.png";

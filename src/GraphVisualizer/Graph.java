@@ -84,16 +84,6 @@ public class Graph implements Serializable {
         Random rand = new Random();
         int x = rand.nextInt(1,AppSettings.CONTAINER_WIDTH / 50); //14
         int y = rand.nextInt(1,AppSettings.CONTAINER_HEIGHT / 50); //12
-        //GraphNode node = new GraphNode(50 + 50*x, 50+50*y, label,this);
-//        if(VerticeIndexer.containsKey(node.nodeLabel))
-//        {
-//            GraphNode oldNode = VerticeIndexer.get(node.nodeLabel);
-//            VerticeIndexer.remove(node.nodeLabel);
-//            V.remove(oldNode);
-//        }
-//        V.add(node);
-//        VerticeIndexer.put(label, node);
-//        this.adjacencyMap.put(node, new HashMap<>());
         return createNodeWithCoordinates(50 + 50*x, 50+50*y,label);
     }
 
@@ -226,7 +216,6 @@ public class Graph implements Serializable {
 
     public void RemoveVertice(GraphNode node)
     {
-        List<DirectedEdge> toRemove = new ArrayList<>();
         if(this.isDirected())
         {
             for(DirectedEdge edge : node.connectedEdges)
@@ -278,6 +267,7 @@ public class Graph implements Serializable {
         private transient Group nodeObject;
         private transient Circle circle;
         private transient Text label;
+        private transient Color verticeColor;
         public List<DirectedEdge> connectedEdges = new ArrayList<>();
         public List<GraphNode> neighborsList = new ArrayList<>();
         private String nodeLabel;
@@ -297,8 +287,9 @@ public class Graph implements Serializable {
 
             xPosition = x;
             yPosition = y;
-            circle = new Circle(x, y, AppSettings.nodeRadius, Color.LIGHTBLUE);
+            circle = new Circle(x, y, AppSettings.nodeRadius, AppSettings.INITIAL_VERTEXCOLOR);
             circle.getStyleClass().add(AppSettings.Graph_node_css_class);
+            verticeColor = AppSettings.INITIAL_VERTEXCOLOR;
 
             this.G = G;
             label = new Text(x - AppSettings.nodeLabelPadding, y + AppSettings.nodeLabelPadding, textLabel);
@@ -314,8 +305,13 @@ public class Graph implements Serializable {
 
         public void ChangeColor(Color color)
         {
+            verticeColor = color;
             circle.setStyle("-fx-fill: " + toHex(color) + ";");
             nodeObject = new Group(this.circle,label);
+        }
+
+        public Color getVerticeColor() {
+            return verticeColor;
         }
 
         public GraphNode(GraphNode other) {

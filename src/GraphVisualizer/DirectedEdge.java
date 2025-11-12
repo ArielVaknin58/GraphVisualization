@@ -19,6 +19,7 @@ public class DirectedEdge implements Serializable,Comparable {
     private transient Line shaft;
     private transient Polygon arrowHead;
     private transient Group edgeGroup;  // Holds the shaft + arrowhead
+    private transient Color edgeColor;
 
 
     public DirectedEdge(Graph.GraphNode from, Graph.GraphNode to, boolean isDirected, int weight, int flow, int capacity) {
@@ -72,6 +73,7 @@ public class DirectedEdge implements Serializable,Comparable {
 
     public void ChangeColor(Color color)
     {
+        edgeColor = color;
         String hexColor = toHex(color);
         shaft.setStyle("-fx-stroke: " + hexColor + ";");
         if (arrowHead != null) {

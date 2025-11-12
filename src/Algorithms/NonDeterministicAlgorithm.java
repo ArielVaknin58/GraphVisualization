@@ -76,6 +76,7 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
                 }
 
                 counter++;
+                controller.displayGraph(this.G);
                 controller.getStateNDLabel().setText("Looking... "+counter+"/"+iterations);
                 Run();
                 CreateOutputGraph();
