@@ -5,22 +5,11 @@ import Algorithms.*;
 import Controllers.Controller;
 import Controllers.ControllerManager;
 import Controllers.GraphInputController;
-import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
-import GraphVisualizer.ThemeManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
-import static Controllers.Controller.AlertError;
 
 public class GraphTools {
 
@@ -82,7 +71,7 @@ public class GraphTools {
 
     public static String CreateDescribedGraph(String input)
     {
-        GeminiService gs = GeminiService.getInstance();
+        OllamaService gs = OllamaService.getInstance();
         String finalPrompt = gs.getFinalPromptText(input);
 
         new Thread(() -> {
@@ -131,14 +120,14 @@ public class GraphTools {
 
     public static String ExplainGraph(String input)
     {
-        GeminiService gs = GeminiService.getInstance();
+        OllamaService gs = OllamaService.getInstance();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonReport = gson.toJson(currentGraph.getGraphReportMap());
         return ExplainGraphWithPrompt(gs.getfinalPromptForExplainer(jsonReport));
     }
 
     private static String ExplainGraphWithPrompt(String finalPrompt) {
-        return GeminiService.getInstance().generateContent(finalPrompt);
+        return OllamaService.getInstance().generateContent(finalPrompt);
     }
 
 

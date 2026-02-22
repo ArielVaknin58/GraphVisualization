@@ -1,6 +1,6 @@
 package Controllers;
 
-import Services.GeminiService;
+import Services.OllamaService;
 import Services.GraphData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
@@ -31,7 +31,7 @@ public class graphPromptPopupController extends Controller{
     @FXML
     private void OnCreateClicked()
     {
-        GeminiService gs = GeminiService.getInstance();
+        OllamaService gs = OllamaService.getInstance();
         LoadingPopup loadingPopup = new LoadingPopup();
 
         String text = promptBox.getText();

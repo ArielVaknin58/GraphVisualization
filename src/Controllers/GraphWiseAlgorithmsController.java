@@ -4,25 +4,19 @@ import Algorithms.*;
 import Exceptions.InvalidAlgorithmInputException;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.ThemeManager;
-import Services.GeminiService;
-import Services.GraphData;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import GraphVisualizer.Graph;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import resources.LoadingPopup;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 

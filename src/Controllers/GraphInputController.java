@@ -3,11 +3,8 @@ package Controllers;
 import Algorithms.*;
 import Exceptions.*;
 import GraphVisualizer.*;
-import Services.GeminiService;
+import Services.OllamaService;
 import Services.GraphData;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +12,6 @@ import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.ContextMenuEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -25,7 +21,6 @@ import javafx.stage.Stage;
 import resources.LoadingPopup;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 public class GraphInputController extends Controller{
@@ -214,7 +209,7 @@ public class GraphInputController extends Controller{
         }
     }
     private void ExplainGraphWithPrompt(String finalPrompt) {
-        GeminiService gs = GeminiService.getInstance();
+        OllamaService gs = OllamaService.getInstance();
         LoadingPopup loadingPopup = new LoadingPopup();
         loadingPopup.show();
         new Thread(() -> {

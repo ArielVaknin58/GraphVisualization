@@ -2,14 +2,9 @@ package Controllers;
 
 import GraphVisualizer.Graph;
 import Services.ChatRecord; // Make sure this is: public record ChatRecord(String role, String content) {}
-import Services.GeminiService;
+import Services.OllamaService;
 import Services.GraphData;
 import Services.GraphTools;
-import autovalue.shaded.org.objectweb.asm.Type;
-import com.google.genai.types.FunctionDeclaration;
-import com.google.genai.types.GenerateContentConfig;
-import com.google.genai.types.Schema;
-import com.google.genai.types.Tool;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.application.Platform; // Import this!
@@ -23,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text; // Import Text and TextFlow
 import javafx.scene.text.TextFlow;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +35,7 @@ public class ChatController extends Controller {
     private TextArea inputArea;
 
     private GraphTools tools;
-    private GeminiService geminiService = GeminiService.getInstance();
+    private OllamaService ollamaService = OllamaService.getInstance();
     private Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Create this once
     //private GenerateContentConfig geminiToolConfig;
 
@@ -135,7 +129,7 @@ public class ChatController extends Controller {
             @Override
             protected String call() throws Exception {
                 Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Typing...")));
-                return geminiService.generateContent(masterPrompt);
+                return ollamaService.generateContent(masterPrompt);
             }
         };
 
