@@ -1,0 +1,91 @@
+--- Non-Deterministic Vertex Cover Algorithm Results ---
+Iteration #1:
+       current set: 1, 2, 6, 8,  --> not a cover
+Iteration #2:
+       current set: 1, 2, 3, 6,  --> not a cover
+Iteration #3:
+       current set: 4, 5, 6, 7,  --> not a cover
+Iteration #4:
+       current set: 2, 4, 6, 8,  --> not a cover
+Iteration #5:
+       current set: 3, 4, 7, 8,  --> not a cover
+Iteration #6:
+       current set: 1, 5, 7, 8,  --> not a cover
+Iteration #7:
+       current set: 1, 3, 5, 6,  --> not a cover
+Iteration #8:
+       current set: 4, 5, 6, 7,  --> not a cover
+Iteration #9:
+       current set: 1, 3, 4, 6,  --> not a cover
+Iteration #10:
+       current set: 1, 2, 3, 4,  --> not a cover
+Iteration #11:
+       current set: 1, 5, 6, 8,  --> not a cover
+Iteration #12:
+       current set: 1, 2, 3, 6,  --> not a cover
+Iteration #13:
+       current set: 1, 3, 4, 5,  --> not a cover
+Iteration #14:
+       current set: 2, 4, 5, 7,  --> not a cover
+Iteration #15:
+       current set: 1, 3, 4, 6,  --> not a cover
+Iteration #16:
+       current set: 2, 4, 6, 7,  --> not a cover
+Iteration #17:
+       current set: 2, 6, 7, 8,  --> not a cover
+Iteration #18:
+       current set: 2, 3, 4, 5,  --> not a cover
+Iteration #19:
+       current set: 3, 5, 6, 7,  --> not a cover
+Iteration #20:
+       current set: 2, 3, 4, 5,  --> not a cover
+Iteration #21:
+       current set: 1, 4, 5, 6,  --> not a cover
+Iteration #22:
+       current set: 1, 2, 4, 6,  --> not a cover
+Iteration #23:
+       current set: 1, 3, 5, 6,  --> not a cover
+Iteration #24:
+       current set: 1, 4, 5, 7,  --> not a cover
+Iteration #25:
+       current set: 2, 4, 5, 7,  --> not a cover
+Iteration #26:
+       current set: 4, 5, 7, 8,  --> not a cover
+Iteration #27:
+       current set: 1, 2, 3, 4,  --> not a cover
+Iteration #28:
+       current set: 1, 5, 7, 8,  --> not a cover
+Iteration #29:
+       current set: 3, 4, 5, 8,  --> not a cover
+Iteration #30:
+       current set: 2, 3, 6, 8,  --> not a cover
+Iteration #31:
+       current set: 3, 4, 7, 8,  --> not a cover
+Iteration #32:
+       current set: 4, 6, 7, 8,  --> not a cover
+Iteration #33:
+       current set: 2, 5, 6, 7,  --> not a cover
+Iteration #34:
+       current set: 1, 2, 3, 5,  --> not a cover
+Iteration #35:
+       current set: 3, 4, 5, 8,  --> not a cover
+Iteration #36:
+       current set: 1, 2, 3, 6,  --> not a cover
+Iteration #37:
+       current set: 1, 2, 5, 6,  --> not a cover
+Iteration #38:
+       current set: 2, 4, 5, 7,  --> not a cover
+Iteration #39:
+       current set: 3, 4, 7, 8,  --> not a cover
+Iteration #40:
+       current set: 1, 2, 3, 5,  --> not a cover
+Iteration #41:
+       current set: 1, 4, 7, 8,  --> not a cover
+Iteration #42:
+       current set: 1, 5, 7, 8,  --> not a cover
+Iteration #43:
+       current set: 2, 3, 5, 8,  --> not a cover
+ --> vertex cover of size 4 found !
+----------------------------------------------
+
+

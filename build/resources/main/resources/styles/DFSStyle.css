@@ -1,0 +1,20 @@
+/* Default node style */
+
+
+/* DFS colors */
+.node-white {
+    -fx-fill: white;
+
+}
+
+.node-grey {
+    -fx-fill: grey;
+}
+
+.node-black {
+    -fx-fill: black;
+}
+
+.node-label {
+    fill: white;
+}

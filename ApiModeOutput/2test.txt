@@ -1,0 +1,206 @@
+--- Non-Deterministic Clique Algorithm Results ---
+Iteration #1:
+       current set: 1, 2,  --> not a clique
+Iteration #2:
+       current set: 1, 2,  --> not a clique
+Iteration #3:
+       current set: 1, 2,  --> not a clique
+Iteration #4:
+       current set: 1, 2,  --> not a clique
+Iteration #5:
+       current set: 1, 2,  --> not a clique
+Iteration #6:
+       current set: 1, 2,  --> not a clique
+Iteration #7:
+       current set: 1, 2,  --> not a clique
+Iteration #8:
+       current set: 1, 2,  --> not a clique
+Iteration #9:
+       current set: 1, 2,  --> not a clique
+Iteration #10:
+       current set: 1, 2,  --> not a clique
+Iteration #11:
+       current set: 1, 2,  --> not a clique
+Iteration #12:
+       current set: 1, 2,  --> not a clique
+Iteration #13:
+       current set: 1, 2,  --> not a clique
+Iteration #14:
+       current set: 1, 2,  --> not a clique
+Iteration #15:
+       current set: 1, 2,  --> not a clique
+Iteration #16:
+       current set: 1, 2,  --> not a clique
+Iteration #17:
+       current set: 1, 2,  --> not a clique
+Iteration #18:
+       current set: 1, 2,  --> not a clique
+Iteration #19:
+       current set: 1, 2,  --> not a clique
+Iteration #20:
+       current set: 1, 2,  --> not a clique
+Iteration #21:
+       current set: 1, 2,  --> not a clique
+Iteration #22:
+       current set: 1, 2,  --> not a clique
+Iteration #23:
+       current set: 1, 2,  --> not a clique
+Iteration #24:
+       current set: 1, 2,  --> not a clique
+Iteration #25:
+       current set: 1, 2,  --> not a clique
+Iteration #26:
+       current set: 1, 2,  --> not a clique
+Iteration #27:
+       current set: 1, 2,  --> not a clique
+Iteration #28:
+       current set: 1, 2,  --> not a clique
+Iteration #29:
+       current set: 1, 2,  --> not a clique
+Iteration #30:
+       current set: 1, 2,  --> not a clique
+Iteration #31:
+       current set: 1, 2,  --> not a clique
+Iteration #32:
+       current set: 1, 2,  --> not a clique
+Iteration #33:
+       current set: 1, 2,  --> not a clique
+Iteration #34:
+       current set: 1, 2,  --> not a clique
+Iteration #35:
+       current set: 1, 2,  --> not a clique
+Iteration #36:
+       current set: 1, 2,  --> not a clique
+Iteration #37:
+       current set: 1, 2,  --> not a clique
+Iteration #38:
+       current set: 1, 2,  --> not a clique
+Iteration #39:
+       current set: 1, 2,  --> not a clique
+Iteration #40:
+       current set: 1, 2,  --> not a clique
+Iteration #41:
+       current set: 1, 2,  --> not a clique
+Iteration #42:
+       current set: 1, 2,  --> not a clique
+Iteration #43:
+       current set: 1, 2,  --> not a clique
+Iteration #44:
+       current set: 1, 2,  --> not a clique
+Iteration #45:
+       current set: 1, 2,  --> not a clique
+Iteration #46:
+       current set: 1, 2,  --> not a clique
+Iteration #47:
+       current set: 1, 2,  --> not a clique
+Iteration #48:
+       current set: 1, 2,  --> not a clique
+Iteration #49:
+       current set: 1, 2,  --> not a clique
+Iteration #50:
+       current set: 1, 2,  --> not a clique
+Iteration #51:
+       current set: 1, 2,  --> not a clique
+Iteration #52:
+       current set: 1, 2,  --> not a clique
+Iteration #53:
+       current set: 1, 2,  --> not a clique
+Iteration #54:
+       current set: 1, 2,  --> not a clique
+Iteration #55:
+       current set: 1, 2,  --> not a clique
+Iteration #56:
+       current set: 1, 2,  --> not a clique
+Iteration #57:
+       current set: 1, 2,  --> not a clique
+Iteration #58:
+       current set: 1, 2,  --> not a clique
+Iteration #59:
+       current set: 1, 2,  --> not a clique
+Iteration #60:
+       current set: 1, 2,  --> not a clique
+Iteration #61:
+       current set: 1, 2,  --> not a clique
+Iteration #62:
+       current set: 1, 2,  --> not a clique
+Iteration #63:
+       current set: 1, 2,  --> not a clique
+Iteration #64:
+       current set: 1, 2,  --> not a clique
+Iteration #65:
+       current set: 1, 2,  --> not a clique
+Iteration #66:
+       current set: 1, 2,  --> not a clique
+Iteration #67:
+       current set: 1, 2,  --> not a clique
+Iteration #68:
+       current set: 1, 2,  --> not a clique
+Iteration #69:
+       current set: 1, 2,  --> not a clique
+Iteration #70:
+       current set: 1, 2,  --> not a clique
+Iteration #71:
+       current set: 1, 2,  --> not a clique
+Iteration #72:
+       current set: 1, 2,  --> not a clique
+Iteration #73:
+       current set: 1, 2,  --> not a clique
+Iteration #74:
+       current set: 1, 2,  --> not a clique
+Iteration #75:
+       current set: 1, 2,  --> not a clique
+Iteration #76:
+       current set: 1, 2,  --> not a clique
+Iteration #77:
+       current set: 1, 2,  --> not a clique
+Iteration #78:
+       current set: 1, 2,  --> not a clique
+Iteration #79:
+       current set: 1, 2,  --> not a clique
+Iteration #80:
+       current set: 1, 2,  --> not a clique
+Iteration #81:
+       current set: 1, 2,  --> not a clique
+Iteration #82:
+       current set: 1, 2,  --> not a clique
+Iteration #83:
+       current set: 1, 2,  --> not a clique
+Iteration #84:
+       current set: 1, 2,  --> not a clique
+Iteration #85:
+       current set: 1, 2,  --> not a clique
+Iteration #86:
+       current set: 1, 2,  --> not a clique
+Iteration #87:
+       current set: 1, 2,  --> not a clique
+Iteration #88:
+       current set: 1, 2,  --> not a clique
+Iteration #89:
+       current set: 1, 2,  --> not a clique
+Iteration #90:
+       current set: 1, 2,  --> not a clique
+Iteration #91:
+       current set: 1, 2,  --> not a clique
+Iteration #92:
+       current set: 1, 2,  --> not a clique
+Iteration #93:
+       current set: 1, 2,  --> not a clique
+Iteration #94:
+       current set: 1, 2,  --> not a clique
+Iteration #95:
+       current set: 1, 2,  --> not a clique
+Iteration #96:
+       current set: 1, 2,  --> not a clique
+Iteration #97:
+       current set: 1, 2,  --> not a clique
+Iteration #98:
+       current set: 1, 2,  --> not a clique
+Iteration #99:
+       current set: 1, 2,  --> not a clique
+Iteration #100:
+       current set: 1, 2,  --> not a clique
+
+--Clique of size 2 not found --
+----------------------------------------------
+
+
