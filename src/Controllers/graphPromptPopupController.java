@@ -3,6 +3,8 @@ package Controllers;
 import Services.OllamaService;
 import Services.GraphData;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -62,27 +64,39 @@ public class graphPromptPopupController extends Controller{
             cleanedJson = jsonResponse.substring(firstBrace, lastBrace + 1);
             final GraphData graphData;
             try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                graphData = objectMapper.readValue(cleanedJson, GraphData.class);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+                // 1. Parse the full AI response
+                com.google.gson.JsonObject fullResponse = com.google.gson.JsonParser.parseString(cleanedJson).getAsJsonObject();
+
+                // 2. Extract and map the graphData
+                com.google.gson.JsonElement graphPart = fullResponse.get("graphData");
+                graphData = gson.fromJson(graphPart, GraphData.class);
+
+                // 3. Perform ALL UI updates in one single block
+                Platform.runLater(() -> {
+                    try {
+                        loadingPopup.hide();
+
+                        // Draw the graph
+                        GraphInputController.CreateGraphStatic(graphData);
+
+                        SuccessPopup("Graph successfully created by AI!");
+
+                        // Close the prompt window
+                        Stage stage = (Stage) graphPromptAnchorPane.getScene().getWindow();
+                        stage.close();
+                    } catch (Exception e) {
+                        Controller.AlertError(e);
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
                 Platform.runLater(() -> {
-                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
-                    System.out.println(cleanedJson);
-                });
-                return;
-            }
-            Platform.runLater(() -> {
-                try {
                     loadingPopup.hide();
-                    GraphInputController.CreateGraphStatic(graphData);
-                    SuccessPopup("Graph successfully created by AI!");
-                    Stage stage = (Stage) graphPromptAnchorPane.getScene().getWindow();
-                    stage.close();
-                } catch (Exception e) {
-                    Controller.AlertError(e);
-                }
-            });
+                    Controller.AlertError(new Exception("Failed to parse AI response. Ensure it returned a valid JSON."));
+                });
+            }
 
         }).start();
     }

@@ -33,12 +33,14 @@ public class OllamaService {
     /**
      * Sends a request to Ollama.
      * @param promptText The prompt
-     * @param forceJson If true, uses Ollama's JSON mode to ensure valid JSON output
      */
-    public String generateContent(String promptText, boolean forceJson) {
+    public String generateContent(String promptText) {
         try {
             // Clean the prompt for JSON escaping (very important for local models)
-            String escapedPrompt = promptText.replace("\"", "\\\"").replace("\n", "\\n");
+            String escapedPrompt = promptText.replace("\\", "\\\\")
+                    .replace("\"", "\\\"")
+                    .replace("\n", "\\n")
+                    .replace("\r", "\\r");
 
             String jsonBody = """
             {
@@ -47,7 +49,7 @@ public class OllamaService {
               "stream": false
               %s
             }
-            """.formatted(MODEL_NAME, escapedPrompt, forceJson ? ", \"format\": \"json\"" : "");
+            """.formatted(MODEL_NAME, escapedPrompt, ", \"format\": \"json\"");
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(OLLAMA_URL))
@@ -84,7 +86,6 @@ public class OllamaService {
         }
     }
 
-    // --- Template Methods from your original Gemini class ---
 
     public String getFinalPromptText(String userPrompt) {
 

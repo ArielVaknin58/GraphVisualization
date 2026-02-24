@@ -114,61 +114,122 @@ public class ChatController extends Controller {
     @FXML
     private void OnSendButtonClicked() {
         String userInput = inputArea.getText();
-        if (userInput == null || userInput.isBlank()) {
-            return;
-        }
+        if (userInput == null || userInput.isBlank()) return;
 
-        // 8. Add the ChatRecord object, NOT a string
         addMessageToChat(new ChatRecord("user", userInput));
         inputArea.clear();
 
-        // 9. Build the master prompt from the ChatRecord list
         String masterPrompt = buildMasterPrompt(ControllerManager.getGraphInputController().getGraph(), chatHistory);
 
         Task<String> apiCallTask = new Task<>() {
             @Override
             protected String call() throws Exception {
-                Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Typing...")));
+                Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Thinking...")));
+                // Ensure OllamaService.generateContent(prompt, true) returns the raw JSON string
                 return ollamaService.generateContent(masterPrompt);
             }
         };
 
         apiCallTask.setOnSucceeded(event -> {
-            String aiResponse = apiCallTask.getValue();
-            chatHistory.remove(chatHistory.size() - 1);
-            addMessageToChat(new ChatRecord("model", aiResponse));
-        });
+            chatHistory.removeLast(); // Remove "Thinking..."
+            String aiRawResponse = apiCallTask.getValue();
 
-        apiCallTask.setOnFailed(event -> {
-            chatHistory.remove(chatHistory.size() - 1);
-            addMessageToChat(new ChatRecord("model", "Sorry, I encountered an error."));
-            apiCallTask.getException().printStackTrace();
-            AlertError((Exception) apiCallTask.getException());
+            try {
+                // 1. Find the first '{' and last '}' to strip away conversational text
+                int firstBrace = aiRawResponse.indexOf('{');
+                int lastBrace = aiRawResponse.lastIndexOf('}');
+
+                if (firstBrace == -1 || lastBrace == -1) {
+                    // AI didn't return JSON at all, treat as plain text chat
+                    addMessageToChat(new ChatRecord("model", aiRawResponse));
+                    return;
+                }
+
+                String jsonOnly = aiRawResponse.substring(firstBrace, lastBrace + 1);
+                // If the model wrapped the JSON in a string primitive
+                if (jsonOnly.startsWith("\"") && jsonOnly.endsWith("\"")) {
+                    jsonOnly = com.google.gson.JsonParser.parseString(jsonOnly).getAsString();
+                }
+                // 2. Parse the cleaned JSON
+                com.google.gson.JsonObject responseJson = com.google.gson.JsonParser.parseString(jsonOnly).getAsJsonObject();
+
+                String type = responseJson.get("type").getAsString();
+                String message = responseJson.get("message").getAsString();
+
+                // 3. Always show the message in chat
+                addMessageToChat(new ChatRecord("model", message));
+
+                // 4. Route based on type
+                if ("ACTION".equals(type)) {
+                    String action = responseJson.get("action").getAsString();
+                    handleAlgorithmAction(action, responseJson.getAsJsonObject("parameters"));
+                } else if ("CREATE_GRAPH".equals(type)) {
+                    GraphData graphData = gson.fromJson(responseJson.get("graphData"), GraphData.class);
+                    Platform.runLater(() -> GraphInputController.CreateGraphStatic(graphData));
+                }
+
+            } catch (Exception e) {
+                // If parsing still fails, the model might have returned bad JSON structure
+                System.err.println("Malformed JSON from AI: " + aiRawResponse);
+                addMessageToChat(new ChatRecord("model", "I tried to run that, but I had a formatting error. Please try again."));
+            }
         });
 
         new Thread(apiCallTask).start();
     }
 
+    private void handleAlgorithmAction(String action, com.google.gson.JsonObject params) {
+        Platform.runLater(() -> {
+            String startNode = params.get("startNode").getAsString();
+            switch (action) {
+                case "run_bfs" -> {
+                    GraphTools.runBFS(startNode);
+                }
+                case "run_dfs" -> {
+                    GraphTools.runDFS(startNode);
+                }
+                case "run_bipartite" -> {
+                    GraphTools.runBiPartite(startNode);
+                }
+            }
+        });
+    }
 
     private String buildMasterPrompt(Graph graph, List<ChatRecord> history) {
         GraphData graphData = new GraphData(graph);
         String graphJson = gson.toJson(graphData);
 
-        // Convert the list of objects back into the string format for the AI
         String historyString = history.stream()
                 .map(record -> record.getRole() + " : " + record.getMessage())
                 .collect(Collectors.joining("\n"));
 
-        return "You are a helpful graph analyst assistant. " +
-                "You will be given the current graph data in JSON format, " +
-                "followed by a conversation history. " +
-                "Base all your answers on the provided graph data and the history.\n\n" +
-                "--- CURRENT GRAPH DATA ---\n" +
-                graphJson + "\n\n" +
-                "--- CONVERSATION HISTORY ---\n" +
-                historyString + "\n" +
-                "--- END OF CONTEXT ---\n\n" +
-                "Please provide a response to the last 'user' message.";
+        return """
+    You are a Graph AI. You MUST return ONLY valid JSON.
+    
+    JSON Structure:
+    {
+      "type": "CHAT" | "ACTION" | "CREATE_GRAPH",
+      "message": "text description",
+      "action": "run_bfs" | "run_dfs" | "run_bipartite" | "none",
+      "parameters": {"startNode": "1"},
+      "graphData": {
+        "isDirected": true,
+        "nodes": ["1", "2"],
+        "edges": [
+          {"from": "1", "to": "2", "weight": 0, "capacity": 0}
+        ]
+      }
+    }
+
+    CRITICAL RULES:
+    1. "edges" MUST be a list of OBJECTS with 'from' and 'to' keys. 
+    2. NEVER return edges as a list of lists like [["1","2"]].
+    3. If type is CREATE_GRAPH, you MUST provide the full "graphData" object.
+    
+    --- CONTEXT ---
+    Graph: %s
+    History: %s
+    """.formatted(graphJson, historyString);
     }
 
 }
