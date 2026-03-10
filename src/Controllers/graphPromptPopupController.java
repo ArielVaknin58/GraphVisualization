@@ -29,8 +29,66 @@ public class graphPromptPopupController extends Controller{
     }
 
     @FXML
-    private void OnCreateClicked()
-    {
+//    private void OnCreateClicked()
+//    {
+//        OllamaService gs = OllamaService.getInstance();
+//        LoadingPopup loadingPopup = new LoadingPopup();
+//
+//        String text = promptBox.getText();
+//        String userPrompt = text.isEmpty() ? "Create a directed graph with 3 nodes and edges from 1 to 2 and 1 to 3" : text;
+//        String finalPrompt = gs.getFinalPromptText(userPrompt);
+//
+//
+//        loadingPopup.show();
+//        new Thread(() -> {
+//
+//            String jsonResponse = gs.generateContent(finalPrompt);
+//
+//            int firstBrace = jsonResponse.indexOf('{');
+//            int lastBrace = jsonResponse.lastIndexOf('}');
+//
+//            final String cleanedJson;
+//
+//            if (firstBrace == -1 || lastBrace == -1 || lastBrace <= firstBrace) {
+//                // If we can't find a { or }, the response is bad.
+//                Platform.runLater(() -> {
+//                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
+//                    loadingPopup.hide();
+//                    System.out.println(jsonResponse);
+//                });
+//                return;
+//            }
+//
+//            cleanedJson = jsonResponse.substring(firstBrace, lastBrace + 1);
+//            final GraphData graphData;
+//            try {
+//                ObjectMapper objectMapper = new ObjectMapper();
+//                graphData = objectMapper.readValue(cleanedJson, GraphData.class);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                Platform.runLater(() -> {
+//                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
+//                    System.out.println(cleanedJson);
+//                });
+//                return;
+//            }
+//            Platform.runLater(() -> {
+//                try {
+//                    loadingPopup.hide();
+//                    GraphInputController.CreateGraphStatic(graphData);
+//                    SuccessPopup("Graph successfully created by AI!");
+//                    Stage stage = (Stage) graphPromptAnchorPane.getScene().getWindow();
+//                    stage.close();
+//                } catch (Exception e) {
+//                    Controller.AlertError(e);
+//                }
+//            });
+//
+//        }).start();
+//    }
+
+
+    private void OnCreateClicked() {
         OllamaService gs = OllamaService.getInstance();
         LoadingPopup loadingPopup = new LoadingPopup();
 
@@ -38,52 +96,55 @@ public class graphPromptPopupController extends Controller{
         String userPrompt = text.isEmpty() ? "Create a directed graph with 3 nodes and edges from 1 to 2 and 1 to 3" : text;
         String finalPrompt = gs.getFinalPromptText(userPrompt);
 
-
         loadingPopup.show();
         new Thread(() -> {
-
             String jsonResponse = gs.generateContent(finalPrompt);
 
+            // 1. Check if the service itself returned an error message
+            if (jsonResponse.startsWith("Error:")) {
+                Platform.runLater(() -> {
+                    loadingPopup.hide();
+                    Controller.AlertError(new Exception(jsonResponse));
+                });
+                return;
+            }
+
+            System.out.println(jsonResponse);
+            // 2. Extract JSON (Handles cases where AI adds conversational text)
             int firstBrace = jsonResponse.indexOf('{');
             int lastBrace = jsonResponse.lastIndexOf('}');
 
-            final String cleanedJson;
-
             if (firstBrace == -1 || lastBrace == -1 || lastBrace <= firstBrace) {
-                // If we can't find a { or }, the response is bad.
                 Platform.runLater(() -> {
-                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
                     loadingPopup.hide();
-                    System.out.println(jsonResponse);
+                    Controller.AlertError(new Exception("The AI didn't provide a valid JSON object."));
+                    System.out.println("Raw Response: " + jsonResponse);
                 });
                 return;
             }
 
-            cleanedJson = jsonResponse.substring(firstBrace, lastBrace + 1);
-            final GraphData graphData;
+            String cleanedJson = jsonResponse.substring(firstBrace, lastBrace + 1);
+
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
-                graphData = objectMapper.readValue(cleanedJson, GraphData.class);
-            } catch (Exception e) {
-                e.printStackTrace();
+                GraphData graphData = objectMapper.readValue(cleanedJson, GraphData.class);
+
                 Platform.runLater(() -> {
-                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
-                    System.out.println(cleanedJson);
-                });
-                return;
-            }
-            Platform.runLater(() -> {
-                try {
                     loadingPopup.hide();
                     GraphInputController.CreateGraphStatic(graphData);
                     SuccessPopup("Graph successfully created by AI!");
                     Stage stage = (Stage) graphPromptAnchorPane.getScene().getWindow();
                     stage.close();
-                } catch (Exception e) {
-                    Controller.AlertError(e);
-                }
-            });
+                });
 
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    loadingPopup.hide();
+                    Controller.AlertError(new Exception("Failed to parse AI response. Check console for details."));
+                    System.out.println("Attempted to parse: " + cleanedJson);
+                });
+            }
         }).start();
     }
 }

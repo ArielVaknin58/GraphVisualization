@@ -2,6 +2,8 @@ package Services;
 
 import GraphVisualizer.AppSettings;
 import Controllers.Controller;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.application.Platform;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -12,7 +14,7 @@ import java.time.Duration;
 public class OllamaService {
 
     private static final String OLLAMA_URL = "http://localhost:11434/api/generate";
-    private static final String MODEL_NAME = "phi3:mini";
+    private static final String MODEL_NAME = AppSettings.AI_model_used;
     private static OllamaService singleton = null;
     private final HttpClient httpClient;
 
@@ -33,27 +35,29 @@ public class OllamaService {
     /**
      * Sends a request to Ollama.
      * @param promptText The prompt
-     * @param forceJson If true, uses Ollama's JSON mode to ensure valid JSON output
      */
-    public String generateContent(String promptText, boolean forceJson) {
+    public String generateContent(String promptText) {
         try {
             // Clean the prompt for JSON escaping (very important for local models)
             String escapedPrompt = promptText.replace("\"", "\\\"").replace("\n", "\\n");
 
             String jsonBody = """
-            {
-              "model": "%s",
-              "prompt": "%s",
-              "stream": false
-              %s
-            }
-            """.formatted(MODEL_NAME, escapedPrompt, forceJson ? ", \"format\": \"json\"" : "");
+                {
+                "model": "%s",
+                "prompt": "%s",
+                "stream": false,
+                "format": "json",
+                "options": {
+                "num_predict": 1024
+                }
+                }
+                """.formatted(MODEL_NAME, escapedPrompt);
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(OLLAMA_URL))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-                    .timeout(Duration.ofSeconds(60)) // Inference can be slow on CPU
+                    .timeout(Duration.ofSeconds(AppSettings.Ollama_TIMEOUT_IN_SECONDS)) // Inference can be slow on CPU
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -64,17 +68,22 @@ public class OllamaService {
 
             // The response from Ollama is a JSON containing the field "response"
             // To keep it simple without adding a JSON library yet, we do a basic extract:
-            String body = response.body();
-            int start = body.indexOf("\"response\":\"") + 12;
-            int end = body.lastIndexOf("\",\"done\":");
-
-            if (start > 11 && end > start) {
-                String result = body.substring(start, end);
-                // Unescape newlines and quotes returned in the JSON string
-                return result.replace("\\n", "\n").replace("\\\"", "\"");
-            }
-
-            return body;
+//            String body = response.body();
+//            int start = body.indexOf("\"response\":\"") + 12;
+//            int end = body.lastIndexOf("\",\"done\":");
+//
+//            if (start > 11 && end > start) {
+//                String result = body.substring(start, end);
+//                // Unescape newlines and quotes returned in the JSON string
+//                return result.replace("\\n", "\n").replace("\\\"", "\"");
+//            }
+//
+//            return body;
+            ObjectMapper mapper = new ObjectMapper();
+            // Parse the wrapper JSON from Ollama
+            JsonNode root = mapper.readTree(response.body());
+            // Get the actual string inside the "response" field
+            return root.get("response").asText();
         } catch (Exception e) {
             Platform.runLater(() -> {
                 // Showing the error on UI so user knows to start Ollama
@@ -87,41 +96,45 @@ public class OllamaService {
     // --- Template Methods from your original Gemini class ---
 
     public String getFinalPromptText(String userPrompt) {
+        return """
+        Instruction: You are a graph data generator. Convert the user's request into a strict JSON format.
+        
+        ### JSON SCHEMA ###
+        {
+          "isDirected": boolean,
+          "nodes": ["1", "2", "3", ...],
+          "edges": [
+            { "from": "1", "to": "2", "weight": 10, "capacity": 5 },
+            ...
+          ]
+        }
 
-        return "You are a graph data generator. Parse the user's request and return " +
+        ### RULES ###
+        1. Nodes MUST be strings representing numbers starting from 1.
+        2. if not mentioned- the graph will be undirected.
+        3. If "random weights" is mentioned without a range, use 1-10.
+        4. If "random capacities" is mentioned without a range, use 1-50.
+        5. Return ONLY the raw JSON. No markdown, no explanations.
+        6. If 'undirected', for every edge A->B, you MUST add a second edge object B->A.
+        7. edges: list of objects with keys 'from', 'to', 'weight', and 'capacity'." +
+                   "   CRITICAL: Do NOT use any other keys. Do NOT include safety labels or 'harmful' tags.
 
-                "ONLY a single, valid JSON object based on the 'GraphData' and 'EdgeData' " +
 
-                "Java classes. The JSON must have these keys:\n" +
+        ### EXAMPLE ###
+        User: "Undirected graph 2 nodes, edge between 1 and 2, weight 5"
+        Output: {
+          "isDirected": false,
+          "nodes": ["1", "2"],
+          "edges": [
+            {"from": "1", "to": "2", "weight": 5, "capacity": 0},
+            {"from": "2", "to": "1", "weight": 5, "capacity": 0}
+          ]
+        }
 
-                "1. isDirected (boolean)\n" +
-
-                "2. nodes (a list of strings that can be parsed to numbers, starting from 1 and not 0)\n" +
-
-                "3. edges (a list of objects, each with 'from', 'to', 'weight', and 'capacity' keys):\n" +
-
-                "   - 'from' and 'to' values must be strings that can be parsed to numbers from the nodes list.\n" +
-
-                "   - 'weight':\n" +
-
-                "     - FIRST, check if the user specified a range (e.g., 'random weights between 1 and 10'). If so, you MUST use that range.\n" +
-
-                "     - SECOND, if the user just says 'random weights' (with no range), generate a random integer between 1 and 10 for each edge.\n" +
-
-                "     - THIRD, if weight is not mentioned at all, default to 0.\n" +
-
-                "   - 'capacity':\n" +
-
-                "     - FIRST, check if the user specified a range for capacity (e.g., 'random capacity between 1 and 100'). If so, you MUST use that exact range.\n" +
-
-                "     - SECOND, if the user just says 'random capacities' (with no range), generate a random integer between 1 and 50 for each edge.\n" +
-
-                "     - THIRD, if capacity is not mentioned at all, you MUST default to 0.\n" +
-
-                "   - If the graph is 'undirected', you MUST create the reverse edge (e.g., from 'B' to 'A') for every edge (from 'A' to 'B').\n\n" +
-
-                "User Request: \"" + userPrompt + "\"";
-
+        ### ACTUAL TASK ###
+        User Request: "%s"
+        Output:
+        """.formatted(userPrompt);
     }
 
 
