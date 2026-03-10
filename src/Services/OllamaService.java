@@ -39,9 +39,13 @@ public class OllamaService {
     public String generateContent(String promptText) {
         try {
             // Clean the prompt for JSON escaping (very important for local models)
-            String escapedPrompt = promptText.replace("\"", "\\\"").replace("\n", "\\n");
+            String escapedPrompt = promptText.replace("\\", "\\\\")
+                    .replace("\"", "\\\"")
+                    .replace("\n", "\\n")
+                    .replace("\r", "\\r");
 
             String jsonBody = """
+<<<<<<< HEAD
                 {
                 "model": "%s",
                 "prompt": "%s",
@@ -52,6 +56,15 @@ public class OllamaService {
                 }
                 }
                 """.formatted(MODEL_NAME, escapedPrompt);
+=======
+            {
+              "model": "%s",
+              "prompt": "%s",
+              "stream": false
+              %s
+            }
+            """.formatted(MODEL_NAME, escapedPrompt, ", \"format\": \"json\"");
+>>>>>>> fad986257337b5f593d031c33bc90c7fd81fdc11
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(OLLAMA_URL))
@@ -93,7 +106,6 @@ public class OllamaService {
         }
     }
 
-    // --- Template Methods from your original Gemini class ---
 
     public String getFinalPromptText(String userPrompt) {
         return """

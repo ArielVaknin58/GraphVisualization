@@ -3,6 +3,8 @@ package Controllers;
 import Services.OllamaService;
 import Services.GraphData;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -126,6 +128,7 @@ public class graphPromptPopupController extends Controller{
             String cleanedJson = jsonResponse.substring(firstBrace, lastBrace + 1);
 
             try {
+<<<<<<< HEAD
                 ObjectMapper objectMapper = new ObjectMapper();
                 GraphData graphData = objectMapper.readValue(cleanedJson, GraphData.class);
 
@@ -136,6 +139,41 @@ public class graphPromptPopupController extends Controller{
                     Stage stage = (Stage) graphPromptAnchorPane.getScene().getWindow();
                     stage.close();
                 });
+=======
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+                // 1. Parse the full AI response
+                com.google.gson.JsonObject fullResponse = com.google.gson.JsonParser.parseString(cleanedJson).getAsJsonObject();
+
+                // 2. Extract and map the graphData
+                com.google.gson.JsonElement graphPart = fullResponse.get("graphData");
+                graphData = gson.fromJson(graphPart, GraphData.class);
+
+                // 3. Perform ALL UI updates in one single block
+                Platform.runLater(() -> {
+                    try {
+                        loadingPopup.hide();
+
+                        // Draw the graph
+                        GraphInputController.CreateGraphStatic(graphData);
+
+                        SuccessPopup("Graph successfully created by AI!");
+
+                        // Close the prompt window
+                        Stage stage = (Stage) graphPromptAnchorPane.getScene().getWindow();
+                        stage.close();
+                    } catch (Exception e) {
+                        Controller.AlertError(e);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                Platform.runLater(() -> {
+                    loadingPopup.hide();
+                    Controller.AlertError(new Exception("Failed to parse AI response. Ensure it returned a valid JSON."));
+                });
+            }
+>>>>>>> fad986257337b5f593d031c33bc90c7fd81fdc11
 
             } catch (Exception e) {
                 e.printStackTrace();
