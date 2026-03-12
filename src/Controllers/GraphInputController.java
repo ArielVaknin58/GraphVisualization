@@ -122,7 +122,7 @@ public class GraphInputController extends Controller{
         MenuItem addNodeItem = new MenuItem("Add Node Here");
         addNodeItem.setOnAction(event -> {
             if (currentContextMenuEvent != null) {
-                System.out.println("Add Node at: (" + currentContextMenuEvent.getX() + ", " + currentContextMenuEvent.getY() + ")");
+                //System.out.println("Add Node at: (" + currentContextMenuEvent.getX() + ", " + currentContextMenuEvent.getY() + ")");
                 this.G.createAvailableNode(currentContextMenuEvent.getX(),currentContextMenuEvent.getY());
                 displayGraph(G);
             }
@@ -383,7 +383,7 @@ public class GraphInputController extends Controller{
             AlertError(e);
         }
 
-        System.out.println("Added edge: " + from + " → " + to);
+        //System.out.println("Added edge: " + from + " → " + to);
 
         edgeStartField.clear();
         edgeEndField.clear();

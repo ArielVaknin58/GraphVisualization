@@ -14,7 +14,6 @@ import javafx.application.Platform;
 public class GraphTools {
 
     private static Graph currentGraph;
-    private static Graph.GraphNode InputNode;
 
 
     public GraphTools()
@@ -39,17 +38,27 @@ public class GraphTools {
         return runAlgorithm(new DFS(currentGraph,startNode));
     }
 
-    public static String runBiPartite(String startNodeLabel)
+    public static String runEulerCircuit()
+    {
+        return runAlgorithm(new EulerCircuit(currentGraph));
+    }
+
+    public static String runTopologicalSort()
+    {
+        return runAlgorithm(new TopologicalSort(currentGraph));
+    }
+
+    public static String runBiPartite()
     {
         return runAlgorithm(new BiPartite(currentGraph));
     }
 
-    public static String runKosarajuAlgorithm(String input)
+    public static String runKosarajuAlgorithm()
     {
         return runAlgorithm(new KosarajuSharirAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
 
-    public static String runSuperGraphAlgorithm(String input)
+    public static String runSuperGraphAlgorithm()
     {
         return runAlgorithm(new SuperGraph(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
@@ -69,66 +78,66 @@ public class GraphTools {
     }
 
 
-    public static String CreateDescribedGraph(String input)
-    {
-        OllamaService gs = OllamaService.getInstance();
-        String finalPrompt = gs.getFinalPromptText(input);
+//    public static String CreateDescribedGraph(String input)
+//    {
+//        OllamaService gs = OllamaService.getInstance();
+//        String finalPrompt = gs.getFinalPromptText(input);
+//
+//        new Thread(() -> {
+//
+//            String jsonResponse = gs.generateContent(finalPrompt);
+//
+//            int firstBrace = jsonResponse.indexOf('{');
+//            int lastBrace = jsonResponse.lastIndexOf('}');
+//
+//            final String cleanedJson;
+//
+//            if (firstBrace == -1 || lastBrace == -1 || lastBrace <= firstBrace) {
+//                // If we can't find a { or }, the response is bad.
+//                Platform.runLater(() -> {
+//                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
+//                    System.out.println(jsonResponse);
+//                });
+//                return;
+//            }
+//
+//            cleanedJson = jsonResponse.substring(firstBrace, lastBrace + 1);
+//            final GraphData graphData;
+//            try {
+//                ObjectMapper objectMapper = new ObjectMapper();
+//                graphData = objectMapper.readValue(cleanedJson, GraphData.class);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                Platform.runLater(() -> {
+//                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
+//                    System.out.println(cleanedJson);
+//                });
+//                return;
+//            }
+//            Platform.runLater(() -> {
+//                try {
+//                    GraphInputController.CreateGraphStatic(graphData);
+//                    currentGraph = ControllerManager.getGraphInputController().getGraph();
+//                } catch (Exception e) {
+//                    Controller.AlertError(e);
+//                }
+//            });
+//
+//        }).start();
+//        return "Sure ! here is the graph you requested.";
+//    }
 
-        new Thread(() -> {
-
-            String jsonResponse = gs.generateContent(finalPrompt);
-
-            int firstBrace = jsonResponse.indexOf('{');
-            int lastBrace = jsonResponse.lastIndexOf('}');
-
-            final String cleanedJson;
-
-            if (firstBrace == -1 || lastBrace == -1 || lastBrace <= firstBrace) {
-                // If we can't find a { or }, the response is bad.
-                Platform.runLater(() -> {
-                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
-                    System.out.println(jsonResponse);
-                });
-                return;
-            }
-
-            cleanedJson = jsonResponse.substring(firstBrace, lastBrace + 1);
-            final GraphData graphData;
-            try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                graphData = objectMapper.readValue(cleanedJson, GraphData.class);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Platform.runLater(() -> {
-                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
-                    System.out.println(cleanedJson);
-                });
-                return;
-            }
-            Platform.runLater(() -> {
-                try {
-                    GraphInputController.CreateGraphStatic(graphData);
-                    currentGraph = ControllerManager.getGraphInputController().getGraph();
-                } catch (Exception e) {
-                    Controller.AlertError(e);
-                }
-            });
-
-        }).start();
-        return "Sure ! here is the graph you requested.";
-    }
-
-    public static String ExplainGraph(String input)
-    {
-        OllamaService gs = OllamaService.getInstance();
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonReport = gson.toJson(currentGraph.getGraphReportMap());
-        return ExplainGraphWithPrompt(gs.getfinalPromptForExplainer(jsonReport));
-    }
-
-    private static String ExplainGraphWithPrompt(String finalPrompt) {
-        return OllamaService.getInstance().generateContent(finalPrompt);
-    }
+//    public static String ExplainGraph(String input)
+//    {
+//        OllamaService gs = OllamaService.getInstance();
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        String jsonReport = gson.toJson(currentGraph.getGraphReportMap());
+//        return ExplainGraphWithPrompt(gs.getfinalPromptForExplainer(jsonReport));
+//    }
+//
+//    private static String ExplainGraphWithPrompt(String finalPrompt) {
+//        return OllamaService.getInstance().generateContent(finalPrompt);
+//    }
 
 
     private static String run(Algorithm algorithm)

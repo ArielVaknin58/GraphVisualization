@@ -360,7 +360,7 @@ public class Graph implements Serializable {
         private void initNodeEvents() {
             circle.setFocusTraversable(true);
             circle.setOnMouseClicked(event -> {
-                System.out.println("Clicked node " + nodeLabel);
+                //System.out.println("Clicked node " + nodeLabel);
                 LoggerManager.Logger().fine("Clicked node " + nodeLabel);
 
             });

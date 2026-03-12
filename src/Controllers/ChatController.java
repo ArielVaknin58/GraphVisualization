@@ -1,10 +1,7 @@
 package Controllers;
 
 import GraphVisualizer.Graph;
-import Services.ChatRecord; // Make sure this is: public record ChatRecord(String role, String content) {}
-import Services.OllamaService;
-import Services.GraphData;
-import Services.GraphTools;
+import Services.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.application.Platform; // Import this!
@@ -35,7 +32,7 @@ public class ChatController extends Controller {
     private TextArea inputArea;
 
     private GraphTools tools;
-    private OllamaService ollamaService = OllamaService.getInstance();
+    private GeminiService geminiService = GeminiService.getInstance();
     private Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Create this once
     //private GenerateContentConfig geminiToolConfig;
 
@@ -119,14 +116,13 @@ public class ChatController extends Controller {
         addMessageToChat(new ChatRecord("user", userInput));
         inputArea.clear();
 
-        String masterPrompt = buildMasterPrompt(ControllerManager.getGraphInputController().getGraph(), chatHistory);
+        String masterPrompt = buildMasterPrompt(ControllerManager.getGraphInputController().getGraph(), chatHistory,userInput);
 
         Task<String> apiCallTask = new Task<>() {
             @Override
             protected String call() throws Exception {
                 Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Thinking...")));
-                // Ensure OllamaService.generateContent(prompt, true) returns the raw JSON string
-                return ollamaService.generateContent(masterPrompt);
+                return geminiService.generateContent(masterPrompt);
             }
         };
 
@@ -180,22 +176,44 @@ public class ChatController extends Controller {
 
     private void handleAlgorithmAction(String action, com.google.gson.JsonObject params) {
         Platform.runLater(() -> {
-            String startNode = params.get("startNode").getAsString();
-            switch (action) {
-                case "run_bfs" -> {
-                    GraphTools.runBFS(startNode);
+            try
+            {
+                switch (action) {
+                    case "run_bfs" -> {
+                        String startNode = params.get("startNode").getAsString();
+                        GraphTools.runBFS(startNode);
+                    }
+                    case "run_dfs" -> {
+                        String startNode = params.get("startNode").getAsString();
+                        GraphTools.runDFS(startNode);
+                    }
+                    case "run_bipartite" -> {
+                        GraphTools.runBiPartite();
+                    }
+                    case "run_euler_circuit" -> {
+                        GraphTools.runEulerCircuit();
+                    }
+                    case "run_topological" -> {
+                        GraphTools.runTopologicalSort();
+                    }
+                    case "run_kosaraju" -> {
+                        GraphTools.runKosarajuAlgorithm();
+                    }
+                    case "run_super" -> {
+                        GraphTools.runSuperGraphAlgorithm();
+                    }
                 }
-                case "run_dfs" -> {
-                    GraphTools.runDFS(startNode);
-                }
-                case "run_bipartite" -> {
-                    GraphTools.runBiPartite(startNode);
-                }
+            }catch (NullPointerException e) {
+                e.printStackTrace();
+                addMessageToChat(new ChatRecord("model", "I tried to run that, but the selected vertice is null. Please try again."));
+
             }
+
         });
     }
 
-    private String buildMasterPrompt(Graph graph, List<ChatRecord> history) {
+
+    private String buildMasterPrompt(Graph graph, List<ChatRecord> history, String userRequest) {
         GraphData graphData = new GraphData(graph);
         String graphJson = gson.toJson(graphData);
 
@@ -204,32 +222,72 @@ public class ChatController extends Controller {
                 .collect(Collectors.joining("\n"));
 
         return """
-    You are a Graph AI. You MUST return ONLY valid JSON.
+    Instruction: You are an expert AI for a Graph Visualization application.
+    You MUST analyze the user's request and respond with a single, valid JSON object following the schema below.
     
-    JSON Structure:
+    
+    ### JSON SCHEMA ###
     {
       "type": "CHAT" | "ACTION" | "CREATE_GRAPH",
-      "message": "text description",
-      "action": "run_bfs" | "run_dfs" | "run_bipartite" | "none",
-      "parameters": {"startNode": "1"},
+      "message": "Human-readable response or explanation",
+      "action": "run_bfs" | "run_dfs" | "run_bipartite" | "run_euler_circuit" | "run_topological" | "none",
+      "parameters": { "startNode": "string" , "iterations": "integer" , "k": "integer" }
       "graphData": {
-        "isDirected": true,
-        "nodes": ["1", "2"],
-        "edges": [
-          {"from": "1", "to": "2", "weight": 0, "capacity": 0}
-        ]
+        "isDirected": boolean,
+        "nodes": ["1", "2", ...],
+        "edges": [{"from": "1", "to": "2", "weight": 0, "capacity": 0}]
       }
     }
+    ### AVAILABLE ALGORITHM TOKENS ###
+        - "run_bfs": Breadth-First Search
+        - "run_dfs": Depth-First Search
+        - "run_bipartite": Check if graph is Bipartite
+        - "run_euler_circuit": Find Euler Circuit
+        - "run_topological": Topological Sort
+        - "run_prim": Minimum Spanning Tree
+        - "run_bellman_ford": Minimum Spanning Tree (Bellman's)
+        - "run_connectivity": finds connectivity components in an undirected graph
+        - "run_euler_path": finds an euler path in a given graph
+        - "run_floyd_warshall": finds lightest paths between every two vertices
+        - "run_ford_felkerson": finds max flow in a graph
+        - "run_hamilton_path": finds a hamilton path in a given graph
+        - "run_kosaraju": finds connectivity components in a directed graph
+        - "run_mincut": finds a minimal cut in a graph
+        - "run_shortest_paths_tree": finds shortest paths between every two vertices
+        - "run_super": creates the super graph of a given directed graph
+        # NON DETERMINISTIC ALGORITHM TOKENS #
+            - "run_clique": finds a click of size k in a graph
+            - "run_independent_set": finds an independent set of size k in a graph
+            - "run_k_colors": finds a valid coloring of k colors in the given graph
+            - "run_vertex_cover": finds a vertex cover of size k in the given graph
+        
+    ### RULES FOR PARAMETERS ###
+        1. If an algorithm is deterministic (like BFS/DFS), set "iterations" and "k": null.
+        2. If an algorithm is NON-DETERMINISTIC or STOCHASTIC (like Random Walk or Meta-heuristics):
+           - Check if the user provided a number of iterations and k.
+           - If they DID NOT set iterations, set "type": "CHAT" and ask the user: "How many iterations would you like to run for this algorithm?" 
+           - If they DID NOT set k, set "type": "CHAT" and ask the user: "what parameter would you like to give for the algorithm?" 
+           - If they DID, set "type": "ACTION" and fill the "iterations" and "k" parameters.
+        
+    ### INTENT RULES ###
+    1. CREATE_GRAPH: Use this when the user describes a new graph to build. You MUST populate the "graphData" object.
+    2. ACTION: Use this when the user asks to run an algorithm on the CURRENT graph. Use the action tokens provided.
+    3. CHAT: Use this for general questions, status checks, or conversation. Set "action" to "none" and "graphData" to null.
 
-    CRITICAL RULES:
-    1. "edges" MUST be a list of OBJECTS with 'from' and 'to' keys. 
-    2. NEVER return edges as a list of lists like [["1","2"]].
-    3. If type is CREATE_GRAPH, you MUST provide the full "graphData" object.
-    
+    ### CRITICAL CONSTRAINTS ###
+    - Nodes MUST be strings representing numbers (e.g., "1", "2").
+    - Edges MUST be objects with "from" and "to" keys. NEVER nested lists.
+    - If "parameters" are not needed, return: "parameters": {}.
+    - Do NOT include markdown tags like ```json in your response.
+
     --- CONTEXT ---
-    Graph: %s
+    Current Graph: %s
     History: %s
-    """.formatted(graphJson, historyString);
+
+    ### TASK ###
+    User Request: "%s"
+    Output:
+    """.formatted(graphJson, historyString, userRequest);
     }
 
 }
