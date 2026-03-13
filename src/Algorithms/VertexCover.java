@@ -21,7 +21,7 @@ public class VertexCover extends NonDeterministicAlgorithm{
 
     @Override
     public void Run() {
-        int independentSetSize = this.G.V.size() - this.setSize;
+        int independentSetSize = this.G.V.size() - this.k;
 
         if (independentSetSize < 0) {
             isSetFound = false;

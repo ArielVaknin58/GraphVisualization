@@ -6,6 +6,9 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -26,22 +29,35 @@ import java.util.Objects;
 
 import static Controllers.Controller.AlertError;
 
-public class BellmanFordAlgorithm extends Algorithm{
+public class BellmanFordAlgorithm extends NodeCentricAlgorithm{
 
-    private Graph.GraphNode inputNode;
+    //private Graph.GraphNode inputNode;
     private HashMap<Graph.GraphNode,Integer> weightedPaths;
     private HashMap<Graph.GraphNode, Graph.GraphNode> parents;
     private boolean hasNegativeCycles = false;
-    public static final String AlgorithmDescription = "This algorithm finds the lightest paths from a given vertice v to each other vertice in G.";
+    //public static final String AlgorithmDescription = "This algorithm finds the lightest paths from a given vertice v to each other vertice in G.";
 
     public BellmanFordAlgorithm(Graph graph, Graph.GraphNode inputNode)
     {
+        super(inputNode);
+        INIT(graph);
+    }
+
+    private void INIT(Graph graph)
+    {
         this.G = graph;
         this.AlgorithmName = "Bellman-Ford Algorithm";
-        this.inputNode = inputNode;
+        this.AlgorithmDescription = "This algorithm finds the lightest paths from a given vertice v to each other vertice in G.";
         this.requiredInput = "a directed, weighted graph G=(V,E)";
         init();
     }
+
+    @JsonCreator
+    public BellmanFordAlgorithm(@JsonProperty("inputNode") String nodeId ) {
+        super(ControllerManager.getGraphInputController().getGraph().VerticeIndexer.get(nodeId));
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
 
     private void init()
     {

@@ -2,6 +2,7 @@ package Controllers;
 
 import GraphVisualizer.Graph;
 import Services.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.application.Platform; // Import this!
@@ -150,15 +151,21 @@ public class ChatController extends Controller {
                 com.google.gson.JsonObject responseJson = com.google.gson.JsonParser.parseString(jsonOnly).getAsJsonObject();
 
                 String type = responseJson.get("type").getAsString();
+                System.out.println("TYPE = "+ type);
+
+                ObjectMapper objectMapper = new ObjectMapper();
                 String message = responseJson.get("message").getAsString();
+                GeminiResponse response = objectMapper.readValue(message, GeminiResponse.class);
 
                 // 3. Always show the message in chat
                 addMessageToChat(new ChatRecord("model", message));
 
                 // 4. Route based on type
                 if ("ACTION".equals(type)) {
-                    String action = responseJson.get("action").getAsString();
-                    handleAlgorithmAction(action, responseJson.getAsJsonObject("parameters"));
+                    response.algorithm.Execute(responseJson.getAsJsonObject("parameters"), ControllerManager.getGraphInputController().getGraph());
+//                    String action = responseJson.get("action").getAsString();
+//                    System.out.println("ACTION = "+ action);
+//                    handleAlgorithmAction(action, responseJson.getAsJsonObject("parameters"));
                 } else if ("CREATE_GRAPH".equals(type)) {
                     GraphData graphData = gson.fromJson(responseJson.get("graphData"), GraphData.class);
                     Platform.runLater(() -> GraphInputController.CreateGraphStatic(graphData));
@@ -180,11 +187,11 @@ public class ChatController extends Controller {
             {
                 switch (action) {
                     case "run_bfs" -> {
-                        String startNode = params.get("startNode").getAsString();
+                        String startNode = params.get("inputNode").getAsString();
                         GraphTools.runBFS(startNode);
                     }
                     case "run_dfs" -> {
-                        String startNode = params.get("startNode").getAsString();
+                        String startNode = params.get("inputNode").getAsString();
                         GraphTools.runDFS(startNode);
                     }
                     case "run_bipartite" -> {
@@ -231,7 +238,7 @@ public class ChatController extends Controller {
       "type": "CHAT" | "ACTION" | "CREATE_GRAPH",
       "message": "Human-readable response or explanation",
       "action": "run_bfs" | "run_dfs" | "run_bipartite" | "run_euler_circuit" | "run_topological" | "none",
-      "parameters": { "startNode": "string" , "iterations": "integer" , "k": "integer" }
+      "parameters": { "inputNode": "string" , "iterations": "integer" , "k": "integer" }
       "graphData": {
         "isDirected": boolean,
         "nodes": ["1", "2", ...],

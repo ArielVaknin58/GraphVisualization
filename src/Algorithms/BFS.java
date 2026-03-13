@@ -6,6 +6,9 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -24,19 +27,23 @@ import java.util.*;
 
 import static Controllers.Controller.AlertError;
 
-public class BFS extends Algorithm{
+public class BFS extends NodeCentricAlgorithm{
 
-    private Graph.GraphNode inputNode;
+    //private Graph.GraphNode inputNode;
     private HashMap<String, String> result = new HashMap();
     private HashMap<String, Integer> distancesResult = new HashMap<>();
     private HashMap<String,String> parents = new HashMap<>();
-    public static final String AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
+    //public static final String AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
 
+    @JsonCreator
+    public BFS(@JsonProperty("inputNode") String nodeId ) {
+        super(ControllerManager.getGraphInputController().getGraph().VerticeIndexer.get(nodeId));
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
 
-    public BFS(Graph G, Graph.GraphNode inputNode)
+    private void INIT(Graph G)
     {
         this.G = G;
-        this.inputNode = inputNode;
         for(Graph.GraphNode node : G.V)
         {
             result.put(node.getNodeLabel(),String.valueOf(Integer.MAX_VALUE));
@@ -46,8 +53,16 @@ public class BFS extends Algorithm{
         result.put(inputNode.getNodeLabel(),"0");
         distancesResult.put(inputNode.getNodeLabel(),0);
         this.AlgorithmName = "BFS";
+        this.AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
     }
+
+    public BFS(Graph G, Graph.GraphNode inputNode)
+    {
+        super(inputNode);
+        INIT(G);
+    }
+
 
     @Override
     public void Run() {

@@ -7,6 +7,8 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.gson.JsonObject;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -26,18 +28,31 @@ import static Controllers.Controller.AlertError;
 
 public class BiPartite extends Algorithm{
 
-    public static final String AlgorithmDescription = "This algorithm returns a division of graph G into 2 cut (U,V), where every edge - if exists - crosses one to the other.";
+    //public static final String AlgorithmDescription = "This algorithm returns a division of graph G into 2 cut (U,V), where every edge - if exists - crosses one to the other.";
     private boolean isBipartite;
     private HashMap<String,Integer> bfsRESULT;
 
     public BiPartite(Graph graph)
     {
+        INIT(graph);
+    }
+
+    @JsonCreator
+    public BiPartite()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    private void INIT(Graph graph)
+    {
         this.G = graph;
         this.requiredInput = "Undirected, fully connected graph.";
         this.AlgorithmName = "Bipartite graph algorithm";
+        this.AlgorithmDescription = "This algorithm returns a division of graph G into 2 cut (U,V), where every edge - if exists - crosses one to the other.";
         this.isBipartite = false;
         this.bfsRESULT = new HashMap<>();
     }
+
     @Override
     public void Run()
     {

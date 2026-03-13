@@ -8,6 +8,8 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -30,13 +32,26 @@ import static Controllers.Controller.AlertError;
 public class ConnectivityComponents extends Algorithm{
 
 
-    public static final String AlgorithmDescription = "An algorithm that finds Connectivity components in an undirected graph.";
+    //public static final String AlgorithmDescription = "An algorithm that finds Connectivity components in an undirected graph.";
     private Hashtable<String,String> result;
 
     public ConnectivityComponents(Graph G)
     {
+        INIT(G);
+    }
+
+    @JsonCreator
+    public ConnectivityComponents()
+    {
+        super();
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    private void INIT(Graph G)
+    {
         this.G = G;
         this.AlgorithmName = "Undirected Connectivity Components";
+        this.AlgorithmDescription = "An algorithm that finds Connectivity components in an undirected graph.";
         this.requiredInput = "An undirected Graph G = (V,E)";
         this.result = new Hashtable<>();
     }

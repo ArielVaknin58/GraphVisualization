@@ -20,7 +20,7 @@ import java.util.Set;
 public abstract class NonDeterministicAlgorithm extends Algorithm{
 
     protected int iterations;
-    protected int setSize;
+    protected int k;
     protected Set<Graph.GraphNode> currentSet;
     protected boolean isSetFound;
     protected Timeline timeline;
@@ -31,7 +31,7 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
     {
         this.G = g;
         this.iterations = iterations;
-        this.setSize = k;
+        this.k = k;
         this.isSetFound = false;
         this.currentSet = new HashSet<>();
     }

@@ -7,30 +7,73 @@ import Controllers.SaveGraphPopupController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY, // Uses the 'action' key already in your JSON
+        property = "action",
+        visible = true
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = BFS.class, name = "run_bfs"),
+        @JsonSubTypes.Type(value = DFS.class, name = "run_dfs"),
+        @JsonSubTypes.Type(value = BiPartite.class, name = "run_bipartite")
+})
 public abstract class Algorithm {
 
     protected Graph G;
     protected String AlgorithmName;
     protected String requiredInput;
     protected Graph graphResult;
+    protected String AlgorithmDescription;
 
     Algorithm() {};
+
+    public void Execute(com.google.gson.JsonObject params, Graph graph)
+    {
+        this.G = graph;
+        if(this instanceof NodeCentricAlgorithm)
+        {
+            ((NodeCentricAlgorithm) this).inputNode = this.G.VerticeIndexer.get(params.get("inputNode").getAsString());
+        }
+        if(this instanceof NonDeterministicAlgorithm)
+        {
+            ((NonDeterministicAlgorithm) this).iterations = params.get("iterations").getAsInt();
+            ((NonDeterministicAlgorithm) this).k = params.get("k").getAsInt();
+        }
+
+        RunAlgorithm(this);
+    }
+
+    private void RunAlgorithm(Algorithm algorithm)
+    {
+        if (algorithm.checkValidity())
+        {
+            if(algorithm.getClass() == DFS.class)
+                Platform.runLater(algorithm::Run);
+            else
+                algorithm.Run();
+            Platform.runLater(algorithm::DisplayResults);
+
+        }
+
+    }
+
+    public String getAlgorithmDescription() { return this.AlgorithmDescription; }
 
     public String getAlgorithmName() {return this.AlgorithmName;}
 

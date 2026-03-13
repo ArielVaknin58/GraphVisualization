@@ -2,9 +2,6 @@ package Algorithms;
 
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
-import Services.GraphData;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.scene.paint.Color;
 
 import java.io.PrintWriter;
@@ -87,7 +84,7 @@ public class MaxCut extends NonDeterministicAlgorithm{
                 if (edgeCopy != null) {
                     edgeCopy.ChangeColor(Color.RED);
                 }
-                if(counter == 2*setSize)
+                if(counter == 2* k)
                     isSetFound = true;
             }
             else if(currentSet.contains(edge.getFrom()) && currentSet.contains(edge.getTo()))
@@ -112,13 +109,13 @@ public class MaxCut extends NonDeterministicAlgorithm{
                     out.print(node.getNodeLabel()+", ");
                 CreateOutputGraph();
                 if(isSetFound)
-                    out.println(" --> Cut of size "+this.setSize+" found !");
+                    out.println(" --> Cut of size "+this.k +" found !");
                 else
                     out.println(" --> not a Cut. "+ (this.edge != null ? "In-Cut Edge : "+edge.getFrom().getNodeLabel()+" and "+edge.getTo().getNodeLabel() : ""));
 
             }
             if(!isSetFound)
-                out.println("\n--Cut with size "+this.setSize+" not found --");
+                out.println("\n--Cut with size "+this.k +" not found --");
             out.println("----------------------------------------------\n\n");
 
         }

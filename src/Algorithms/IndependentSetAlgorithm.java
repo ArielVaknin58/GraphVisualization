@@ -33,7 +33,7 @@ public class IndependentSetAlgorithm extends NonDeterministicAlgorithm{
         Set<Graph.GraphNode> nodes = new HashSet<>();
         Random rand = new Random();
 
-        while(nodes.size() < setSize)
+        while(nodes.size() < k)
         {
             int index = rand.nextInt(1,this.G.V.size()+1);
             nodes.add(this.G.VerticeIndexer.get(Integer.toString(index)));

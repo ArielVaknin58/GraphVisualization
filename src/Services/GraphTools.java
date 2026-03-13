@@ -69,6 +69,8 @@ public class GraphTools {
                 return "Error: Graph is not loaded.";
             }
 
+            if(!algorithm.checkValidity())
+                return "Error: Not a valid input for the algorithm. \nRequired input : "+ algorithm.getRequiredInputDescription();
             return run(algorithm);
 
         } catch (Exception e) {

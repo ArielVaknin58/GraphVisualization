@@ -38,7 +38,7 @@ public class kColors extends NonDeterministicAlgorithm
     private Set<Graph.GraphNode> init()
     {
         this.graphResult = new Graph(this.initialGraph);
-        colors = KosarajuSharirAlgorithm.generateColors(setSize);
+        colors = KosarajuSharirAlgorithm.generateColors(k);
         Set<Graph.GraphNode> nodes = new HashSet<>();
         Random rand = new Random();
 
@@ -102,13 +102,13 @@ public class kColors extends NonDeterministicAlgorithm
                     out.println("              "+node.getNodeLabel()+" : "+node.getVerticeColor());
                 CreateOutputGraph();
                 if(isSetFound)
-                    out.println(" --> Coloring of size "+this.setSize+" found !");
+                    out.println(" --> Coloring of size "+this.k +" found !");
                 else
                     out.println(" --> not a valid coloring..");
 
             }
             if(!isSetFound)
-                out.println("\n--Coloring with "+this.setSize+" colors not found --");
+                out.println("\n--Coloring with "+this.k +" colors not found --");
             out.println("----------------------------------------------\n\n");
 
         }

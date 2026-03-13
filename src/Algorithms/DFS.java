@@ -2,6 +2,8 @@ package Algorithms;
 
 import Controllers.ControllerManager;
 import GraphVisualizer.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.scene.Group;
@@ -19,10 +21,10 @@ import java.util.*;
 
 import static Controllers.Controller.AlertError;
 
-public class DFS extends Algorithm{
+public class DFS extends NodeCentricAlgorithm{
 
     private AnchorPane pane;
-    private Graph.GraphNode inputNode;
+    //private Graph.GraphNode inputNode;
     private HashMap<String, Color> colors = new HashMap<>();
     private List<DirectedEdge> visitedEdges = new ArrayList<DirectedEdge>();
     private Hashtable<DirectedEdge,Boolean> coloredEdges = new Hashtable<DirectedEdge, Boolean>();
@@ -30,14 +32,29 @@ public class DFS extends Algorithm{
     private List<Graph.GraphNode> finishTimeList;
     private List<Graph.GraphNode> StartTimeList;
     private int dfsAnimationNodeIndex = 0;
-    public static final String AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by iterating over its neighbors and exhusting all the paths from one child before proceeding to the next - unlike BFS that exhusts all the children nodes before proceeding";
+    //public static final String AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by iterating over its neighbors and exhusting all the paths from one child before proceeding to the next - unlike BFS that exhusts all the children nodes before proceeding";
 
 
     public DFS(Graph G, Graph.GraphNode inputNode)
     {
+        super(inputNode);
+        INIT(G);
+    }
+
+    @JsonCreator
+    public DFS(@JsonProperty("inputNode") String nodeId)
+    {
+        super(ControllerManager.getGraphInputController().getGraph().VerticeIndexer.get(nodeId));
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    private void INIT(Graph G)
+    {
         this.G = G;
-        this.inputNode = inputNode;
         this.AlgorithmName = "DFS";
+        this.AlgorithmDescription = "Depth First Search is a search algorithm that traverses a given graph G from a given vertice v by" +
+                " iterating over its neighbors and exhusting all the paths from one child before proceeding " +
+                "to the next - unlike BFS that exhusts all the children nodes before proceeding";
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
         this.rootVertice = new Hashtable<>();
         this.finishTimeList = new ArrayList<>();

@@ -1,6 +1,7 @@
 package Algorithms;
 
 import GraphVisualizer.Graph;
+import com.google.gson.JsonObject;
 import javafx.scene.paint.Color;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -15,14 +16,20 @@ import static Controllers.Controller.AlertError;
 public class Clique extends NonDeterministicAlgorithm{
 
 
-    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a clique of size k.";
+    //public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a clique of size k.";
 
     public Clique(Graph g, int iterations, int k) {
         super(g, iterations, k);
+        this.AlgorithmDescription = "This algorithm non-deterministically determines if G has a clique of size k.";
         this.AlgorithmName = "Non-Deterministic Clique Algorithm";
         this.requiredInput = "undirected graph";
     }
 
+
+    @Override
+    public void Execute(JsonObject params) {
+
+    }
 
     @Override
     public void Run() {
@@ -36,7 +43,7 @@ public class Clique extends NonDeterministicAlgorithm{
         Set<Graph.GraphNode> nodes = new HashSet<>();
         Random rand = new Random();
 
-        while(nodes.size() < setSize)
+        while(nodes.size() < k)
         {
             int index = rand.nextInt(1,this.G.V.size()+1);
             nodes.add(this.G.VerticeIndexer.get(Integer.toString(index)));
@@ -105,10 +112,10 @@ public class Clique extends NonDeterministicAlgorithm{
                 out.println(" --> not a clique");
                 CreateOutputGraph();
                 if(isSetFound)
-                    out.println(" --> Clique of size "+this.setSize+" found !");
+                    out.println(" --> Clique of size "+this.k +" found !");
             }
             if(!isSetFound)
-                out.println("\n--Clique of size "+this.setSize+" not found --");
+                out.println("\n--Clique of size "+this.k +" not found --");
             out.println("----------------------------------------------\n\n");
 
         }
