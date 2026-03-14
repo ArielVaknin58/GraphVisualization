@@ -28,7 +28,6 @@ import static Controllers.Controller.AlertError;
 
 public class BiPartite extends Algorithm{
 
-    //public static final String AlgorithmDescription = "This algorithm returns a division of graph G into 2 cut (U,V), where every edge - if exists - crosses one to the other.";
     private boolean isBipartite;
     private HashMap<String,Integer> bfsRESULT;
 
@@ -43,12 +42,12 @@ public class BiPartite extends Algorithm{
         INIT(ControllerManager.getGraphInputController().getGraph());
     }
 
-    private void INIT(Graph graph)
+    protected void INIT(Graph graph)
     {
         this.G = graph;
         this.requiredInput = "Undirected, fully connected graph.";
         this.AlgorithmName = "Bipartite graph algorithm";
-        this.AlgorithmDescription = "This algorithm returns a division of graph G into 2 cut (U,V), where every edge - if exists - crosses one to the other.";
+        AlgorithmDescription = "This algorithm returns a division of graph G into 2 cut (U,V), where every edge - if exists - crosses one to the other.";
         this.isBipartite = false;
         this.bfsRESULT = new HashMap<>();
     }

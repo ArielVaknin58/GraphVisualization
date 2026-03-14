@@ -31,11 +31,9 @@ import static Controllers.Controller.AlertError;
 
 public class BellmanFordAlgorithm extends NodeCentricAlgorithm{
 
-    //private Graph.GraphNode inputNode;
     private HashMap<Graph.GraphNode,Integer> weightedPaths;
     private HashMap<Graph.GraphNode, Graph.GraphNode> parents;
     private boolean hasNegativeCycles = false;
-    //public static final String AlgorithmDescription = "This algorithm finds the lightest paths from a given vertice v to each other vertice in G.";
 
     public BellmanFordAlgorithm(Graph graph, Graph.GraphNode inputNode)
     {
@@ -43,11 +41,11 @@ public class BellmanFordAlgorithm extends NodeCentricAlgorithm{
         INIT(graph);
     }
 
-    private void INIT(Graph graph)
+     protected void INIT(Graph graph)
     {
         this.G = graph;
         this.AlgorithmName = "Bellman-Ford Algorithm";
-        this.AlgorithmDescription = "This algorithm finds the lightest paths from a given vertice v to each other vertice in G.";
+        AlgorithmDescription = "This algorithm finds the lightest paths from a given vertice v to each other vertice in G.";
         this.requiredInput = "a directed, weighted graph G=(V,E)";
         init();
     }

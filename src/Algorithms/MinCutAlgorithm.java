@@ -1,8 +1,10 @@
 package Algorithms;
 
+import Controllers.ControllerManager;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import Services.GraphData;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.scene.paint.Color;
@@ -19,13 +21,24 @@ import static Controllers.Controller.AlertError;
 
 public class MinCutAlgorithm extends Algorithm{
 
-    public static final String AlgorithmDescription = "The algorithm finds a minimal cut, smallest group of edges that removing them disconnects the graph into 2 components.";
     private Graph flowingGraph;
 
 
     public MinCutAlgorithm(Graph graph)
     {
+        INIT(graph);
+    }
+
+    @JsonCreator
+    public MinCutAlgorithm()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
         this.G = graph;
+        AlgorithmDescription = "The algorithm finds a minimal cut, smallest group of edges that removing them disconnects the graph into 2 components.";
         this.AlgorithmName = "Min-Cut Algorithm";
         this.requiredInput = "A directed graph G";
     }

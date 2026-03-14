@@ -29,11 +29,9 @@ import static Controllers.Controller.AlertError;
 
 public class BFS extends NodeCentricAlgorithm{
 
-    //private Graph.GraphNode inputNode;
     private HashMap<String, String> result = new HashMap();
     private HashMap<String, Integer> distancesResult = new HashMap<>();
     private HashMap<String,String> parents = new HashMap<>();
-    //public static final String AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
 
     @JsonCreator
     public BFS(@JsonProperty("inputNode") String nodeId ) {
@@ -41,7 +39,7 @@ public class BFS extends NodeCentricAlgorithm{
         INIT(ControllerManager.getGraphInputController().getGraph());
     }
 
-    private void INIT(Graph G)
+    protected void INIT(Graph G)
     {
         this.G = G;
         for(Graph.GraphNode node : G.V)
@@ -53,7 +51,7 @@ public class BFS extends NodeCentricAlgorithm{
         result.put(inputNode.getNodeLabel(),"0");
         distancesResult.put(inputNode.getNodeLabel(),0);
         this.AlgorithmName = "BFS";
-        this.AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
+        AlgorithmDescription = "The Breadth First Search Algorithm gets a given graph and a vertice v, and returns a list of the lengths of the shortest paths from v to each vertice in G. (can also produce the paths themselves).";
         this.requiredInput = "A Graph G = (V,E) and a node u from V";
     }
 

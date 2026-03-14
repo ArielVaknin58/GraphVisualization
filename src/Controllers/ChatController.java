@@ -155,13 +155,14 @@ public class ChatController extends Controller {
 
                 ObjectMapper objectMapper = new ObjectMapper();
                 String message = responseJson.get("message").getAsString();
-                GeminiResponse response = objectMapper.readValue(message, GeminiResponse.class);
+
 
                 // 3. Always show the message in chat
                 addMessageToChat(new ChatRecord("model", message));
 
                 // 4. Route based on type
                 if ("ACTION".equals(type)) {
+                    GeminiResponse response = objectMapper.readValue(aiRawResponse, GeminiResponse.class);
                     response.algorithm.Execute(responseJson.getAsJsonObject("parameters"), ControllerManager.getGraphInputController().getGraph());
 //                    String action = responseJson.get("action").getAsString();
 //                    System.out.println("ACTION = "+ action);
@@ -174,6 +175,7 @@ public class ChatController extends Controller {
             } catch (Exception e) {
                 // If parsing still fails, the model might have returned bad JSON structure
                 System.err.println("Malformed JSON from AI: " + aiRawResponse);
+                System.out.println(e.getMessage());
                 addMessageToChat(new ChatRecord("model", "I tried to run that, but I had a formatting error. Please try again."));
             }
         });
@@ -181,43 +183,43 @@ public class ChatController extends Controller {
         new Thread(apiCallTask).start();
     }
 
-    private void handleAlgorithmAction(String action, com.google.gson.JsonObject params) {
-        Platform.runLater(() -> {
-            try
-            {
-                switch (action) {
-                    case "run_bfs" -> {
-                        String startNode = params.get("inputNode").getAsString();
-                        GraphTools.runBFS(startNode);
-                    }
-                    case "run_dfs" -> {
-                        String startNode = params.get("inputNode").getAsString();
-                        GraphTools.runDFS(startNode);
-                    }
-                    case "run_bipartite" -> {
-                        GraphTools.runBiPartite();
-                    }
-                    case "run_euler_circuit" -> {
-                        GraphTools.runEulerCircuit();
-                    }
-                    case "run_topological" -> {
-                        GraphTools.runTopologicalSort();
-                    }
-                    case "run_kosaraju" -> {
-                        GraphTools.runKosarajuAlgorithm();
-                    }
-                    case "run_super" -> {
-                        GraphTools.runSuperGraphAlgorithm();
-                    }
-                }
-            }catch (NullPointerException e) {
-                e.printStackTrace();
-                addMessageToChat(new ChatRecord("model", "I tried to run that, but the selected vertice is null. Please try again."));
-
-            }
-
-        });
-    }
+//    private void handleAlgorithmAction(String action, com.google.gson.JsonObject params) {
+//        Platform.runLater(() -> {
+//            try
+//            {
+//                switch (action) {
+//                    case "run_bfs" -> {
+//                        String startNode = params.get("inputNode").getAsString();
+//                        GraphTools.runBFS(startNode);
+//                    }
+//                    case "run_dfs" -> {
+//                        String startNode = params.get("inputNode").getAsString();
+//                        GraphTools.runDFS(startNode);
+//                    }
+//                    case "run_bipartite" -> {
+//                        GraphTools.runBiPartite();
+//                    }
+//                    case "run_euler_circuit" -> {
+//                        GraphTools.runEulerCircuit();
+//                    }
+//                    case "run_topological" -> {
+//                        GraphTools.runTopologicalSort();
+//                    }
+//                    case "run_kosaraju" -> {
+//                        GraphTools.runKosarajuAlgorithm();
+//                    }
+//                    case "run_super" -> {
+//                        GraphTools.runSuperGraphAlgorithm();
+//                    }
+//                }
+//            }catch (NullPointerException e) {
+//                e.printStackTrace();
+//                addMessageToChat(new ChatRecord("model", "I tried to run that, but the selected vertice is null. Please try again."));
+//
+//            }
+//
+//        });
+//    }
 
 
     private String buildMasterPrompt(Graph graph, List<ChatRecord> history, String userRequest) {
@@ -238,7 +240,7 @@ public class ChatController extends Controller {
       "type": "CHAT" | "ACTION" | "CREATE_GRAPH",
       "message": "Human-readable response or explanation",
       "action": "run_bfs" | "run_dfs" | "run_bipartite" | "run_euler_circuit" | "run_topological" | "none",
-      "parameters": { "inputNode": "string" , "iterations": "integer" , "k": "integer" }
+      "parameters": { "inputNode": "string" , "iterations": "integer" , "k": "integer" , "s": "integer" , "t": "integer"}
       "graphData": {
         "isDirected": boolean,
         "nodes": ["1", "2", ...],
@@ -270,7 +272,8 @@ public class ChatController extends Controller {
         
     ### RULES FOR PARAMETERS ###
         1. If an algorithm is deterministic (like BFS/DFS), set "iterations" and "k": null.
-        2. If an algorithm is NON-DETERMINISTIC or STOCHASTIC (like Random Walk or Meta-heuristics):
+        2. If the algorithm is Ford Felkerson - then set s and t to be the starting and finishing nodes of the algorithm respectively.
+        3. If an algorithm is NON-DETERMINISTIC or STOCHASTIC (like Random Walk or Meta-heuristics):
            - Check if the user provided a number of iterations and k.
            - If they DID NOT set iterations, set "type": "CHAT" and ask the user: "How many iterations would you like to run for this algorithm?" 
            - If they DID NOT set k, set "type": "CHAT" and ask the user: "what parameter would you like to give for the algorithm?" 
@@ -283,6 +286,7 @@ public class ChatController extends Controller {
 
     ### CRITICAL CONSTRAINTS ###
     - Nodes MUST be strings representing numbers (e.g., "1", "2").
+    - Be wary of algorithm input constraints. if the algorithm expects a directed graph and the graph is undirected then mention the input is not right.
     - Edges MUST be objects with "from" and "to" keys. NEVER nested lists.
     - If "parameters" are not needed, return: "parameters": {}.
     - Do NOT include markdown tags like ```json in your response.

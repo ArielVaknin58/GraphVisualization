@@ -1,12 +1,15 @@
 package Algorithms;
 
 import Controllers.Controller;
+import Controllers.ControllerManager;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import Services.GraphData;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.fxml.FXMLLoader;
@@ -26,21 +29,31 @@ import java.util.Objects;
 
 import static Controllers.Controller.AlertError;
 
-public class ShortestPathsTree extends Algorithm{
+public class ShortestPathsTree extends NodeCentricAlgorithm{
 
-    public static final String AlgorithmDescription = "The algorithm returns a tree that presents all the shortest paths from vertice s in graph G to all the vertices";
-    private Graph.GraphNode inputNode;
     private HashMap<String,String> bfsResult;
 
     public ShortestPathsTree(Graph graph, Graph.GraphNode node)
     {
+        super(node);
+        INIT(graph);
+    }
+
+    @JsonCreator
+    public ShortestPathsTree(@JsonProperty("inputNode") String nodeId)
+    {
+        super(ControllerManager.getGraphInputController().getGraph().VerticeIndexer.get(nodeId));
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
         this.G = graph;
-        this.inputNode = node;
+        AlgorithmDescription = "The algorithm returns a tree that presents all the shortest paths from vertice s in graph G to all the vertices";
         this.AlgorithmName = "Shortest Paths Algorithm";
         this.requiredInput = "A graph G and a vertice v from G.";
         this.bfsResult = new HashMap<>();
     }
-
 
     @Override
     public void Run() {

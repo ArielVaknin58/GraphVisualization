@@ -67,22 +67,22 @@ public class GraphWiseAlgorithmsController extends Controller{
 
     private void initTooltips()
     {
-        TopologicalSortButton.setTooltip(new Tooltip(TopologicalSort.AlgorithmDescription));
-        eulerCircuitButton.setTooltip(new Tooltip(EulerCircuit.AlgorithmDescription));
-        hamiltonButton.setTooltip(new Tooltip(HamiltonianPath.AlgorithmDescription));
-        eulerPathButton.setTooltip(new Tooltip(EulerPath.AlgorithmDescription));
-        connectivityButton.setTooltip(new Tooltip(ConnectivityComponents.AlgorithmDescription));
-        KosarajuButton.setTooltip((new Tooltip(KosarajuSharirAlgorithm.AlgorithmDescription)));
-        superGraphButton.setTooltip(new Tooltip(SuperGraph.AlgorithmDescription));
-        bipartiteButton.setTooltip(new Tooltip(BiPartite.AlgorithmDescription));
-        FloydWarshallButton.setTooltip(new Tooltip(FloydWarshallAlgorithm.AlgorithmDescription));
-        mincutButton.setTooltip(new Tooltip(MinCutAlgorithm.AlgorithmDescription));
-        mstButton.setTooltip(new Tooltip(PrimAlgorithm.AlgorithmDescription));
-        isButton.setTooltip(new Tooltip(IndependentSetAlgorithm.AlgorithmDescription));
-        vertexCoverButton.setTooltip(new Tooltip(VertexCover.AlgorithmDescription));
-        maxCutButton.setTooltip(new Tooltip(MaxCut.AlgorithmDescription));
-        CliqueButton.setTooltip(new Tooltip(Clique.AlgorithmDescription));
-        kColorsButton.setTooltip(new Tooltip(kColors.AlgorithmDescription));
+        TopologicalSortButton.setTooltip(new Tooltip(TopologicalSort.getAlgorithmDescription()));
+        eulerCircuitButton.setTooltip(new Tooltip(EulerCircuit.getAlgorithmDescription()));
+        hamiltonButton.setTooltip(new Tooltip(HamiltonianPath.getAlgorithmDescription()));
+        eulerPathButton.setTooltip(new Tooltip(EulerPath.getAlgorithmDescription()));
+        connectivityButton.setTooltip(new Tooltip(ConnectivityComponents.getAlgorithmDescription()));
+        KosarajuButton.setTooltip((new Tooltip(KosarajuSharirAlgorithm.getAlgorithmDescription())));
+        superGraphButton.setTooltip(new Tooltip(SuperGraph.getAlgorithmDescription()));
+        bipartiteButton.setTooltip(new Tooltip(BiPartite.getAlgorithmDescription()));
+        FloydWarshallButton.setTooltip(new Tooltip(FloydWarshallAlgorithm.getAlgorithmDescription()));
+        mincutButton.setTooltip(new Tooltip(MinCutAlgorithm.getAlgorithmDescription()));
+        mstButton.setTooltip(new Tooltip(PrimAlgorithm.getAlgorithmDescription()));
+        isButton.setTooltip(new Tooltip(IndependentSetAlgorithm.getAlgorithmDescription()));
+        vertexCoverButton.setTooltip(new Tooltip(VertexCover.getAlgorithmDescription()));
+        maxCutButton.setTooltip(new Tooltip(MaxCut.getAlgorithmDescription()));
+        CliqueButton.setTooltip(new Tooltip(Clique.getAlgorithmDescription()));
+        kColorsButton.setTooltip(new Tooltip(kColors.getAlgorithmDescription()));
     }
 
     private void run(Algorithm algorithm)

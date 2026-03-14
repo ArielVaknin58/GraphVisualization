@@ -39,9 +39,11 @@ public abstract class Algorithm {
     protected String AlgorithmName;
     protected String requiredInput;
     protected Graph graphResult;
-    protected String AlgorithmDescription;
+    protected static String AlgorithmDescription;
 
     Algorithm() {};
+
+    protected abstract void INIT(Graph graph);
 
     public void Execute(com.google.gson.JsonObject params, Graph graph)
     {
@@ -73,7 +75,7 @@ public abstract class Algorithm {
 
     }
 
-    public String getAlgorithmDescription() { return this.AlgorithmDescription; }
+    public static String getAlgorithmDescription() { return AlgorithmDescription; }
 
     public String getAlgorithmName() {return this.AlgorithmName;}
 

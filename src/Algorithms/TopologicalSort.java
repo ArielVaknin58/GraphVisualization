@@ -6,6 +6,7 @@ import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -26,16 +27,26 @@ import static Controllers.Controller.AlertError;
 public class TopologicalSort extends Algorithm {
 
     private List<Graph.GraphNode> result;
-    public static final String AlgorithmDescription = "A topological sort is a linear ordering of vertices in a directed acyclic graph (DAG), where for every directed edge from vertex u to vertex v, u comes before v in the ordering.";
 
     public TopologicalSort(Graph G)
     {
-        super();
+        INIT(G);
+    }
+
+    @JsonCreator
+    public TopologicalSort()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
         result = new ArrayList<>();
-        this.G = G;
+        this.G = graph;
+        AlgorithmDescription = "A topological sort is a linear ordering of vertices in a directed acyclic graph (DAG)," +
+                " where for every directed edge from vertex u to vertex v, u comes before v in the ordering.";
         requiredInput = "Acyclic directed graph";
         this.AlgorithmName = "Topological Sort";
-
     }
 
     @Override

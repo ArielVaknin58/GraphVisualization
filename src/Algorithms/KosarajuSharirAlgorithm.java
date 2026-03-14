@@ -1,8 +1,10 @@
 package Algorithms;
 
 
+import Controllers.ControllerManager;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import javafx.scene.paint.Color;
 
 import java.io.PrintWriter;
@@ -15,17 +17,27 @@ import static Controllers.Controller.AlertError;
 
 public class KosarajuSharirAlgorithm extends Algorithm{
 
-    public static final String AlgorithmDescription = "The algorithm find strongly connected components in a given directed graph.";
     private Hashtable<String,String> result;
 
     public KosarajuSharirAlgorithm(Graph graph)
     {
+        INIT(graph);
+    }
+
+    @JsonCreator
+    public KosarajuSharirAlgorithm()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
         this.G = graph;
+        AlgorithmDescription = "The algorithm find strongly connected components in a given directed graph.";
         this.AlgorithmName = "Kosaraju Sharir Algorithm";
         this.requiredInput = "A directed graph";
         this.result = new Hashtable<>();
     }
-
 
     @Override
     public void Run() {

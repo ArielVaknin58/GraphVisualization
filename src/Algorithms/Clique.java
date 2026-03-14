@@ -1,6 +1,9 @@
 package Algorithms;
 
+import Controllers.ControllerManager;
 import GraphVisualizer.Graph;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.JsonObject;
 import javafx.scene.paint.Color;
 import java.io.PrintWriter;
@@ -16,19 +19,23 @@ import static Controllers.Controller.AlertError;
 public class Clique extends NonDeterministicAlgorithm{
 
 
-    //public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a clique of size k.";
-
     public Clique(Graph g, int iterations, int k) {
         super(g, iterations, k);
-        this.AlgorithmDescription = "This algorithm non-deterministically determines if G has a clique of size k.";
-        this.AlgorithmName = "Non-Deterministic Clique Algorithm";
-        this.requiredInput = "undirected graph";
+        INIT(g);
     }
 
+    @JsonCreator
+    public Clique(@JsonProperty("iterations") Integer iterations, @JsonProperty("k") Integer k)
+    {
+        super(ControllerManager.getGraphInputController().getGraph(),iterations , k);
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
 
     @Override
-    public void Execute(JsonObject params) {
-
+    protected void INIT(Graph graph) {
+        AlgorithmDescription = "This algorithm non-deterministically determines if G has a clique of size k.";
+        this.AlgorithmName = "Non-Deterministic Clique Algorithm";
+        this.requiredInput = "undirected graph";
     }
 
     @Override

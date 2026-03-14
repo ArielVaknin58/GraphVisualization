@@ -1,12 +1,14 @@
 package Algorithms;
 
 import Controllers.Controller;
+import Controllers.ControllerManager;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import Services.GraphData;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.fxml.FXMLLoader;
@@ -25,14 +27,25 @@ import static Controllers.Controller.AlertError;
 
 public class SuperGraph extends Algorithm{
 
-    public static final String AlgorithmDescription = "The algorithm find Super graph H of graph G, where every connected component in G is a vertice in H";
     private Hashtable<String, Set<String>> components;
     private Hashtable<String,String> ksaResult;
 
 
     public SuperGraph(Graph graph)
     {
+        INIT(graph);
+    }
+
+    @JsonCreator
+    public SuperGraph()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
         this.G = graph;
+        AlgorithmDescription = "The algorithm find Super graph H of graph G, where every connected component in G is a vertice in H";
         this.AlgorithmName = "Super Graph Algorithm";
         this.requiredInput = "A directed graph";
         this.components = new Hashtable<>();

@@ -31,8 +31,6 @@ import static Controllers.Controller.AlertError;
 
 public class ConnectivityComponents extends Algorithm{
 
-
-    //public static final String AlgorithmDescription = "An algorithm that finds Connectivity components in an undirected graph.";
     private Hashtable<String,String> result;
 
     public ConnectivityComponents(Graph G)
@@ -47,11 +45,11 @@ public class ConnectivityComponents extends Algorithm{
         INIT(ControllerManager.getGraphInputController().getGraph());
     }
 
-    private void INIT(Graph G)
+    protected void INIT(Graph G)
     {
         this.G = G;
         this.AlgorithmName = "Undirected Connectivity Components";
-        this.AlgorithmDescription = "An algorithm that finds Connectivity components in an undirected graph.";
+        AlgorithmDescription = "An algorithm that finds Connectivity components in an undirected graph.";
         this.requiredInput = "An undirected Graph G = (V,E)";
         this.result = new Hashtable<>();
     }

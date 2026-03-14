@@ -1,7 +1,10 @@
 package Algorithms;
 
+import Controllers.ControllerManager;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.scene.paint.Color;
 
 import java.io.PrintWriter;
@@ -16,12 +19,24 @@ import static Controllers.Controller.AlertError;
 
 public class MaxCut extends NonDeterministicAlgorithm{
 
-    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a cut of size at least k.";
-
     private DirectedEdge edge;
+
     public MaxCut(Graph g, int iterations, int k)
     {
         super(g,iterations,k);
+        INIT(g);
+    }
+
+    @JsonCreator
+    public MaxCut(@JsonProperty("iterations") Integer iterations, @JsonProperty("k") Integer k)
+    {
+        super(ControllerManager.getGraphInputController().getGraph(), iterations, k);
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
+        AlgorithmDescription = "This algorithm non-deterministically determines if G has a cut of size at least k.";
         this.AlgorithmName = "Non-Deterministic Max-Cut Algorithm";
         this.requiredInput = "undirected graph";
     }

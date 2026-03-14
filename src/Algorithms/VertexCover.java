@@ -1,7 +1,10 @@
 package Algorithms;
 
+import Controllers.ControllerManager;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.scene.paint.Color;
 
 import java.util.HashSet;
@@ -9,15 +12,26 @@ import java.util.Set;
 
 public class VertexCover extends NonDeterministicAlgorithm{
 
-    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a vertex cover of size k.";
 
     public VertexCover(Graph g, int iterations, int k)
     {
         super(g, iterations, k);
+        INIT(g);
+    }
+
+    @JsonCreator
+    public VertexCover(@JsonProperty("iterations") Integer iterations, @JsonProperty("k") Integer k)
+    {
+        super(ControllerManager.getGraphInputController().getGraph(), iterations, k);
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
+        AlgorithmDescription = "This algorithm non-deterministically determines if G has a vertex cover of size k.";
         this.AlgorithmName = "Non-Deterministic Vertex Cover Algorithm";
         this.requiredInput = "undirected graph";
     }
-
 
     @Override
     public void Run() {

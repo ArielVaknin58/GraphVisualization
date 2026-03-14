@@ -1,20 +1,37 @@
 package Algorithms;
 
+import Controllers.ControllerManager;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.scene.paint.Color;
 import java.util.*;
 
 public class IndependentSetAlgorithm extends NonDeterministicAlgorithm{
 
-    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has an independent set of size k.";
 
     public IndependentSetAlgorithm(Graph g, int iterations,int k)
     {
         super(g, iterations, k);
+        INIT(G);
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
+        AlgorithmDescription = "This algorithm non-deterministically determines if G has an independent set of size k.";
         this.AlgorithmName = "Non-Deterministic Independent Set Algorithm";
         this.requiredInput = "undirected graph";
     }
+
+    @JsonCreator
+    public IndependentSetAlgorithm(@JsonProperty("iterations") Integer iterations, @JsonProperty("k") Integer k)
+    {
+        super(ControllerManager.getGraphInputController().getGraph(), iterations, k);
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
     @Override
     public void Run() {
 
@@ -42,10 +59,12 @@ public class IndependentSetAlgorithm extends NonDeterministicAlgorithm{
         return nodes;
     }
 
+    @JsonIgnore
     public boolean getIsSetFound() {
         return isSetFound;
     }
 
+    @JsonIgnore
     public Set<Graph.GraphNode> getCurrentSet() {
         return currentSet;
     }

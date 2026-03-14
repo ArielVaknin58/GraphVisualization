@@ -7,6 +7,7 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -25,17 +26,29 @@ import static Controllers.Controller.AlertError;
 
 public class HamiltonianPath extends Algorithm{
 
-    public static final String AlgorithmDescription = "The algorithm gets a graph G=(V,E) and returns a path where each vertice appears exactly once.";
     private List<Graph.GraphNode> result;
 
 
     public HamiltonianPath(Graph G)
     {
-        this.G = G;
+        INIT(G);
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
+        this.G = graph;
+        AlgorithmDescription = "The algorithm gets a graph G=(V,E) and returns a path where each vertice appears exactly once.";
         this.AlgorithmName = "Hamiltonian Path Algorithm";
         this.requiredInput = "Acyclic directed Graph";
         this.result = new ArrayList<>();
     }
+
+    @JsonCreator
+    public HamiltonianPath()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
     @Override
     public void Run() {
 

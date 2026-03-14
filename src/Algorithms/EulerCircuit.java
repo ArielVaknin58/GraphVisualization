@@ -3,6 +3,7 @@ package Algorithms;
 import Controllers.ControllerManager;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -15,14 +16,25 @@ import static Controllers.Controller.AlertError;
 public class EulerCircuit extends Algorithm{
 
     private List<Graph.GraphNode> result = new ArrayList<>();
-    public static final String AlgorithmDescription = "The Algorithm finds an Euler's circuit, which is a circuit in graph G that passes every edge exactly once.";
     private Graph.GraphNode startingNode = null;
 
 
     public EulerCircuit(Graph G)
     {
-        this.G = G;
+        INIT(G);
+    }
+
+    @JsonCreator
+    public EulerCircuit()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
+        this.G = graph;
         this.AlgorithmName = "Euler's Circuit Algorithm";
+        AlgorithmDescription = "The Algorithm finds an Euler's circuit, which is a circuit in graph G that passes every edge exactly once.";
         this.requiredInput = "A Graph G = (V,E)";
     }
 

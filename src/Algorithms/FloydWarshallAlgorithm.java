@@ -6,6 +6,7 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,19 +28,29 @@ import static Controllers.Controller.AlertError;
 
 public class FloydWarshallAlgorithm extends Algorithm{
 
-    public static final String AlgorithmDescription = "This algorithm finds the lightest paths from every couple of vertices in graph G.";
     private HashMap<Graph.GraphNode,HashMap<Graph.GraphNode,Integer>> weightsMatrix;
     private HashMap<Graph.GraphNode,HashMap<Graph.GraphNode, Graph.GraphNode>> parents;
     private boolean hasNegativeCycle;
 
     public FloydWarshallAlgorithm(Graph graph)
     {
+        INIT(graph);
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
         this.G = graph;
         this.AlgorithmName = "Floyd-Warshall Algorithm";
+        AlgorithmDescription = "This algorithm finds the lightest paths from every couple of vertices in graph G.";
         this.requiredInput = "a directed,weighted graph G=(V,E)";
         this.hasNegativeCycle = false;
         init();
+    }
 
+    @JsonCreator
+    public FloydWarshallAlgorithm()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
     }
 
     private void init()
@@ -74,6 +85,8 @@ public class FloydWarshallAlgorithm extends Algorithm{
         }
 
     }
+
+
 
     @Override
     public void Run() {

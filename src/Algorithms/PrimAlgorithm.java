@@ -1,12 +1,14 @@
 package Algorithms;
 
 import Controllers.Controller;
+import Controllers.ControllerManager;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import Services.GraphData;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.fxml.FXMLLoader;
@@ -29,18 +31,19 @@ import static Controllers.Controller.AlertError;
 
 public class PrimAlgorithm extends Algorithm {
 
-    public static final String AlgorithmDescription = "The algorithm finds minimal spanning tree in a given undirected graph.";
     private HashMap<Graph.GraphNode,Boolean> isInTree;
     private HashMap<Graph.GraphNode,Integer> weightsToConnect;
     private HashMap<Graph.GraphNode, Graph.GraphNode> parents;;
 
     public PrimAlgorithm(Graph graph)
     {
-        this.G = graph;
-        this.AlgorithmName = "Prim's Algorithm";
-        this.requiredInput = "A weighted, undirected and fully connected graph";
-        this.graphResult = new Graph(false);
-        init();
+        INIT(graph);
+    }
+
+    @JsonCreator
+    public PrimAlgorithm()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
     }
 
     private void init()
@@ -54,6 +57,16 @@ public class PrimAlgorithm extends Algorithm {
             weightsToConnect.put(node,Integer.MAX_VALUE);
             parents.put(node,null);
         }
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
+        this.G = graph;
+        AlgorithmDescription = "The algorithm finds minimal spanning tree in a given undirected graph.";
+        this.AlgorithmName = "Prim's Algorithm";
+        this.requiredInput = "A weighted, undirected and fully connected graph";
+        this.graphResult = new Graph(false);
+        init();
     }
 
     @Override

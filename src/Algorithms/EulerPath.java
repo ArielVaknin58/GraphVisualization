@@ -3,6 +3,8 @@ package Algorithms;
 import Controllers.ControllerManager;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.google.gson.JsonObject;
 
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -16,13 +18,24 @@ import static Controllers.Controller.AlertError;
 public class EulerPath extends Algorithm{
 
     private List<Graph.GraphNode> result = new ArrayList<>();
-    public static final String AlgorithmDescription = "The Algorithm finds an Euler's path, which is a path in graph G that passes every edge exactly once.";
 
     public EulerPath(Graph G)
     {
+        INIT(G);
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
         this.G = G;
+        AlgorithmDescription = "The Algorithm finds an Euler's path, which is a path in graph G that passes every edge exactly once.";
         this.AlgorithmName = "Euler Circuit Algorithm";
         this.requiredInput = "An undirected,fully connected graph G=(V,E)";
+    }
+
+    @JsonCreator
+    public EulerPath()
+    {
+        INIT(ControllerManager.getGraphInputController().getGraph());
     }
 
     @Override

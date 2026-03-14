@@ -5,6 +5,8 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
 import Services.GraphData;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.scene.paint.Color;
@@ -19,8 +21,6 @@ import static Controllers.Controller.AlertError;
 
 public class FordFelkersonAlgorithm extends Algorithm{
 
-    public static final String AlgorithmDescription = "This algorithm finds the maximum flow in graph G from s to v with given capacities..";
-
     private Graph.GraphNode s;
     private Graph.GraphNode t;
     private int maxFlow;
@@ -32,10 +32,7 @@ public class FordFelkersonAlgorithm extends Algorithm{
         this.G = graph;
         this.s = s;
         this.t = t;
-        this.AlgorithmName = "Ford-Felkerson Algorithm";
-        this.requiredInput = "A directed graph G, and vertices s and t from G";
-        this.adjMap = this.G.getAdjacencyMap();
-
+        INIT(graph);
 
     }
 
@@ -48,11 +45,28 @@ public class FordFelkersonAlgorithm extends Algorithm{
         }
     }
 
+    @JsonCreator
+    public FordFelkersonAlgorithm(@JsonProperty("s") int start, @JsonProperty("t") int finish)
+    {
+        this.G = ControllerManager.getGraphInputController().getGraph();
+        this.s = G.V.get(start);
+        this.t = G.V.get(finish);
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
 
     public Graph getGraph()
     {
         return G;
     }
+
+    @Override
+    protected void INIT(Graph graph) {
+        this.AlgorithmName = "Ford-Felkerson Algorithm";
+        AlgorithmDescription = "This algorithm finds the maximum flow in graph G from s to v with given capacities..";
+        this.requiredInput = "A directed graph G, and vertices s and t from G";
+        this.adjMap = this.G.getAdjacencyMap();
+    }
+
     @Override
     public void Run() {
         init();

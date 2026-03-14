@@ -1,6 +1,9 @@
 package Algorithms;
 
+import Controllers.ControllerManager;
 import GraphVisualizer.Graph;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.scene.paint.Color;
 
 import java.io.PrintWriter;
@@ -17,17 +20,28 @@ import static Controllers.Controller.AlertError;
 public class kColors extends NonDeterministicAlgorithm
 {
 
-    public static final String AlgorithmDescription = "This algorithm non-deterministically determines if G has a valid k-colors coloring of vertices.";
     private List<Color> colors;
     private Graph initialGraph;
 
     public kColors(Graph g, int iterations, int k) {
         super(g, iterations, k);
-        this.initialGraph = new Graph(g);
+        INIT(g);
+    }
+
+    @JsonCreator
+    public kColors(@JsonProperty("iterations") Integer iterations, @JsonProperty("k") Integer k)
+    {
+        super(ControllerManager.getGraphInputController().getGraph(), iterations, k);
+        INIT(ControllerManager.getGraphInputController().getGraph());
+    }
+
+    @Override
+    protected void INIT(Graph graph) {
+        AlgorithmDescription = "This algorithm non-deterministically determines if G has a valid k-colors coloring of vertices.";
+        this.initialGraph = new Graph(graph);
         this.AlgorithmName = "k-colors Algorithm";
         this.requiredInput = "undirected graph";
     }
-
 
     @Override
     public void Run() {
