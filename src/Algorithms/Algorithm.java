@@ -1,9 +1,6 @@
 package Algorithms;
 
-import Controllers.Controller;
-import Controllers.ControllerManager;
-import Controllers.GraphResultController;
-import Controllers.SaveGraphPopupController;
+import Controllers.*;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
@@ -45,18 +42,18 @@ public abstract class Algorithm {
 
     protected abstract void INIT(Graph graph);
 
-    public void Execute(com.google.gson.JsonObject params, Graph graph)
+    public void Execute(Graph graph)
     {
         this.G = graph;
-        if(this instanceof NodeCentricAlgorithm)
-        {
-            ((NodeCentricAlgorithm) this).inputNode = this.G.VerticeIndexer.get(params.get("inputNode").getAsString());
-        }
-        if(this instanceof NonDeterministicAlgorithm)
-        {
-            ((NonDeterministicAlgorithm) this).iterations = params.get("iterations").getAsInt();
-            ((NonDeterministicAlgorithm) this).k = params.get("k").getAsInt();
-        }
+//        if(this instanceof NodeCentricAlgorithm)
+//        {
+//            ((NodeCentricAlgorithm) this).inputNode = this.G.VerticeIndexer.get(params.get("inputNode").getAsString());
+//        }
+//        if(this instanceof NonDeterministicAlgorithm)
+//        {
+//            ((NonDeterministicAlgorithm) this).iterations = params.get("iterations").getAsInt();
+//            ((NonDeterministicAlgorithm) this).k = params.get("k").getAsInt();
+//        }
 
         RunAlgorithm(this);
     }

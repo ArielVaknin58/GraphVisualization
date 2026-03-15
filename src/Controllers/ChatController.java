@@ -163,7 +163,8 @@ public class ChatController extends Controller {
                 // 4. Route based on type
                 if ("ACTION".equals(type)) {
                     GeminiResponse response = objectMapper.readValue(aiRawResponse, GeminiResponse.class);
-                    response.algorithm.Execute(responseJson.getAsJsonObject("parameters"), ControllerManager.getGraphInputController().getGraph());
+                    response.algorithm.Execute(ControllerManager.getGraphInputController().getGraph());
+                    Platform.runLater( () -> GraphInputController.displayGraph(ControllerManager.getGraphInputController().getGraph()));
 //                    String action = responseJson.get("action").getAsString();
 //                    System.out.println("ACTION = "+ action);
 //                    handleAlgorithmAction(action, responseJson.getAsJsonObject("parameters"));

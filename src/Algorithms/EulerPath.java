@@ -26,7 +26,7 @@ public class EulerPath extends Algorithm{
 
     @Override
     protected void INIT(Graph graph) {
-        this.G = G;
+        this.G = graph;
         AlgorithmDescription = "The Algorithm finds an Euler's path, which is a path in graph G that passes every edge exactly once.";
         this.AlgorithmName = "Euler Circuit Algorithm";
         this.requiredInput = "An undirected,fully connected graph G=(V,E)";
