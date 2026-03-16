@@ -2,12 +2,14 @@ package Algorithms;
 
 import Controllers.Controller;
 import Controllers.ControllerManager;
+import Controllers.GraphInputController;
 import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -62,12 +64,32 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
                 timeline.stop();
             }
 
-            // Create a new timeline
+//            // Create a new timeline
+//            timeline = new Timeline();
+//            // We set iterations - 1 because we already ran one iteration
+//            timeline.setCycleCount(iterations - 1);
+//
+//            // Create a KeyFrame that runs every 100 milliseconds
+//            KeyFrame keyFrame = new KeyFrame(Duration.millis(100), event -> {
+//                if (isSetFound) {
+//                    timeline.stop();
+//                    controller.getStateNDLabel().setText("Found !");
+//                    return;
+//                }
+//
+//                counter++;
+//                controller.displayGraph(this.G);
+//                controller.getStateNDLabel().setText("Looking... "+counter+"/"+iterations);
+//                Run();
+//                CreateOutputGraph();
+//                controller.displayGraph(this.graphResult);
+//            });
+//
+//            timeline.getKeyFrames().add(keyFrame);
+
             timeline = new Timeline();
-            // We set iterations - 1 because we already ran one iteration
             timeline.setCycleCount(iterations - 1);
 
-            // Create a KeyFrame that runs every 100 milliseconds
             KeyFrame keyFrame = new KeyFrame(Duration.millis(100), event -> {
                 if (isSetFound) {
                     timeline.stop();
@@ -76,14 +98,21 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
                 }
 
                 counter++;
-                controller.displayGraph(this.G);
-                controller.getStateNDLabel().setText("Looking... "+counter+"/"+iterations);
+
+                // --- CHANGE STARTS HERE ---
+                // 1. Perform calculations first
                 Run();
                 CreateOutputGraph();
+
+                // 2. Update the UI only once with the final result of this iteration
+                // This prevents the "flicker" caused by drawing the original graph (this.G)
                 controller.displayGraph(this.graphResult);
+                controller.getStateNDLabel().setText("Looking... " + counter + "/" + iterations);
+                // --- CHANGE ENDS HERE ---
             });
 
             timeline.getKeyFrames().add(keyFrame);
+
 
             timeline.setOnFinished(event -> {
                 if (!isSetFound) {
@@ -94,6 +123,7 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
 
             // Play the animation
             timeline.play();
+
 
         } catch (Exception e) {
             Controller.AlertError(e);

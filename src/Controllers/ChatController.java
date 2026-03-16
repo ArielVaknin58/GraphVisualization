@@ -164,10 +164,7 @@ public class ChatController extends Controller {
                 if ("ACTION".equals(type)) {
                     GeminiResponse response = objectMapper.readValue(aiRawResponse, GeminiResponse.class);
                     response.algorithm.Execute(ControllerManager.getGraphInputController().getGraph());
-                    Platform.runLater( () -> GraphInputController.displayGraph(ControllerManager.getGraphInputController().getGraph()));
-//                    String action = responseJson.get("action").getAsString();
-//                    System.out.println("ACTION = "+ action);
-//                    handleAlgorithmAction(action, responseJson.getAsJsonObject("parameters"));
+
                 } else if ("CREATE_GRAPH".equals(type)) {
                     GraphData graphData = gson.fromJson(responseJson.get("graphData"), GraphData.class);
                     Platform.runLater(() -> GraphInputController.CreateGraphStatic(graphData));
@@ -180,6 +177,7 @@ public class ChatController extends Controller {
                 addMessageToChat(new ChatRecord("model", "I tried to run that, but I had a formatting error. Please try again."));
             }
         });
+
 
         new Thread(apiCallTask).start();
     }

@@ -1,9 +1,11 @@
 package Algorithms;
 
 import Controllers.ControllerManager;
+import Controllers.GraphInputController;
 import GraphVisualizer.Graph;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
 import java.io.PrintWriter;

@@ -1,6 +1,7 @@
 package Algorithms;
 
 import Controllers.*;
+import Exceptions.InvalidAlgorithmInputException;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import GraphVisualizer.ThemeManager;
@@ -18,6 +19,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+
+import static Controllers.Controller.AlertError;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -45,31 +48,33 @@ public abstract class Algorithm {
     public void Execute(Graph graph)
     {
         this.G = graph;
-//        if(this instanceof NodeCentricAlgorithm)
-//        {
-//            ((NodeCentricAlgorithm) this).inputNode = this.G.VerticeIndexer.get(params.get("inputNode").getAsString());
-//        }
-//        if(this instanceof NonDeterministicAlgorithm)
-//        {
-//            ((NonDeterministicAlgorithm) this).iterations = params.get("iterations").getAsInt();
-//            ((NonDeterministicAlgorithm) this).k = params.get("k").getAsInt();
-//        }
+        Platform.runLater(() ->
+                RunAlgorithm(this));
 
-        RunAlgorithm(this);
     }
 
-    private void RunAlgorithm(Algorithm algorithm)
-    {
-        if (algorithm.checkValidity())
+    private void RunAlgorithm(Algorithm algorithm) {
+        try
         {
-            if(algorithm.getClass() == DFS.class)
-                Platform.runLater(algorithm::Run);
+            if (!algorithm.checkValidity())
+            {
+                AlertError(new InvalidAlgorithmInputException(algorithm));
+            }
             else
-                algorithm.Run();
-            Platform.runLater(algorithm::DisplayResults);
+            {
+                Platform.runLater(() -> {
+                    algorithm.Run();
+                    if(ControllerManager.getGraphInputController().isApiMode())
+                        algorithm.OutputContentToFile();
+                    else
+                        algorithm.DisplayResults();
+                });
 
+            }
+        }catch (Exception e)
+        {
+            AlertError(e);
         }
-
     }
 
     public static String getAlgorithmDescription() { return AlgorithmDescription; }
@@ -109,7 +114,7 @@ public abstract class Algorithm {
             popupStage.showAndWait();
         }
         catch (IOException e) {
-            Controller.AlertError(e);
+            AlertError(e);
         }
     }
 
@@ -126,7 +131,7 @@ public abstract class Algorithm {
             ControllerManager.getGraphWiseAlgorithmsController().SuccessPopup("results stored as : " + fileName + ".txt");
 
         } catch (IOException e) {
-            Controller.AlertError(e);
+            AlertError(e);
         }
     }
 
@@ -158,7 +163,7 @@ public abstract class Algorithm {
         }
         catch (Exception e)
         {
-            Controller.AlertError(e);
+            AlertError(e);
         }
     }
 }
