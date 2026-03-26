@@ -2,7 +2,6 @@ package GraphVisualizer;
 
 import Controllers.Controller;
 import Controllers.ControllerManager;
-
 import javax.swing.*;
 import java.io.*;
 import java.nio.file.*;
@@ -12,7 +11,6 @@ public class GraphSerializer {
 
     public static void saveGraph(Graph g, String fileName) {
         try {
-            // 1️⃣ Determine the serialization folder relative to the working directory
             Path serializationPath = Paths.get(System.getProperty("user.dir"), "Serializations");
 
             Files.createDirectories(serializationPath);

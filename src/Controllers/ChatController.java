@@ -1,11 +1,12 @@
 package Controllers;
 
+import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import Services.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.application.Platform; // Import this!
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -15,9 +16,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text; // Import Text and TextFlow
 import javafx.scene.text.TextFlow;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
+import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.service.AiServices;
+
+
 
 public class ChatController extends Controller {
 
@@ -32,34 +38,28 @@ public class ChatController extends Controller {
     @FXML
     private TextArea inputArea;
 
-    private GraphTools tools;
     private GeminiService geminiService = GeminiService.getInstance();
     private Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Create this once
-    //private GenerateContentConfig geminiToolConfig;
-
+    private ChatAssistant assistant;
 
     @FXML
     public void initialize() {
 
-        tools = new GraphTools();
-        //            Method runBFS = GraphTools.class.getMethod("runBFS",String.class);
-//            Method runDFS = GraphTools.class.getMethod("runDFS",String.class);
-//            Method runBipartite = GraphTools.class.getMethod("runBiPartite",String.class);
-//            Method createGraph = GraphTools.class.getMethod("CreateDescribedGraph",String.class);
-//            Method explainGraph = GraphTools.class.getMethod("ExplainGraph",String.class);
-//            Method kosarajuAlgorithm = GraphTools.class.getMethod("runKosarajuAlgorithm",String.class);
-//            Method superGraph = GraphTools.class.getMethod("runSuperGraphAlgorithm",String.class);
-//
-//            geminiToolConfig = GenerateContentConfig.builder().tools(Tool.builder().functions(runBFS).build(),
-//                                                                     Tool.builder().functions(runDFS).build(),
-//                                                                     Tool.builder().functions(runBipartite).build(),
-//                                                                     Tool.builder().functions(createGraph).build(),
-//                                                                     Tool.builder().functions(explainGraph).build(),
-//                                                                     Tool.builder().functions(kosarajuAlgorithm).build(),
-//                                                                     Tool.builder().functions(superGraph).build()
-//
-//
-//                    ).build();
+        //        // 1. Initialize the Model
+//        ChatModel model = GoogleAiGeminiChatModel.builder()
+//                .apiKey(System.getenv("GEMINI_API_KEY"))
+//                .modelName(AppSettings.AI_model_used)
+//                .build();
+
+        assistant = AiServices.builder(ChatAssistant.class)
+                .chatModel(GoogleAiGeminiChatModel.builder()
+                        .apiKey(System.getenv("GEMINI_API_KEY"))
+                        .modelName(AppSettings.AI_model_used)
+                        .build())
+                .chatMemory(MessageWindowChatMemory.withMaxMessages(13))
+                .tools(new GraphTools())
+                .build();
+
 
         ControllerManager.setChatController(this);
         chatView.setItems(chatHistory);
@@ -102,6 +102,10 @@ public class ChatController extends Controller {
 
         chatView.setSelectionModel(null);
         chatView.setFocusTraversable(false);
+
+
+
+
     }
 
     private void addMessageToChat(ChatRecord message) {
@@ -110,77 +114,165 @@ public class ChatController extends Controller {
     }
 
     @FXML
-    private void OnSendButtonClicked() {
+    private void OnSendButtonClicked()
+    {
         String userInput = inputArea.getText();
         if (userInput == null || userInput.isBlank()) return;
 
         addMessageToChat(new ChatRecord("user", userInput));
         inputArea.clear();
 
-        String masterPrompt = buildMasterPrompt(ControllerManager.getGraphInputController().getGraph(), chatHistory,userInput);
-
-        Task<String> apiCallTask = new Task<>() {
+        String userPrompt = buildMasterPrompt(ControllerManager.getGraphInputController().getGraph(), userInput);
+        Task<String> chatTask = new Task<>() {
             @Override
-            protected String call() throws Exception {
+            protected String call() {
                 Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Thinking...")));
-                return geminiService.generateContent(masterPrompt);
+                return assistant.chat(userPrompt);
             }
         };
 
-        apiCallTask.setOnSucceeded(event -> {
-            chatHistory.removeLast(); // Remove "Thinking..."
-            String aiRawResponse = apiCallTask.getValue();
-
-            try {
-                // 1. Find the first '{' and last '}' to strip away conversational text
-                int firstBrace = aiRawResponse.indexOf('{');
-                int lastBrace = aiRawResponse.lastIndexOf('}');
-
-                if (firstBrace == -1 || lastBrace == -1) {
-                    // AI didn't return JSON at all, treat as plain text chat
-                    addMessageToChat(new ChatRecord("model", aiRawResponse));
-                    return;
-                }
-
-                String jsonOnly = aiRawResponse.substring(firstBrace, lastBrace + 1);
-                // If the model wrapped the JSON in a string primitive
-                if (jsonOnly.startsWith("\"") && jsonOnly.endsWith("\"")) {
-                    jsonOnly = com.google.gson.JsonParser.parseString(jsonOnly).getAsString();
-                }
-                // 2. Parse the cleaned JSON
-                com.google.gson.JsonObject responseJson = com.google.gson.JsonParser.parseString(jsonOnly).getAsJsonObject();
-
-                String type = responseJson.get("type").getAsString();
-                System.out.println("TYPE = "+ type);
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                String message = responseJson.get("message").getAsString();
-
-
-                // 3. Always show the message in chat
-                addMessageToChat(new ChatRecord("model", message));
-
-                // 4. Route based on type
-                if ("ACTION".equals(type)) {
-                    GeminiResponse response = objectMapper.readValue(aiRawResponse, GeminiResponse.class);
-                    response.algorithm.Execute(ControllerManager.getGraphInputController().getGraph());
-
-                } else if ("CREATE_GRAPH".equals(type)) {
-                    GraphData graphData = gson.fromJson(responseJson.get("graphData"), GraphData.class);
-                    Platform.runLater(() -> GraphInputController.CreateGraphStatic(graphData));
-                }
-
-            } catch (Exception e) {
-                // If parsing still fails, the model might have returned bad JSON structure
-                System.err.println("Malformed JSON from AI: " + aiRawResponse);
-                System.out.println(e.getMessage());
-                addMessageToChat(new ChatRecord("model", "I tried to run that, but I had a formatting error. Please try again."));
-            }
+        chatTask.setOnSucceeded(event -> {
+            chatHistory.removeLast();
+            String aiResponse = chatTask.getValue();
+            addMessageToChat(new ChatRecord("model", aiResponse));
         });
 
+        chatTask.setOnFailed(event -> {
+            chatHistory.removeLast();
+            Throwable e = chatTask.getException();
+            e.printStackTrace(); // This will show the EXACT error in your IntelliJ console
+            addMessageToChat(new ChatRecord("model", "Error: " + e.getMessage()));
+        });
 
-        new Thread(apiCallTask).start();
+        new Thread(chatTask).start();
+
+
     }
+
+    private void handleAiResponse(String aiRawResponse) {
+
+        try {
+            int firstBrace = aiRawResponse.indexOf('{');
+            int lastBrace = aiRawResponse.lastIndexOf('}');
+
+            if (firstBrace == -1 || lastBrace == -1) {
+                addMessageToChat(new ChatRecord("model", aiRawResponse));
+                return;
+            }
+
+            String jsonOnly = aiRawResponse.substring(firstBrace, lastBrace + 1);
+
+            if (jsonOnly.startsWith("\"") && jsonOnly.endsWith("\"")) {
+                jsonOnly = com.google.gson.JsonParser.parseString(jsonOnly).getAsString();
+            }
+
+            com.google.gson.JsonObject responseJson = com.google.gson.JsonParser.parseString(jsonOnly).getAsJsonObject();
+
+            String type = responseJson.has("type") ? responseJson.get("type").getAsString() : "CHAT";
+            String message = responseJson.has("message") ? responseJson.get("message").getAsString() : "";
+
+            if (!message.isEmpty()) {
+                addMessageToChat(new ChatRecord("model", message));
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            if ("ACTION".equals(type)) {
+                GeminiResponse response = objectMapper.readValue(jsonOnly, GeminiResponse.class);
+
+                // Ensure algorithm execution happens safely
+                if (response.algorithm != null) {
+                    Platform.runLater(() -> {
+                        response.algorithm.Execute(ControllerManager.getGraphInputController().getGraph());
+                    });
+                }
+
+            } else if ("CREATE_GRAPH".equals(type) && responseJson.has("graphData")) {
+                GraphData graphData = gson.fromJson(responseJson.get("graphData"), GraphData.class);
+                Platform.runLater(() -> GraphInputController.CreateGraphStatic(graphData));
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error processing AI response: " + e.getMessage());
+            e.printStackTrace();
+            addMessageToChat(new ChatRecord("model", "I encountered an error processing that request. Check the logs for details."));
+        }
+
+    }
+
+
+//    @FXML
+//    private void OnSendButtonClicked() {
+//        String userInput = inputArea.getText();
+//        if (userInput == null || userInput.isBlank()) return;
+//
+//        addMessageToChat(new ChatRecord("user", userInput));
+//        inputArea.clear();
+//
+//        String masterPrompt = buildMasterPrompt(ControllerManager.getGraphInputController().getGraph(), chatHistory,userInput);
+//
+//        Task<String> apiCallTask = new Task<>() {
+//            @Override
+//            protected String call() throws Exception {
+//                Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Thinking...")));
+//                return geminiService.generateContent(masterPrompt);
+//            }
+//        };
+//
+//        apiCallTask.setOnSucceeded(event -> {
+//            chatHistory.removeLast(); // Remove "Thinking..."
+//            String aiRawResponse = apiCallTask.getValue();
+//
+//            try {
+//                // 1. Find the first '{' and last '}' to strip away conversational text
+//                int firstBrace = aiRawResponse.indexOf('{');
+//                int lastBrace = aiRawResponse.lastIndexOf('}');
+//
+//                if (firstBrace == -1 || lastBrace == -1) {
+//                    // AI didn't return JSON at all, treat as plain text chat
+//                    addMessageToChat(new ChatRecord("model", aiRawResponse));
+//                    return;
+//                }
+//
+//                String jsonOnly = aiRawResponse.substring(firstBrace, lastBrace + 1);
+//                // If the model wrapped the JSON in a string primitive
+//                if (jsonOnly.startsWith("\"") && jsonOnly.endsWith("\"")) {
+//                    jsonOnly = com.google.gson.JsonParser.parseString(jsonOnly).getAsString();
+//                }
+//                // 2. Parse the cleaned JSON
+//                com.google.gson.JsonObject responseJson = com.google.gson.JsonParser.parseString(jsonOnly).getAsJsonObject();
+//
+//                String type = responseJson.get("type").getAsString();
+//                System.out.println("TYPE = "+ type);
+//
+//                ObjectMapper objectMapper = new ObjectMapper();
+//                String message = responseJson.get("message").getAsString();
+//
+//
+//                // 3. Always show the message in chat
+//                addMessageToChat(new ChatRecord("model", message));
+//
+//                // 4. Route based on type
+//                if ("ACTION".equals(type)) {
+//                    GeminiResponse response = objectMapper.readValue(aiRawResponse, GeminiResponse.class);
+//                    response.algorithm.Execute(ControllerManager.getGraphInputController().getGraph());
+//
+//                } else if ("CREATE_GRAPH".equals(type)) {
+//                    GraphData graphData = gson.fromJson(responseJson.get("graphData"), GraphData.class);
+//                    Platform.runLater(() -> GraphInputController.CreateGraphStatic(graphData));
+//                }
+//
+//            } catch (Exception e) {
+//                // If parsing still fails, the model might have returned bad JSON structure
+//                System.err.println("Malformed JSON from AI: " + aiRawResponse);
+//                System.out.println(e.getMessage());
+//                addMessageToChat(new ChatRecord("model", "I tried to run that, but I had a formatting error. Please try again."));
+//            }
+//        });
+
+//
+//        new Thread(apiCallTask).start();
+//    }
 
 //    private void handleAlgorithmAction(String action, com.google.gson.JsonObject params) {
 //        Platform.runLater(() -> {
@@ -221,83 +313,38 @@ public class ChatController extends Controller {
 //    }
 
 
-    private String buildMasterPrompt(Graph graph, List<ChatRecord> history, String userRequest) {
+//    private String buildMasterPrompt(Graph graph, List<ChatRecord> history, String userRequest) {
+//        GraphData graphData = new GraphData(graph);
+//        String graphJson = gson.toJson(graphData);
+//
+//        String historyString = history.stream()
+//                .map(record -> record.getRole() + " : " + record.getMessage())
+//                .collect(Collectors.joining("\n"));
+//
+//        return """
+//    --- CONTEXT ---
+//    Current Graph: %s
+//    History: %s
+//
+//    ### TASK ###
+//    User Request: "%s"
+//    Output:
+//    """.formatted(graphJson, historyString, userRequest);
+//    }
+
+    private String buildMasterPrompt(Graph graph, String userRequest) {
+        // We only need the current state of the graph here.
+        // LangChain4j's ChatMemory will handle the 'history' part for us!
         GraphData graphData = new GraphData(graph);
         String graphJson = gson.toJson(graphData);
 
-        String historyString = history.stream()
-                .map(record -> record.getRole() + " : " + record.getMessage())
-                .collect(Collectors.joining("\n"));
-
         return """
-    Instruction: You are an expert AI for a Graph Visualization application.
-    You MUST analyze the user's request and respond with a single, valid JSON object following the schema below.
-    
-    
-    ### JSON SCHEMA ###
-    {
-      "type": "CHAT" | "ACTION" | "CREATE_GRAPH",
-      "message": "Human-readable response or explanation",
-      "action": "run_bfs" | "run_dfs" | "run_bipartite" | "run_euler_circuit" | "run_topological" | "none",
-      "parameters": { "inputNode": "string" , "iterations": "integer" , "k": "integer" , "s": "integer" , "t": "integer"}
-      "graphData": {
-        "isDirected": boolean,
-        "nodes": ["1", "2", ...],
-        "edges": [{"from": "1", "to": "2", "weight": 0, "capacity": 0}]
-      }
-    }
-    ### AVAILABLE ALGORITHM TOKENS ###
-        - "run_bfs": Breadth-First Search
-        - "run_dfs": Depth-First Search
-        - "run_bipartite": Check if graph is Bipartite
-        - "run_euler_circuit": Find Euler Circuit
-        - "run_topological": Topological Sort
-        - "run_prim": Minimum Spanning Tree
-        - "run_bellman_ford": Minimum Spanning Tree (Bellman's)
-        - "run_connectivity": finds connectivity components in an undirected graph
-        - "run_euler_path": finds an euler path in a given graph
-        - "run_floyd_warshall": finds lightest paths between every two vertices
-        - "run_ford_felkerson": finds max flow in a graph
-        - "run_hamilton_path": finds a hamilton path in a given graph
-        - "run_kosaraju": finds connectivity components in a directed graph
-        - "run_mincut": finds a minimal cut in a graph
-        - "run_shortest_paths_tree": finds shortest paths between every two vertices
-        - "run_super": creates the super graph of a given directed graph
-        # NON DETERMINISTIC ALGORITHM TOKENS #
-            - "run_clique": finds a click of size k in a graph
-            - "run_independent_set": finds an independent set of size k in a graph
-            - "run_k_colors": finds a valid coloring of k colors in the given graph
-            - "run_vertex_cover": finds a vertex cover of size k in the given graph
-        
-    ### RULES FOR PARAMETERS ###
-        1. If an algorithm is deterministic (like BFS/DFS), set "iterations" and "k": null.
-        2. If the algorithm is Ford Felkerson - then set s and t to be the starting and finishing nodes of the algorithm respectively.
-        3. If an algorithm is NON-DETERMINISTIC or STOCHASTIC (like Random Walk or Meta-heuristics):
-           - Check if the user provided a number of iterations and k.
-           - If they DID NOT set iterations, set "type": "CHAT" and ask the user: "How many iterations would you like to run for this algorithm?" 
-           - If they DID NOT set k, set "type": "CHAT" and ask the user: "what parameter would you like to give for the algorithm?" 
-           - If they DID, set "type": "ACTION" and fill the "iterations" and "k" parameters.
-        
-    ### INTENT RULES ###
-    1. CREATE_GRAPH: Use this when the user describes a new graph to build. You MUST populate the "graphData" object.
-    2. ACTION: Use this when the user asks to run an algorithm on the CURRENT graph. Use the action tokens provided.
-    3. CHAT: Use this for general questions, status checks, or conversation. Set "action" to "none" and "graphData" to null.
+    ### CURRENT GRAPH CONTEXT ###
+    %s
 
-    ### CRITICAL CONSTRAINTS ###
-    - Nodes MUST be strings representing numbers (e.g., "1", "2").
-    - Be wary of algorithm input constraints. if the algorithm expects a directed graph and the graph is undirected then mention the input is not right.
-    - Edges MUST be objects with "from" and "to" keys. NEVER nested lists.
-    - If "parameters" are not needed, return: "parameters": {}.
-    - Do NOT include markdown tags like ```json in your response.
-
-    --- CONTEXT ---
-    Current Graph: %s
-    History: %s
-
-    ### TASK ###
-    User Request: "%s"
-    Output:
-    """.formatted(graphJson, historyString, userRequest);
+    ### USER REQUEST ###
+    %s
+    """.formatted(graphJson, userRequest);
     }
 
 }

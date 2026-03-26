@@ -7,7 +7,6 @@ public class EdgeData {
     public String to;
     public int weight;
     public int capacity;
-    public int flow;
 
     public EdgeData() {}
 
@@ -17,6 +16,12 @@ public class EdgeData {
         this.to = edge.getTo().getNodeLabel();
         this.weight = edge.getWeight();
         this.capacity = edge.getCapacity();
-        this.flow = edge.getFlow();
+    }
+
+    public EdgeData(String from, String to, int weight, int capacity) {
+        this.from = from;
+        this.to = to;
+        this.weight = weight;
+        this.capacity = capacity;
     }
 }

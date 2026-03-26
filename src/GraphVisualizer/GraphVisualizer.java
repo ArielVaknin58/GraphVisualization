@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import java.util.Objects;
 
-
 public class GraphVisualizer extends Application {
 
     public static void main(String[] args) {

@@ -29,6 +29,12 @@ public class GraphData {
 
     }
 
+    public GraphData(Boolean isDirected, List<String> nodes, List<EdgeData> edges) {
+        this.isDirected = isDirected;
+        this.nodes = nodes;
+        this.edges = edges;
+    }
+
     public void PrintJsonGraphToFile(PrintWriter out)
     {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
