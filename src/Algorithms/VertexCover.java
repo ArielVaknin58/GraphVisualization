@@ -48,7 +48,7 @@ public class VertexCover extends NonDeterministicAlgorithm{
 
         isSetFound = is.getIsSetFound();
         Set<Graph.GraphNode> independentSet = is.getCurrentSet();
-        this.currentSet.clear(); // Clear the set to store the VC
+        this.currentSet.clear();
 
         for (Graph.GraphNode node : this.G.V) {
             if (!independentSet.contains(node)) {

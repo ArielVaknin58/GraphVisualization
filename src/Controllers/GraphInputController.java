@@ -3,7 +3,7 @@ package Controllers;
 import Algorithms.*;
 import Exceptions.*;
 import GraphVisualizer.*;
-import Services.OllamaService;
+import Unused.OllamaService;
 import Services.GraphData;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -137,22 +137,14 @@ public class GraphInputController extends Controller{
             graphPaneContextMenu.hide();
         });
 
-        MenuItem AIGraphCreation = new MenuItem("create graph with AI");
-        AIGraphCreation.setOnAction(event -> {
-            System.out.println("build AI graph action");
-            loadGraphPromptPopup();
-            graphPaneContextMenu.hide();
-
-        });
-
-        MenuItem openChat = new MenuItem("chat with Graphy");
+        MenuItem openChat = new MenuItem("chat with assistant");
         openChat.setOnAction(event ->{
             System.out.println("opens chat");
             launchChat();
             graphPaneContextMenu.hide();
         });
 
-        graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem, AIGraphCreation, openChat);
+        graphPaneContextMenu.getItems().addAll(addNodeItem, clearGraphItem, openChat);
 
 
         // --- Event Handlers for the Pane ---
@@ -207,19 +199,6 @@ public class GraphInputController extends Controller{
         } catch (Exception e) {
             AlertError(e);
         }
-    }
-    private void ExplainGraphWithPrompt(String finalPrompt) {
-        OllamaService gs = OllamaService.getInstance();
-        LoadingPopup loadingPopup = new LoadingPopup();
-        loadingPopup.show();
-        new Thread(() -> {
-
-            String analysis = gs.generateContent(finalPrompt);
-            Platform.runLater(() -> {
-                infoPopup(analysis);
-                loadingPopup.hide();
-            });
-        }).start();
     }
 
     public Graph getGraph()

@@ -8,7 +8,6 @@ import GraphVisualizer.Graph;
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
 import javafx.application.Platform;
-
 import java.util.List;
 
 public class GraphTools {
@@ -87,7 +86,7 @@ public class GraphTools {
     }
 
     @Tool("Execute the Super-Graph algorithm on the current graph. finds the super graph of a directed given graph- a strongly connected component in the graph is a node in the new super graph.")
-    public String runSuperGraphAlgorithm()
+    public String runSuperGraph()
     {
         return runAlgorithm(new SuperGraph(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
@@ -98,7 +97,100 @@ public class GraphTools {
 
         return runAlgorithm(new kColors(new Graph(ControllerManager.getGraphInputController().getGraph()), iterations, k));
     }
-    private static String runAlgorithm(Algorithm algorithm)
+
+    @Tool("Executes the Bellman-Ford algorithm on the current graph. finds the lightest paths from a given node to each other node in the graph")
+    public String runBellmanFord(@P("The label of the node where the algorithm should begin (e.g., '1', '2')")String startNodeLabel)
+    {
+        Graph.GraphNode startNode = currentGraph.VerticeIndexer.get(startNodeLabel);
+        if (startNode == null) {
+            return "Error: Node '" + startNodeLabel + "' does not exist.";
+        }
+        return runAlgorithm(new BellmanFordAlgorithm(currentGraph,startNode));
+    }
+
+    @Tool("Execute the Clique algorithm on the graph. runs some iterations and finds a clique of size k in a graph. A clique is a set of nodes where each two are connected by an edge.")
+    public String runClique(@P("number of iterations to run the algorithms") int iterations, @P("set number, parameter for the problem") int k)
+    {
+        return runAlgorithm(new Clique(new Graph(ControllerManager.getGraphInputController().getGraph()), iterations, k));
+    }
+
+    @Tool("Execute the Connectivity Components finder algorithm. finds connectivity components in a given undirected graph.")
+    public String runConnectivityComponents()
+    {
+        return runAlgorithm(new ConnectivityComponents(currentGraph));
+    }
+
+    @Tool("Execute the Euler Path algorithm. finds an euler path (if exists) in a fully connected and undirected graph ")
+    public String runEulerPath()
+    {
+        return runAlgorithm(new EulerPath(currentGraph));
+    }
+
+    @Tool("Execute the Floyd-Warshall algorithm. finds the lightest paths between every two nodes in a weighted graph.")
+    public String runFloydWarshall()
+    {
+        return runAlgorithm(new FloydWarshallAlgorithm(currentGraph));
+    }
+
+    @Tool("Executes the Ford-Felkerson algorithm on the current graph. This algorithm finds the maximum flow in the graph from node s to node t with given edges' capacities.")
+    public String runFordFelkerson(@P("The label of the node where the algorithm should begin from (e.g., '1', '2')") String s, @P("The label of the node where the algorithm should end in (e.g., '1', '2')") String t)
+    {
+        Graph.GraphNode startNode = currentGraph.VerticeIndexer.get(s);
+        Graph.GraphNode endNode = currentGraph.VerticeIndexer.get(t);
+
+        if (startNode == null || endNode == null) {
+            return "Error: Node "+ s + " or node " + t + " do not exist.";
+        }
+        return runAlgorithm(new FordFelkersonAlgorithm(currentGraph,startNode,endNode));
+    }
+
+    @Tool("Execute the Hamiltonian Path finder algorithm. finds a hamilton path in the graph if one exists.")
+    public String runHamiltonianPath()
+    {
+        return runAlgorithm(new HamiltonianPath(currentGraph));
+    }
+
+    @Tool("Execute the independent set finder algorithm. for some given number of iterations, finds if the graph has an independent set of size k. an independent set is a set of nodes where non are connected to each other.")
+    public String runIndependentSet(@P("number of iterations to run the algorithms") int iterations, @P("set number, parameter for the problem") int k)
+    {
+        return runAlgorithm(new IndependentSetAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()), iterations, k));
+    }
+
+    @Tool("Execute the max cut finder algorithm. for some given number of iterations, finds if the graph has a maximum cut the size of at least k.")
+    public String runMaxCut(@P("number of iterations to run the algorithms") int iterations, @P("set number, parameter for the problem") int k)
+    {
+        return runAlgorithm(new MaxCut(new Graph(ControllerManager.getGraphInputController().getGraph()), iterations, k));
+    }
+
+    @Tool("Execute the Min cut algorithm. finds in a given graph a minimal cut.")
+    public String runMinCut()
+    {
+        return runAlgorithm(new MinCutAlgorithm(currentGraph));
+    }
+
+    @Tool("Execute the Prim algorithm on the graph. finds a minimal spanning tree in a given graph.")
+    public String runPrim()
+    {
+        return runAlgorithm(new PrimAlgorithm(currentGraph));
+    }
+
+    @Tool("Execute the shortest-paths tree finder algorithm. this reveals the tree that contains all the shortest paths in the graph.")
+    public String runShortestPathsTree(@P("The label of the node where the algorithm should begin (e.g., '1', '2')")String startNodeLabel)
+    {
+        Graph.GraphNode startNode = currentGraph.VerticeIndexer.get(startNodeLabel);
+        if (startNode == null) {
+            return "Error: Node '" + startNodeLabel + "' does not exist.";
+        }
+        return runAlgorithm(new ShortestPathsTree(currentGraph,startNode));
+    }
+
+    @Tool("Execute the vertex cover finder algorithm. for some given number of iterations, finds if the graph has a vertex cover of size k.")
+    public String runVertexCover(@P("number of iterations to run the algorithms") int iterations, @P("set number, parameter for the problem") int k)
+    {
+        return runAlgorithm(new IndependentSetAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()), iterations, k));
+    }
+
+    private String runAlgorithm(Algorithm algorithm)
     {
         try {
             if (currentGraph == null) {
@@ -116,7 +208,7 @@ public class GraphTools {
     }
 
 
-    private static String run(Algorithm algorithm)
+    private String run(Algorithm algorithm)
     {
         if (!algorithm.checkValidity())
         {

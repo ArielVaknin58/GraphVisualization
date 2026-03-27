@@ -1,11 +1,8 @@
 package Controllers;
 
 import Services.GeminiService;
-import Services.OllamaService;
 import Services.GraphData;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,64 +28,6 @@ public class graphPromptPopupController extends Controller{
         createButton.setTooltip(new Tooltip("send graph description to Gemini"));
     }
 
-    @FXML
-//    private void OnCreateClicked()
-//    {
-//        OllamaService gs = OllamaService.getInstance();
-//        LoadingPopup loadingPopup = new LoadingPopup();
-//
-//        String text = promptBox.getText();
-//        String userPrompt = text.isEmpty() ? "Create a directed graph with 3 nodes and edges from 1 to 2 and 1 to 3" : text;
-//        String finalPrompt = gs.getFinalPromptText(userPrompt);
-//
-//
-//        loadingPopup.show();
-//        new Thread(() -> {
-//
-//            String jsonResponse = gs.generateContent(finalPrompt);
-//
-//            int firstBrace = jsonResponse.indexOf('{');
-//            int lastBrace = jsonResponse.lastIndexOf('}');
-//
-//            final String cleanedJson;
-//
-//            if (firstBrace == -1 || lastBrace == -1 || lastBrace <= firstBrace) {
-//                // If we can't find a { or }, the response is bad.
-//                Platform.runLater(() -> {
-//                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
-//                    loadingPopup.hide();
-//                    System.out.println(jsonResponse);
-//                });
-//                return;
-//            }
-//
-//            cleanedJson = jsonResponse.substring(firstBrace, lastBrace + 1);
-//            final GraphData graphData;
-//            try {
-//                ObjectMapper objectMapper = new ObjectMapper();
-//                graphData = objectMapper.readValue(cleanedJson, GraphData.class);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                Platform.runLater(() -> {
-//                    Controller.AlertError(new Exception("The AI returned data I couldn't understand:\n"));
-//                    System.out.println(cleanedJson);
-//                });
-//                return;
-//            }
-//            Platform.runLater(() -> {
-//                try {
-//                    loadingPopup.hide();
-//                    GraphInputController.CreateGraphStatic(graphData);
-//                    SuccessPopup("Graph successfully created by AI!");
-//                    Stage stage = (Stage) graphPromptAnchorPane.getScene().getWindow();
-//                    stage.close();
-//                } catch (Exception e) {
-//                    Controller.AlertError(e);
-//                }
-//            });
-//
-//        }).start();
-//    }
 
 
     private void OnCreateClicked() {

@@ -1,4 +1,4 @@
-package Services;
+package Unused;
 
 import GraphVisualizer.AppSettings;
 import Controllers.Controller;
@@ -60,7 +60,7 @@ public class OllamaService {
                     .uri(URI.create(OLLAMA_URL))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-                    .timeout(Duration.ofSeconds(AppSettings.Ollama_TIMEOUT_IN_SECONDS)) // Inference can be slow on CPU
+                    .timeout(Duration.ofSeconds(AppSettings.MODEL_TIMEOUT_IN_SECONDS)) // Inference can be slow on CPU
                     .build();
 
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());

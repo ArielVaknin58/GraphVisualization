@@ -9,6 +9,7 @@ public interface ChatAssistant {
     If the algorithm needs parameters (like a start node) that the user didn't provide, 
     ask the user for them before calling the tool.
     Don't run a tool if the user didn't ask to run it.
+    For every user request, if the user is asking for a tool then use ONE tool only per request.
     """)
     String chat(String message);
 }
