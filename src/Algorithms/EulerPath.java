@@ -29,7 +29,7 @@ public class EulerPath extends Algorithm{
         this.G = graph;
         AlgorithmDescription = "The Algorithm finds an Euler's path, which is a path in graph G that passes every edge exactly once.";
         this.AlgorithmName = "Euler Circuit Algorithm";
-        this.requiredInput = "An undirected,fully connected graph G=(V,E)";
+        this.requiredInput = "An undirected graph G=(V,E)";
     }
 
     @JsonCreator

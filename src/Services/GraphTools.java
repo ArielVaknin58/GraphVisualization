@@ -20,7 +20,8 @@ public class GraphTools {
     }
 
     @Tool("""
-            Creates a new graph structure. Use this when the user describes nodes and edges to build.### RULES ###
+            Creates a new graph structure. Use this when the user describes nodes and edges to build.
+            ### RULES ###
                     1. Nodes MUST be strings representing numbers starting from 1.
                     2. If directedness is not mentioned, the graph should be undirected (isDirected: false).
                     3. If 'undirected', for every edge A->B, you MUST add a second edge object B->A.
@@ -34,8 +35,9 @@ public class GraphTools {
         GraphData newGraph = new GraphData(isDirected, nodes, edges);
         Platform.runLater(() -> GraphInputController.CreateGraphStatic(newGraph));
 
-        return "Successfully created a " + (isDirected ? "directed" : "undirected") +
-                " graph with " + nodes.size() + " nodes.";
+//        return "Successfully created a " + (isDirected ? "directed" : "undirected") +
+//                " graph with " + nodes.size() + " nodes.";
+        return "SUCCESS: Graph created. DO NOT CALL ANY OTHER TOOLS. Output a short confirmation message to the user and stop.";
     }
 
 
@@ -79,7 +81,9 @@ public class GraphTools {
         return runAlgorithm(new BiPartite(currentGraph));
     }
 
-    @Tool("Execute the Kosaraju-Sharir algorithm on the current graph. used to find connectivity components in a directed graph.")
+    @Tool("Finds strongly connected components in a directed graph using Kosaraju's algorithm. " +
+            "STRICT RULE: ONLY call this if the user explicitly asks to. " +
+            "DO NOT call this automatically after creating a graph.")
     public String runKosarajuAlgorithm()
     {
         return runAlgorithm(new KosarajuSharirAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));

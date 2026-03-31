@@ -40,13 +40,16 @@ public class ChatController extends Controller {
 
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private ChatAssistant assistant;
+    private VerifierAgent verifier;
 
     @FXML
     public void initialize() {
 
-        initAssistant();
         ControllerManager.setChatController(this);
+        initAssistant();
+        initVerifier();
         initChat();
+
 
     }
 
@@ -56,41 +59,105 @@ public class ChatController extends Controller {
     }
 
     @FXML
-    private void OnSendButtonClicked()
-    {
+    private void OnSendButtonClicked() {
         String userInput = inputArea.getText();
         if (userInput == null || userInput.isBlank()) return;
 
         addMessageToChat(new ChatRecord("user", userInput));
         inputArea.clear();
 
-        String userPrompt = buildMasterPrompt(ControllerManager.getGraphInputController().getGraph(), userInput);
-        Task<String> chatTask = new Task<>() {
+        Task<String> orchestrationTask = new Task<>() {
             @Override
-            protected String call() {
-                Platform.runLater(() -> addMessageToChat(new ChatRecord("model", "Thinking...")));
-                return assistant.chat(userPrompt);
+            protected String call() throws Exception {
+                // 1. Initial Prompt with Graph Context
+                String currentUserInput = buildMasterPrompt(
+                        ControllerManager.getGraphInputController().getGraph(),
+                        userInput
+                );
+
+                String lastAssistantResponse = "";
+                int attempts = 0;
+
+                while (attempts <= AppSettings.MAX_RETRIES) {
+                    lastAssistantResponse = assistant.chat(currentUserInput);
+
+                    // Log for your eyes only
+                    System.out.println("[Attempt " + attempts + "] Assistant response: " + lastAssistantResponse);
+
+                    String auditInput = String.format("<req>%s</req>\n<ans>%s</ans>", userInput, lastAssistantResponse);
+                    String verifierRaw = verifier.chat(auditInput);
+                    VerificationResult result = gson.fromJson(cleanJsonResponse(verifierRaw), VerificationResult.class);
+
+                    if (result != null && result.valid) {
+                        return lastAssistantResponse;
+                    }
+
+                    attempts++;
+                    // If we are here, the Verifier REJECTED the Assistant (e.g. because it talked about colors)
+                    currentUserInput = "Your previous response was rejected by the supervisor. " +
+                            "Reason: " + (result != null ? result.criticism_for_agent : "Invalid response format") + ". " +
+                            "Provide a clean, direct response now.";
+                }
+
+                return lastAssistantResponse; // Return the last thing said even if validation failed
             }
         };
 
-        chatTask.setOnSucceeded(event -> {
-            chatHistory.removeLast();
-            String aiResponse = chatTask.getValue();
-            addMessageToChat(new ChatRecord("model", aiResponse));
+        orchestrationTask.setOnRunning(event -> {
+            addMessageToChat(new ChatRecord("model", "Thinking..."));
         });
 
-        chatTask.setOnFailed(event -> {
-            chatHistory.removeLast();
-            Throwable e = chatTask.getException();
-            e.printStackTrace();
-            addMessageToChat(new ChatRecord("model", "I encountered an error, Please try again."));
-            AlertError((Exception) e);
+        orchestrationTask.setOnSucceeded(event -> {
+            if (!chatHistory.isEmpty()) chatHistory.removeLast(); // Remove "Thinking..."
+            addMessageToChat(new ChatRecord("model", orchestrationTask.getValue()));
         });
 
-        new Thread(chatTask).start();
+        orchestrationTask.setOnFailed(event -> {
+            if (!chatHistory.isEmpty()) chatHistory.removeLast();
+            Throwable e = orchestrationTask.getException();
+            e.printStackTrace(); // Check IntelliJ console for the error
+            addMessageToChat(new ChatRecord("model", "Connection Error: " + e.getMessage()));
+        });
 
-
+        new Thread(orchestrationTask).start();
     }
+
+
+    private String cleanJsonResponse(String rawResponse) {
+        if (rawResponse == null || rawResponse.isBlank()) return "{}";
+
+        String cleaned = rawResponse.trim();
+
+        // 1. Strip Markdown Code Blocks
+        // This regex finds ```json [content] ``` and extracts just the [content]
+        if (cleaned.contains("```")) {
+            cleaned = cleaned.replaceAll("(?s)^```json\\s*", "")
+                    .replaceAll("(?s)^```\\s*", "")
+                    .replaceAll("(?s)\\s*```$", "");
+        }
+
+        // 2. Isolate the JSON Object
+        // This finds the first '{' and the last '}' to ignore any text before or after
+        int firstBrace = cleaned.indexOf('{');
+        int lastBrace = cleaned.lastIndexOf('}');
+
+        if (firstBrace != -1 && lastBrace != -1 && lastBrace > firstBrace) {
+            cleaned = cleaned.substring(firstBrace, lastBrace + 1);
+        }
+
+        // 3. Handle potential double-encoding
+        // Sometimes the model wraps the JSON object inside a string primitive
+        if (cleaned.startsWith("\"") && cleaned.endsWith("\"")) {
+            try {
+                cleaned = com.google.gson.JsonParser.parseString(cleaned).getAsString();
+            } catch (Exception e) {
+                // If it's not actually a string primitive, keep it as is
+            }
+        }
+
+        return cleaned.trim();
+    }
+
 
     private String buildMasterPrompt(Graph graph, String userRequest) {
         // We only need the current state of the graph here.
@@ -156,22 +223,22 @@ public class ChatController extends Controller {
         ChatModelListener listener = new ChatModelListener() {
             @Override
             public void onRequest(ChatModelRequestContext requestContext) {
-                System.out.println("--- AI REQUEST ---");
+                System.out.println("---ASSISTANT AI REQUEST ---");
                 System.out.println(requestContext.chatRequest().messages());
             }
 
             @Override
             public void onResponse(ChatModelResponseContext responseContext) {
-                System.out.println("--- AI RESPONSE ---");
+                System.out.println("---ASSISTANT AI RESPONSE ---");
                 System.out.println(responseContext.chatResponse().aiMessage());
 
                 // This shows you exactly how many tokens you used!
-                System.out.println("Tokens Used: " + responseContext.chatResponse().tokenUsage());
+                System.out.println("ASSISTANT : Tokens Used: " + responseContext.chatResponse().tokenUsage());
             }
 
             @Override
             public void onError(ChatModelErrorContext errorContext) {
-                System.err.println("--- AI ERROR ---");
+                System.err.println("--- ASSISTANT AI ERROR ---");
                 errorContext.error().printStackTrace();
             }
         };
@@ -182,10 +249,53 @@ public class ChatController extends Controller {
                         .modelName(AppSettings.AI_model_used)
                         .timeout(Duration.ofSeconds(AppSettings.MODEL_TIMEOUT_IN_SECONDS))
                         .listeners(Collections.singletonList(listener))
+                        .temperature(0.0)
                         .build())
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(AppSettings.MODEL_MAX_CONTEXT))
                 .tools(new GraphTools())
                 .build();
+
+    }
+
+    private void initVerifier()
+    {
+        ChatModelListener listener = new ChatModelListener() {
+            @Override
+            public void onRequest(ChatModelRequestContext requestContext) {
+                System.out.println("---VERIFIER AI REQUEST ---");
+                System.out.println(requestContext.chatRequest().messages());
+            }
+
+            @Override
+            public void onResponse(ChatModelResponseContext responseContext) {
+                System.out.println("---VERIFIER AI RESPONSE ---");
+                System.out.println(responseContext.chatResponse().aiMessage());
+
+                // This shows you exactly how many tokens you used!
+                System.out.println("VERIFIER Tokens Used: " + responseContext.chatResponse().tokenUsage());
+            }
+
+            @Override
+            public void onError(ChatModelErrorContext errorContext) {
+                System.err.println("--- VERIFIER AI ERROR ---");
+                errorContext.error().printStackTrace();
+            }
+        };
+
+        verifier = AiServices.builder(VerifierAgent.class)
+                .chatModel(GoogleAiGeminiChatModel.builder()
+                        .apiKey(System.getenv("GEMINI_API_KEY"))
+                        .modelName(AppSettings.AI_model_used)
+                        .timeout(Duration.ofSeconds(AppSettings.MODEL_TIMEOUT_IN_SECONDS))
+                        .listeners(Collections.singletonList(listener))
+                        .temperature(0.0)
+                        .maxRetries(AppSettings.MAX_RETRIES)
+                        .build())
+                .chatMemory(MessageWindowChatMemory.withMaxMessages(AppSettings.MODEL_MAX_CONTEXT))
+                .tools(new GraphTools())
+                .build();
+
+
     }
 
 }

@@ -3,13 +3,13 @@ import dev.langchain4j.service.SystemMessage;
 
 public interface ChatAssistant {
     @SystemMessage("""
-    You are a Graph Visualization Expert. 
-    You have tools to run algorithms (BFS, DFS, etc.) on the current graph.
-    When a user asks to run an algorithm, call the appropriate tool.
-    If the algorithm needs parameters (like a start node) that the user didn't provide, 
-    ask the user for them before calling the tool.
-    Don't run a tool if the user didn't ask to run it.
-    For every user request, if the user is asking for a tool then use ONE tool only per request.
+    You are a Graph Tool Executor. 
+    
+    RULES:
+    1. If the user asks for a graph, call 'createGraph' and then STOP.
+    2. NEVER mention algorithms (BFS, DFS, Bellman-Ford) unless the user asks for them.
+    3. If you have just called a tool, your turn is strictly finished.
+    4. If you receive CRITICISM from the supervisor, simply fix the exact error requested and do nothing else.
     """)
     String chat(String message);
 }

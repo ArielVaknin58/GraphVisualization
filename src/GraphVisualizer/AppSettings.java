@@ -33,6 +33,7 @@ public class AppSettings {
 
     // AI RELATED VALUES //
     public static final String AI_model_used = "gemini-2.5-pro";
+    public static final int MAX_RETRIES = 3;
     public static final int MODEL_TIMEOUT_IN_SECONDS = 120;
     public static final int MODEL_MAX_CONTEXT = 13;
     public static final String graph_Prompt_Popup_Location = "/resources/graphPromptPopup.fxml";
