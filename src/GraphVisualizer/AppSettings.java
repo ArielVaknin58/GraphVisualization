@@ -39,4 +39,7 @@ public class AppSettings {
     public static final String graph_Prompt_Popup_Location = "/resources/graphPromptPopup.fxml";
     public static final String chat_window_location = "/resources/ChatWindow.fxml";
 
+    // API MODE
+    public static final int API_MODE_PORT = 7070;
+
 }

@@ -12,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import resources.LoadingPopup;
 
+import static Controllers.GraphInputController.displayGraph;
+
 
 public class graphPromptPopupController extends Controller{
 
@@ -74,6 +76,7 @@ public class graphPromptPopupController extends Controller{
                 Platform.runLater(() -> {
                     loadingPopup.hide();
                     GraphInputController.CreateGraphStatic(graphData);
+                    displayGraph(ControllerManager.getGraphInputController().getGraph());
                     SuccessPopup("Graph successfully created by AI!");
                     Stage stage = (Stage) graphPromptAnchorPane.getScene().getWindow();
                     stage.close();

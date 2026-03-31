@@ -162,6 +162,11 @@ public class PrimAlgorithm extends Algorithm {
     }
 
     @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
+    @Override
     protected void WriteOutputToFile(Path fileName) {
         Graph graph = new Graph(false);
         int TreeWeight = 0;

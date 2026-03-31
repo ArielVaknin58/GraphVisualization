@@ -296,6 +296,11 @@ public class DFS extends NodeCentricAlgorithm{
     @Override
     public void CreateOutputGraph() {}
 
+    @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
     private void DisplayColorizedResultsGraph(Pane pane)
     {
         pane.getChildren().clear();

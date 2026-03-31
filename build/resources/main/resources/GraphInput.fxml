@@ -67,7 +67,7 @@
                <children>
                   <Button fx:id="saveGraph" layoutX="8.0" layoutY="33.0" mnemonicParsing="false" onAction="#onSaveGraph" text="Save Graph" />
                   <Button fx:id="loadGraph" layoutX="100.0" layoutY="33.0" mnemonicParsing="false" onAction="#onLoadGraph" text="Load Graph" />
-                  <Label layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="115.0" text="Graph import/export " />
+                  <Label layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="191.0" text="Graph import/export " />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
@@ -94,7 +94,6 @@
                   <Insets bottom="5.0" top="5.0" />
                </GridPane.margin>
             </HBox>
-            <CheckBox fx:id="apiModeCheckbox" mnemonicParsing="false" prefHeight="17.0" prefWidth="201.0" text="API mode" GridPane.rowIndex="2" />
             </children>
          <rowConstraints>
             <RowConstraints maxHeight="132.0" minHeight="19.0" prefHeight="40.0" />

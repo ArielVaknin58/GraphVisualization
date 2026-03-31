@@ -147,6 +147,11 @@ public class BellmanFordAlgorithm extends NodeCentricAlgorithm{
     public void CreateOutputGraph() {}
 
     @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
+    @Override
     protected void WriteOutputToFile(Path fileName) {
 
         try (PrintWriter out = new PrintWriter(

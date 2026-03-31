@@ -118,6 +118,7 @@ public abstract class Algorithm {
         }
     }
 
+    public abstract String WriteOutputToBuffer();
 
     public void PrintOutputToFile(String fileName)
     {

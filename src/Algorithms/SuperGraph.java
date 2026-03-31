@@ -110,6 +110,11 @@ public class SuperGraph extends Algorithm{
     }
 
     @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
+    @Override
     protected void WriteOutputToFile(Path fileName) {
         CreateOutputGraph();
 

@@ -96,6 +96,11 @@ public class ShortestPathsTree extends NodeCentricAlgorithm{
     }
 
     @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
+    @Override
     protected void WriteOutputToFile(Path fileName) {
         Graph graph = new Graph(false);
         for(Graph.GraphNode currentNode : this.G.V)

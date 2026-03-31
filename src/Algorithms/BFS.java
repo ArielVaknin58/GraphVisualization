@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -160,7 +161,26 @@ public class BFS extends NodeCentricAlgorithm{
         {
             AlertError(e);
         }
+    }
 
+    @Override
+    public String WriteOutputToBuffer()
+    {
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ "---");
+            for (Map.Entry<String, String> entry : result.entrySet()) {
+                out.println(entry.getKey()+" : "+entry.getValue());
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

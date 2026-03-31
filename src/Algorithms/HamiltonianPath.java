@@ -97,6 +97,11 @@ public class HamiltonianPath extends Algorithm{
     }
 
     @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
+    @Override
     protected void WriteOutputToFile(Path fileName) {
         try (PrintWriter out = new PrintWriter(
                 Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {

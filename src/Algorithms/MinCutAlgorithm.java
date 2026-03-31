@@ -105,6 +105,11 @@ public class MinCutAlgorithm extends Algorithm{
     }
 
     @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
+    @Override
     protected void WriteOutputToFile(Path fileName) {
         Graph graph = new Graph(true);
         for(Graph.GraphNode node : this.flowingGraph.V)

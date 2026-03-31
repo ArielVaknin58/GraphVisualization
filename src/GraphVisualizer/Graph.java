@@ -59,9 +59,11 @@ public class Graph implements Serializable {
 
     }
 
-    public Map<Graph.GraphNode, Map<GraphNode, DirectedEdge>> getAdjacencyMap() {
+    public Map<Graph.GraphNode, Map<GraphNode, DirectedEdge>> getAdjacencyMap()
+    {
         return adjacencyMap;
     }
+
     public Graph Transpose()
     {
         if(!this.isDirected) return this;

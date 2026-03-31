@@ -63,6 +63,7 @@ public class ChatController extends Controller {
         String userInput = inputArea.getText();
         if (userInput == null || userInput.isBlank()) return;
 
+
         addMessageToChat(new ChatRecord("user", userInput));
         inputArea.clear();
 

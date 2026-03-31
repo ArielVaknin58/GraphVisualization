@@ -92,4 +92,9 @@ public class VertexCover extends NonDeterministicAlgorithm{
             }
         }
     }
+
+    @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
 }

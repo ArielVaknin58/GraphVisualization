@@ -33,11 +33,20 @@ public class GraphTools {
             @P("List of edge objects with from, to, weight, and capacity") List<EdgeData> edges
     ) {
         GraphData newGraph = new GraphData(isDirected, nodes, edges);
-        Platform.runLater(() -> GraphInputController.CreateGraphStatic(newGraph));
+        GraphInputController.CreateGraphStatic(newGraph);
+        if(!ControllerManager.getApiModeController().isAPIMode())
+        {
+            Platform.runLater(() ->
+            {
+                GraphInputController.displayGraph(ControllerManager.getGraphInputController().getGraph());
+            });
+            return "SUCCESS: Graph created. DO NOT CALL ANY OTHER TOOLS. Output a short confirmation message to the user and stop.";
 
+        }
+
+        return "Graph successfully created in API mode !";
 //        return "Successfully created a " + (isDirected ? "directed" : "undirected") +
 //                " graph with " + nodes.size() + " nodes.";
-        return "SUCCESS: Graph created. DO NOT CALL ANY OTHER TOOLS. Output a short confirmation message to the user and stop.";
     }
 
 
@@ -224,7 +233,10 @@ public class GraphTools {
                 Platform.runLater(algorithm::Run);
             else
                 algorithm.Run();
-            Platform.runLater(algorithm::DisplayResults);
+            if(!ControllerManager.getGraphInputController().isApiMode())
+                Platform.runLater(algorithm::DisplayResults);
+            else
+                return algorithm.WriteOutputToBuffer();
 
         }
 

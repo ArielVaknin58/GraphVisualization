@@ -24,20 +24,40 @@ public class ControllerManager {
         return chatController;
     }
 
+    public static APIModeController apiModeController;
+
+    public static void setApiModeController(APIModeController apiModeController) {
+        ControllerManager.apiModeController = apiModeController;
+    }
+
+    public static APIModeController getApiModeController() {
+        if(apiModeController == null) {
+            apiModeController = APIModeController.CreateInstance(false);
+        }
+        return apiModeController;
+    }
+
     public static void setChatController(ChatController chatController) {
         ControllerManager.chatController = chatController;
     }
 
     public static Controllers.graphPromptPopupController getGraphPromptPopupController() {
+        if(graphPromptPopupController == null) {
+            graphPromptPopupController = new graphPromptPopupController();
+        }
         return graphPromptPopupController;
     }
 
-    public static void setGraphPromptPopupController(graphPromptPopupController graphPromptPopupController)
+    public static void setGraphPromptPopupController(graphPromptPopupController GraphPromptPopupController)
     {
-        graphPromptPopupController = graphPromptPopupController;
+        graphPromptPopupController = GraphPromptPopupController;
     }
 
-    public static NDPopupController getNdPopupController() {
+    public static NDPopupController getNdPopupController()
+    {
+        if(ndPopupController == null) {
+            ndPopupController = new NDPopupController();
+        }
         return ndPopupController;
     }
 
@@ -49,11 +69,19 @@ public class ControllerManager {
         ControllerManager.maxFlowPopupController = maxFlowPopupController;
     }
 
-    public static MaxFlowPopupController getMaxFlowPopupController() {
+    public static MaxFlowPopupController getMaxFlowPopupController()
+    {
+        if(maxFlowPopupController == null) {
+            maxFlowPopupController = new MaxFlowPopupController();
+        }
         return maxFlowPopupController;
     }
 
-    public static GraphResultController getGraphResultController() {
+    public static GraphResultController getGraphResultController()
+    {
+        if(graphResultController == null) {
+            graphResultController = new GraphResultController();
+        }
         return graphResultController;
     }
 
@@ -61,7 +89,11 @@ public class ControllerManager {
         ControllerManager.graphResultController = graphResultController;
     }
 
-    public static ResultsPaneController getResultsPaneController() {
+    public static ResultsPaneController getResultsPaneController()
+    {
+        if(resultsPaneController == null) {
+            resultsPaneController = new ResultsPaneController();
+        }
         return resultsPaneController;
     }
 
@@ -69,7 +101,11 @@ public class ControllerManager {
         ControllerManager.resultsPaneController = resultsPaneController;
     }
 
-    public static SaveGraphPopupController getSaveGraphPopupController() {
+    public static SaveGraphPopupController getSaveGraphPopupController()
+    {
+        if(saveGraphPopupController == null) {
+            saveGraphPopupController = new SaveGraphPopupController();
+        }
         return saveGraphPopupController;
     }
 
@@ -81,7 +117,11 @@ public class ControllerManager {
         ControllerManager.graphInputController = graphInputController;
     }
 
-    public static GraphInputController getGraphInputController() {
+    public static GraphInputController getGraphInputController()
+    {
+        if(graphInputController == null) {
+            graphInputController = new GraphInputController();
+        }
         return graphInputController;
     }
 
@@ -89,7 +129,11 @@ public class ControllerManager {
         ControllerManager.graphWiseAlgorithmsController = graphWiseAlgorithmsController;
     }
 
-    public static GraphWiseAlgorithmsController getGraphWiseAlgorithmsController() {
+    public static GraphWiseAlgorithmsController getGraphWiseAlgorithmsController()
+    {
+        if(graphWiseAlgorithmsController == null) {
+            graphWiseAlgorithmsController = new GraphWiseAlgorithmsController();
+        }
         return graphWiseAlgorithmsController;
     }
 

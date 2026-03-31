@@ -87,6 +87,11 @@ public class KosarajuSharirAlgorithm extends Algorithm{
     }
 
     @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
+    @Override
     public Boolean checkValidity() {
         return this.G.isDirected();
     }

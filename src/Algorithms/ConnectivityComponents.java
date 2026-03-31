@@ -127,6 +127,11 @@ public class ConnectivityComponents extends Algorithm{
     }
 
     @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
+    @Override
     public Boolean checkValidity() {
         return !G.isDirected();
     }

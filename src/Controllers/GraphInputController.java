@@ -57,8 +57,8 @@ public class GraphInputController extends Controller{
     private Label weightLabel;
     @FXML
     private TextField capacityField;
-    @FXML
-    private CheckBox apiModeCheckbox;
+//    @FXML
+//    private CheckBox apiModeCheckbox;
     private ContextMenu graphPaneContextMenu;
     private ContextMenuEvent currentContextMenuEvent;
     private ContextMenu verticeContextMenu;
@@ -72,8 +72,10 @@ public class GraphInputController extends Controller{
         return graphContainer;
     }
 
-    public boolean isApiMode() {
-        return apiModeCheckbox.isSelected();
+    public boolean isApiMode()
+    {
+        return ControllerManager.getApiModeController().isAPIMode();
+        //return apiModeCheckbox.isSelected();
     }
 
 
@@ -106,7 +108,7 @@ public class GraphInputController extends Controller{
         });
 
         DirectedCheckbox.setSelected(false);
-        apiModeCheckbox.setSelected(false);
+        //apiModeCheckbox.setSelected(false);
         DirectedCheckbox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
             enterButton.setDisable(false);
             graphContainer.getChildren().clear();
@@ -281,14 +283,14 @@ public class GraphInputController extends Controller{
             for (Services.EdgeData edge : data.edges) {
                 if (edge != null && edge.from != null && edge.to != null) {
                     G.createEdge(edge.from, edge.to, edge.weight,0, edge.capacity);
+                    if(!G.isDirected())
+                        G.createEdge(edge.to, edge.from, edge.weight,0, edge.capacity);
+
                 }
             }
         }catch (Exception e) {
             AlertError(e);
         }
-
-
-        displayGraph(G);
 
     }
     @FXML
@@ -361,8 +363,6 @@ public class GraphInputController extends Controller{
         {
             AlertError(e);
         }
-
-        //System.out.println("Added edge: " + from + " → " + to);
 
         edgeStartField.clear();
         edgeEndField.clear();

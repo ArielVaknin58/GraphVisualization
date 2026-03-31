@@ -103,6 +103,11 @@ public class Clique extends NonDeterministicAlgorithm{
         }
     }
 
+    @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
+
 
     @Override
     protected void WriteOutputToFile(Path fileName) {

@@ -186,4 +186,9 @@ public class EulerPath extends Algorithm{
 
     @Override
     public void CreateOutputGraph() {}
+
+    @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
 }

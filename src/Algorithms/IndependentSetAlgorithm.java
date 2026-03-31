@@ -119,4 +119,9 @@ public class IndependentSetAlgorithm extends NonDeterministicAlgorithm{
             }
         }
     }
+
+    @Override
+    public String WriteOutputToBuffer() {
+        return "";
+    }
 }
