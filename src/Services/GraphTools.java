@@ -9,6 +9,7 @@ import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
 import javafx.application.Platform;
 import java.util.List;
+import java.util.Map;
 
 public class GraphTools {
 
@@ -93,7 +94,7 @@ public class GraphTools {
     @Tool("Finds strongly connected components in a directed graph using Kosaraju's algorithm. " +
             "STRICT RULE: ONLY call this if the user explicitly asks to. " +
             "DO NOT call this automatically after creating a graph.")
-    public String runKosarajuAlgorithm()
+    public String runKosarajuSharir()
     {
         return runAlgorithm(new KosarajuSharirAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph())));
     }
@@ -242,4 +243,5 @@ public class GraphTools {
 
         return "Sure ! here are the results of the algorithm you asked.";
     }
+
 }

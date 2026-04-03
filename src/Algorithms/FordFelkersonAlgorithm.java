@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import javafx.scene.paint.Color;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -65,6 +66,20 @@ public class FordFelkersonAlgorithm extends Algorithm{
         AlgorithmDescription = "This algorithm finds the maximum flow in graph G from s to v with given capacities..";
         this.requiredInput = "A directed graph G, and vertices s and t from G";
         this.adjMap = this.G.getAdjacencyMap();
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        try{
+            this.s = G.VerticeIndexer.get(params.get("s"));
+            this.t = G.VerticeIndexer.get(params.get("t"));
+            if(this.s == null || this.t == null)
+                return "s or t values are null. Received values : \ns = "+this.s +"\nt = "+this.t;
+            return null;
+        }catch (Exception e){
+            return "an error has occured : "+e.getMessage();
+        }
+
     }
 
     @Override
@@ -174,7 +189,21 @@ public class FordFelkersonAlgorithm extends Algorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+s.getNodeLabel()+" to "+t.getNodeLabel()+" ---");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(new GraphData(this.G), out);
+            out.println("\nMax Flow: "+this.maxFlow);
+            out.println("\n----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

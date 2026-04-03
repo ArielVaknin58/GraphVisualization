@@ -14,6 +14,7 @@ import javafx.util.Duration;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -298,7 +299,34 @@ public class DFS extends NodeCentricAlgorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        initColors();
+        visitRegular(inputNode);
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter))  {
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ "---");
+            int counter = 1;
+            for (Graph.GraphNode node : StartTimeList) {
+                if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(StartTimeList.getLast()))
+                {
+                    out.println(node.getNodeLabel());
+                    if(!node.equals(StartTimeList.getLast()))
+                        out.print("--> ");
+                }
+                else
+                {
+                    out.print(node.getNodeLabel() + "--> ");
+                }
+                counter++;
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     private void DisplayColorizedResultsGraph(Pane pane)

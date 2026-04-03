@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -37,6 +38,30 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
         this.isSetFound = false;
         this.currentSet = new HashSet<>();
     }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params)
+    {
+        try
+        {
+            this.iterations = Integer.parseInt(params.get("iterations"));
+            this.k = Integer.parseInt(params.get("k"));
+            if(this.iterations <= 0 || this.k <= 0)
+            {
+                return "Iterations or k values must be greater than 0";
+            }
+        }catch (NumberFormatException e)
+        {
+            return "Iterations or k values must be integer numbers";
+        }catch (NullPointerException e)
+        {
+            return "Iterations or k values aren't set";
+        }
+
+        return null;
+    }
+
+
     protected void LoadAndRun()
     {
         try {
@@ -64,28 +89,6 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
                 timeline.stop();
             }
 
-//            // Create a new timeline
-//            timeline = new Timeline();
-//            // We set iterations - 1 because we already ran one iteration
-//            timeline.setCycleCount(iterations - 1);
-//
-//            // Create a KeyFrame that runs every 100 milliseconds
-//            KeyFrame keyFrame = new KeyFrame(Duration.millis(100), event -> {
-//                if (isSetFound) {
-//                    timeline.stop();
-//                    controller.getStateNDLabel().setText("Found !");
-//                    return;
-//                }
-//
-//                counter++;
-//                controller.displayGraph(this.G);
-//                controller.getStateNDLabel().setText("Looking... "+counter+"/"+iterations);
-//                Run();
-//                CreateOutputGraph();
-//                controller.displayGraph(this.graphResult);
-//            });
-//
-//            timeline.getKeyFrames().add(keyFrame);
 
             timeline = new Timeline();
             timeline.setCycleCount(iterations - 1);

@@ -19,7 +19,7 @@ public class GraphVisualizer extends Application {
 
     public static void main(String[] args) {
 
-        if (args.length > 0 && args[0].equals("--api")) {
+        if (args.length > 0 && args[0].equals(AppSettings.API_MODE_INVOKER)) {
             ControllerManager.setApiModeController(APIModeController.CreateInstance(true));
             runApiMode();
         } else {
@@ -30,25 +30,7 @@ public class GraphVisualizer extends Application {
 
     private static void runApiMode()
     {
-        var app = Javalin.create().start(ControllerManager.getApiModeController().getPort());
-        app.get("/", ctx -> ctx.result("API is running! Send me a graph."));
-        app.post("/echo", ctx ->
-                ctx.result("Received Information : \n" + ctx.body()));
-        app.post("/load_graph", ctx ->
-                {
-                  String rawData = ctx.body();
-                  GraphData info =  new GsonBuilder().setPrettyPrinting().create().fromJson(rawData, GraphData.class);
-                  System.out.println(info.isDirected);
-                  System.out.println(info.edges);
-                  System.out.println(info.nodes);
-
-                  GraphInputController.CreateGraphStatic(info);
-
-
-                  GraphTools tool = new GraphTools();
-                  ctx.result(tool.runBFS("2"));
-                });
-
+        APIModeController.getInstance().initAPIMode();
     }
 
     @Override

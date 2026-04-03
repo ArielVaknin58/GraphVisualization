@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.scene.paint.Color;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -95,6 +97,36 @@ public class VertexCover extends NonDeterministicAlgorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            for(int counter = 1; counter <= this.iterations && !isSetFound; counter++)
+            {
+                Run();
+                out.println("Iteration #"+counter+":");
+                out.print("       current set: ");
+                for(Graph.GraphNode node : currentSet)
+                    out.print(node.getNodeLabel()+", ");
+                CreateOutputGraph();
+                if(isSetFound)
+                    out.println(" --> cover of size "+this.k +" found !");
+                else
+                    out.println(" --> not a vertex cover");
+
+            }
+            if(!isSetFound)
+                out.println("\n--Vertex cover of size "+this.k +" not found --");
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
+
+
 }

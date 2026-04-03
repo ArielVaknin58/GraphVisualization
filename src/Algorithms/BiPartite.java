@@ -17,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -50,6 +51,11 @@ public class BiPartite extends Algorithm{
         AlgorithmDescription = "This algorithm returns a division of graph G into 2 cut (U,V), where every edge - if exists - crosses one to the other.";
         this.isBipartite = false;
         this.bfsRESULT = new HashMap<>();
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @Override
@@ -114,7 +120,36 @@ public class BiPartite extends Algorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results "+" ---");
+            if(isBipartite)
+            {
+                for(Graph.GraphNode node : graphResult.V)
+                {
+                    if(bfsRESULT.get(node.getNodeLabel()) % 2 == 0)
+                    {
+                        out.println(node.getNodeLabel() + " - " + "SIDE A");
+                    }
+                    else
+                    {
+                        out.println(node.getNodeLabel() + " - " + "SIDE B");
+                    }
+                }
+            }
+            else
+            {
+                out.println("--- The given graph isn't bipartite. ---");
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

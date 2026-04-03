@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import javafx.scene.paint.Color;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,6 +38,11 @@ public class KosarajuSharirAlgorithm extends Algorithm{
         this.AlgorithmName = "Kosaraju Sharir Algorithm";
         this.requiredInput = "A directed graph";
         this.result = new Hashtable<>();
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @Override
@@ -88,7 +94,37 @@ public class KosarajuSharirAlgorithm extends Algorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            Hashtable<String, Set<String>> components = new Hashtable<>();
+            for(String Hvertice : result.keySet())
+            {
+                components.put(Hvertice, new HashSet<>(Arrays.asList(result.get(Hvertice).split(","))));
+            }
+            this.graphResult = new Graph(this.G);
+            int componentNumber = 0;
+            for(String componentIndex : components.keySet())
+            {
+                out.print("component #"+(componentNumber+1)+": ");
+                Set<String> verticesLabels = components.get(componentIndex);
+                for(String verticeLabel : verticesLabels)
+                {
+                    out.print(verticeLabel+", ");
+                }
+                out.println();
+                componentNumber++;
+            }
+
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

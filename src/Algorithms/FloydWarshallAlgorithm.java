@@ -19,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,6 +46,11 @@ public class FloydWarshallAlgorithm extends Algorithm{
         this.requiredInput = "a directed,weighted graph G=(V,E)";
         this.hasNegativeCycle = false;
         init();
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @JsonCreator
@@ -189,7 +195,35 @@ public class FloydWarshallAlgorithm extends Algorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            for (Graph.GraphNode node : weightsMatrix.keySet()) {
+                int counter = 1;
+                out.println("vertice "+node.getNodeLabel()+" :");
+                for(Graph.GraphNode node1 : weightsMatrix.get(node).keySet())
+                {
+                    if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0)
+                    {
+                        out.println(node1.getNodeLabel() + " : " + weightsMatrix.get(node).get(node1) );
+                    }
+                    else
+                    {
+                        out.print(node1.getNodeLabel() + " : " + weightsMatrix.get(node).get(node1) +" ");
+                    }
+                    counter++;
+                }
+
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

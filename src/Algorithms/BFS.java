@@ -63,6 +63,8 @@ public class BFS extends NodeCentricAlgorithm{
     }
 
 
+
+
     @Override
     public void Run() {
         Queue<Graph.GraphNode> Q = new LinkedList<>();
@@ -126,7 +128,6 @@ public class BFS extends NodeCentricAlgorithm{
 
             for (Map.Entry<String, String> entry : result.entrySet()) {
                 data.add(new ResultPair<String,String>(entry.getKey(), entry.getValue()));
-
             }
 
             ControllerManager.getResultsPaneController().getResultsTable().setItems(data);
@@ -150,7 +151,7 @@ public class BFS extends NodeCentricAlgorithm{
 
         try (PrintWriter out = new PrintWriter(
                 Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
-            out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ "---");
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ " ---");
             for (Map.Entry<String, String> entry : result.entrySet()) {
                 out.println(entry.getKey()+" : "+entry.getValue());
             }

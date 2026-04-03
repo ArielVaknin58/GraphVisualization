@@ -40,6 +40,13 @@ public class AppSettings {
     public static final String chat_window_location = "/resources/ChatWindow.fxml";
 
     // API MODE
+    public static final String API_MODE_INVOKER = "--api";
     public static final int API_MODE_PORT = 7070;
+    public static final String API_MODE_K_STRING = "setSize";
+    public static final String API_MODE_ITERATIONS_STRING = "iterations";
+    public static final String API_MODE_INPUT_NODE_STRING = "inputNode";
+    public static final String API_MODE_S_STRING = "sourceNode";
+    public static final String API_MODE_T_STRING = "destinationNode";
+
 
 }

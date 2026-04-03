@@ -1,26 +1,16 @@
 package Algorithms;
 
-import Controllers.Controller;
 import Controllers.ControllerManager;
-import Controllers.GraphResultController;
 import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
-import GraphVisualizer.ThemeManager;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static Controllers.Controller.AlertError;
 
@@ -47,6 +37,11 @@ public class TopologicalSort extends Algorithm {
                 " where for every directed edge from vertex u to vertex v, u comes before v in the ordering.";
         requiredInput = "Acyclic directed graph";
         this.AlgorithmName = "Topological Sort";
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @Override
@@ -131,7 +126,32 @@ public class TopologicalSort extends Algorithm {
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            int counter = 1;
+            for (Graph.GraphNode node : result) {
+                if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
+                {
+                    out.println(node.getNodeLabel());
+                    if(!node.equals(result.getLast()))
+                        out.print("--> ");
+                }
+                else
+                {
+                    out.print(node.getNodeLabel() + "--> ");
+                }
+                counter++;
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

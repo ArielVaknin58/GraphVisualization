@@ -15,11 +15,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static Controllers.Controller.AlertError;
@@ -41,6 +43,11 @@ public class HamiltonianPath extends Algorithm{
         this.AlgorithmName = "Hamiltonian Path Algorithm";
         this.requiredInput = "Acyclic directed Graph";
         this.result = new ArrayList<>();
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @JsonCreator
@@ -98,7 +105,32 @@ public class HamiltonianPath extends Algorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            int counter = 1;
+            for (Graph.GraphNode node : result) {
+                if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
+                {
+                    out.println(node.getNodeLabel());
+                    if(!node.equals(result.getLast()))
+                        out.print("--> ");
+                }
+                else
+                {
+                    out.print(node.getNodeLabel() + "--> ");
+                }
+                counter++;
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

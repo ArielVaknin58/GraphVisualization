@@ -5,13 +5,16 @@ import GraphVisualizer.AppSettings;
 import GraphVisualizer.Graph;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.gson.JsonObject;
+import kotlin._Assertions;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static Controllers.Controller.AlertError;
 
@@ -30,6 +33,11 @@ public class EulerPath extends Algorithm{
         AlgorithmDescription = "The Algorithm finds an Euler's path, which is a path in graph G that passes every edge exactly once.";
         this.AlgorithmName = "Euler Circuit Algorithm";
         this.requiredInput = "An undirected graph G=(V,E)";
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @JsonCreator
@@ -142,21 +150,28 @@ public class EulerPath extends Algorithm{
         try (PrintWriter out = new PrintWriter(
                 Files.newBufferedWriter(fileName, StandardCharsets.UTF_8))) {
             out.println("--- "+this.AlgorithmName+" Results ---");
-            int counter = 1;
-            for (Graph.GraphNode node : result) {
-                if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
-                {
-                    out.println(node.getNodeLabel());
-                    if(!node.equals(result.getLast()))
-                        out.print("--> ");
-                }
-                else
-                {
-                    out.print(node.getNodeLabel() + "--> ");
-                }
-                counter++;
+            if(result.isEmpty())
+            {
+                out.println("There's no euler path in the graph.");
             }
-            out.println("----------------------------------------------\n\n");
+            else
+            {
+                int counter = 1;
+                for (Graph.GraphNode node : result) {
+                    if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
+                    {
+                        out.println(node.getNodeLabel());
+                        if(!node.equals(result.getLast()))
+                            out.print("--> ");
+                    }
+                    else
+                    {
+                        out.print(node.getNodeLabel() + "--> ");
+                    }
+                    counter++;
+                }
+                out.println("----------------------------------------------\n\n");
+            }
 
         }
         catch(Exception e)
@@ -189,6 +204,37 @@ public class EulerPath extends Algorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            if(result.isEmpty())
+            {
+                out.println("There is no euler path in the graph.");
+            }
+            else
+            {
+                int counter = 1;
+                for (Graph.GraphNode node : result) {
+                    if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
+                    {
+                        out.println(node.getNodeLabel());
+                        if(!node.equals(result.getLast()))
+                            out.print("--> ");
+                    }
+                    else
+                    {
+                        out.print(node.getNodeLabel() + "--> ");
+                    }
+                    counter++;
+                }
+                out.println("----------------------------------------------\n\n");
+            }
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 }

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.JsonObject;
 import javafx.scene.paint.Color;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -105,7 +106,33 @@ public class Clique extends NonDeterministicAlgorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            for(int counter = 1; counter <= this.iterations && !isSetFound; counter++)
+            {
+                Run();
+                out.println("Iteration #"+counter+":");
+                out.print("       current set: ");
+                for(Graph.GraphNode node : currentSet)
+                    out.print(node.getNodeLabel()+", ");
+                out.println(" --> not a clique");
+                CreateOutputGraph();
+                if(isSetFound)
+                    out.println(" --> Clique of size "+this.k +" found !");
+            }
+            if(!isSetFound)
+                out.println("\n--Clique of size "+this.k +" not found --");
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
 

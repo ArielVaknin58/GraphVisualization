@@ -20,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -148,7 +149,23 @@ public class BellmanFordAlgorithm extends NodeCentricAlgorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+
+            out.println("--- "+this.AlgorithmName+" Results from vertice "+inputNode.getNodeLabel()+ "---");
+            for (Map.Entry<Graph.GraphNode, Integer> entry : weightedPaths.entrySet()) {
+                String displayWeight = (entry.getValue() == Integer.MAX_VALUE) ? "∞" : entry.getValue().toString();
+                out.println(entry.getKey().getNodeLabel()+" : "+displayWeight);
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

@@ -1,31 +1,20 @@
 package Algorithms;
 
-import Controllers.Controller;
 import Controllers.ControllerManager;
-import Controllers.GraphResultController;
-import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
-import GraphVisualizer.ThemeManager;
 import Services.GraphData;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.PriorityQueue;
+import java.util.*;
 
 import static Controllers.Controller.AlertError;
 
@@ -67,6 +56,11 @@ public class PrimAlgorithm extends Algorithm {
         this.requiredInput = "A weighted, undirected and fully connected graph";
         this.graphResult = new Graph(false);
         init();
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @Override
@@ -163,7 +157,39 @@ public class PrimAlgorithm extends Algorithm {
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        Graph graph = new Graph(false);
+        int TreeWeight = 0;
+        for(Graph.GraphNode node : G.V)
+        {
+            graph.createNode(node.getNodeLabel());
+        }
+        for(Graph.GraphNode node : parents.keySet())
+        {
+            Graph.GraphNode parent = parents.get(node);
+            if(parent != null)
+            {
+                DirectedEdge edge = G.getAdjacencyMap().get(parent).get(node);
+                graph.createEdge(node.getNodeLabel(), parent.getNodeLabel(), edge.getWeight(),0,0);
+                TreeWeight += edge.getWeight();
+            }
+        }
+
+
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(new GraphData(graph), out);
+            out.println("\nTree Weight: "+TreeWeight);
+            out.println("\n----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

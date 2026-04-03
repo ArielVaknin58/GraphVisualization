@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -97,7 +98,34 @@ public class ShortestPathsTree extends NodeCentricAlgorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        Graph graph = new Graph(false);
+        for(Graph.GraphNode currentNode : this.G.V)
+        {
+            graph.createNodeWithCoordinates(currentNode.xPosition, currentNode.yPosition, currentNode.getNodeLabel());
+        }
+        for(String nodeLabel : bfsResult.keySet())
+        {
+            if(bfsResult.get(nodeLabel) != null)
+            {
+                Graph.GraphNode parent = this.G.VerticeIndexer.get(bfsResult.get(nodeLabel));
+                graph.createEdge(parent.getNodeLabel(),nodeLabel);
+            }
+        }
+
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(new GraphData(graph), out);
+            out.println("\n----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

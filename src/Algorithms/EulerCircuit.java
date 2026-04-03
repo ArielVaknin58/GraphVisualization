@@ -6,6 +6,7 @@ import GraphVisualizer.Graph;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,6 +37,11 @@ public class EulerCircuit extends Algorithm{
         this.AlgorithmName = "Euler's Circuit Algorithm";
         AlgorithmDescription = "The Algorithm finds an Euler's circuit, which is a circuit in graph G that passes every edge exactly once.";
         this.requiredInput = "A Graph G = (V,E)";
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @Override
@@ -107,7 +113,40 @@ public class EulerCircuit extends Algorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter))  {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            if(result.isEmpty())
+            {
+                out.println("There is no euler circuit in the graph.");
+            }
+            else
+            {
+                int counter = 1;
+                for (Graph.GraphNode node : result)
+                {
+                    if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0 || node.equals(result.getLast()))
+                    {
+                        out.println(node.getNodeLabel());
+                        if(!node.equals(result.getLast()))
+                            out.print("--> ");
+                    }
+                    else
+                    {
+                        out.print(node.getNodeLabel() + "--> ");
+                    }
+                    counter++;
+                }
+            }
+            out.println("----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override

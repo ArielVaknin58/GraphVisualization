@@ -12,28 +12,16 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Objects;
 
 import static Controllers.Controller.AlertError;
 
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY, // Uses the 'action' key already in your JSON
-        property = "action",
-        visible = true
-)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = BFS.class, name = "run_bfs"),
-        @JsonSubTypes.Type(value = DFS.class, name = "run_dfs"),
-        @JsonSubTypes.Type(value = BiPartite.class, name = "run_bipartite")
-})
-public abstract class Algorithm {
+public abstract class Algorithm implements Command{
 
     protected Graph G;
     protected String AlgorithmName;
@@ -51,6 +39,32 @@ public abstract class Algorithm {
         Platform.runLater(() ->
                 RunAlgorithm(this));
 
+    }
+
+    protected abstract String UpdateParams(Map<String, String> params);
+
+    @Override
+    public String executeCommand(Map<String, String> params) {
+
+        try
+        {
+            if (!this.checkValidity())
+            {
+                return new InvalidAlgorithmInputException(this).getMessage();
+            }
+            else
+            {
+                String error = UpdateParams(params);
+                if(error != null)
+                    return error;
+                this.Run();
+                return this.WriteOutputToBuffer();
+
+            }
+        }catch (Exception e)
+        {
+            return "An error occured while executing the command : +"+e.getMessage();
+        }
     }
 
     private void RunAlgorithm(Algorithm algorithm) {

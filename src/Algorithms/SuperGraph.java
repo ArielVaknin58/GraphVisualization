@@ -1,23 +1,15 @@
 package Algorithms;
 
-import Controllers.Controller;
 import Controllers.ControllerManager;
-import Controllers.GraphResultController;
-import GraphVisualizer.AppSettings;
 import GraphVisualizer.DirectedEdge;
 import GraphVisualizer.Graph;
-import GraphVisualizer.ThemeManager;
 import Services.GraphData;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -50,6 +42,11 @@ public class SuperGraph extends Algorithm{
         this.requiredInput = "A directed graph";
         this.components = new Hashtable<>();
         this.ksaResult = new Hashtable<>();
+    }
+
+    @Override
+    protected String UpdateParams(Map<String, String> params) {
+        return null;
     }
 
     @Override
@@ -111,7 +108,22 @@ public class SuperGraph extends Algorithm{
 
     @Override
     public String WriteOutputToBuffer() {
-        return "";
+        CreateOutputGraph();
+
+        StringWriter stringWriter = new StringWriter();
+        try (PrintWriter out = new PrintWriter(stringWriter)) {
+            out.println("--- "+this.AlgorithmName+" Results ---");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(new GraphData(graphResult), out);
+            out.println("\n----------------------------------------------\n\n");
+
+        }
+        catch(Exception e)
+        {
+            return "an error occured : "+e.getMessage();
+        }
+
+        return stringWriter.toString();
     }
 
     @Override
