@@ -8,6 +8,8 @@ import GraphVisualizer.Graph;
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
 import javafx.application.Platform;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
 public class GraphTools {
@@ -205,6 +207,48 @@ public class GraphTools {
         return runAlgorithm(new IndependentSetAlgorithm(new Graph(ControllerManager.getGraphInputController().getGraph()), iterations, k));
     }
 
+    @Tool("creates a new node for the current graph.")
+    public String addNodeToGraph()
+    {
+        return "node "+ currentGraph.createNode(currentGraph.getAvailableNodeLabel()) + " created succesfully !";
+    }
+
+    @Tool("gets a node label and deletes the corresponding node from the graph.")
+    public String RemoveNode(@P("The label of the node to delete (e.g., '1', '2')")String startNodeLabel)
+    {
+        currentGraph.RemoveVertice(startNodeLabel);
+        return "node "+ startNodeLabel+ "has been deleted !";
+    }
+
+    @Tool("Creates a new edge between two existing nodes. Labels are mandatory; weight, flow, and capacity are optional.")
+    public String createEdge(
+            @P("The starting node label (mandatory)") String fromLabel,
+            @P("The target node label (mandatory)") String toLabel,
+            @Nullable @P("The weight of the edge (optional, defaults to 1)") Integer weight,
+            @Nullable @P("The initial flow (optional, defaults to 0)") Integer flow,
+            @Nullable @P("The total capacity (optional, defaults to 0)") Integer capacity
+    )
+    {
+        int finalWeight = (weight != null) ? weight : 1;
+        int finalFlow = (flow != null) ? flow : 0;
+        int finalCapacity = (capacity != null) ? capacity : 0;
+
+        currentGraph.createEdge(fromLabel, toLabel,finalWeight,finalFlow,finalCapacity);
+        return "an edge from node "+fromLabel +" to node "+toLabel+" had been successfully created .";
+
+    }
+
+    @Tool("Deletes a given edge from the graph")
+    public String removeEdge(
+            @P("The starting node label ") String fromLabel,
+            @P("The target node label ") String toLabel
+    )
+    {
+        currentGraph.removeEdge(fromLabel, toLabel);
+        return "Edge has been removed from the graph.";
+    }
+
+    
     private String runAlgorithm(Algorithm algorithm)
     {
         try {

@@ -72,10 +72,6 @@ public class APIModeController extends Controller{
             var app = Javalin.create().start(ControllerManager.getApiModeController().getPort());
             app.before(ctx -> {
                 System.out.println("[GraphVisualizer] ["+ctx.method().name()+"] INFO "+ ctx.path());
-//                if (ctx.path().startsWith("/algorithm/"))
-//                {
-//
-//                }
             });
             app.get("/", ctx ->
             {

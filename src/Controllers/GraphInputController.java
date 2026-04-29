@@ -124,7 +124,6 @@ public class GraphInputController extends Controller{
         MenuItem addNodeItem = new MenuItem("Add Node Here");
         addNodeItem.setOnAction(event -> {
             if (currentContextMenuEvent != null) {
-                //System.out.println("Add Node at: (" + currentContextMenuEvent.getX() + ", " + currentContextMenuEvent.getY() + ")");
                 this.G.createAvailableNode(currentContextMenuEvent.getX(),currentContextMenuEvent.getY());
                 displayGraph(G);
             }
@@ -133,7 +132,6 @@ public class GraphInputController extends Controller{
 
         MenuItem clearGraphItem = new MenuItem("Clear Graph");
         clearGraphItem.setOnAction(event -> {
-            System.out.println("Clear Graph action");
             this.G = new Graph(DirectedCheckbox.isSelected());
             displayGraph(G);
             graphPaneContextMenu.hide();
@@ -141,7 +139,6 @@ public class GraphInputController extends Controller{
 
         MenuItem openChat = new MenuItem("chat with assistant");
         openChat.setOnAction(event ->{
-            System.out.println("opens chat");
             launchChat();
             graphPaneContextMenu.hide();
         });
@@ -152,7 +149,6 @@ public class GraphInputController extends Controller{
         // --- Event Handlers for the Pane ---
         graphContainer.setOnContextMenuRequested(event -> {
             currentContextMenuEvent = event;
-            System.out.println("Context menu requested");
             graphPaneContextMenu.show(graphContainer, event.getScreenX(), event.getScreenY());
             event.consume();
         });
@@ -170,10 +166,7 @@ public class GraphInputController extends Controller{
                 {
                     edgeContextMenu.hide();
                 }
-                if (event.getTarget() == graphContainer) {
-                    System.out.println("Primary click on container background - Deselecting node.");
 
-                }
             }
 
         });

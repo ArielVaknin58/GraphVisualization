@@ -89,15 +89,20 @@ public class Graph implements Serializable {
         return createNodeWithCoordinates(50 + 50*x, 50+50*y,label);
     }
 
+    public String getAvailableNodeLabel()
+    {
+        Optional<Integer> label = availableLabels.stream().sorted().findFirst();
+        availableLabels.remove(label.get());
+        return String.valueOf(label.get());
+    }
+
     public void createAvailableNode(double x, double y)
     {
         if(availableLabels.isEmpty()) {
             createNodeWithCoordinates(x, y, String.valueOf(this.V.size() + 1));
             return;
         }
-        Optional<Integer> label = availableLabels.stream().sorted().findFirst();
-        availableLabels.remove(label.get());
-        createNodeWithCoordinates(x, y, String.valueOf(label.get()));
+        createNodeWithCoordinates(x, y, getAvailableNodeLabel());
 
     }
 
@@ -216,6 +221,10 @@ public class Graph implements Serializable {
         return E;
     }
 
+    public void RemoveVertice(String nodeLabel)
+    {
+        this.RemoveVertice(this.VerticeIndexer.get(nodeLabel));
+    }
     public void RemoveVertice(GraphNode node)
     {
         if(this.isDirected())
