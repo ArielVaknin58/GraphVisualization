@@ -44,18 +44,20 @@ public abstract class NonDeterministicAlgorithm extends Algorithm{
     {
         try
         {
-            this.iterations = Integer.parseInt(params.get("iterations"));
-            this.k = Integer.parseInt(params.get("k"));
+            this.iterations = Integer.parseInt(params.get(AppSettings.API_MODE_ITERATIONS_STRING));
+            this.k = Integer.parseInt(params.get(AppSettings.API_MODE_K_STRING));
+
             if(this.iterations <= 0 || this.k <= 0)
             {
-                return "Iterations or k values must be greater than 0";
+                return "%s or %s values must be greater than 0. \n values : %d and %d".formatted(AppSettings.API_MODE_ITERATIONS_STRING,AppSettings.API_MODE_K_STRING, iterations, k);
             }
         }catch (NumberFormatException e)
         {
-            return "Iterations or k values must be integer numbers";
+            return "%s or %s values must be integers. \n values : %d and %d".formatted(AppSettings.API_MODE_ITERATIONS_STRING,AppSettings.API_MODE_K_STRING, iterations, k);
         }catch (NullPointerException e)
         {
-            return "Iterations or k values aren't set";
+            return "%s or %s values aren't set.".formatted(AppSettings.API_MODE_ITERATIONS_STRING,AppSettings.API_MODE_K_STRING);
+
         }
 
         return null;

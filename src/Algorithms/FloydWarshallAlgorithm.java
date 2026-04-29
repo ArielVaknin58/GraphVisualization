@@ -199,23 +199,15 @@ public class FloydWarshallAlgorithm extends Algorithm{
         try (PrintWriter out = new PrintWriter(stringWriter)) {
             out.println("--- "+this.AlgorithmName+" Results ---");
             for (Graph.GraphNode node : weightsMatrix.keySet()) {
-                int counter = 1;
                 out.println("vertice "+node.getNodeLabel()+" :");
                 for(Graph.GraphNode node1 : weightsMatrix.get(node).keySet())
                 {
-                    if(counter % AppSettings.VERTICES_IN_LINE_IN_FILES == 0)
-                    {
-                        out.println(node1.getNodeLabel() + " : " + weightsMatrix.get(node).get(node1) );
-                    }
-                    else
-                    {
-                        out.print(node1.getNodeLabel() + " : " + weightsMatrix.get(node).get(node1) +" ");
-                    }
-                    counter++;
+                    out.print(node1.getNodeLabel() + " : " + weightsMatrix.get(node).get(node1)+" |  ");
                 }
 
+                out.println();
             }
-            out.println("----------------------------------------------\n\n");
+            out.println("\n\n----------------------------------------------\n\n");
 
         }
         catch(Exception e)

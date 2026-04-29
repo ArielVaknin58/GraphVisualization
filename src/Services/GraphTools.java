@@ -9,7 +9,6 @@ import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
 import javafx.application.Platform;
 import java.util.List;
-import java.util.Map;
 
 public class GraphTools {
 
@@ -55,6 +54,8 @@ public class GraphTools {
             "Use this to find the shortest path in unweighted graphs or to explore reachable nodes.")
     public String runBFS(@P("The label of the node where the search should begin (e.g., '1', '2')")String startNodeLabel)
     {
+        System.out.println(startNodeLabel);
+        System.out.println(currentGraph.V.size());
         Graph.GraphNode startNode = currentGraph.VerticeIndexer.get(startNodeLabel);
         if (startNode == null) {
             return "Error: Node '" + startNodeLabel + "' does not exist.";
@@ -241,7 +242,7 @@ public class GraphTools {
 
         }
 
-        return "Sure ! here are the results of the algorithm you asked.";
+        return "Algorithm execution complete. Here are the "+algorithm.getAlgorithmName()+ " run results :";
     }
 
 }

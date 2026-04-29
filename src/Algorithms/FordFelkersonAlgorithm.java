@@ -71,10 +71,10 @@ public class FordFelkersonAlgorithm extends Algorithm{
     @Override
     protected String UpdateParams(Map<String, String> params) {
         try{
-            this.s = G.VerticeIndexer.get(params.get("s"));
-            this.t = G.VerticeIndexer.get(params.get("t"));
+            this.s = G.VerticeIndexer.get(params.get(AppSettings.API_MODE_S_STRING));
+            this.t = G.VerticeIndexer.get(params.get(AppSettings.API_MODE_T_STRING));
             if(this.s == null || this.t == null)
-                return "s or t values are null. Received values : \ns = "+this.s +"\nt = "+this.t;
+                return "%s or %s values aren't valid. \nvalues : %s and %s respectively".formatted(AppSettings.API_MODE_S_STRING, AppSettings.API_MODE_T_STRING, params.get(AppSettings.API_MODE_S_STRING),params.get(AppSettings.API_MODE_T_STRING));
             return null;
         }catch (Exception e){
             return "an error has occured : "+e.getMessage();

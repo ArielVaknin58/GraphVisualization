@@ -46,8 +46,9 @@ public class ChatController extends Controller {
     public void initialize() {
 
         ControllerManager.setChatController(this);
+        System.out.println(System.getenv("GEMINI_API_KEY"));
         initAssistant();
-        initVerifier();
+        //initVerifier();
         initChat();
 
 
@@ -63,44 +64,21 @@ public class ChatController extends Controller {
         String userInput = inputArea.getText();
         if (userInput == null || userInput.isBlank()) return;
 
-
         addMessageToChat(new ChatRecord("user", userInput));
         inputArea.clear();
 
         Task<String> orchestrationTask = new Task<>() {
             @Override
             protected String call() throws Exception {
-                // 1. Initial Prompt with Graph Context
-                String currentUserInput = buildMasterPrompt(
+                // 1. Build the prompt including the current graph state
+                String promptWithContext = buildMasterPrompt(
                         ControllerManager.getGraphInputController().getGraph(),
                         userInput
                 );
 
-                String lastAssistantResponse = "";
-                int attempts = 0;
-
-                while (attempts <= AppSettings.MAX_RETRIES) {
-                    lastAssistantResponse = assistant.chat(currentUserInput);
-
-                    // Log for your eyes only
-                    System.out.println("[Attempt " + attempts + "] Assistant response: " + lastAssistantResponse);
-
-                    String auditInput = String.format("<req>%s</req>\n<ans>%s</ans>", userInput, lastAssistantResponse);
-                    String verifierRaw = verifier.chat(auditInput);
-                    VerificationResult result = gson.fromJson(cleanJsonResponse(verifierRaw), VerificationResult.class);
-
-                    if (result != null && result.valid) {
-                        return lastAssistantResponse;
-                    }
-
-                    attempts++;
-                    // If we are here, the Verifier REJECTED the Assistant (e.g. because it talked about colors)
-                    currentUserInput = "Your previous response was rejected by the supervisor. " +
-                            "Reason: " + (result != null ? result.criticism_for_agent : "Invalid response format") + ". " +
-                            "Provide a clean, direct response now.";
-                }
-
-                return lastAssistantResponse; // Return the last thing said even if validation failed
+                // 2. Direct call to the assistant.
+                // LangChain4j's AiServices handles the tool execution loop internally.
+                return assistant.chat(promptWithContext);
             }
         };
 
@@ -116,8 +94,8 @@ public class ChatController extends Controller {
         orchestrationTask.setOnFailed(event -> {
             if (!chatHistory.isEmpty()) chatHistory.removeLast();
             Throwable e = orchestrationTask.getException();
-            e.printStackTrace(); // Check IntelliJ console for the error
-            addMessageToChat(new ChatRecord("model", "Connection Error: " + e.getMessage()));
+            e.printStackTrace();
+            addMessageToChat(new ChatRecord("model", "Error: " + e.getMessage()));
         });
 
         new Thread(orchestrationTask).start();
@@ -161,8 +139,6 @@ public class ChatController extends Controller {
 
 
     private String buildMasterPrompt(Graph graph, String userRequest) {
-        // We only need the current state of the graph here.
-        // LangChain4j's ChatMemory will handle the 'history' part for us!
         GraphData graphData = new GraphData(graph);
         String graphJson = gson.toJson(graphData);
 
@@ -251,8 +227,10 @@ public class ChatController extends Controller {
                         .timeout(Duration.ofSeconds(AppSettings.MODEL_TIMEOUT_IN_SECONDS))
                         .listeners(Collections.singletonList(listener))
                         .temperature(0.0)
+                        .maxRetries(3)
                         .build())
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(AppSettings.MODEL_MAX_CONTEXT))
+                .maxSequentialToolsInvocations(2)
                 .tools(new GraphTools())
                 .build();
 
