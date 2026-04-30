@@ -248,7 +248,7 @@ public class GraphTools {
         return "Edge has been removed from the graph.";
     }
 
-    
+
     private String runAlgorithm(Algorithm algorithm)
     {
         try {
